@@ -9,9 +9,10 @@ How? Through metadata.'
 date: 2024-02-17
 ---
 
-## What? Enterprise wide consisted data management design.
-## Why? Reduce the time to deliver data integration and interoperability
-## How? Through metadata.
+Simply explained
+*      What? Enterprise wide consisted data management design.
+*      Why? Reduce the time to deliver data integration and interoperability
+*      How? Through metadata.
 
 Gartner has been pushing this for a while and I have condensed 2 key points in their own words.
 > *A data fabric maps data residing in disparate applications (within the underlying data stores, regardless of the original deployment designs and locations) and makes them ready for business exploration.*
