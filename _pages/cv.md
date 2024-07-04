@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "CV"
+title: "18 YEARS OF EXPERTISE IN ARCHITECTING, DESIGNING AND DEVELOPING CUTTING EDGE INFORMATION AND DATA TECHNOLOGY PLATFORMS. PROVEN TRACK RECORD IN PROVIDING TECHONOLOGY THOUGHT LEADERSHIP IN MULTIPLE TRANFORMATION INITIATIVES"
 permalink: /cv/
 author_profile: true
 redirect_from:
@@ -26,21 +26,21 @@ redirect_from:
 * ***Machine Learning OPS***: Built the industry’s first system to digitize of EAR and ITAR export licenses using machine learning with 97% accuracy. A joint patent has been granted.
 * ***Machine Learning Platform Development***: Piloted Boeing’s first ML Platform to auto-classify data with export (ITAR, EAR) regulation controls with $4M value.
 ## 2018 – 2019: HCL America – ENTERPRISE DATA STRATEGY. Client: Boeing – Seattle
-* ***Data Strategy Technology Leadership: Developed the enterprise-wide data integration architecture solution layer aligned to the information strategy for Boeing’s 2CES Program, which is world’s largest IT Transformation Program. Presented and approved by CIO. The architecture focused on the realizing the strategy to support Enterprise Data Integration, Data Interoperability, Master/Reference Data, Data Security, Data Modeling, Data Quality and Metadata.
-* ***Enterprise Data Management: Supervised the development of a robust enterprise data architecture featuring hybrid federated data management capabilities. This encompassed describing data assets, organizing domains for ownership, provisioning data for seamless sharing, implementing integration strategies to unify diverse data sources and Institution of governance frameworks.
-* ***Data Access & Security: Led the architecture and the overall development of systems and integrations required to support enterprise Data Access program to support 90% of automated fine-grained attribute-based authorizations for EAR and TAR policies. This included tagging and classification and the data analytics platform.
-* ***Data Architecture & Strategy: Realized an enterprise data strategy to connect data by spearheading the federated data integration initiative for digital threads across enterprise systems using linked data architecture to demonstrate 30 use-cases.
-* ***Enterprise Data Governance: Developed and rolled out the enterprise-wide data governance model.
+* ***Data Strategy Technology Leadership***: Developed the enterprise-wide data integration architecture solution layer aligned to the information strategy for Boeing’s 2CES Program, which is world’s largest IT Transformation Program. Presented and approved by CIO. The architecture focused on the realizing the strategy to support Enterprise Data Integration, Data Interoperability, Master/Reference Data, Data Security, Data Modeling, Data Quality and Metadata.
+* ***Enterprise Data Management***: Supervised the development of a robust enterprise data architecture featuring hybrid federated data management capabilities. This encompassed describing data assets, organizing domains for ownership, provisioning data for seamless sharing, implementing integration strategies to unify diverse data sources and Institution of governance frameworks.
+* ***Data Access & Security***: Led the architecture and the overall development of systems and integrations required to support enterprise Data Access program to support 90% of automated fine-grained attribute-based authorizations for EAR and TAR policies. This included tagging and classification and the data analytics platform.
+* ***Data Architecture & Strategy***: Realized an enterprise data strategy to connect data by spearheading the federated data integration initiative for digital threads across enterprise systems using linked data architecture to demonstrate 30 use-cases.
+* ***Enterprise Data Governance***: Developed and rolled out the enterprise-wide data governance model.
 ## 2016 - 2017: HCL America – DATA PRACTICE MANAGER – Seattle
-* ***Practice Management: Managed an enterprise consulting practice with healthy margins and sustained growth of 60% year on year. This included building a team size of 40+ architects/developers in cross functional areas by creating a robust hiring process, promoting a culture based on values and encouraging skill development.
-* ***Solution Delivery: Managed customer engagement by collaborating with Lead Architects, Senior Managers, and Directors to align expectations with the delivery on transformation projects valued at $6M/year.
-* ***Enterprise Architecture: Articulated, socialized, and guided Boeing’s leadership community and IT-COTS vendors on the needed capabilities to support Boeing’s data strategy.
+* ***Practice Management***: Managed an enterprise consulting practice with healthy margins and sustained growth of 60% year on year. This included building a team size of 40+ architects/developers in cross functional areas by creating a robust hiring process, promoting a culture based on values and encouraging skill development.
+* ***Solution Delivery***: Managed customer engagement by collaborating with Lead Architects, Senior Managers, and Directors to align expectations with the delivery on transformation projects valued at $6M/year.
+* ***Enterprise Architecture***: Articulated, socialized, and guided Boeing’s leadership community and IT-COTS vendors on the needed capabilities to support Boeing’s data strategy.
 ## 2014 – 2015: HCL America – DATA PLATFORM BUILD LEAD Client: Boeing – Seattle
-* ***Enterprise & Data Architecture: Led the platform build for enterprise data initiatives such as ETL, master data management; information architecture; data service APIs; data curation; analytics-big data platforms; reference data, meta-data management; data quality; unified information model; data catalog.
+* ***Enterprise & Data Architecture***: Led the platform build for enterprise data initiatives such as ETL, master data management; information architecture; data service APIs; data curation; analytics-big data platforms; reference data, meta-data management; data quality; unified information model; data catalog.
 ## 2010 – 2013: HCL America – PROJECT LEAD
-* ***Business Architecture: Designed process transformation for the world’s largest fund administration organization.  (Product, suppliers, employee, customer expectation, design and control). (State Street – Boston)
-* ***Application Development: Product architecture, software development management, operation process analysis, system integration and quality assurance. (Iron Mountain – Collegeville, PA)
-* ***Data Architecture: Led a team of 4 data architect to develop the architecture opportunity and gap analysis for identifying potential solutions such as Operational BI, MDM, SOA, DW, etc. (Boeing - India)
+* ***Business Architecture***: Designed process transformation for the world’s largest fund administration organization.  (Product, suppliers, employee, customer expectation, design and control). (State Street – Boston)
+* ***Application Development***: Product architecture, software development management, operation process analysis, system integration and quality assurance. (Iron Mountain – Collegeville, PA)
+* ***Data Architecture***: Led a team of 4 data architect to develop the architecture opportunity and gap analysis for identifying potential solutions such as Operational BI, MDM, SOA, DW, etc. (Boeing - India)
 ## 2010 JDA - Bangalore, India: Systems Analysis of the Demand Management System
 ## 2009 STMicroelectronics - Rousset, France: Enterprise Architecture Methodology (TOGAF, Zachman, COBIT)
 ## 2005 – 2007, CTS - Chennai, India: Java, SQL, J2EE, SOA, XML, Oracle, OOPS, Design Patterns
