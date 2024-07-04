@@ -1,7 +1,7 @@
 ---
 title: "Data Fabric"
 collection: publications
-permalink: /publication/2024-02-17-paper-title-number-4
+permalink: /publication/data-frabic-overview
 excerpt: '
 What? Enterprise wide consisted data management design.
 Why? Reduce the time to deliver data integration and interoperability
