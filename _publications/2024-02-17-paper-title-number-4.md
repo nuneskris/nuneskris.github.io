@@ -2,9 +2,10 @@
 title: "Data Fabric"
 collection: publications
 permalink: /publication/2024-02-17-paper-title-number-4
-excerpt: '* What? Enterprise wide consisted data management design.
-* Why? Reduce the time to deliver data integration and interoperability
-* How? Through metadata.'
+excerpt: '
+What? Enterprise wide consisted data management design.
+Why? Reduce the time to deliver data integration and interoperability
+How? Through metadata.'
 date: 2024-02-17
 ---
 
