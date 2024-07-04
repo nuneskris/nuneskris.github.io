@@ -1,5 +1,5 @@
 ---
-title: "Data Fabric in 2 mins"
+title: "Integrated Data for a Data Fabric"
 collection: publications
 permalink: /publication/data-frabic-overview
 excerpt: '
@@ -9,8 +9,8 @@ How? Through metadata.'
 date: 2024-02-17
 ---
 
-# Simply explained
-***What*** Enterprise wide consisted data management design.
+# Data Fabric simply explained
+***What?*** Enterprise wide consisted data management design.
 ***Why?*** Reduce the time to deliver data integration and interoperability
 ***How?*** Through metadata.
 
@@ -18,9 +18,9 @@ Gartner has been pushing this for a while and I have condensed 2 key points in t
 > *A data fabric maps data residing in disparate applications (within the underlying data stores, regardless of the original deployment designs and locations) and makes them ready for business exploration.*
 > *A data fabric utilizes continuous analytics over existing, discoverable and inferenced metadata assets to support the design, deployment and utilization of integrated and reusable data across all environments, including hybrid and multi-cloud platforms.*
 
-# My thoughts
+# My thoughts Integrated Logical Data
 
-## Integrated Logical Data
+### I will be focusing on the first key point. Mapping disperate data which is ready for exploration.
 
 At its core, I believe data fabric aims to ***reduce the time needed to integrate data***. Data warehouses integrate data from various sources to provide a unified view for analysis, with approaches such as Inmon, Kimball, Data Lake, Lakehouse, and Logical Data Warehouse attempting to achieve this goal. Data fabric leverages metadata on logical data to accomplish this integration more efficiently. I led the development of the architecture and platform for a very large program that adopted data fabric as its data strategy. Below are the data management capabilities required to achieve this.
 
@@ -32,5 +32,3 @@ At its core, I believe data fabric aims to ***reduce the time needed to integrat
 
 3. *Share* data via a Uniform Interfaces: Data across the enterprise needs to be accessed via a uniform interface, which defines a consistent and standardized way for consumers and publishers of data to interact with each other. This consistency simplifies the integration architecture, making it easier to understand and use, and promoting scalability and evolvability. For sharing data within logical data marts, Parquet is often the preferred format due to its columnar storage, compression, and schema evolution capabilities.
 > Implementation Tip: Consider RESTful (Representational State Transfer) interfaces with ***Resource Identification*** in Requests (URIs) which are aligned with entities within the unified data model, ***Self-descriptive*** Messages which includes enough information to describe how to process the data and Hypermedia to integrate with other data.
-
-4. *Integrate* 
