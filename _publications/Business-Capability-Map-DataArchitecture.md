@@ -3,7 +3,6 @@ title: "Data Domain Ownership"
 collection: publications
 permalink: /publication/Business-Capability-Map-DataArchitecture
 excerpt: 'Leverage Business Capability Maps for Data Domains'
-date: 2019-10-01
 ---
 Capability is an abstract concept by design and misunderstood by me in the beginning. I have seen this tool used to great value in many places, and a money pit in a few. However it is by far the most accepted artifact by the business and a great tool to gain a clear understanding of the functional areas and domains. They serve as a foundation for decision-making related to business transformation, process improvement, organizational restructuring, and IT initiatives.
 
