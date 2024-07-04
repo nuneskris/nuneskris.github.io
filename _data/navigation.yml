@@ -1,18 +1,18 @@
 # main links links
 main:
-  - title: "Publications"
+  - title: "Data Architecture"
     url: /publications/
 
-  - title: "Talks"
+  - title: "Data Engineering"
     url: /talks/    
 
-  - title: "Teaching"
+  - title: "Technology"
     url: /teaching/    
     
   - title: "Portfolio"
     url: /portfolio/
         
-  - title: "Blog Posts"
+  - title: "Machine Learning"
     url: /year-archive/
     
   - title: "CV"
