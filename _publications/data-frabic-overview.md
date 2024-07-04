@@ -16,6 +16,7 @@ date: 2024-02-17
 
 Gartner has been pushing this for a while and I have condensed 2 key points in their own words.
 > *A data fabric maps data residing in disparate applications (within the underlying data stores, regardless of the original deployment designs and locations) and makes them ready for business exploration.*
+
 > *A data fabric utilizes continuous analytics over existing, discoverable and inferenced metadata assets to support the design, deployment and utilization of integrated and reusable data across all environments, including hybrid and multi-cloud platforms.*
 
 ## My Solution for Mapping disperate data which is ready for exploration.
