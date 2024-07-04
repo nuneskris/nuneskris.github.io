@@ -9,7 +9,7 @@ How? Through metadata.'
 date: 2024-02-17
 ---
 
-# Data Fabric simply explained
+## Data Fabric simply explained
 ***What?*** Enterprise wide consisted data management design.
 ***Why?*** Reduce the time to deliver data integration and interoperability
 ***How?*** Through metadata.
@@ -18,9 +18,7 @@ Gartner has been pushing this for a while and I have condensed 2 key points in t
 > *A data fabric maps data residing in disparate applications (within the underlying data stores, regardless of the original deployment designs and locations) and makes them ready for business exploration.*
 > *A data fabric utilizes continuous analytics over existing, discoverable and inferenced metadata assets to support the design, deployment and utilization of integrated and reusable data across all environments, including hybrid and multi-cloud platforms.*
 
-# My thoughts Integrated Logical Data
-
-### I will be focusing on the first key point. Mapping disperate data which is ready for exploration.
+## My Solution for Mapping disperate data which is ready for exploration.
 
 At its core, I believe data fabric aims to ***reduce the time needed to integrate data***. Data warehouses integrate data from various sources to provide a unified view for analysis, with approaches such as Inmon, Kimball, Data Lake, Lakehouse, and Logical Data Warehouse attempting to achieve this goal. Data fabric leverages metadata on logical data to accomplish this integration more efficiently. I led the development of the architecture and platform for a very large program that adopted data fabric as its data strategy. Below are the data management capabilities required to achieve this.
 
