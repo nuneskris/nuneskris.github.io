@@ -1,12 +1,33 @@
 ---
-title: "Paper Title Number 4"
+title: "Data Fabric"
 collection: publications
 permalink: /publication/2024-02-17-paper-title-number-4
-excerpt: 'This paper is about fixing template issue #693.'
+excerpt: '* What? Enterprise wide consisted data management design.
+* Why? Reduce the time to deliver data integration and interoperability
+* How? Through metadata.'
 date: 2024-02-17
-venue: 'GitHub Journal of Bugs'
-paperurl: 'http://academicpages.github.io/files/paper3.pdf'
-citation: 'Your Name, You. (2024). &quot;Paper Title Number 3.&quot; <i>GitHub Journal of Bugs</i>. 1(3).'
 ---
 
-The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font.
+At the core Data Fabric, it is striving to reduce time to data integration and interoperability.
+    - use a consistent metadata standards to realize  
+        - unified data
+        - semantic data.
+
+1. Describe: What the data is.
+    * Unified Data Model: An inclusive data model which 
+        * consolidates commonalities 
+        * accommodates exclusivities.
+    * Data Catalog
+2. Organize: 
+    * Unified Data: is when many fragmented data sources are merged into one logical data set based on the unified data model.
+    * Resource URI & URI Endpoints (URL)
+3. Share:  
+    * Uniform Interface: Data across the enterprise needs to be accessed via a uniform interface.
+        * REST Architecture with Uniform Interface: 
+        * HTTPS
+        * JsonSchema
+        * Open API
+        * GraphQL
+4. Integrate:  
+    * Semantic Model with self described Data Integration: 
+        * Hypermedia with linked relationships, RDF, Graphql
