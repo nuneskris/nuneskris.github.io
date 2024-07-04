@@ -10,9 +10,9 @@ date: 2024-02-17
 ---
 
 Simply explained
-*      What? Enterprise wide consisted data management design.
-*      Why? Reduce the time to deliver data integration and interoperability
-*      How? Through metadata.
+***What*** Enterprise wide consisted data management design.
+***Why?*** Reduce the time to deliver data integration and interoperability
+***How?*** Through metadata.
 
 Gartner has been pushing this for a while and I have condensed 2 key points in their own words.
 > *A data fabric maps data residing in disparate applications (within the underlying data stores, regardless of the original deployment designs and locations) and makes them ready for business exploration.*
@@ -23,15 +23,21 @@ Gartner has been pushing this for a while and I have condensed 2 key points in t
 ## Integrated Logical Data
 
 At its core, I believe data fabric aims to ***reduce the time needed to integrate data***. Data warehouses integrate data from various sources to provide a unified view for analysis, with approaches such as Inmon, Kimball, Data Lake, Lakehouse, and Logical Data Warehouse attempting to achieve this goal. Data fabric leverages metadata on logical data to accomplish this integration more efficiently. I led the development of the architecture and platform for a very large program that adopted data fabric as its data strategy. Below are the data management capabilities required to achieve this.
-*        1. *Describe* what the data is. To effectively manage and integrate data, we need a Unified Data Model. This model consolidates commonalities and accommodates exclusivities, providing a comprehensive and inclusive framework for our data. Modern data catalogs excel at managing data models through automation, streamlining this process significantly.
 
-The key is knowing what level of detail is sufficient. Overmodeling can cause initiatives to lose momentum and become overly complex. I've observed many projects falter at this stage due to excessive modeling. It's essential to strike a balance, ensuring the data model is detailed enough to be useful but not so intricate that it hinders progress.
+1. *Describe* what the data is. To effectively manage and integrate data, we need a Unified Data Model. This model consolidates commonalities and accommodates exclusivities, providing a comprehensive and inclusive framework for our data. Modern data catalogs excel at managing data models through automation, streamlining this process significantly.
+> Implementation Tip: The key is knowing what level of detail is sufficient. Overmodeling can cause initiatives to lose momentum and become overly complex. I've observed many projects falter at this stage due to excessive modeling. It's essential to strike a balance, ensuring the data model is detailed enough to be useful but not so intricate that it hinders progress.
 
-2. *Organize* Unified Data. is when many fragmented data sources are merged into one logical data set based on the unified data model.
+2. *Organize* Unified Data from fragmented data sources are merged into one logical data set based on the unified data model into a cohesive and consistent format. There should be one source of truth for each data type all data of a data type within an organization is harmonized and can be accessed and analyzed seamlessly.
+> Implemetation Tip:
 
-3. Share:  
+Consistency and Accuracy: Provides a single source of truth, eliminating discrepancies between different data sources.
+Improved Decision-Making: Enables comprehensive analysis and insights by consolidating data from various systems.
+Efficiency: Reduces the complexity and time needed to access and analyze data, streamlining business processes.
+3. Operational data , Master and reference data are being 
+
+4. Share:  
     * Uniform Interface: Data across the enterprise needs to be accessed via a uniform interface.
-4. Integrate:  
+5. Integrate:  
     * Semantic Model with self described Data Integration: 
         * Hypermedia with linked relationships, RDF, Graphql
-        *         * Resource URI & URI Endpoints (URL)
+        *         * 
