@@ -1,39 +1,44 @@
 ---
-title: "ETL Project Initiation Checklist"
+title: "Data Engineering Project Initiation Checklist"
 collection: talks
 type: "Tutorial"
 permalink: /talks/ETL-Project-Initiation-Checklist
 date: 2019-03-01
 ---
 
-## Acquisition
-* Are the data sources external to the cloud.  If this is the case, we need an ingestion design (compressed/encrypted data from external sources) and add complexity to the overall solution.
-* Irrespective of the extraction pattern (Delta, Full Load), it is recommended to use a data file landing stage on cloud storage which is key to roll-back, archival (raw data) and audit.
-* Establish standard tools and SLAs with extraction/source teams which highly impact timelines and quality of the first time delivery.
-* Data encrypted in-flight/at-rest. Also is the security architecture built around acquiring the data and a regular audit process to ensure compliance
-* Establishing the frequency at which data is to be extracted from the sources to the system. This will be based on entity type, reporting needs and source system constraints. This needs be handled case-by-case basis and one size does not fit all. This needs to be designed along with the source system.
-* Is it possible to extract delta-loads from the source system.
-* It is recommended to extract only desired data from the source systems when we start so that we don’t get overwhelmed. Do we have a list of tables which need to be extracted.
-* What is the format of data which will be extracted (type, compression, size etc.)
-* How much reliability do we need to build into the extraction.
+Some upfront work is required to ensure the success of data engineering projects. I have used this checklist to provide a framework for collaborating with multiple stakeholders to define clear requirements and designs.
 
+## Acquisition
+
+* Are the data sources external to the cloud? If so, we need an ingestion design (compressed/encrypted data from external sources) which adds complexity to the overall solution.
+* Regardless of the extraction pattern (Delta, Full Load), it is recommended to use a data file landing stage on cloud storage for roll-back, archival (raw data), and audit purposes.
+* Establish standard tools and SLAs with extraction/source teams that significantly impact timelines and the quality of initial deliveries.
+* Is data encrypted in-flight/at-rest? Is the security architecture built around acquiring the data, with a regular audit process to ensure compliance?
+* Establish the frequency of data extraction from sources to the system based on entity type, reporting needs, and source system constraints. This should be handled on a case-by-case basis as one size does not fit all.
+* Can delta-loads be extracted from the source system?
+* When starting, it's recommended to extract only the necessary data from source systems to avoid overwhelm. Do we have a list of tables that need extraction?
+* What format (type, compression, size, etc.) should the extracted data be in?
+* How much reliability needs to be built into the extraction process?
+  
 ## Transformation/Processing
-* What are the stages (Logical Partitions) do we have within the Data lake. We would need clear partitions on the various stages so that there is separation on computing needs, security and risk profile.
-* Is there any data which is personal or sensitive that should be anonymized or concealed to protect data privacy and ensure regulatory compliance.
-* Do we have clear data cleansing requirements, or do we need to run any data-profiling tools to scan the data? (missing or inaccurate values, poorly structured fields, Accuracy, Completeness, Consistency, Timeliness, Validity, Uniqueness).
-* Do we have a canonical data model to represent the main subject areas? What is the data model impedance between the data source model and the target canonical model.
-* How many types of consumers do we have for the single source of truth (canonical data)
-* What are the decision arguments behind the technology stack for processing data?
-* The dimensional model.
-* Is there an estimate on the volume of data which needs to be processed. The performance consideration which needs to be addressed accordingly.
-* Is there a design to handle slowly changing dimensions. The extraction of slowly changing dimensions will impact on the SCD type.
-* Do we need to maintain a data catalog or schemas. Do we have a mapping between the final reports to tables?
-* Do we have governance requirements which need to be included?
+
+* What stages (Logical Partitions) do we have within the Data lake? Clear partitions are needed for computing needs, security, and risk profile separation.
+* Is there personal or sensitive data that needs anonymization or concealment to protect privacy and ensure regulatory compliance?
+* Are there clear data cleansing requirements? Do we need to use data-profiling tools to scan for missing or inaccurate values, poorly structured fields, and ensure Accuracy, Completeness, Consistency, Timeliness, Validity, Uniqueness?
+* Do we have a canonical data model to represent main subject areas? What is the data model impedance between the data source model and the target canonical model?
+* How many types of consumers are there for the single source of truth (canonical data)?
+* What are the decision criteria for selecting the technology stack for processing data?
+* Is there a dimensional model in place?
+* Do we have an estimate of the volume of data to be processed? What performance considerations need to be addressed accordingly?
+* Is there a design to handle slowly changing dimensions? This impacts the SCD type.
+* Do we need to maintain a data catalog or schemas? Is there a mapping between final reports and tables?
+* Are there governance requirements that need to be included?
 * Reliability should be built into the pipelines.
 
 ## Serving
-* How many reports and do we have clear requirements?
-* Is there a logical grouping of the reports from a development perspective.
-* Do we have a mapping between reports and data requirements.
-* The serving data model should be mapped using the rule of thumb. One query to one table.
-* Separate self-service/ ad-hoc reporting from high frequency operational reporting. 
+
+* How many reports do we have, and are the requirements clear?
+* Is there a logical grouping of reports from a development perspective?
+* Do we have a mapping between reports and data requirements?
+* The serving data model should follow the rule of thumb: one query to one table.
+* Separate self-service/ad-hoc reporting from high-frequency operational reporting.
