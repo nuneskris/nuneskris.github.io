@@ -175,7 +175,7 @@ To make this interesting we will be adding the BQ dataset and table name within 
 	--trigger-event-filters="type=google.cloud.storage.object.v1.finalized" \
 	--trigger-event-filters="bucket=${ORAC_GCP_ETLPIPELINE_BUCKET_NAME}"
 
- ## Running the demo
+## Running the demo
 
 We would need to ensure we have a bucket and a BigQuery Dataset and Table. Preload the schema to make thigns simple.
 
@@ -188,7 +188,7 @@ We would need to ensure we have a bucket and a BigQuery Dataset and Table. Prelo
 	##### Read the logs
 	gcloud functions logs read gcp-ingest-finalize-function-ETL --region us-west1 --gen2 --limit=5
 
- ## Results.
+## Results.
 #### Deployed Cloud Function.
 The details indicate the trigger and the execution function which we developed and deployed earlier
 
