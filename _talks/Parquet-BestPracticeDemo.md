@@ -23,8 +23,6 @@ Focus is on
 4. Nested Data Structures
 5. Schema Evolution
 
-The data can be found in
-
 ```python
 import pandas as pd
 import pyarrow as pyar
