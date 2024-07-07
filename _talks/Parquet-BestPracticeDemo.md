@@ -2,7 +2,7 @@
 title: "Parquet: Best practices demonstration"
 collection: talks
 type: "Talk"
-permalink: /talks/Parquet-Storage-Standard
+permalink: /talks/Parquet-BestPracticeDemo
 date: 2024-02-01
 ---
 
