@@ -5,11 +5,12 @@ type: "Talk"
 permalink: /talks/Parquet-BestPracticeDemo
 date: 2024-02-01
 ---
+A often overlooked feature of Parquet is its support for Interoperability which is key to enterprise data plaforms which serves different tools and systems, facilitating data exchange and integration.
+This is my take on Parquet best practices and I have used python-pyarrow to demonstrate them.
 
 # Parquet - a widely adopted standard file format:  Best practices demonstration
 
-A often overlooked feature of Parquet is its support for Interoperability which is key to enterprise data plaforms which serves different tools and systems, facilitating data exchange and integration.
-Below are my take on Parquet best practices and I have used python-pyarrow to demonstrate them.
+
 
 Focus is on
 1. Use  Appropriate Data Types
