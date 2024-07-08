@@ -13,7 +13,7 @@ main:
     url: /portfolio/
         
   - title: "Machine Learning"
-    url: /year-archive/
+    url: /mypublication/
     
   - title: "CV"
     url: /cv/
