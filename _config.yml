@@ -199,7 +199,7 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:path/
-  mypublications:
+    mypublications:
     output: true
     permalink: /:collection/:path/
 
@@ -254,7 +254,7 @@ defaults:
   # _mypublication
   - scope:
      path: ""
-      type: mypublications
+      type: mypublication
     values:
       layout: single
       author_profile: true
