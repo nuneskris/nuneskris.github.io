@@ -1,0 +1,1250 @@
+---
+title: 'SpaceTitanic|Pipeline|Model Impute|81 score|'
+date: 2024-06-14
+permalink: /posts/2012/08/blog-post-4/
+tags:
+  - cool posts
+  - category1
+  - category2
+---
+The objective in this Notebook is to use a Pipeline to streamline development of code. I will not be focusing on data analysis and charts. 
+
+# Part 1: Simple pipeline
+#### Benefit Demonstrated: Improves Code Readability and Maintenance
+Building a simple pipeline with 2 components: 
+1) A simple imputer to fill null values, and in this case the most frequest value
+2) Onehot encoding of the column.
+
+
+```python
+import numpy as np 
+import pandas as pd 
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import FunctionTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from xgboost import XGBClassifier
+from sklearn.preprocessing import OneHotEncoder
+
+
+from sklearn import set_config
+set_config(display="diagram")
+fileNameTrain ='/kaggle/input/spaceship-titanic/train.csv';
+fileNameTest = '/kaggle/input/spaceship-titanic/test.csv';
+fileSubmission = '/kaggle/working/submission.csv'
+
+train = pd.read_csv(fileNameTrain).set_index('PassengerId')
+test = pd.read_csv(fileNameTest).set_index('PassengerId')
+trainX = train.drop(['Transported'], axis=1)
+trainy = train['Transported']
+testX = test.copy();
+```
+
+### Simple Imputer:
+Provding some extra print statement for some explanation and validation
+
+
+```python
+print(f">>>> null values before: {trainX['Destination'].isnull().sum()}")
+imputer = SimpleImputer(strategy='most_frequent')
+asArray = imputer.fit_transform(train[['Destination']])
+print(f">>>> The simple imputer return result as n array \n{asArray}")
+print(f">>>> shape of array {asArray.shape}")
+asDF = pd.DataFrame(asArray, columns =['Destination'])
+asDF
+print(f">>>> converting back to dataframe just for explaination: \n{asDF.head(3)}")
+print(f">>>> null values after: {asDF['Destination'].isnull().sum()}")
+
+```
+
+    >>>> null values before: 182
+    >>>> The simple imputer return result as n array 
+    [['TRAPPIST-1e']
+     ['TRAPPIST-1e']
+     ['TRAPPIST-1e']
+     ...
+     ['TRAPPIST-1e']
+     ['55 Cancri e']
+     ['TRAPPIST-1e']]
+    >>>> shape of array (8693, 1)
+    >>>> converting back to dataframe just for explaination: 
+       Destination
+    0  TRAPPIST-1e
+    1  TRAPPIST-1e
+    2  TRAPPIST-1e
+    >>>> null values after: 0
+
+
+### Combining a Simple Imputer and a One Hot encoder without using a pipeline.
+
+
+```python
+imputer = SimpleImputer(strategy='most_frequent')
+asArray = imputer.fit_transform(train[['Destination']])
+one = OneHotEncoder(sparse_output=False,handle_unknown='ignore')
+one.fit_transform(asArray)
+```
+
+
+
+
+    array([[0., 0., 1.],
+           [0., 0., 1.],
+           [0., 0., 1.],
+           ...,
+           [0., 0., 1.],
+           [1., 0., 0.],
+           [0., 0., 1.]])
+
+
+
+### Combining a Simple Imputer and a One Hot encoder using a pipeline. 
+
+**Clear Structure for development and maintainability**:  Even with just 2 processing steps, we see that the code gets orgranized into a structure which focuses on the most important aspects of the pipeline and avoids boiler plate code.
+
+
+```python
+imputation_pipeline_cat= Pipeline(steps=[('impute', SimpleImputer(strategy='most_frequent')),
+                                         ('encode', OneHotEncoder(sparse_output=False, handle_unknown='ignore'))
+                                      ])
+imputation_pipeline_cat.fit_transform(train[['Destination']])
+```
+
+
+
+
+    array([[0., 0., 1.],
+           [0., 0., 1.],
+           [0., 0., 1.],
+           ...,
+           [0., 0., 1.],
+           [1., 0., 0.],
+           [0., 0., 1.]])
+
+
+
+### Reusing the pipeline for other columns with similar processing requirements. 
+#### Benefit Demonstrated: Simplifies the Workflow
+**Ease of Use:** Pipelines can combine multiple steps into a single object and reuse the processing steps for multiple columns and simplifying the code. We are reusing the same steps across 4 pipelines.
+
+
+```python
+
+imputation_pipeline_cat= Pipeline(steps=[('impute', SimpleImputer(strategy='most_frequent')),
+                                         ('encode', OneHotEncoder(sparse_output=False, handle_unknown='ignore'))
+                                      ])
+imputation_pipeline_cat.fit_transform(train[['Destination','HomePlanet','VIP','CryoSleep']])
+
+```
+
+
+
+
+    array([[0., 0., 1., ..., 0., 1., 0.],
+           [0., 0., 1., ..., 0., 1., 0.],
+           [0., 0., 1., ..., 1., 1., 0.],
+           ...,
+           [0., 0., 1., ..., 0., 1., 0.],
+           [1., 0., 0., ..., 0., 1., 0.],
+           [0., 0., 1., ..., 0., 1., 0.]])
+
+
+
+# Part 2: Pipeline combined with classifcaiton.  
+
+### Building a pipeline with the simple feature engineering and fit/predict with a classifcaiton model.
+
+
+```python
+
+space_titanic_pipeline = Pipeline(steps=[('impute', SimpleImputer(strategy='most_frequent')),
+                                      ('encode', OneHotEncoder(sparse_output=False, handle_unknown='ignore')),
+                                      ('model', XGBClassifier(max_depth=3, min_child_weight=2, learning_rate =0.5, n_estimators=300,
+        gamma=0.001, subsample=0.9, colsample_bytree=0.9,
+        objective= 'binary:logistic', nthread=4, scale_pos_weight=1, seed=27))])
+space_titanic_pipeline.fit(train[['Destination','HomePlanet','VIP','CryoSleep']], trainy)
+space_titanic_pipeline.predict(test[['Destination','HomePlanet','VIP','CryoSleep']])
+
+```
+
+
+
+
+    array([1, 0, 1, ..., 1, 0, 1])
+
+
+
+### Cross validaing the pipeline as we keep adding features provides a robust framework for progress
+
+
+```python
+from sklearn.model_selection import cross_validate, StratifiedKFold
+
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=123)
+ct_cv_res = cross_validate(estimator = space_titanic_pipeline, 
+                           X = train[['Destination','HomePlanet','VIP','CryoSleep']],
+                           y = trainy,
+                           cv = skf,
+                           scoring = 'accuracy')['test_score'].mean()
+print(f"Average cross-validated accuracy from\ncolumn transformer pipeline: {ct_cv_res:.3f}")
+```
+
+    Average cross-validated accuracy from
+    column transformer pipeline: 0.717
+
+
+# Part 3: Function (Simple) Transformer
+
+Until now we have used 2 OOTB tranformation on the data. But very often we would need specific functions which was developed and required to beused This is used to use custom stateless transformations for data processing within a pipeline.
+
+## Develop the Function and call the same using a FunctionTransformer within a pipeline
+
+
+```python
+def binAge(dfbinIn: pd.DataFrame) -> pd.DataFrame:
+    dfbin = dfbinIn.copy();
+    labels=[0,10,20,30,40,50,60,70]
+    bins=[-np.inf,0,10,20,30,40,50,60,np.inf]
+    binnedArray = pd.cut(dfbin["Age"], bins = bins, labels=labels)
+    dfbin["Age"]=binnedArray.tolist()
+    mode_value = dfbin['Age'].mode().iloc[0] if not dfbin['Age'].mode().empty else False
+    tempDF = pd.DataFrame()
+    tempDF = dfbin['Age'].copy()
+    tempDF.fillna(mode_value, inplace=True)
+    dfbin['Age']=tempDF
+    return dfbin
+
+pipeline_Age = Pipeline([('binAge', FunctionTransformer(binAge, validate=False))])
+
+pipeline_Age.fit_transform(trainX)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>HomePlanet</th>
+      <th>CryoSleep</th>
+      <th>Cabin</th>
+      <th>Destination</th>
+      <th>Age</th>
+      <th>VIP</th>
+      <th>RoomService</th>
+      <th>FoodCourt</th>
+      <th>ShoppingMall</th>
+      <th>Spa</th>
+      <th>VRDeck</th>
+      <th>Name</th>
+    </tr>
+    <tr>
+      <th>PassengerId</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0001_01</th>
+      <td>Europa</td>
+      <td>False</td>
+      <td>B/0/P</td>
+      <td>TRAPPIST-1e</td>
+      <td>40.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Maham Ofracculy</td>
+    </tr>
+    <tr>
+      <th>0002_01</th>
+      <td>Earth</td>
+      <td>False</td>
+      <td>F/0/S</td>
+      <td>TRAPPIST-1e</td>
+      <td>30.0</td>
+      <td>False</td>
+      <td>109.0</td>
+      <td>9.0</td>
+      <td>25.0</td>
+      <td>549.0</td>
+      <td>44.0</td>
+      <td>Juanna Vines</td>
+    </tr>
+    <tr>
+      <th>0003_01</th>
+      <td>Europa</td>
+      <td>False</td>
+      <td>A/0/S</td>
+      <td>TRAPPIST-1e</td>
+      <td>60.0</td>
+      <td>True</td>
+      <td>43.0</td>
+      <td>3576.0</td>
+      <td>0.0</td>
+      <td>6715.0</td>
+      <td>49.0</td>
+      <td>Altark Susent</td>
+    </tr>
+    <tr>
+      <th>0003_02</th>
+      <td>Europa</td>
+      <td>False</td>
+      <td>A/0/S</td>
+      <td>TRAPPIST-1e</td>
+      <td>40.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>1283.0</td>
+      <td>371.0</td>
+      <td>3329.0</td>
+      <td>193.0</td>
+      <td>Solam Susent</td>
+    </tr>
+    <tr>
+      <th>0004_01</th>
+      <td>Earth</td>
+      <td>False</td>
+      <td>F/1/S</td>
+      <td>TRAPPIST-1e</td>
+      <td>20.0</td>
+      <td>False</td>
+      <td>303.0</td>
+      <td>70.0</td>
+      <td>151.0</td>
+      <td>565.0</td>
+      <td>2.0</td>
+      <td>Willy Santantines</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9276_01</th>
+      <td>Europa</td>
+      <td>False</td>
+      <td>A/98/P</td>
+      <td>55 Cancri e</td>
+      <td>50.0</td>
+      <td>True</td>
+      <td>0.0</td>
+      <td>6819.0</td>
+      <td>0.0</td>
+      <td>1643.0</td>
+      <td>74.0</td>
+      <td>Gravior Noxnuther</td>
+    </tr>
+    <tr>
+      <th>9278_01</th>
+      <td>Earth</td>
+      <td>True</td>
+      <td>G/1499/S</td>
+      <td>PSO J318.5-22</td>
+      <td>20.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Kurta Mondalley</td>
+    </tr>
+    <tr>
+      <th>9279_01</th>
+      <td>Earth</td>
+      <td>False</td>
+      <td>G/1500/S</td>
+      <td>TRAPPIST-1e</td>
+      <td>30.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1872.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>Fayey Connon</td>
+    </tr>
+    <tr>
+      <th>9280_01</th>
+      <td>Europa</td>
+      <td>False</td>
+      <td>E/608/S</td>
+      <td>55 Cancri e</td>
+      <td>40.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>1049.0</td>
+      <td>0.0</td>
+      <td>353.0</td>
+      <td>3235.0</td>
+      <td>Celeon Hontichre</td>
+    </tr>
+    <tr>
+      <th>9280_02</th>
+      <td>Europa</td>
+      <td>False</td>
+      <td>E/608/S</td>
+      <td>TRAPPIST-1e</td>
+      <td>50.0</td>
+      <td>False</td>
+      <td>126.0</td>
+      <td>4688.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>12.0</td>
+      <td>Propsh Hontichre</td>
+    </tr>
+  </tbody>
+</table>
+<p>8693 rows × 12 columns</p>
+</div>
+
+
+
+# Part 4: Column Tranformer
+As we have noticed, we would like to have 2 seperate types of data processeing. One for the Categorical variables (['Destination','HomePlanet','VIP','CryoSleep'] and another seperate one for Age.
+Column Transfoer allows  to apply different preprocessing transformations to different columns of your dataset.
+
+Column Transformer for 2 pipelines
+
+The below chart also diagramatically details the processing steps.
+
+
+```python
+multicolumn_prep = ColumnTransformer([
+                                    ('pipeline_cat',imputation_pipeline_cat,['Destination','HomePlanet','VIP','CryoSleep']),
+                                    ('pipeline_Age', pipeline_Age, ['Age'])
+                                     ],
+                                     remainder='passthrough')
+multicolumn_prep
+```
+
+
+
+
+<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                  transformers=[(&#x27;pipeline_cat&#x27;,
+                                 Pipeline(steps=[(&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;,
+                                  &#x27;CryoSleep&#x27;]),
+                                (&#x27;pipeline_Age&#x27;,
+                                 Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                  FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;))]),
+                                 [&#x27;Age&#x27;])])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                  transformers=[(&#x27;pipeline_cat&#x27;,
+                                 Pipeline(steps=[(&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;,
+                                  &#x27;CryoSleep&#x27;]),
+                                (&#x27;pipeline_Age&#x27;,
+                                 Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                  FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;))]),
+                                 [&#x27;Age&#x27;])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_cat</label><div class="sk-toggleable__content"><pre>[&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_Age</label><div class="sk-toggleable__content"><pre>[&#x27;Age&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">remainder</label><div class="sk-toggleable__content"><pre></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">passthrough</label><div class="sk-toggleable__content"><pre>passthrough</pre></div></div></div></div></div></div></div></div></div></div>
+
+
+
+### Pipeline with the column Transformer and the classificaiton model to fit and predict
+
+
+```python
+space_titanic_pipeline = Pipeline([('preprocessing', multicolumn_prep),
+                        ('XG_model', XGBClassifier(max_depth=3, min_child_weight=2, learning_rate =0.5, n_estimators=300,
+        gamma=0.001, subsample=0.9, colsample_bytree=0.9,
+        objective= 'binary:logistic', nthread=4, scale_pos_weight=1, seed=27))])
+ct_cv_res = cross_validate(estimator = space_titanic_pipeline, 
+                           X = train[['Destination','HomePlanet','VIP','CryoSleep','Age']],
+                           y = trainy,
+                           cv = skf,
+                           scoring = 'accuracy')['test_score'].mean()
+print(f"Average cross-validated accuracy from\ncolumn transformer pipeline: {ct_cv_res:.3f}")
+```
+
+    Average cross-validated accuracy from
+    column transformer pipeline: 0.731
+
+
+# Part 4: Function (a bit more) Transformer
+The previous Function Transformer one bined the age. The below demonstrates we are able to perform more complex requirements like spliting columns and creating additional columns. Again we are able create a specific sub pipeline and combine it to a lager pipeline within a column transformer
+
+### Splitting a column into new columns
+
+
+```python
+def split_Cabin_column(dfin):
+    df = dfin.copy()
+    
+    # Track which rows were originally NaN
+    is_null = df['Cabin'].isnull()
+    
+    # Handle null values before splitting by filling with empty string
+    df['Cabin'] = df['Cabin'].fillna('//')
+    
+    # Split the column and create new columns
+    split_data = df['Cabin'].str.split('/', expand=True)
+    split_data.columns = ['Cabin_Deck','Cabin_Num','Cabin_Side']
+    
+    # Reset split columns back to np.nan where original column was np.nan
+    split_data[is_null] = np.nan
+    
+    # Join the new columns with the original dataframe
+    df = df.join(split_data)
+    
+    return df.drop(columns=['Cabin','Cabin_Num'])
+#new_df = split_column(trainX)
+
+def split_column_cabin_wrapper(df):
+    return split_Cabin_column(df)
+
+
+pipeline_splitColumns_Cabin = Pipeline([
+                                        ('column_splitter', FunctionTransformer(split_column_cabin_wrapper, validate=False)),
+                                        ('impute', SimpleImputer(strategy='most_frequent')),
+                                        ('encode', OneHotEncoder(sparse_output=False, handle_unknown='ignore'))
+])
+trainXCabin =pipeline_splitColumns_Cabin.fit_transform(trainX[['Cabin']]);
+trainXCabin[0]
+```
+
+
+
+
+    array([0., 1., 0., 0., 0., 0., 0., 0., 1., 0.])
+
+
+
+
+```python
+multicolumn_prep = ColumnTransformer([
+                                    ('pipeline_cat',imputation_pipeline_cat,['Destination','HomePlanet','VIP','CryoSleep']),
+                                    ('pipeline_Age', pipeline_Age, ['Age']),
+                                    ('pipeline_splitColumns_Cabin', pipeline_splitColumns_Cabin, ['Cabin'])
+                                     ],
+                                     remainder='passthrough')
+space_titanic_pipeline = Pipeline([    
+                            ('preprocessing', multicolumn_prep),
+                            ('XG_model', XGBClassifier(max_depth=3, min_child_weight=2, learning_rate =0.5, n_estimators=300,
+        gamma=0.001, subsample=0.9, colsample_bytree=0.9,
+        objective= 'binary:logistic', nthread=4, scale_pos_weight=1, seed=27))])
+
+
+
+ct_cv_res = cross_validate(estimator = space_titanic_pipeline, 
+                           X = train[['Destination','HomePlanet','VIP','CryoSleep','Age','Cabin']],
+                           y = trainy,
+                           cv = skf,
+                           scoring = 'accuracy')['test_score'].mean()
+print(f"Average cross-validated accuracy from\ncolumn transformer pipeline: {ct_cv_res:.3f}")
+
+space_titanic_pipeline
+```
+
+    Average cross-validated accuracy from
+    column transformer pipeline: 0.735
+
+
+
+
+
+<style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                                 sparse_output=False))]),
+                                                  [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;,
+                                                   &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]),
+                                                 (&#x27;pipeline_Age&#x27;,
+                                                  Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                                   FunctionTransfor...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                                 sparse_output=False))]),
+                                                  [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;,
+                                                   &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]),
+                                                 (&#x27;pipeline_Age&#x27;,
+                                                  Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                                   FunctionTransfor...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label sk-toggleable__label-arrow">preprocessing: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                  transformers=[(&#x27;pipeline_cat&#x27;,
+                                 Pipeline(steps=[(&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;,
+                                  &#x27;CryoSleep&#x27;]),
+                                (&#x27;pipeline_Age&#x27;,
+                                 Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                  FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;))]),
+                                 [&#x27;Age&#x27;]),
+                                (&#x27;pipeline_splitColumns_Cabin&#x27;,
+                                 Pipeline(steps=[(&#x27;column_splitter&#x27;,
+                                                  FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)),
+                                                 (&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Cabin&#x27;])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_cat</label><div class="sk-toggleable__content"><pre>[&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_Age</label><div class="sk-toggleable__content"><pre>[&#x27;Age&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_splitColumns_Cabin</label><div class="sk-toggleable__content"><pre>[&#x27;Cabin&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" ><label for="sk-estimator-id-17" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" ><label for="sk-estimator-id-18" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" ><label for="sk-estimator-id-19" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label sk-toggleable__label-arrow">remainder</label><div class="sk-toggleable__content"><pre></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-21" type="checkbox" ><label for="sk-estimator-id-21" class="sk-toggleable__label sk-toggleable__label-arrow">passthrough</label><div class="sk-toggleable__content"><pre>passthrough</pre></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-22" type="checkbox" ><label for="sk-estimator-id-22" class="sk-toggleable__label sk-toggleable__label-arrow">XGBClassifier</label><div class="sk-toggleable__content"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=0.9, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              gamma=0.001, grow_policy=None, importance_type=None,
+              interaction_constraints=None, learning_rate=0.5, max_bin=None,
+              max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=None, max_depth=3, max_leaves=None,
+              min_child_weight=2, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=300, n_jobs=None, nthread=4,
+              num_parallel_tree=None, ...)</pre></div></div></div></div></div></div></div>
+
+
+
+#### Benifit Demonstrated: Enhance Model Management
+By combining all both data preprocessing and model development into a single pipeline object, which can be easily saved, loaded, and used for predictions brings clarity and reduce chaos in the development. At the same time where is modularity  with each step in the pipeline is a separate component, allowing for easy modification and experimentation with different preprocessing techniques and models.
+
+We will be able to quickly put things together and check if there is an improvement in the model or not. (Note: This is a needs to be coupled with EDA and putting it to the test easily via pipeline). 
+
+We notice there is a dip (though very slight) in performance.
+
+
+```python
+def split_for_groupCount(df):
+
+    df_reset = df.copy()
+    df_reset.reset_index(inplace = True)
+    df_pass = df_reset.copy();
+
+    split_data =df_reset['PassengerId'].str.split('_', expand=True)
+
+    split_data.columns = ['PGroup','PGroupPP']
+    split_data['PassengerId'] = df_pass['PassengerId'].copy()
+    
+    df_reset = df_reset.set_index('PassengerId')
+    groupbyDF = pd.DataFrame()
+    # Check to see if the group size has an impact on the target
+    groupbyDF = split_data.groupby(["PGroup"], as_index=False)['PGroupPP'].count()
+    
+    groupbyDF = groupbyDF.rename(columns={"PGroupPP": "PGroupPPCounts"})
+    split_data = pd.merge(split_data,groupbyDF,on = "PGroup")
+    split_data["PGroupPP"] = split_data["PGroupPP"].astype(int)
+    split_data = split_data.set_index('PassengerId')
+    split_data.drop(columns=['PGroup','PGroupPP']);
+    df_reset = df_reset.join(split_data)
+    # Join the new columns with the original dataframe
+    return  df_reset.drop(['PGroup','PGroupPP'], axis = 1);
+
+def split_for_groupCount_wrapper(df):
+    return split_for_groupCount(df)
+
+pipeline_pass_splitColumnsGroup = Pipeline([
+    ('passenger_splitGroup', FunctionTransformer(split_for_groupCount_wrapper, validate=False))]);
+
+```
+
+
+```python
+
+multicolumn_prep = ColumnTransformer([
+                                    ('pipeline_cat',imputation_pipeline_cat,['Destination','HomePlanet','VIP','CryoSleep']),
+                                    ('pipeline_Age', pipeline_Age, ['Age']),
+                                    ('pipeline_splitColumns_Cabin', pipeline_splitColumns_Cabin, ['Cabin'])
+                                     ],
+                                     remainder='passthrough')
+ct_pipeline = Pipeline([    ('pipeline-splitIndexColumns-Group', pipeline_pass_splitColumnsGroup),
+                            ('preprocessing', multicolumn_prep),
+                            ('XG_model', XGBClassifier(max_depth=3, min_child_weight=2, learning_rate =0.5, n_estimators=300,
+        gamma=0.001, subsample=0.9, colsample_bytree=0.9,
+        objective= 'binary:logistic', nthread=4, scale_pos_weight=1, seed=27))])
+
+ct_cv_res = cross_validate(estimator = ct_pipeline, 
+                           X = train[['Destination','HomePlanet','VIP','CryoSleep','Age','Cabin']],
+                           y = trainy,
+                           cv = skf,
+                           scoring = 'accuracy')['test_score'].mean()
+
+
+                            
+print(f"Average cross-validated accuracy from\ncolumn transformer pipeline: {ct_cv_res:.3f}")
+
+ct_pipeline 
+```
+
+    Average cross-validated accuracy from
+    column transformer pipeline: 0.733
+
+
+
+
+
+<style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;pipeline-splitIndexColumns-Group&#x27;,
+                 Pipeline(steps=[(&#x27;passenger_splitGroup&#x27;,
+                                  FunctionTransformer(func=&lt;function split_for_groupCount_wrapper at 0x79aaf7262560&gt;))])),
+                (&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotE...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-23" type="checkbox" ><label for="sk-estimator-id-23" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;pipeline-splitIndexColumns-Group&#x27;,
+                 Pipeline(steps=[(&#x27;passenger_splitGroup&#x27;,
+                                  FunctionTransformer(func=&lt;function split_for_groupCount_wrapper at 0x79aaf7262560&gt;))])),
+                (&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotE...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-24" type="checkbox" ><label for="sk-estimator-id-24" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline-splitIndexColumns-Group: Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;passenger_splitGroup&#x27;,
+                 FunctionTransformer(func=&lt;function split_for_groupCount_wrapper at 0x79aaf7262560&gt;))])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-25" type="checkbox" ><label for="sk-estimator-id-25" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function split_for_groupCount_wrapper at 0x79aaf7262560&gt;)</pre></div></div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-26" type="checkbox" ><label for="sk-estimator-id-26" class="sk-toggleable__label sk-toggleable__label-arrow">preprocessing: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                  transformers=[(&#x27;pipeline_cat&#x27;,
+                                 Pipeline(steps=[(&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;,
+                                  &#x27;CryoSleep&#x27;]),
+                                (&#x27;pipeline_Age&#x27;,
+                                 Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                  FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;))]),
+                                 [&#x27;Age&#x27;]),
+                                (&#x27;pipeline_splitColumns_Cabin&#x27;,
+                                 Pipeline(steps=[(&#x27;column_splitter&#x27;,
+                                                  FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)),
+                                                 (&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Cabin&#x27;])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-27" type="checkbox" ><label for="sk-estimator-id-27" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_cat</label><div class="sk-toggleable__content"><pre>[&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-28" type="checkbox" ><label for="sk-estimator-id-28" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-29" type="checkbox" ><label for="sk-estimator-id-29" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-30" type="checkbox" ><label for="sk-estimator-id-30" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_Age</label><div class="sk-toggleable__content"><pre>[&#x27;Age&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-31" type="checkbox" ><label for="sk-estimator-id-31" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-32" type="checkbox" ><label for="sk-estimator-id-32" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_splitColumns_Cabin</label><div class="sk-toggleable__content"><pre>[&#x27;Cabin&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-33" type="checkbox" ><label for="sk-estimator-id-33" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-34" type="checkbox" ><label for="sk-estimator-id-34" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-35" type="checkbox" ><label for="sk-estimator-id-35" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-36" type="checkbox" ><label for="sk-estimator-id-36" class="sk-toggleable__label sk-toggleable__label-arrow">remainder</label><div class="sk-toggleable__content"><pre></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-37" type="checkbox" ><label for="sk-estimator-id-37" class="sk-toggleable__label sk-toggleable__label-arrow">passthrough</label><div class="sk-toggleable__content"><pre>passthrough</pre></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-38" type="checkbox" ><label for="sk-estimator-id-38" class="sk-toggleable__label sk-toggleable__label-arrow">XGBClassifier</label><div class="sk-toggleable__content"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=0.9, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              gamma=0.001, grow_policy=None, importance_type=None,
+              interaction_constraints=None, learning_rate=0.5, max_bin=None,
+              max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=None, max_depth=3, max_leaves=None,
+              min_child_weight=2, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=300, n_jobs=None, nthread=4,
+              num_parallel_tree=None, ...)</pre></div></div></div></div></div></div></div>
+
+
+
+### Adding multiple columns
+
+
+```python
+from sklearn.preprocessing import KBinsDiscretizer
+
+def sum_expenses(X):
+    df = X.copy()
+    df['SumOfExpenses']=df['RoomService']+df['FoodCourt']+df['ShoppingMall']+df['Spa']+df['VRDeck']
+    labels=[0,1000,2000]
+    bins=[-np.inf,0,1000,np.inf]
+    binnedArray = pd.cut( df['SumOfExpenses'], bins = bins, labels=labels)
+    df['SumOfExpenses']=binnedArray.tolist()
+    return df.drop(['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck'], axis = 1)
+
+def sum_expenses_wrapper(df):
+    return sum_expenses(df)
+
+imputation_pipeline_sumExp= Pipeline(steps=[('sumExp', FunctionTransformer(sum_expenses_wrapper, validate=False)),
+                                            ('impute', SimpleImputer(strategy='most_frequent'))
+                                      ])
+
+# XS = imputation_pipeline_sumExp.fit_transform(trainX[['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']])
+
+multicolumn_prep = ColumnTransformer([
+                                    ('pipeline_cat',imputation_pipeline_cat,['Destination','HomePlanet','VIP','CryoSleep']),
+                                    ('imputation_pipeline_sumExp', imputation_pipeline_sumExp,['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck','Age']),
+                                    ('pipeline_splitColumns_Cabin',pipeline_splitColumns_Cabin,['Cabin'])
+                                     ],
+                                     remainder='passthrough')
+
+ct_pipeline = Pipeline([   ('preprocessing', multicolumn_prep),
+                           ('XG_model', XGBClassifier(max_depth=3, min_child_weight=2, learning_rate =0.5, n_estimators=300,
+        gamma=0.001, subsample=0.9, colsample_bytree=0.9,
+        objective= 'binary:logistic', nthread=4, scale_pos_weight=1, seed=27))])
+
+ct_cv_res = cross_validate(estimator = ct_pipeline, 
+                           X = trainX[['Destination','HomePlanet','VIP','CryoSleep',
+                                                        'Cabin','Age',
+                                                        'RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']],
+                           y = trainy,
+                           cv = skf,
+                           scoring = 'accuracy')['test_score'].mean()
+
+
+                            
+print(f"Average cross-validated accuracy from\ncolumn transformer pipeline: {ct_cv_res:.3f}")
+
+ct_pipeline 
+```
+
+    Average cross-validated accuracy from
+    column transformer pipeline: 0.732
+
+
+
+
+
+<style>#sk-container-id-4 {color: black;background-color: white;}#sk-container-id-4 pre{padding: 0;}#sk-container-id-4 div.sk-toggleable {background-color: white;}#sk-container-id-4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-4 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-4 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-4 div.sk-item {position: relative;z-index: 1;}#sk-container-id-4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-4 div.sk-item::before, #sk-container-id-4 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-4 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-4 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-4 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-4 div.sk-label-container {text-align: center;}#sk-container-id-4 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-4 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                                 sparse_output=False))]),
+                                                  [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;,
+                                                   &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]),
+                                                 (&#x27;imputation_pipeline_sumExp&#x27;,
+                                                  Pipeline(steps=[(&#x27;sumExp&#x27;,
+                                                                   Fu...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-39" type="checkbox" ><label for="sk-estimator-id-39" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                                 sparse_output=False))]),
+                                                  [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;,
+                                                   &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]),
+                                                 (&#x27;imputation_pipeline_sumExp&#x27;,
+                                                  Pipeline(steps=[(&#x27;sumExp&#x27;,
+                                                                   Fu...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-40" type="checkbox" ><label for="sk-estimator-id-40" class="sk-toggleable__label sk-toggleable__label-arrow">preprocessing: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                  transformers=[(&#x27;pipeline_cat&#x27;,
+                                 Pipeline(steps=[(&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;,
+                                  &#x27;CryoSleep&#x27;]),
+                                (&#x27;imputation_pipeline_sumExp&#x27;,
+                                 Pipeline(steps=[(&#x27;sumExp&#x27;,
+                                                  FunctionTransformer(func=&lt;function s...
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;))]),
+                                 [&#x27;RoomService&#x27;, &#x27;FoodCourt&#x27;, &#x27;ShoppingMall&#x27;,
+                                  &#x27;Spa&#x27;, &#x27;VRDeck&#x27;, &#x27;Age&#x27;]),
+                                (&#x27;pipeline_splitColumns_Cabin&#x27;,
+                                 Pipeline(steps=[(&#x27;column_splitter&#x27;,
+                                                  FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)),
+                                                 (&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Cabin&#x27;])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-41" type="checkbox" ><label for="sk-estimator-id-41" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_cat</label><div class="sk-toggleable__content"><pre>[&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-42" type="checkbox" ><label for="sk-estimator-id-42" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-43" type="checkbox" ><label for="sk-estimator-id-43" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-44" type="checkbox" ><label for="sk-estimator-id-44" class="sk-toggleable__label sk-toggleable__label-arrow">imputation_pipeline_sumExp</label><div class="sk-toggleable__content"><pre>[&#x27;RoomService&#x27;, &#x27;FoodCourt&#x27;, &#x27;ShoppingMall&#x27;, &#x27;Spa&#x27;, &#x27;VRDeck&#x27;, &#x27;Age&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-45" type="checkbox" ><label for="sk-estimator-id-45" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function sum_expenses_wrapper at 0x79aaf7262950&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-46" type="checkbox" ><label for="sk-estimator-id-46" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-47" type="checkbox" ><label for="sk-estimator-id-47" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_splitColumns_Cabin</label><div class="sk-toggleable__content"><pre>[&#x27;Cabin&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-48" type="checkbox" ><label for="sk-estimator-id-48" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-49" type="checkbox" ><label for="sk-estimator-id-49" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-50" type="checkbox" ><label for="sk-estimator-id-50" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-51" type="checkbox" ><label for="sk-estimator-id-51" class="sk-toggleable__label sk-toggleable__label-arrow">remainder</label><div class="sk-toggleable__content"><pre></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-52" type="checkbox" ><label for="sk-estimator-id-52" class="sk-toggleable__label sk-toggleable__label-arrow">passthrough</label><div class="sk-toggleable__content"><pre>passthrough</pre></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-53" type="checkbox" ><label for="sk-estimator-id-53" class="sk-toggleable__label sk-toggleable__label-arrow">XGBClassifier</label><div class="sk-toggleable__content"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=0.9, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              gamma=0.001, grow_policy=None, importance_type=None,
+              interaction_constraints=None, learning_rate=0.5, max_bin=None,
+              max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=None, max_depth=3, max_leaves=None,
+              min_child_weight=2, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=300, n_jobs=None, nthread=4,
+              num_parallel_tree=None, ...)</pre></div></div></div></div></div></div></div>
+
+
+
+# Part 5: Custom Transfomer: To handle Model Based Imputation
+
+#### Benefit:Prevents Data Leakage 
+By encapsulating all preprocessing steps within a pipeline and thus avoid applying transformations that might inadvertently expose information from the test set to the training set, thus preventing data leakage.
+
+We are going to use DecisionTreeClassifier to impute missing data from the available remaining expenses. We do see a signifiant improvement in the model.
+
+
+```python
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.tree import DecisionTreeClassifier
+
+def bin_expenses(X):
+    df = X.copy()
+    expenses=['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']
+    for exp in expenses:
+        labels=[0,1000,2000]
+        bins=[-np.inf,0,1000,np.inf]
+        binnedArray = pd.cut( df[exp], bins = bins, labels=labels)
+        df[exp]=binnedArray.tolist()
+    return df
+
+# Custom Binning Transformer
+class CustomModelImputer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.expenses=['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck','Age']
+
+    def fit(self,X, y=None):
+        modelExpenses = self.expenses.copy();
+        modelExpenses.remove('Age')
+        models = {};
+        for exp in modelExpenses:
+            X_train = X[self.expenses].copy()
+            X_train = X_train.dropna(subset=self.expenses).copy()  # we will build models with only the non-null values
+            tree_model = DecisionTreeClassifier()
+            y_train = X_train.pop(exp)
+            tree_model.fit(X_train, y_train);
+            models[exp] = tree_model;
+        self.models = models;
+        return self
+
+    def transform(self, Xin):
+        X = Xin.copy()
+        #X.reset_index(inplace = True)
+        imputedDF = X.copy();
+        modelExpenses = self.expenses.copy();
+        modelExpenses.remove('Age')
+        for exp in modelExpenses:
+            dfbase = X[self.expenses].copy()
+            expenses_copy = self.expenses.copy()
+            expenses_copy.remove(exp)
+
+            othernonnullExpDFToPred = dfbase.dropna(subset=expenses_copy).copy()
+
+            missingValuesExpense = othernonnullExpDFToPred[pd.isnull(othernonnullExpDFToPred[exp])].copy()
+
+            #nonnullExpDFToPred_Pid = missingValuesExpense[['PassengerId']].copy()
+            
+            X_missingValuesAllExpense = missingValuesExpense[self.expenses].copy();
+           
+            y_nonnullExp = X_missingValuesAllExpense.pop(exp);
+            ypred = self.models.get(exp).predict(X_missingValuesAllExpense)
+            missing_mask = missingValuesExpense[exp].isnull()
+            missingValuesExpense.loc[missing_mask, exp]= ypred;
+            missingValuesExpense = missingValuesExpense[[exp]].copy()
+            #missingValuesExpense.insert(1, "PassengerId", nonnullExpDFToPred_Pid["PassengerId"].values, True)
+            missingValuesExpense.rename(columns = {exp : exp+"_temp"}, inplace = True)
+            # Merge DataFrames on 'key' with a left join
+            df_merged = pd.merge(imputedDF, missingValuesExpense, left_index=True, right_index=True, how='left')
+            # Update 'value1' with 'value2' where available
+            df_merged[exp] = df_merged[exp+"_temp"].combine_first(df_merged[exp])
+            # Drop the 'value2' column as it is no longer needed
+            df_merged = df_merged.drop(columns=[exp+"_temp"])
+            imputedDF[exp] = df_merged[exp].copy()
+        return imputedDF;
+#('CustomModelImputer', CustomModelImputer())
+
+imputation_pipeline_Exp= Pipeline(steps=[('binAge', FunctionTransformer(binAge, validate=False)),
+                                        ('bin_expenses', FunctionTransformer(bin_expenses, validate=False)),
+                                         ('CustomModelImputer', CustomModelImputer()), 
+                                      ])
+```
+
+
+```python
+multicolumn_prep = ColumnTransformer([
+                                    ('pipeline_cat',imputation_pipeline_cat,['Destination','HomePlanet','VIP','CryoSleep']),
+                                    ('imputation_pipeline_Exp', imputation_pipeline_Exp,['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck','Age']),
+                                    ('pipeline_splitColumns_Cabin',pipeline_splitColumns_Cabin,['Cabin'])
+                                     ],
+                                     remainder='passthrough')
+
+ct_pipeline = Pipeline([   ('preprocessing', multicolumn_prep),
+                           ('XG_model', XGBClassifier(max_depth=3, min_child_weight=2, learning_rate =0.5, n_estimators=300,
+        gamma=0.001, subsample=0.9, colsample_bytree=0.9,
+        objective= 'binary:logistic', nthread=4, scale_pos_weight=1, seed=27))])
+
+ct_cv_res = cross_validate(estimator = ct_pipeline, 
+                           X = trainX[['Destination','HomePlanet','VIP','CryoSleep',
+                                                        'Cabin','Age',
+                                                        'RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']],
+                           y = trainy,
+                           cv = skf,
+                           scoring = 'accuracy')['test_score'].mean()
+                            
+print(f"Average cross-validated accuracy from\ncolumn transformer pipeline: {ct_cv_res:.3f}")
+
+ct_pipeline 
+```
+
+    Average cross-validated accuracy from
+    column transformer pipeline: 0.777
+
+
+
+
+
+<style>#sk-container-id-5 {color: black;background-color: white;}#sk-container-id-5 pre{padding: 0;}#sk-container-id-5 div.sk-toggleable {background-color: white;}#sk-container-id-5 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-5 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-5 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-5 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-5 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-5 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-5 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-5 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-5 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-5 div.sk-item {position: relative;z-index: 1;}#sk-container-id-5 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-5 div.sk-item::before, #sk-container-id-5 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-5 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-5 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-5 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-5 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-5 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-5 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-5 div.sk-label-container {text-align: center;}#sk-container-id-5 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-5 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                                 sparse_output=False))]),
+                                                  [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;,
+                                                   &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]),
+                                                 (&#x27;imputation_pipeline_Exp&#x27;,
+                                                  Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                                   Funct...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-54" type="checkbox" ><label for="sk-estimator-id-54" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;preprocessing&#x27;,
+                 ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                                   transformers=[(&#x27;pipeline_cat&#x27;,
+                                                  Pipeline(steps=[(&#x27;impute&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                                  (&#x27;encode&#x27;,
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                                 sparse_output=False))]),
+                                                  [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;,
+                                                   &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]),
+                                                 (&#x27;imputation_pipeline_Exp&#x27;,
+                                                  Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                                   Funct...
+                               feature_types=None, gamma=0.001,
+                               grow_policy=None, importance_type=None,
+                               interaction_constraints=None, learning_rate=0.5,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None, min_child_weight=2,
+                               missing=nan, monotone_constraints=None,
+                               multi_strategy=None, n_estimators=300,
+                               n_jobs=None, nthread=4, num_parallel_tree=None, ...))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-55" type="checkbox" ><label for="sk-estimator-id-55" class="sk-toggleable__label sk-toggleable__label-arrow">preprocessing: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(remainder=&#x27;passthrough&#x27;,
+                  transformers=[(&#x27;pipeline_cat&#x27;,
+                                 Pipeline(steps=[(&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;,
+                                  &#x27;CryoSleep&#x27;]),
+                                (&#x27;imputation_pipeline_Exp&#x27;,
+                                 Pipeline(steps=[(&#x27;binAge&#x27;,
+                                                  FunctionTransformer(func=&lt;function binA...
+                                                  CustomModelImputer())]),
+                                 [&#x27;RoomService&#x27;, &#x27;FoodCourt&#x27;, &#x27;ShoppingMall&#x27;,
+                                  &#x27;Spa&#x27;, &#x27;VRDeck&#x27;, &#x27;Age&#x27;]),
+                                (&#x27;pipeline_splitColumns_Cabin&#x27;,
+                                 Pipeline(steps=[(&#x27;column_splitter&#x27;,
+                                                  FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)),
+                                                 (&#x27;impute&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encode&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;,
+                                                                sparse_output=False))]),
+                                 [&#x27;Cabin&#x27;])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-56" type="checkbox" ><label for="sk-estimator-id-56" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_cat</label><div class="sk-toggleable__content"><pre>[&#x27;Destination&#x27;, &#x27;HomePlanet&#x27;, &#x27;VIP&#x27;, &#x27;CryoSleep&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-57" type="checkbox" ><label for="sk-estimator-id-57" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-58" type="checkbox" ><label for="sk-estimator-id-58" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-59" type="checkbox" ><label for="sk-estimator-id-59" class="sk-toggleable__label sk-toggleable__label-arrow">imputation_pipeline_Exp</label><div class="sk-toggleable__content"><pre>[&#x27;RoomService&#x27;, &#x27;FoodCourt&#x27;, &#x27;ShoppingMall&#x27;, &#x27;Spa&#x27;, &#x27;VRDeck&#x27;, &#x27;Age&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-60" type="checkbox" ><label for="sk-estimator-id-60" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function binAge at 0x79aaf72604c0&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-61" type="checkbox" ><label for="sk-estimator-id-61" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function bin_expenses at 0x79aaf72624d0&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-62" type="checkbox" ><label for="sk-estimator-id-62" class="sk-toggleable__label sk-toggleable__label-arrow">CustomModelImputer</label><div class="sk-toggleable__content"><pre>CustomModelImputer()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-63" type="checkbox" ><label for="sk-estimator-id-63" class="sk-toggleable__label sk-toggleable__label-arrow">pipeline_splitColumns_Cabin</label><div class="sk-toggleable__content"><pre>[&#x27;Cabin&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-64" type="checkbox" ><label for="sk-estimator-id-64" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function split_column_cabin_wrapper at 0x79aaf7262200&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-65" type="checkbox" ><label for="sk-estimator-id-65" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-66" type="checkbox" ><label for="sk-estimator-id-66" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;, sparse_output=False)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-67" type="checkbox" ><label for="sk-estimator-id-67" class="sk-toggleable__label sk-toggleable__label-arrow">remainder</label><div class="sk-toggleable__content"><pre></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-68" type="checkbox" ><label for="sk-estimator-id-68" class="sk-toggleable__label sk-toggleable__label-arrow">passthrough</label><div class="sk-toggleable__content"><pre>passthrough</pre></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-69" type="checkbox" ><label for="sk-estimator-id-69" class="sk-toggleable__label sk-toggleable__label-arrow">XGBClassifier</label><div class="sk-toggleable__content"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=0.9, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              gamma=0.001, grow_policy=None, importance_type=None,
+              interaction_constraints=None, learning_rate=0.5, max_bin=None,
+              max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=None, max_depth=3, max_leaves=None,
+              min_child_weight=2, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=300, n_jobs=None, nthread=4,
+              num_parallel_tree=None, ...)</pre></div></div></div></div></div></div></div>
+
+
+
+# Part 6: Testing and Submitting the Model
+
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import f1_score
+X_train, X_test, y_train, y_test = train_test_split(trainX, trainy, test_size=0.10, random_state=10)
+ct_pipeline.fit(X_train[['Destination','HomePlanet','VIP','CryoSleep',
+                                                    'Cabin','Age',
+                                                    'RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']],y_train)
+y_pred = ct_pipeline.predict(X_test[['Destination','HomePlanet','VIP','CryoSleep',
+                                                    'Cabin','Age',
+                                                    'RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']])
+
+f1_score_all = f1_score(y_test, y_pred, average="weighted")
+print(f"performed with value: {f1_score_all}")
+```
+
+    performed with value: 0.7942487959983674
+
+
+
+```python
+ct_pipeline.fit(trainX[['Destination','HomePlanet','VIP','CryoSleep',
+                                                    'Cabin','Age',
+                                                    'RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']],trainy)
+y_pred = ct_pipeline.predict(testX[['Destination','HomePlanet','VIP','CryoSleep',
+                                                    'Cabin','Age',
+                                                    'RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']])
+sub = testX.copy();
+sub = sub.reset_index();
+submission = pd.DataFrame();
+submission['PassengerId'] = sub['PassengerId'].copy()
+submission['Transported'] = y_pred
+submission['Transported']= submission['Transported'].apply(lambda x: True if x == 1 else False)
+submission.to_csv(fileSubmission, index=False)
+```
+
+# Extra: GridSearchCV with Pipeline: Its simple
+
+
+```python
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import classification_report
+
+multicolumn_prep = ColumnTransformer([
+                                    ('pipeline_cat',imputation_pipeline_cat,['Destination','HomePlanet','VIP','CryoSleep']),
+                                    ('imputation_pipeline_Exp', imputation_pipeline_Exp,['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck','Age']),
+                                    ('pipeline_splitColumns_Cabin',pipeline_splitColumns_Cabin,['Cabin'])
+                                     ],
+                                     remainder='passthrough')
+
+ct_pipeline = Pipeline([   ('preprocessing', multicolumn_prep),
+                           ('XG_model', XGBClassifier(objective= 'binary:logistic', seed=27))])
+
+# defining parameter range 
+param_grid = {'XG_model__max_depth': [ 3],
+              'XG_model__min_child_weight': [2],
+              'XG_model__nthread': [2,4],
+              'XG_model__scale_pos_weight': [1],
+              'XG_model__n_estimators': [300],
+              'XG_model__learning_rate': [ .05],
+              'XG_model__subsample': [.8],
+              'XG_model__colsample_bytree': [.8],
+              'XG_model__gamma': [ 0.001],  
+              }
+
+grid = GridSearchCV(ct_pipeline, param_grid, refit = True, verbose = 3,n_jobs=-1) 
+
+grid.fit(X_train[['Destination','HomePlanet','VIP','CryoSleep',
+                                                    'Cabin','Age',
+                                                    'RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']],y_train)
+# print best parameter after tuning 
+print(grid.best_params_) 
+grid_predictions = grid.predict(X_test) 
+   
+# print classification report 
+print(classification_report(y_test, grid_predictions)) 
+```
+
+    Fitting 5 folds for each of 2 candidates, totalling 10 fits
+    {'XG_model__colsample_bytree': 0.8, 'XG_model__gamma': 0.001, 'XG_model__learning_rate': 0.05, 'XG_model__max_depth': 3, 'XG_model__min_child_weight': 2, 'XG_model__n_estimators': 300, 'XG_model__nthread': 2, 'XG_model__scale_pos_weight': 1, 'XG_model__subsample': 0.8}
+                  precision    recall  f1-score   support
+    
+           False       0.82      0.80      0.81       434
+            True       0.80      0.82      0.81       436
+    
+        accuracy                           0.81       870
+       macro avg       0.81      0.81      0.81       870
+    weighted avg       0.81      0.81      0.81       870
+    
+
