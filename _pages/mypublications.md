@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Data Architecture"
+title: "Machine Learning"
 permalink: /mypublications/
 author_profile: true
 ---
