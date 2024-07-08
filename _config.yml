@@ -199,7 +199,7 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:path/
-  mypublications:
+  talks:
     output: true
     permalink: /:collection/:path/
 
@@ -251,15 +251,14 @@ defaults:
       author_profile: true
       share: true
       comment: true
-  # _mypublication
+  # _talks
   - scope:
-     path: ""
-      type: mypublication
+      path: ""
+      type: talks
     values:
-      layout: single
+      layout: talk
       author_profile: true
       share: true
-      comments: true
 
 
 # Sass/SCSS
