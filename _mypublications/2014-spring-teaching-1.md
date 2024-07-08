@@ -1,6 +1,6 @@
 ---
-title: "Teaching experience 1"
-collection: teaching
+title: "Machine Learning - 1"
+collection: mypublication
 type: "Undergraduate course"
 permalink: /mypublication/2014-spring-teaching-1
 venue: "University 1, Department"
