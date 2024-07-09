@@ -56,98 +56,100 @@ private static final Logger logger = Logger.getLogger(AutomaticFileEventHandling
 ### Component: Read the event.
 We are able to read the file, bucket and also any meta data associated with the file which was ingested. 
 To make this interesting we will be adding the BQ dataset and table name within the metadata of the file.
+```java
+package com.java.kfn.study.gcp.cloudfunction.invoke;
+import java.util.Map;
+import com.google.events.cloud.storage.v1.StorageObjectData;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.util.JsonFormat;
 
-	package com.java.kfn.study.gcp.cloudfunction.invoke;
-	import java.util.Map;
-	import com.google.events.cloud.storage.v1.StorageObjectData;
-	import com.google.protobuf.InvalidProtocolBufferException;
-	import com.google.protobuf.util.JsonFormat;
-	
-	public class MyCloudStorageEventHandler {
+public class MyCloudStorageEventHandler {
 
-		private String tableViewName;
-		private Object bucket;
-		private String fileName;
-		private String datasetName;
-		
-		public String getFilePath() {
-			return "gs://"+this.bucket+"/"+this.fileName;
-		}
+	private String tableViewName;
+	private Object bucket;
+	private String fileName;
+	private String datasetName;
 	
-		public MyCloudStorageEventHandler(String cloudEventData) throws InvalidProtocolBufferException {
-			 // StorageObjectData is a helper class provided by GCP to parse an GCP Storage Event string.
-			 StorageObjectData.Builder builder = StorageObjectData.newBuilder(); 
-			 JsonFormat.parser().merge(cloudEventData, builder);
-			 StorageObjectData storageObjectData = builder.build();
-			 // Storage Object (Bucket and file name 
-			 this.bucket=storageObjectData.getBucket();
-			 this.fileName=storageObjectData.getName();  
-			 // We can even parse metadata of the storage object. 
-			 // To make it interesting, we will be parsing the target BQ Dataset and table name from the storage metadata
-			 Map<String, String> metadataMap = storageObjectData.getMetadataMap();
-			 this.tableViewName = metadataMap.get("table_view_name");
-			 this.datasetName = metadataMap.get("dataset_name");
-			 
-	   }
-		public String getTableViewName() {
-			return this.tableViewName;
-		}
-		public Object getBucket() {
-			return this.bucket;
-		}
-	
-		public String getFileName() {
-			return this.fileName;
-		}
-	
-		public String getDatasetName() {
-			return this.datasetName;
-		}
+	public String getFilePath() {
+		return "gs://"+this.bucket+"/"+this.fileName;
 	}
+
+	public MyCloudStorageEventHandler(String cloudEventData) throws InvalidProtocolBufferException {
+		 // StorageObjectData is a helper class provided by GCP to parse an GCP Storage Event string.
+		 StorageObjectData.Builder builder = StorageObjectData.newBuilder(); 
+		 JsonFormat.parser().merge(cloudEventData, builder);
+		 StorageObjectData storageObjectData = builder.build();
+		 // Storage Object (Bucket and file name 
+		 this.bucket=storageObjectData.getBucket();
+		 this.fileName=storageObjectData.getName();  
+		 // We can even parse metadata of the storage object. 
+		 // To make it interesting, we will be parsing the target BQ Dataset and table name from the storage metadata
+		 Map<String, String> metadataMap = storageObjectData.getMetadataMap();
+		 this.tableViewName = metadataMap.get("table_view_name");
+		 this.datasetName = metadataMap.get("dataset_name");
+		 
+   }
+	public String getTableViewName() {
+		return this.tableViewName;
+	}
+	public Object getBucket() {
+		return this.bucket;
+	}
+
+	public String getFileName() {
+		return this.fileName;
+	}
+
+	public String getDatasetName() {
+		return this.datasetName;
+	}
+}
+```
 
 
 ### Component: Load data in Big Query
 
+```java
+package com.java.kfn.study.gcp.cloudfunction.invoke;
+import java.io.IOException;
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.FormatOptions;
+import com.google.cloud.bigquery.Job;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.LoadJobConfiguration;
+import com.google.cloud.bigquery.TableId;
 
-	package com.java.kfn.study.gcp.cloudfunction.invoke;
-	import java.io.IOException;
-	import com.google.cloud.bigquery.BigQuery;
-	import com.google.cloud.bigquery.BigQueryException;
-	import com.google.cloud.bigquery.BigQueryOptions;
-	import com.google.cloud.bigquery.FormatOptions;
-	import com.google.cloud.bigquery.Job;
-	import com.google.cloud.bigquery.JobInfo;
-	import com.google.cloud.bigquery.LoadJobConfiguration;
-	import com.google.cloud.bigquery.TableId;
-	
-	public class MyCallBigQueryToLoadLocalFile {
-	
-		 public  void loadLocalFile(
-			      String datasetName, String tableName, String csv_Path)
-			      throws IOException, InterruptedException {
-			    try {
-			      // Initialize client that will be used to send requests. This client only needs to be created
-			      // once, and can be reused for multiple requests.
-			      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-	
-			      TableId tableId = TableId.of(datasetName, tableName);
-			      LoadJobConfiguration loadConfig = LoadJobConfiguration.newBuilder(tableId, csv_Path).setFormatOptions(FormatOptions.csv()).build();
-			      Job loadJob = bigquery.create(JobInfo.of(loadConfig));
-			      loadJob = loadJob.waitFor();
-			      if (loadJob.isDone()) {
-			    	    System.out.println("Data successfully loaded into BigQuery table");
-			    	} else {
-			    	    System.out.println("Failed to load data into BigQuery table: " + loadJob.getStatus().getError());
-			    	}
-	
-			       } catch (BigQueryException e) {
-			      System.out.println("Local file not loaded. \n" + e);
-			      throw e;
-			    }
-			  }
-	
-	}
+public class MyCallBigQueryToLoadLocalFile {
 
+	 public  void loadLocalFile(
+		      String datasetName, String tableName, String csv_Path)
+		      throws IOException, InterruptedException {
+		    try {
+		      // Initialize client that will be used to send requests. This client only needs to be created
+		      // once, and can be reused for multiple requests.
+		      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+		      TableId tableId = TableId.of(datasetName, tableName);
+		      LoadJobConfiguration loadConfig = LoadJobConfiguration.newBuilder(tableId, csv_Path).setFormatOptions(FormatOptions.csv()).build();
+		      Job loadJob = bigquery.create(JobInfo.of(loadConfig));
+		      loadJob = loadJob.waitFor();
+		      if (loadJob.isDone()) {
+			    System.out.println("Data successfully loaded into BigQuery table");
+			} else {
+			    System.out.println("Failed to load data into BigQuery table: " + loadJob.getStatus().getError());
+			}
+
+		       } catch (BigQueryException e) {
+		      System.out.println("Local file not loaded. \n" + e);
+		      throw e;
+		    }
+		  }
+
+}
+
+```
 
 ## Cloud Function deployment
 
