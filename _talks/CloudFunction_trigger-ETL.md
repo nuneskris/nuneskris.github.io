@@ -16,40 +16,40 @@ I am called to review troubled data engineering pipelines and I have encountered
 
 ### Main Function Class
 ```python
-	package com.java.kfn.study.gcp.cloudfunction.invoke;
-	import java.io.IOException;
-	import java.nio.charset.StandardCharsets;
-	import java.util.logging.Logger;
-	import org.apache.http.client.ClientProtocolException;
-	import com.google.cloud.functions.CloudEventsFunction;
-	import io.cloudevents.CloudEvent;
-	// Step 1: Implement the com.google.cloud.functions.CloudEventsFunction. We will define how this is called during deployment
-	public class AutomaticFileEventHandling implements CloudEventsFunction {
-	private static final Logger logger = Logger.getLogger(AutomaticFileEventHandling.class.getName());
+package com.java.kfn.study.gcp.cloudfunction.invoke;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Logger;
+import org.apache.http.client.ClientProtocolException;
+import com.google.cloud.functions.CloudEventsFunction;
+import io.cloudevents.CloudEvent;
+// Step 1: Implement the com.google.cloud.functions.CloudEventsFunction. We will define how this is called during deployment
+public class AutomaticFileEventHandling implements CloudEventsFunction {
+private static final Logger logger = Logger.getLogger(AutomaticFileEventHandling.class.getName());
 
-	  @Override
-	  public void accept(CloudEvent event) throws ClientProtocolException, IOException, InterruptedException {	 
-		 if (event.getData() == null) {
-		      logger.warning("No data found in cloud event payload!");
-		      return;
-		 } else  {
-			 // this is the  string data of the cloud event which triggered the cloud function.
-			 // In our case this is the event which was triggered when the file arrived at the cloud storage
-			 // Step2:  Read the event
-			 String cloudEventData = new String(event.getData().toBytes(), StandardCharsets.UTF_8);
-			 logger.info("Event: " + event.getId() +", Event Type: " + event.getType());
-			 //Step 4: We would need to parse the event string. We can get information like bucket name, file name, event type, bucket meta data etc
-			 MyCloudStorageEventHandler cloudStorageBody = new MyCloudStorageEventHandler(cloudEventData);
-			 //Step 5: Simple Java Class to Load data into Big Query
-			 MyCallBigQueryToLoadLocalFile bqload = new MyCallBigQueryToLoadLocalFile();
-			 bqload.loadLocalFile(
-					 cloudStorageBody.getDatasetName(), 
-					 cloudStorageBody.getTableViewName() , 
-					 cloudStorageBody.getFilePath());
-	     
-	    }
-	  
-	  }
+  @Override
+  public void accept(CloudEvent event) throws ClientProtocolException, IOException, InterruptedException {	 
+	 if (event.getData() == null) {
+	      logger.warning("No data found in cloud event payload!");
+	      return;
+	 } else  {
+		 // this is the  string data of the cloud event which triggered the cloud function.
+		 // In our case this is the event which was triggered when the file arrived at the cloud storage
+		 // Step2:  Read the event
+		 String cloudEventData = new String(event.getData().toBytes(), StandardCharsets.UTF_8);
+		 logger.info("Event: " + event.getId() +", Event Type: " + event.getType());
+		 //Step 4: We would need to parse the event string. We can get information like bucket name, file name, event type, bucket meta data etc
+		 MyCloudStorageEventHandler cloudStorageBody = new MyCloudStorageEventHandler(cloudEventData);
+		 //Step 5: Simple Java Class to Load data into Big Query
+		 MyCallBigQueryToLoadLocalFile bqload = new MyCallBigQueryToLoadLocalFile();
+		 bqload.loadLocalFile(
+				 cloudStorageBody.getDatasetName(), 
+				 cloudStorageBody.getTableViewName() , 
+				 cloudStorageBody.getFilePath());
+     
+    }
+  
+  }
 }
 ```
 
