@@ -15,7 +15,7 @@ I am called to review troubled data engineering pipelines and I have encountered
 ## Component: Cloud Function
 
 ### Main Function Class
-```python
+```java
 package com.java.kfn.study.gcp.cloudfunction.invoke;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
