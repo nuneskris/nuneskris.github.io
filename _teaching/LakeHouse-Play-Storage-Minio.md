@@ -14,8 +14,8 @@ When I play with new technologies, I like to plat it on my machine locally. Mini
 > MinIO is an object storage solution that provides an Amazon Web Services S3-compatible API and supports all core S3 features. MinIO is built to deploy anywhere - public or private cloud, baremetal infrastructure, orchestrated environments, and edge infrastructure - [From Minio](https://min.io/docs/minio/linux/index.html)
 
 # Installation
-### 1. Install Docker Desktop
-### 2. Search and install image: bitnami/minio:latest
+***1. Install Docker Desktop***
+***2. Search and install image: bitnami/minio:latest***
    
    ![image](https://github.com/nuneskris/nuneskris.github.io/assets/82786764/b380c61b-0443-412b-a822-1d981760c069)
 
@@ -24,13 +24,13 @@ When I play with new technologies, I like to plat it on my machine locally. Mini
    ![image](https://github.com/nuneskris/nuneskris.github.io/assets/82786764/eb31cefb-39f6-4b96-a251-30be48380eb9)
 
 # Working with Mino
-### 1. Open the URL with the user-id and password.
-### 2. Create a bucket. We are able to create bucket similar to s3
+***1. Open the URL with the user-id and password.***
+***2. Create a bucket. We are able to create bucket similar to s3***
    
  ![image](https://github.com/nuneskris/nuneskris.github.io/assets/82786764/1cb79ca4-cf17-435c-83f8-6a26d6d45f59)
 
 # Minio Client API
-### 1. Install Python Client
+***1. Install Python Client***
 
  [Python setup](https://min.io/docs/minio/linux/developers/python/minio-py.html)
    
@@ -45,11 +45,11 @@ import glob
 import os
 ```
 
-### 2. Create Access Keys
+***2. Create Access Keys***
 
 <img width="932" alt="image" src="https://github.com/nuneskris/nuneskris.github.io/assets/82786764/c53feeb2-b961-4505-a758-c54a19da6e27">
 
-### 3. Connect to Minio
+***3. Connect to Minio***
    
          MINIO_CLIENT = Minio("localhost:55003", access_key=ACCESS_KEY, secret_key=SECRET_KEY, secure=False)
 
@@ -63,7 +63,7 @@ we can also use docker cli for this.
       CONTAINER ID   IMAGE                      COMMAND                  CREATED        STATUS             PORTS                                                                                                  NAMES
       f1af05f8d214   bitnami/minio:latest       "/opt/bitnami/script…"   10 hours ago   Up About an hour   0.0.0.0:55003-       >9000/tcp, 0.0.0.0:55002->9001/tcp                                                       minimino
 
-### Python code to put
+***Python code to put files to the bucket***
 
 ```python
 load_dotenv()
@@ -106,7 +106,7 @@ def upload_local_directory_to_minio(local_path, bucket_name, minio_path, client)
             client.fput_object(bucket_name, remote_path, local_file)
 ```
 
-# Verifying the data is in the bucket
+***Verifying the data is in the bucket***
 
 ![image](https://github.com/nuneskris/nuneskris.github.io/assets/82786764/337f902f-c509-40fa-924e-19a816782d68)
 
