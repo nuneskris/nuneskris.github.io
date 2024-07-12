@@ -75,7 +75,45 @@ spark.sql("DROP TABLE icebergmanagedplay.my_table_old")
 
 ![image](https://github.com/user-attachments/assets/effa5423-0494-4480-827d-4d59c14c0070)
 
+### Changing the column order.
+The new columns were created at the end. we can change the position both of the new columns back to the position where the original column was.
 
+```python
+# Altering the column Order
+spark.sql("ALTER TABLE icebergmanagedplay.SalesOrderItems ALTER COLUMN PRODCATEGORYID AFTER SALESORDERITEM")
+spark.sql("ALTER TABLE icebergmanagedplay.SalesOrderItems ALTER COLUMN PRODUCTITEMID AFTER PRODCATEGORYID")
+df = spark.table("icebergmanagedplay.SalesOrderItems")
+df.show()
+```
+
+![image](https://github.com/user-attachments/assets/57174bcf-fa78-4ead-a367-1f22530ee074)
+
+# Partion in Iceberg
+
+Partitioning in Iceberg helps to organize and optimize the storage of data by splitting it into more manageable pieces, known as partitions. This enhances query performance by limiting the amount of data scanned. Unlike traditional partitioning, Iceberg uses hidden partitioning, where partition columns do not need to be included in the schema. Instead, partitioning is defined separately, which makes schema evolution easier.
+
+Partition evolution in Iceberg allows you to change the partitioning scheme of a table without rewriting the underlying data files. This feature is one of the key advantages of Iceberg over traditional partitioned tables, as it provides flexibility in how data is organized and queried over time.
+
+Key Points about Partition Evolution in Iceberg
+Non-intrusive: Partition evolution does not require rewriting the existing Parquet (or any other format) files.
+Metadata Management: Iceberg manages partitioning at the metadata level, meaning it keeps track of which files belong to which partitions without modifying the files themselves.
+Backward Compatibility: Old partitions remain readable even after partitioning changes, ensuring backward compatibility.
+How Partition Evolution Works
+When you change the partitioning scheme, Iceberg:
+
+Updates the table metadata to reflect the new partitioning.
+Writes new data using the new partitioning scheme.
+Continues to read old data with the old partitioning scheme seamlessly.
+
+```python
+# Partition table based on "VendorID" column
+logger.info("Partitioning table based on PRODCATEGORYID column...")
+spark.sql("ALTER TABLE icebergmanagedplay.SalesOrderItems ADD PARTITION FIELD PRODCATEGORYID")
+spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
+```
+![image](https://github.com/user-attachments/assets/c80b2fe5-14d7-4327-a26f-0913a9e24652)
+
+![image](https://github.com/user-attachments/assets/d2d67206-8d2e-4410-85a7-f434e2a5dcd1)
 
 
 
