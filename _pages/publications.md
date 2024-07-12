@@ -2,7 +2,7 @@
 layout: archive
 title: "the art and science of building data products"
 permalink: /publications/
-author_profile: false
+author_profile: true
 ---
 
 {% include base_path %}
