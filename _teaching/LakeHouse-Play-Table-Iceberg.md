@@ -194,7 +194,8 @@ tables.show()
 ```python
 spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
 ```
-![Uploading image.png…]()
+
+<img width="329" alt="image" src="https://github.com/user-attachments/assets/6bc32fec-4305-4150-bf9c-2b601d362d91">
 
 
 ## 1. Column Name Change
@@ -214,31 +215,7 @@ spark.sql(
     "ALTER TABLE icebergmanagedplay.SalesOrderItems ALTER COLUMN OPITEM_POS COMMENT 'This Column is modified and we will also delete it.'")
 spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
 ```
-+------------------+---------+--------------------+
-|          col_name|data_type|             comment|
-+------------------+---------+--------------------+
-|      SALESORDERID|      int|                    |
-|    SALESORDERITEM|      int|                    |
-|         PRODUCTID|   string|                    |
-|            NOTEID|   string|                    |
-|          CURRENCY|   string|                    |
-|       GROSSAMOUNT|      int|                    |
-|         NETAMOUNT|   double|                    |
-|         TAXAMOUNT|   double|                    |
-|     ITEMATPSTATUS|   string|                    |
-|        OPITEM_POS|   string|This Column is mo...|
-|          QUANTITY|      int|                    |
-|      QUANTITYUNIT|   string|                    |
-|      DELIVERYDATE|      int|                    |
-|                  |         |                    |
-|    # Partitioning|         |                    |
-|   Not partitioned|         |                    |
-|                  |         |                    |
-|# Metadata Columns|         |                    |
-|          _spec_id|      int|                    |
-|        _partition| struct<>|                    |
-+------------------+---------+--------------------+
-only showing top 20 rows
+<img width="477" alt="image" src="https://github.com/user-attachments/assets/58e63bf6-c8ca-4e88-a7c1-6a6fc7d8b9f0">
 
 ## 2. Droping a column
 ```python
