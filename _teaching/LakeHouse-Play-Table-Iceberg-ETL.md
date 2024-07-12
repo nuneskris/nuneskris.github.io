@@ -170,5 +170,48 @@ hist_df.show()
 
 # Time Travel
 
+Original table without row changes
+![image](https://github.com/user-attachments/assets/b8de8c0e-9029-4262-bd13-842caff2743b)
 
+Table Inserts
+```python
+spark.sql("""
+    INSERT INTO icebergmanagedplay.SalesOrderItems VALUES
+    (900000000,10,'MB','1034',NULL,'USD',2499,2186.625,312.375,'I',4,'EA',DATE'2018-03-11'),
+    (900000000,20,'CB','1161',NULL,'USD',399, 349.125,  49.875,'I',9,'EA',DATE'2018-03-11')
+""")
+```
+![image](https://github.com/user-attachments/assets/5ba2a6f0-25d3-45d5-91a3-29f394a41fe4)
 
+```python
+# Check the snapshots available
+logger.info("Checking snapshots...")
+snap_df = spark.sql("SELECT * FROM icebergmanagedplay.SalesOrderItems.snapshots")
+snap_df.show()
+```
+![image](https://github.com/user-attachments/assets/f61eaf74-1a80-4486-8bd4-b593fd0d1bfa)
+
+```python
+files_count_df = spark.sql("SELECT COUNT(*) AS cnt FROM icebergmanagedplay.SalesOrderItems.files")
+total_files_count = files_count_df.first().cnt
+logger.info(f"Total Data Files Data: {total_files_count}")
+logger.info("Querying Files table...")
+files_count_df = spark.sql("SELECT * FROM icebergmanagedplay.SalesOrderItems.files")
+files_count_df.show()
+```
+![image](https://github.com/user-attachments/assets/52a6d470-1172-40a0-a93e-595da83d6cb4)
+
+![image](https://github.com/user-attachments/assets/d67e9fdd-c462-428f-80ca-d63a1a754f75)
+
+```python
+# Time travel to initial snapshot
+logger.info("Time Travel to initial snapshot...")
+snap_df = spark.sql("SELECT snapshot_id FROM icebergmanagedplay.SalesOrderItems.history LIMIT 1")
+# snapshot id can directly set as an longtype without doing this.
+spark.sql(f"CALL icebergmanagedplay.system.rollback_to_snapshot('icebergmanagedplay.SalesOrderItems', {snap_df.first().snapshot_id})")
+# Query table row count
+count_df = spark.sql("SELECT COUNT(*) AS cnt FROM icebergmanagedplay.SalesOrderItems")
+total_rows_count = count_df.first().cnt
+logger.info(f"Total Rows: {total_rows_count}")
+```
+![image](https://github.com/user-attachments/assets/fef07afa-e92d-4f76-b9d3-c8d6208f2cfd)
