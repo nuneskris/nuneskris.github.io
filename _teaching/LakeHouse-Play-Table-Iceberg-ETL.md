@@ -115,5 +115,40 @@ spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
 
 ![image](https://github.com/user-attachments/assets/d2d67206-8d2e-4410-85a7-f434e2a5dcd1)
 
+```python
+# Query table row count
+count_df = spark.sql("SELECT COUNT(*) AS cnt FROM icebergmanagedplay.SalesOrderItems")
+total_rows_count = count_df.first().cnt
+logger.info(f"Total Rows: {total_rows_count}")
+```
+ MyIcebergSparkJob - INFO - Total Rows: 1930
+
+```python
+spark.sql("""
+    INSERT INTO icebergmanagedplay.SalesOrderItems VALUES
+    (900000000,10,'MB','1034',NULL,'USD',2499,2186.625,312.375,'I',4,'EA',DATE'2018-03-11'),
+    (900000000,20,'CB','1161',NULL,'USD',399, 349.125,  49.875,'I',9,'EA',DATE'2018-03-11')
+""")
+
+# Query table row count
+count_df = spark.sql("SELECT COUNT(*) AS cnt FROM icebergmanagedplay.SalesOrderItems")
+total_rows_count = count_df.first().cnt
+logger.info(f"Total Rows: {total_rows_count}")
+```
+ MyIcebergSparkJob - INFO - Total Rows after insert: 1932
+
+ ![image](https://github.com/user-attachments/assets/fc3f8a56-72f6-46be-84bb-134a0ea3149b)
+
+# Table Metadata Management
+After inserting records we now have 2 snaphots
+
+```python
+# Check the snapshots available
+logger.info("Checking snapshots...")
+snap_df = spark.sql("SELECT * FROM icebergmanagedplay.SalesOrderItems.snapshots")
+snap_df.show()
+```
+ ![image](https://github.com/user-attachments/assets/ee3c024c-c6a3-4664-81ae-8bee81428cf2)
+
 
 
