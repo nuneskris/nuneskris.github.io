@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Data Architecture"
+title: "Data Architecture - "
 permalink: /publications/
 author_profile: true
 ---
