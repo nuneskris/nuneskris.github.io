@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Data Architecture - "
+title: "the art and science of building data products"
 permalink: /publications/
 author_profile: true
 ---
