@@ -15,7 +15,7 @@ The main reason for using Spark on Iceberg, is for it to provide ETL services on
 
 # Tranformation
 Iceberg enforces schema consistency, and modifying columns directly can cause conflicts.
-# 1. Changing the column type. from int (yyyymmdd) to date. (Change Table Name, Drop a table
+## 1. Changing the column type. from int (yyyymmdd) to date. (Change Table Name, Drop a table
 This was a bit tricky. 
 ```python
 from pyspark.sql.functions import col, to_date
@@ -41,7 +41,7 @@ spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
 
 ![image](https://github.com/user-attachments/assets/7c097bac-ee8a-4cef-9daa-228ba9d4f690)
 
-## Column Transformation: Splitting a Column
+## 2. Column Transformation: Splitting a Column
 
 To split a column with values separated by a dash (-) into two new columns and remove the old column using PySpark, you can follow these steps:
 
@@ -149,6 +149,26 @@ snap_df = spark.sql("SELECT * FROM icebergmanagedplay.SalesOrderItems.snapshots"
 snap_df.show()
 ```
  ![image](https://github.com/user-attachments/assets/ee3c024c-c6a3-4664-81ae-8bee81428cf2)
+
+Also there are multiple files are being generated.
+```python
+files_count_df = spark.sql("SELECT COUNT(*) AS cnt FROM icebergmanagedplay.SalesOrderItems.files")
+total_files_count = files_count_df.first().cnt
+logger.info(f"Total Data Files Data: {total_files_count}")
+logger.info("Querying Files table...")
+files_count_df = spark.sql("SELECT * FROM icebergmanagedplay.SalesOrderItems.files")
+files_count_df.show()
+```
+<img width="698" alt="image" src="https://github.com/user-attachments/assets/61c9082b-e65d-4b66-aa6f-e02e12c3a9c7">
+```python
+# Query history table
+logger.info("Querying History table...")
+hist_df = spark.sql("SELECT * FROM icebergmanagedplay.SalesOrderItems.history")
+hist_df.show()
+```
+![image](https://github.com/user-attachments/assets/96d184ef-f319-474c-88db-364e1b4c4dbc)
+
+# Time Travel
 
 
 
