@@ -1,5 +1,5 @@
 ---
-title: "A Table for files - Iceberg"
+title: "Iceberg Setup with Spark ETL and Nessie Catalog"
 collection: teaching
 type: "Lakehouse"
 permalink: /teaching/LakeHouse-Play-Table-Iceberg
@@ -9,7 +9,13 @@ date: 2024-06-01
 location: "Docker"
 ---
 
-The objective of this demonstration is to highlight how we can seemlessly manage tables and contrast it to the issues we had hive.
+The objective of this demonstration is to highlight how we can seemlessly manage tables and contrast it to the issues we had hive. We will reserve this to schema evolution.
+
+1. Change Column Name
+2. Drop a Column
+3. Change Column Type
+4. Change Table Name
+5. Drop a Table
 
 It took a while trying to get Iceberg to work. I had to deal with way to many jar dependencies. I tried and tried and it was taking more time than I planned and had over a Saturday.
 So I did take the easy way out by reusing images which were packaged and ready to go. Follow along the post by [Alex Merced](https://alexmercedcoder.medium.com/creating-a-local-data-lakehouse-using-spark-minio-dremio-nessie-9a92e320b5b3) for the docker set up.
@@ -222,7 +228,29 @@ spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
 spark.sql("ALTER TABLE icebergmanagedplay.SalesOrderItems DROP COLUMN OPITEM_POS")
 spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
 ```
+## 3. Changing the column type. from int (yyyymmdd) to date. (Change Table Name, Drop a table
+This was a bit tricky. 
+```python
+from pyspark.sql.functions import col, to_date
+df = spark.table("icebergmanagedplay.SalesOrderItems")
 
+# Transform the DELIVERYDATE column to date format
+transformed_df = df.withColumn("DELIVERYDATE", to_date(col("DELIVERYDATE").cast(StringType()), "yyyyMMdd"))
+
+# Create a new table with the desired schema
+transformed_df.writeTo("icebergmanagedplay.SalesOrderItems_temp").create()
+
+# Optionally, rename the new table to the original table name.
+spark.sql("ALTER TABLE SalesOrderItems RENAME TO my_table_old")
+
+spark.sql("ALTER TABLE icebergmanagedplay.SalesOrderItems_temp RENAME to SalesOrderItems")
+
+#Completely purge the table skipping trash. 
+spark.sql("DROP TABLE icebergmanagedplay.my_table_old")
+
+spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
+```
+<img width="325" alt="image" src="https://github.com/user-attachments/assets/8c780f7a-8e12-4dae-a4a4-cee756247de7">
 
 
 
