@@ -137,7 +137,14 @@ def load_config(spark_context):
     spark_context._jsc.hadoopConfiguration().set("fs.s3a.region", AWS_REGION)
 
 load_config(spark.sparkContext)
+
+# Read data from the mounted directory
+df = spark.read.csv("/data/SalesOrderItems.csv", header=True, inferSchema=True)
+df.show()
 ```
+![image](https://github.com/user-attachments/assets/00fdc4bf-87ec-4cb6-9a47-48075c3007e9)
+
+
 ## Ingest Table with predefined Schema
 
 Using the ERP data which we had used from the parquet [demonstration](https://nuneskris.github.io/talks/Parquet-BestPracticeDemo). 
