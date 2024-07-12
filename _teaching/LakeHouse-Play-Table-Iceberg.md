@@ -188,40 +188,14 @@ spark.sql("USE icebergmanagedplay")
 tables = spark.sql("SHOW TABLES")
 tables.show()
 ```
-+---------+---------------+-----------+
-|namespace|      tableName|isTemporary|
-+---------+---------------+-----------+
-|         |SalesOrderItems|      false|
-+---------+---------------+-----------+
+<img width="354" alt="image" src="https://github.com/user-attachments/assets/746a9946-b9ee-4409-9612-3f7b4cc1e651">
+
 
 ```python
 spark.sql("DESCRIBE TABLE EXTENDED icebergmanagedplay.SalesOrderItems").show()
 ```
-+------------------+---------+-------+
-|          col_name|data_type|comment|
-+------------------+---------+-------+
-|      SALESORDERID|      int|       |
-|    SALESORDERITEM|      int|       |
-|         PRODUCTID|   string|       |
-|            NOTEID|   string|       |
-|          CURRENCY|   string|       |
-|       GROSSAMOUNT|      int|       |
-|         NETAMOUNT|   double|       |
-|         TAXAMOUNT|   double|       |
-|     ITEMATPSTATUS|   string|       |
-|         OPITEMPOS|   string|       |
-|          QUANTITY|      int|       |
-|      QUANTITYUNIT|   string|       |
-|      DELIVERYDATE|      int|       |
-|                  |         |       |
-|    # Partitioning|         |       |
-|   Not partitioned|         |       |
-|                  |         |       |
-|# Metadata Columns|         |       |
-|          _spec_id|      int|       |
-|        _partition| struct<>|       |
-+------------------+---------+-------+
-only showing top 20 rows
+![Uploading image.png…]()
+
 
 ## 1. Column Name Change
 ```python
