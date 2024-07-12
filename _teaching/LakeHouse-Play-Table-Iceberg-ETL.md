@@ -9,5 +9,13 @@ date: 2024-06-01
 location: "Docker"
 ---
 
-The objective of this demonstration is to highlight how we can seemlessly manage tables and contrast it to the issues we had hive. We will reserve this to schema evolution.
+This is a continuation from the post which focused on [Setup, Table Management and Schema Evolution of Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg)
+
+The main reason for using Spark on Iceberg, is for it to provide ETL services on a table.
+
+# Tranformation
+
+
+![image](https://github.com/user-attachments/assets/7c097bac-ee8a-4cef-9daa-228ba9d4f690)
+
 
