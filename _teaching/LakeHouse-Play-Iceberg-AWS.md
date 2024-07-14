@@ -8,10 +8,11 @@ venue: "Iceberg"
 date: 2024-06-01
 location: "AWS"
 ---
+You pay for what you get! Getting things started with Iceberg on AWS was a beeeze. I was actaully plesantly supprised to find out the Iceberg is a first class table format along with AWS Glue. They must be seing promise with the technology. 
 
 # Setup
 1. AWS Glue can create Iceberg Tables directily
-NOTE: I was suprised to find out AWS considers Iceberg as a first class table format. They must be seing promise with the tech. 
+
 ![image](https://github.com/user-attachments/assets/c89b44a7-d8bc-4b34-b78b-d2dae3a62c6e)
 
 2. Setup a bucket
