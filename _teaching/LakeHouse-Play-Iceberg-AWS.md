@@ -89,6 +89,8 @@ AWS automatically create a folder called metadata
 
 Use Athena Query Editor to interact with the table
 ```sql
+DESCRIBE helloworldicebergdb.com_kfn_study_play_hello_employee;
+
 INSERT INTO "helloworldicebergdb"."com_kfn_study_play_hello_employee" VALUES (
     'name_first', 'name_middle', 'name_last', 'name_initials', 'sex',
     'language', 'phonenumber', 'emailaddress', 'loginname', 
