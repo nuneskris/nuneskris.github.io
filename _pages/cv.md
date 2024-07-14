@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "With 18 years of expertise, I specialize in architecting, designing, and developing cutting-edge information and data technology platforms. I have a proven track record of providing technology thought leadership in multiple transformation initiatives."
+title: ""
 permalink: /cv/
 author_profile: true
 redirect_from:
@@ -9,6 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
+With 18 years of expertise, I specialize in architecting, designing, and developing cutting-edge information and data technology platforms. I have a proven track record of providing technology thought leadership in multiple transformation initiatives.
 
 # Work experience
 
