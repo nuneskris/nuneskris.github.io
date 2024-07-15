@@ -8,70 +8,28 @@ venue: "EMR"
 date: 2024-06-01
 location: "AWS"
 ---
-# Set up
-1. IAM
-1.1 Create a new role for a notebook via a custom trust policy: Role Name: EMRNotebookRole
-```json
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Sid": "Statement1",
-			"Effect": "Allow",
-			"Principal": {
-			    "Service":"elasticmapreduce.amazonaws.com"
-			},
-			"Action": "sts:AssumeRole"
-		}
-	]
-}
-```
-### Add Permission
-AmazonS3FullAccess
-AmazonElasticMapReduceEditorsRole
+This is a continuation of the setup. 
 
-1.2 Creat anothe role for EMR Serverless Execution
-```json
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Sid": "Statement1",
-			"Effect": "Allow",
-			"Principal": {
-			    "Service":"emr-serverless.amazonaws.com"
-			},
-			"Action": "sts:AssumeRole"
-		}
-	]
-}
-```
-Assign Permission: AWSGlueServiceRole
-Role creared: emr-serverless-execution-play-role
+Below are the list of Iceberg which are listed by AWS and I would like to test and demonstrate them.
 
+1## Delete, update, and merge. Iceberg supports standard SQL commands for data warehousing for use with data lake tables.
 
+Fast scan planning and advanced filtering. Iceberg stores metadata such as partition and column-level statistics that can be used by engines to speed up planning and running queries.
 
+Full schema evolution. Iceberg supports adding, dropping, updating, or renaming columns without side-effects.
 
-# EMR Studio
-Create a EMR Studio: For the Notebooks, I like to chose Interactive workloads "Create a Studio, a Workspace, and an EMR Serverless application with the necessary storage and permissions to store, organize, and run active notebooks."
+Partition evolution. You can update the partition layout of a table as data volume or query patterns change. Iceberg supports changing the columns that a table is partitioned on, or adding columns to, or removing columns from, composite partitions.
 
-Studio name: com-kfn-study-aws-emrserverless-play-studio
-Created a bucket and selected it: s3://com.kfn.study.aws.emr.playemrbucket
-Service Role for the notebook: Used the Role which I had created earlier: EMRNotebookRole
-Created a serverless application: com-kfn-study-aws-emrserverless-play-application
-Assigned the role to the application: emr-serverless-execution-play-role
+Hidden partitioning. This feature prevents reading unnecessary partitions automatically. This eliminates the need for users to understand the table's partitioning details or to add extra filters to their queries.
 
-# EMR Application
-An application with name com-kfn-study-aws-emrserverless-play-application is available within the Studio which was launched.
-The details of the application which was created are:
-Type: Spark
-Release version: emr-6.15.0
-Architecture: x86_64
-Number of Spark drivers: 1
-Size of driver: 4 vCPUs, 16 GB memory
-Driver disk details: 20 GB disk
-Number of Spark executors: 2
-Size of executor: 4 vCPUs, 16 GB memory
-Executor disk details: 20 GB disk
+Version rollback. Users can quickly correct problems by reverting to a pre-transaction state.
+
+Time travel. Users can query a specific previous version of a table.
+
+Serializable isolation. Table changes are atomic, so readers never see partial or uncommitted changes.
+
+Concurrent writers. Iceberg uses optimistic concurrency to allow multiple transactions to succeed. In case of conflicts, one of the writers has to retry the transaction.
+
+Open file formats. Iceberg supports multiple open source file formats, including Apache Parquet, Apache Avro, and Apache ORC.
 
 
