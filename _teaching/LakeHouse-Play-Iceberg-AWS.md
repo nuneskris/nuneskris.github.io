@@ -87,17 +87,17 @@ AWS automatically create a folder called metadata
 ![image](https://github.com/user-attachments/assets/b14d6fd7-7b46-4d22-a8a6-bb9b465406eb)
 
 
-Use Athena Query Editor to interact with the table
+Use Athena Query Editor to interact with the table (Note: I adjuested some names.
 ```sql
-DESCRIBE helloworldicebergdb.com_kfn_study_play_hello_employee;
+DESCRIBE AWSDataCatalog.com_kfn_study_aws_iceberg_play_database_erp.employees;
 
-INSERT INTO "helloworldicebergdb"."com_kfn_study_play_hello_employee" VALUES (
+INSERT INTO AWSDataCatalog.com_kfn_study_aws_iceberg_play_database_erp.employees VALUES (
     'name_first', 'name_middle', 'name_last', 'name_initials', 'sex',
     'language', 'phonenumber', 'emailaddress', 'loginname', 
     1234345, 20241010, 20241212 
-)
+);
 
-SELECT * FROM "helloworldicebergdb"."com_kfn_study_play_hello_employee";
+SELECT * FROM AWSDataCatalog.com_kfn_study_aws_iceberg_play_database_erp.employees;
 ```
 ![image](https://github.com/user-attachments/assets/5b7de8a9-4490-4e94-aad7-0cde9aca20a4)
 
