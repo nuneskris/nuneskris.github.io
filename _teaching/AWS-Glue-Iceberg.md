@@ -9,7 +9,7 @@ date: 2024-06-01
 location: "AWS"
 ---
 
-I remember trying to work with Iceberg with Glue 3 and find it difficult to getting to work togeter. Glue 4 loves Iceberg.
+I remember trying to work with Iceberg with Glue 3 and finding it difficult to getting it to work. Glue 4 loves Iceberg.
 
 # Major Takeaways:
 
