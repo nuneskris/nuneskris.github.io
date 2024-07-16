@@ -4,7 +4,7 @@ collection: teaching
 type: "Lakehouse"
 permalink: /teaching/AWS-Glue-Iceberg
 date: 2024-06-01
-venue: "EMR"
+venue: "Glue"
 date: 2024-06-01
 location: "AWS"
 ---
