@@ -102,6 +102,7 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
 from awsglue.job import Job
+from awsglue.dynamicframe import DynamicFrame
 
 ## @params: [JOB_NAME]
 args = getResolvedOptions(sys.argv, ['JOB_NAME'])
@@ -132,6 +133,19 @@ glueContext.write_data_frame.from_catalog(
     frame = inputS3DF,
     database = "com_kfn_lakehouse_iceberg_play_erp",
     table_name = "iceberg_employee")
+
+# Convert DataFrame to DynamicFrame
+dynamic_frame = DynamicFrame.fromDF(df, glueContext, "dynamic_frame_name")
+
+glueContext.write_dynamic_frame.from_options(
+    frame=dynamic_frame,
+    connection_type="s3",
+    format="csv",
+    connection_options={
+        "path": "s3://kfn-study-inputdata/EmployeesAgAIN.csv",
+    }
+)
+
 
 job.commit()
 ```
