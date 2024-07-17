@@ -20,12 +20,17 @@ Documenting and naming the SCD related columns clearly so that folks understand 
 
 * Adopt type2, as they are the most effiient unless business requirements dictate otherwise. I would still start with SCD2 as my first option.
 
-* Use bulk operations where possible to handle large volumes of data changes to efficiently handle Large Data Volumes:
-  
 * For Dimensions which change very often (like the one I worked on and struggled), have a process to archive data which may not be needed.
 
+* Use bulk operations where possible to handle large volumes of data changes to efficiently handle Large Data Volumes. The below demo used spark on an ACID compliant table format Iceberg and this Lakehouses architecture makes life so simple.
 
 # Demo
+
+* Step1: Source the delta changes.
+* Step2: Get the difference in the data. This is done by Reading current data from Iceberg table and create aliases so that the column names dont conflict when we unioon changes and the updated current records.
+* Step3: Filter rows that have changed
+* Step4: Update the records in the current table which are impacted with the validity dates.
+* Step5: Union the new records with the updated current records
 
 ##set up
 We will be using the DataLakehouse use case which can be followed with.
@@ -123,4 +128,28 @@ final_df.write \
     .mode("append") \
     .save("glue_catalog.com_kfn_lakehouse_iceberg_play_erp.iceberg_employee")
 job.commit()
+```
+
+We can that table has add the 2 new rows and also set the old rows as invalid by setting an end date on the validity.
+
+![image](https://github.com/user-attachments/assets/6cedde02-2582-4bcf-bb2a-76a6e617c4a0)
+
+
+# Additonal Thoughts.
+
+SCD can be time consuming if there are frequent changes to the dimension. Adding IS_CURRENT flag helps quickly identify the current records without needing to evaluate date ranges. This can simplify queries and improve performance, especially when dealing with large datasets.
+
+Below is the code is much more efficient.
+
+```python
+# Update the current records to set validity_enddate and is_current flag
+updated_current_df = current_df.alias("current").join(
+    changes_df.select("EMPLOYEEID").alias("changes"), on="EMPLOYEEID", how="inner"
+).withColumn("VALIDITY_ENDDATE", current_date()) \
+ .withColumn("IS_CURRENT", lit(False))
+
+# Union the new records with the updated current records
+final_df = changes_df.select("EMPLOYEEID", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", 'NAME_INITIALS', 'SEX', 'LANGUAGE', 'PHONENUMBER', 'EMAILADDRESS', 'LOGINNAME', 'ADDRESSID', "VALIDITY_STARTDATE", "VALIDITY_ENDDATE") \
+    .withColumn("IS_CURRENT", lit(True)) \
+    .union(updated_current_df.select("EMPLOYEEID", col("CURRENT_NAME_FIRST").alias("NAME_FIRST"), col("CURRENT_NAME_MIDDLE").alias("NAME_MIDDLE"), col("CURRENT_NAME_LAST").alias("NAME_LAST"), col("CURRENT_NAME_INITIALS").alias("NAME_INITIALS"), col("CURRENT_SEX").alias("SEX"), col("CURRENT_LANGUAGE").alias("LANGUAGE"), col("CURRENT_PHONENUMBER").alias("PHONENUMBER"), col("CURRENT_EMAILADDRESS").alias("EMAILADDRESS"), col("CURRENT_LOGINNAME").alias("LOGINNAME"), col("CURRENT_ADDRESSID").alias("ADDRESSID"), "VALIDITY_STARTDATE", "VALIDITY_ENDDATE", "IS_CURRENT"))
 ```
