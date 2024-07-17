@@ -134,6 +134,16 @@ glueContext.write_data_frame.from_catalog(
     database = "com_kfn_lakehouse_iceberg_play_erp",
     table_name = "iceberg_employee")
 
+
+## Now read the Data from the table and store into S3
+additional_options = {}
+df = glueContext.create_data_frame.from_catalog(
+    database="com_kfn_lakehouse_iceberg_play_erp",
+    table_name="iceberg_employee",
+    additional_options=additional_options
+)
+
+# now read and load back into s3
 # Convert DataFrame to DynamicFrame
 dynamic_frame = DynamicFrame.fromDF(df, glueContext, "dynamic_frame_name")
 
