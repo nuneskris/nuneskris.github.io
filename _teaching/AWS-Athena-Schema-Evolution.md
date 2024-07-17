@@ -34,7 +34,7 @@ Create table iceberg_employee
       ADDRESSID string,
       VALIDITY_STARTDATE string,
       VALIDITY_ENDDATE string )
- location 's3://com-kfn-lakehouse-s3storage-play-erp/warehouse/employee/'
+ location 's3://com-kfn-lakehouse-s3storage-play-erp/warehouse/iceberg_employee/'
  tblproperties (
  'table_type' = 'ICEBERG',
  'format' = 'parquet'
@@ -43,7 +43,9 @@ Create table iceberg_employee
 
 Using the date data type for VALIDITY_STARTDATE and VALIDITY_ENDDATE is generally preferred over using int. This allows you to leverage date functions in Spark SQL for comparisons, calculations, and other date-related operations. Here’s how you can modify your table to use the date data type:
 
-I checked and unfortunately, Athena itself does not currently support direct schema evolution operations for Iceberg tables. However, we can achieve this through Spark-Glue ETL.
+I checked and unfortunately, Athena itself does not currently support direct schema evolution operations for Iceberg tables. However, we can achieve this through Spark-ETL.
+
+
 
 
 
