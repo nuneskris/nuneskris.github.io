@@ -2,7 +2,7 @@
 title: "Data Platform - Enteprise Semantic Layer Requirements"
 collection: publications
 permalink: /publication/Data-Platform-Semantic-Layer-Requirements
-excerpt: 'Deliver Data as a Organized, Unified and Consistent Product'
+excerpt: 'Deliver Data as an Organized, Unified and Consistent Product'
 date: 2024-5-01
 venue: 'Data Platform'
 slidesurl: 'http://academicpages.github.io/files/slides2.pdf'
@@ -18,20 +18,43 @@ Data Mesh has laid out the first principles of Data as a Product which I will gu
 
 ***Valuable on its own***
 
+***AddreEvery data product should have a unique address that helps data consumers access it programmatically. The address typically follows centrally decided naming standards within the organization.
 
 # Requirements
 Here are the key requirements and considerations for the semantic layer in a data lakehouse:
 
 ## Requirement: Business-Friendly Unified Data Models
-The semantic layer should provide business-friendly abstractions of raw data, transforming complexity, technical data structures into understandable and meaningful business concepts. The Semantic Layer needs to be modeled such that the domains are integrated into a enterprise context and they should consolidate commonalities and accommodate exclusivities of source system/process variations, providing a comprehensive and inclusive framework for the data. This can only be achieved with clear articulation of relationships accross entities.[Understandability]
+The semantic layer should provide business-friendly abstractions of raw data, transforming complexity, technical data structures into understandable and meaningful business concepts. The Semantic Layer needs to be modeled such that the domains are integrated into a enterprise context and they should consolidate commonalities and accommodate exclusivities of source system/process variations, providing a comprehensive and inclusive framework for the data. This can only be achieved with clear articulation of relationships accross entities. Articulation should be focused on the ***Understandability** of the data by the consumer.
+
+#### Strategies:
+* Mordern source systems are investing heavily on the data models keepijng downstream analytics in mind. Leverage existing source data model.
+* Data Domains own the data models defininions within the domain and there needs to be consensus building on relationships with entities across data domains. Data Governance is key to measure how well the models conform accross domains
+
+## Quality, Clean and Managed Data Source of Truth
+
+Data needs contracts between producers of data and consumers of data. This contract needs to be governe It’s crucial that the data represents the business accurately in terms of the events or transactions that have occurred, and the probability of truthfulness of the aggregations and projections that have been created by the business. To eliminate uncertainty surrounding the data, a service level agreement would certainly help. These agreements may include details around interval of change (how often changes in the data are reflected), timeliness (time between the business fact occurs and is served to data users), completeness (availability of necessary information), statistical shape of data (distribution, range, volume), lineage (data journey from source to now), precision and accuracy over time (degree of business truthfulness as time passes), and operational qualities (freshness, general availability, performance).
+
+#### Strategies:
+* Metadata Repository: Maintain a metadata repository that stores information about data definitions, business rules, transformations, and lineage. This helps in managing and accessing metadata efficiently. Keep metadata synchronized with the underlying data sources and transformations to ensure that it accurately reflects the current state of the data.
+
+## Requirement: Consistency and Standardization 
+***Addressability*** means that data can be uniquely identified and accessed. This is typically achieved through unique identifiers and URIs (Uniform Resource Identifiers) which are globally understood and refered to when integrating datya (logically) from various data domains.
+
+#### Strategies:
+Uniform Resource Identifiers (URIs): Assign URIs to datasets and data products to ensure they can be uniquely identified and accessed. Globally Unique Identifiers (GUIDs): Use GUIDs or UUIDs for unique identification of data records. There needs to be a balance as to what entities require global identifiers. If an entitiy is used within the context of the domain, this would be an overkill. Metadata Management Systems: Tools like Apache Atlas or OpenMetadata can help assign and manage URIs and GUIDs. Data Catalogs: Systems like Alation or Collibra to provide a central repository where each data asset is uniquely identifiable.
 
 ## Requirement: User-Friendly Self-Service Interfaces
 Provide user-friendly interfaces that allow business users without needing deep technical knowledge to either ingest the data via simple data extraction tools or interact with the data directly for creating reports, dashboards, and ad-hoc queries. Thus this layer should be able to seemlessly integrate with consuming tools. [Natively Accessable]
 
-# Requirement: Performance, Scalability and Flexibility
-Scalability: Design the semantic layer to scale with the growth of data and user demands. This includes handling large volumes of data and concurrent user queries efficiently.
-Flexibility: Ensure that the semantic layer can adapt to changes in data sources, business requirements, and technology. This includes supporting changes in data models and business logic.
-Performance Optimization: Implement mechanisms to optimize query performance, such as indexing, caching, and query rewriting. This helps in delivering fast and responsive analytics.
+## Requirement: Performance, Scalability and Flexibility
+Design the semantic layer to scale with the growth of data and user demands (Volume). This includes handling large volumes of data and concurrent user queries efficiently. Ensure that the semantic layer can adapt to changes in data sources, business requirements, and technology. This includes supporting changes in data models and business logic (Schema Evolution). Implement mechanisms to optimize query performance.
+
+### Strategies:
+* Since data needs to be udpated, we wouuld model the data in the 3rd normal form.
+* Ensure the data incorporates type 2 slowly changing dimensions.
+* Store data in file formats such as Parquet or ORC as they are columnar, support partioning and not size intensive.
+* Use table format such as Iceberg, Hudi or Delta Tables as they support ACID transactions, evolve schema etc. (Modern Data Lakehouse)
+
 
 Data Discovery and Exploration: Enable users to discover and explore data through intuitive search and navigation features. This  helps users find the data they need and understand its context.
 
@@ -52,14 +75,8 @@ Fine-Grained Access Control: Provide fine-grained access controls to ensure that
 Data Lineage: Track and visualize data lineage to understand the flow of data from source to destination. This helps in ensuring data quality and transparency.
 Data Governance: Implement data governance policies and practices to manage data quality, data stewardship, and compliance. This includes defining data ownership and stewardship roles.
 
-8. Interoperability and Integration
-Integration with BI Tools: Ensure seamless integration with business intelligence (BI) tools and data visualization platforms. This allows users to easily create and share reports and dashboards.
-Support for Multiple Data Formats: Support various data formats and structures, including structured, semi-structured, and unstructured data. This is important for a comprehensive and flexible semantic layer.
+## Requirement: Interoperability
 
 
-
-10. Metadata Management
-Metadata Repository: Maintain a metadata repository that stores information about data definitions, business rules, transformations, and lineage. This helps in managing and accessing metadata efficiently.
-Metadata Synchronization: Keep metadata synchronized with the underlying data sources and transformations to ensure that it accurately reflects the current state of the data.
 Conclusion
 The semantic layer in a data lakehouse plays a crucial role in enabling users to interact with data in a meaningful and efficient way. It provides a business-friendly view of data, ensures consistency and accuracy, optimizes query performance, and supports self-service analytics. By addressing these requirements, organizations can create a robust and effective semantic layer that enhances data accessibility, usability, and value.
