@@ -13,11 +13,15 @@ location: "AWS"
 * ****Alignment with Business*** Ensure the business undertand the SCD rules for handling historical data and changes so that they understand and use dimensional data for reporting.
 There was major escalation in the reports providing wrong answers. After investigating it was uncovered that there was discrepencies in how SCD2 was developed and how BI reports consumed them.
 Documenting and naming the SCD related columns clearly so that folks understand how to use them goes a long way. (VALIDITY_STARTDATE, VALIDITY_ENDDATE).
-* For large dimensions (I had one for product with more than 10B rows, I struggled with performance), we would need to partitions.
+
+* For large dimensions (I had one for product with more than 10B rows and I struggled with performance), we would need to partitions the data in a way that that SCD2 can perform efficiently. Remember, SCD2 is to be performed typically in the semantic layer and not in the presentation layer, were partition is done based on reporting query requirements.
 
 * For Type 2, this includes effective start and end dates and use Appropriate Data Types: (DATE or TIMESTAMP) for start and end dates. Avoid using string representations of dates for these columns. This helps in leveraging multiple functions to make like easier.
+
+* Adopt type2, as they are the most effiient unless business requirements dictate otherwise. I would still start with SCD2 as my first option.
+
 * Use bulk operations where possible to handle large volumes of data changes to efficiently handle Large Data Volumes:
-* 
+  
 * For Dimensions which change very often (like the one I worked on and struggled), have a process to archive data which may not be needed.
 
 
