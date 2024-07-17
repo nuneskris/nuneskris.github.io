@@ -9,6 +9,8 @@ date: 2024-06-01
 location: "AWS"
 ---
 
+One of the main features of Data Lakehouses is Schema Evolution. I will demonstrate how Glue/Spark is able to easily (with some gaps) do it. I am sure future releases will fix the gaps.
+
 # Objective
 1. We had used Athena to create a Iceberg Table in this [page](https://nuneskris.github.io/teaching/LakeHouse-Play-Iceberg-AWS)
 2. We has used Glue ETL Spark job to read data from a S3 location and load it into the Icebarg Table in this [post](https://nuneskris.github.io/teaching/AWS-Glue-Iceberg).
@@ -41,11 +43,14 @@ Create table iceberg_employee
  );
 ```
 
-Using the date data type for VALIDITY_STARTDATE and VALIDITY_ENDDATE is generally preferred over using int. This allows you to leverage date functions in Spark SQL for comparisons, calculations, and other date-related operations. Here’s how you can modify your table to use the date data type:
+Using the date data type for VALIDITY_STARTDATE and VALIDITY_ENDDATE is generally preferred over using string. This allows you to leverage date functions in Spark SQL for comparisons, calculations, and other date-related operations. 
+
+Also we would change the employeeid and addressid from string to int for better performance.
+
+> I checked and unfortunately, Athena itself does not currently support direct schema evolution operations for Iceberg tables. However, we can achieve this through Spark-ETL.
+> There is an issue with Glue not automatically updating the schema when we evolve iceberb schema. This created an issue while reading the data. So we would need to manually go and update the Glue schema.
 
 ## Job Script
-
-I checked and unfortunately, Athena itself does not currently support direct schema evolution operations for Iceberg tables. However, we can achieve this through Spark-ETL.
 
 ```python
 import sys
@@ -114,6 +119,3 @@ job.commit()
 
 ![image](https://github.com/user-attachments/assets/ad145380-a7b1-4ba8-bac1-7b7dadcab853)
 
-> Addtionally I wanted to clean up the addressid and employeeid from string to int. Code is update above.
-
-``` 
