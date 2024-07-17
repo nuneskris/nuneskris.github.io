@@ -56,6 +56,7 @@ from awsglue.context import GlueContext
 from awsglue.job import Job
 from awsglue.dynamicframe import DynamicFrame
 from pyspark.sql.functions import col, to_date
+from pyspark.sql.types import IntegerType
 
 ## @params: [JOB_NAME]
 args = getResolvedOptions(sys.argv, ['JOB_NAME'])
@@ -84,6 +85,17 @@ df = df.withColumn("VALIDITY_ENDDATE_temp", to_date(col("VALIDITY_ENDDATE"), "yy
 # Overwrite the original column with the new date values
 df = df.drop("VALIDITY_ENDDATE").withColumnRenamed("VALIDITY_ENDDATE_temp", "VALIDITY_ENDDATE")
 
+
+# Convert datestring to date type and create a temporary new column
+df = df.withColumn('EMPLOYEEID_integer', df['EMPLOYEEID'].cast(IntegerType()))
+# Overwrite the original column with the new date values
+df = df.drop("EMPLOYEEID").withColumnRenamed("EMPLOYEEID_integer", "EMPLOYEEID")
+
+# Convert datestring to date type and create a temporary new column
+df = df.withColumn('ADDRESSID_integer', df['ADDRESSID'].cast(IntegerType()))
+# Overwrite the original column with the new date values
+df = df.drop("ADDRESSID").withColumnRenamed("ADDRESSID_integer", "ADDRESSID")
+
 # Write data back to Iceberg table
 df.write \
     .format("iceberg") \
@@ -101,3 +113,7 @@ job.commit()
 ![image](https://github.com/user-attachments/assets/2e8f8986-ffcd-4f4b-8fbf-c7ab64fd1743)
 
 ![image](https://github.com/user-attachments/assets/ad145380-a7b1-4ba8-bac1-7b7dadcab853)
+
+> Addtionally I wanted to clean up the addressid and employeeid from string to int. Code is update above.
+
+``` 
