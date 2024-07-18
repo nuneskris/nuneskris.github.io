@@ -1,3 +1,11 @@
+---
+title: "Cloud Storage: Best practices"
+collection: talks
+type: "Talk"
+permalink: /talks/CloudStorage-Best-Practices
+date: 2024-02-01
+---
+
 * Buckets names: I am split on wheter to have have smart names which clear inform about the intent of the bucket and its files and the security concerns that may arise by doing so. If there is a need to hide the intent of buckets from possible attackers, we would need manage and enforce catalogs. However, I have seen the worst of both worlds in which the naming is gives enough and these buckets not being cataloged. I would recommend a naming coventions or rules to catalog bucket names and have audits to ensure compliance.
 
 * Single purpose buckets: Do not use size as a reason to create buckets. The number of objects in a bucket does not impact performance. The purpose of these storage c
