@@ -1,7 +1,7 @@
 ---
 title: "Federated Data Management through Domain-Oriented Decentralized Data Ownership"
 collection: publications
-permalink: /publication/Business-Capability-Map-DataArchitecture
+permalink: /publication/Domain-Oriented-Business-Capability-Map
 excerpt: 'Leverage Business Capability Maps for Data Domains'
 ---
 
