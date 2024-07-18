@@ -1,5 +1,5 @@
 ---
-title: "Data Domain Ownership"
+title: "Aligning Business Capabilties and Data Domains"
 collection: publications
 permalink: /publication/Business-Capability-Map-DataArchitecture
 excerpt: 'Leverage Business Capability Maps for Data Domains'
@@ -10,7 +10,7 @@ Mapping Data Domains to organization departments directly can be a political nig
 
 I find business capability typically corresponds to specific data domains or areas of data ownership. For example, a "Customer Management" ***capability aligns and maps*** with data domains related to customer data, such as customer master profiles and and customer preferences. Within each business capability we would then add a new dimension to define ***data ownership responsibilities***. Data ownership includes accountability for data quality, accuracy, security, and compliance within that domain.
 
-Before we dive into how they relate to Data Domain ownership, I have some main takeways on successfully developing Business Capability Maps.
+I have some main takeways on successfully developing Business Capability Maps.
 
 >Implementation Tip: Embrace the principle Good is good enough. Work our way up from an industry model and don’t get caught in a paralysis for perfection. It should be left at a strategic planning level and not worry too much of decomposing capabilities down too much.
 
@@ -22,9 +22,30 @@ Before we dive into how they relate to Data Domain ownership, I have some main t
 
 >Implementation Tip: Value is in the insights and not how pretty it looks. So rather than focusing on tooling and canvas focus on how we can articulate data and measures. Simple heat mapping can go a long enough way.
 
+Understanding Usage Patterns of organzations behind these business capabilities provides a framwork to organize domains and their data. Below is based on my experiences. 
 
+Sales and Marketing
+* Data Volume: Often substantial due to customer data, sales transactions, marketing campaigns, social media interactions, and CRM systems.
+* Types of Data: Customer demographics, purchase history, campaign metrics, web analytics.
+* Trend: Increasing use of big data analytics, customer segmentation, and personalized marketing drives data volume.
 
+Finance
+* Data Volume: Moderate to high, depending on the scale of transactions and regulatory requirements.
+* Types of Data: Financial transactions, accounting records, investment data, regulatory compliance data.
+* Trend: Data volume grows with detailed financial analysis, real-time transaction processing, and compliance reporting.
 
+Operations and Supply Chain
+* Data Volume: High due to logistics, inventory management, manufacturing processes, and IoT data.
+* Types of Data: Supply chain transactions, inventory levels, production data, shipment tracking, sensor data.
+* Trend: Use of IoT and real-time tracking systems increases the volume and complexity of data.
 
+Human Resources (HR)
+* Data Volume: Lower compared to sales and operations but still significant.
+* Types of Data: Employee records, payroll data, performance metrics, recruitment data.
+* Trend: HR analytics and employee performance tracking add to data volume.
 
+Engineering
+* Data Volume: Variable, often high in the sectors I worked in (Aeroa and manufacturing).
+* Types of Data: Experiment results, simulation data, product testing data, innovation metrics.
+* Trend: High volume in sectors reliant on continuous innovation and development.
 
