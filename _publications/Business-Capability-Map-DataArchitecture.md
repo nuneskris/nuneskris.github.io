@@ -1,13 +1,24 @@
 ---
-title: "Aligning Business Capabilties and Data Domains"
+title: "Federated Data Management through Domain-Oriented Decentralized Data Ownership"
 collection: publications
 permalink: /publication/Business-Capability-Map-DataArchitecture
 excerpt: 'Leverage Business Capability Maps for Data Domains'
 ---
 
-A federated approach to data management through domain-oriented decentralized data ownership and architecture is relatively new paradigm and which was a core of the data strategy which I worked with in 2017. It was to address many of the limitations of traditional centralized data management by promoting scalability, flexibility, and responsiveness. This is lately championed by Data Mesh Architecture approach which presribes a Domain-Oriented Decentralized Data Ownership and Architecture. Data is owned by the domain that best understands it, rather than a central IT team. Each domain (e.g., sales, marketing, finance) manages its own data as a product, making it responsible for its quality, governance, and lifecycle. There are multiple ways were we can defines these domains and organize our data around. But the driving force behind decentranlizing to data domains is ownership, management and governance, I would like to use TOGAF guidance on architecture governance.
+A federated approach to data management, characterized by domain-oriented decentralized data ownership and architecture, represents a relatively new paradigm that addresses many limitations of traditional centralized data management. This approach promotes scalability, flexibility, and responsiveness, and was a core aspect of the data strategy I worked on in 2017.
 
+This concept is championed by the Data Mesh Architecture, which prescribes a Domain-Oriented Decentralized Data Ownership and Architecture. In this model, data is owned by the domain that best understands it, rather than a central IT team. Each domain (e.g., sales, marketing, finance) manages its own data as a product, taking responsibility for its quality, governance, and lifecycle.
+
+There are multiple ways to define these domains and organize data around them. However, the driving force behind decentralizing to data domains is ownership, management, and governance. Leveraging TOGAF guidance can help in structuring and governing this architecture effectively. 
 > An Enterprise Architecture imposed without appropriate political backing is bound to fail. In order to succeed, the Enterprise Architecture must reflect the needs of the organization. Enterprise Architects, if they are not involved in the development of business strategy, must at least have a fundamental understanding of it and of the prevailing business issues facing the organization. It may even be necessary for them to be involved in the system deployment process and to ultimately own the investment and product selection decisions arising from the implementation of the Technology Architecture. (TOGAF on Architecture Governance)
+
+# Key considerations
+
+There are many considerations when we developn a data architecture. Specifically for Federated Data Managemen, below are key
+***Domain Ownership*** Data ownership is decentralized to the domain level. Domains that generate and utilize the data are best suited to manage it.
+***Data as a Product*** Each domain treats its data as a product. Domains are responsible for data quality, governance, and lifecycle management.
+***Scalability and Flexibility*** Decentralized data management scales more effectively. Flexible to adapt to the unique needs and expertise of each domain.
+***Governance and Architecture***  Ensure a robust framework for data management and governance across domains.
 
 Capability is an abstract concept by design and misunderstood by me in the beginning. I have seen this tool used to great value in many places, and a money pit in a few. However it is by far the most accepted artifact by the business and a great tool to gain a clear understanding of the functional areas and domains. They serve as a foundation for decision-making related to business transformation, process improvement, organizational restructuring, and IT initiatives.
 
@@ -53,4 +64,3 @@ Engineering
 * Data Volume: Variable, often high in the sectors I worked in (Aeroa and manufacturing).
 * Types of Data: Experiment results, simulation data, product testing data, innovation metrics.
 * Trend: High volume in sectors reliant on continuous innovation and development.
-
