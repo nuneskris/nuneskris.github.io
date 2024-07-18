@@ -5,7 +5,7 @@ permalink: /publication/DataAnalytics-Storage-2024
 excerpt: 'Storage is foundational. The choices are simplified by the maturing technolgies. Providing a technical overview'
 date: 2024-05-01
 venue: 'Storage'
-slidesurl: 'https://nuneskris.github.io/publication/Domain-Oriented-Business-Capability-Map'
+slidesurl: ''
 paperurl: 'http://academicpages.github.io/files/paper1.pdf'
 ---
 
@@ -13,8 +13,9 @@ There is basically three components of the storage layer in a data analytics arc
 
 The choices are simple and the decision as to why choose one over the other is complex. The good news is we can choose all three based on preferences of each domains and move cleansed data around. There is a cost to this but we will get in this in another topic. However, irrespective of the cloud vendors (or a mix) which are chosen, below are the best practices into how we build the storage layer.
 
-## Know your data architecture
-More and more data is moving towards decentralization. By this, we may have solved a data swamp, but we need to be careful in loozing control on how data is stored within domains. I have written an article on how we define domains.
+More and more data is moving towards decentralization. By this, we may have solved a data swamp, but we need to be careful in loozing control on how data is stored within domains. I have written an article on my thouhts on [data domains](https://nuneskris.github.io/publication/Domain-Oriented-Business-Capability-Map). There needs to be clear guidance on the expectations on how domains store data.  
+
+## Manage Buckets
 
 ## Maintain Raw Data in Its Original Format.
 When extracting data from source applications, it's crucial to maintain the data and file formats in their raw state. This approach ensures that the data is easily extractable and stays true to its source. Source application systems (tools, people, processes) are often not designed to manipulate data once it leaves the system. Instead of forcing these systems to process data into a prescribed format, focus on extracting the data efficiently in a manner that aligns with the source application's natural capabilities and limitations.
