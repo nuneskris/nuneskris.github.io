@@ -7,8 +7,10 @@ date: 2009-10-01
 venue: 'Lakehouse'
 slidesurl: 'http://academicpages.github.io/files/slides1.pdf'
 paperurl: 'http://academicpages.github.io/files/paper1.pdf'
-citation: 'AAAAAAA.'
 ---
+
+
+
 
 Apache Iceberg offers several features and benefits that go beyond what Apache Hive traditionally provides, particularly in terms of handling large-scale data and simplifying data management tasks. Here’s a detailed comparison of what Iceberg offers that Hive does not:
 
