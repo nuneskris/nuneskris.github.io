@@ -1,5 +1,5 @@
 ---
-title: "Storage in Data Analytics Storage in 2024"
+title: "Data Analytics Storage in 2024"
 collection: publications
 permalink: /publication/DataAnalytics-Storage-2024
 excerpt: 'Storage is foundational. The choices are simplified by the maturing technolgies. Providing a technical overview'
