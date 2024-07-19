@@ -57,6 +57,13 @@ Data Encryption: Ensure that all data, both at rest and in transit, is encrypted
 
 # File Format
 
+I have written a focused article with a [demo on Parquet](https://nuneskris.github.io/talks/Parquet-BestPracticeDemo) which describing its main features features. Below are the main featues.
+
+* Parquet and ORC are preferred for analytical workloads due to their columnar storage format, which optimizes read performance and compression.
+* Avro is preferred for write-heavy workloads and data interchange scenarios due to its row-based storage format and efficient serialization/deserialization.
+* All three formats support schema evolution, making them flexible for changing data structures.
+* Their wide compatibility with big data tools and platforms makes them popular choices in modern data engineering projects.
+
 # Table Format
 Managing data in files across distributed storage has evolved significantly to mirror the capabilities of a traditional data warehouse. A table format organizes data files and allows interaction with the data within these files as if they were a single table. It includes the schema representing the data within the files, a timeline/history of records updated or deleted, and supports efficient row-level ACID operations for updates and deletes, as well as data partitioning for query performance.
 
