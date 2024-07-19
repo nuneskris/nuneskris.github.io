@@ -11,7 +11,14 @@ location: "Docker"
 
 This is a continuation from the post which focused on [Setup, Table Management and Schema Evolution of Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg)
 
-The main reason for using Spark on Iceberg, is for it to provide ETL services on a table.
+The main reason for using Spark on Iceberg, is for it to provide ETL services on a table. This demo aims to perform the below
+
+* Column Transformation: Data Types with the schema
+* Column Transformation: Splitting a Column
+* Column Transformation: Changing the column order.
+* Table Transformation: Partion
+* Table Management: Metadata
+* Table Management: Time Travel
 
 # Tranformation
 Iceberg enforces schema consistency, and modifying columns directly can cause conflicts.
