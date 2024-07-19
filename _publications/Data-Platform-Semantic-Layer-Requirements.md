@@ -23,13 +23,6 @@ Data Mesh has laid out the first principles of Data as a Product which I will gu
 * Addressability
 * Discoverability
 
-# The Dream
-<img width="656" alt="image" src="https://github.com/user-attachments/assets/48f7edb6-94bb-4e2e-8179-983a63830bb8">
-
-This is the dream: We envision a system where users can go to a ***single place*** to get their data. This does not mean that the data needs to reside in a single location. A single point of access refers to a unified interface or entry point through which users can access multiple datasets or services on top of these datasets. Once users are there, they should be able to interact with a wide range of datasets integrated in such a way that they do not even realize they are dealing with data from disparate sources. The data appears to them as unified, supported by a cohesive data model.
-
-Users should not need technical team support to consume the data and start utilizing it. Finally, any new type of data generated within the enterprise should be curated and integrated into the platform seamlessly. This ideal world does not yet exist, and we, as architects, need to strive to get close to it. The challenges are many, but technological innovations are helping us move in that direction.
-
 # Requirements
 Here are the key requirements and considerations for the semantic layer in a data analytics system:
 
