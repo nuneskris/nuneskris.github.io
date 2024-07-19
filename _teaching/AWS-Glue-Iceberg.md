@@ -85,7 +85,8 @@ Name: com-kfn-etl-glue-play-erp-employee
 ****Job Details****
 ![image](https://github.com/user-attachments/assets/81aacc29-4803-4e3b-bf23-6512f50c6cae)
 
-> under the job parameters add. The only change would be the location where the entity is.: s3://com-kfn-lakehouse-s3storage-play-erp/warehouse/employee/
+> under the job parameters add. The only change would be the location where the entity is.: warehouse=s3://com-kfn-lakehouse-s3storage-play-erp/warehouse/
+> This means that the Spark will look for entities within this warehouse folder structure.
 
 --conf = spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions  --conf spark.sql.catalog.glue_catalog=org.apache.iceberg.spark.SparkCatalog  --conf spark.sql.catalog.glue_catalog.warehouse=s3://com-kfn-lakehouse-s3storage-play-erp/warehouse/  --conf spark.sql.catalog.glue_catalog.catalog-impl=org.apache.iceberg.aws.glue.GlueCatalog  --conf spark.sql.catalog.glue_catalog.io-impl=org.apache.iceberg.aws.s3.S3FileIO
 
