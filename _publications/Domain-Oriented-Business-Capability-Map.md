@@ -15,9 +15,13 @@ There are multiple ways to define these domains and organize data around them. H
 # Key considerations
 
 There are many considerations when we developn a data architecture. Specifically for Federated Data Managemen, below are key
+
 ***Domain Ownership*** Data ownership is decentralized to the domain level. Domains that generate and utilize the data are best suited to manage it.
+
 ***Data as a Product*** Each domain treats its data as a product. Domains are responsible for data quality, governance, and lifecycle management.
+
 ***Scalability and Flexibility*** Decentralized data management scales more effectively. Flexible to adapt to the unique needs and expertise of each domain.
+
 ***Governance and Architecture***  Ensure a robust framework for data management and governance across domains.
 
 Capability is an abstract concept by design and misunderstood by me in the beginning. I have seen this tool used to great value in many places, and a money pit in a few. However it is by far the most accepted artifact by the business and a great tool to gain a clear understanding of the functional areas and domains. They serve as a foundation for decision-making related to business transformation, process improvement, organizational restructuring, and IT initiatives.
