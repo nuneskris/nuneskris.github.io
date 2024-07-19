@@ -1,12 +1,12 @@
 ---
-title: "AWS Glue Spark Evolves Iceberg Schema"
+title: ""
 collection: teaching
-type: "Lakehouse"
-permalink: /teaching/AWS-Glue-ETL-Iceberg-Schema-Evolution
+type: "Data Strategy"
+permalink: /teaching/DataStrategy
 date: 2024-06-01
-venue: "Glue Spark, Iceberg"
+venue: "Vision"
 date: 2024-06-01
-location: "AWS"
+location: "Target Operating Model"
 ---
 
 
