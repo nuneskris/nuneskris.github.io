@@ -70,6 +70,10 @@ Create table iceberg_employee
  'format' = 'parquet'
  );
 ```
+
+
+![image](https://github.com/user-attachments/assets/bb2febae-2677-4b0f-920d-95248a70d58d)
+
 Iceberg creates a metadata foler.
 ![image](https://github.com/user-attachments/assets/172ce278-7d2d-4f2d-8ed0-a7f7bf3710f6)
 
