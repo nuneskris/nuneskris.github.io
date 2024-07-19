@@ -1,5 +1,5 @@
 ---
-title: "Integrated Data for a Data Fabric"
+title: "Data Fabric simply explained"
 collection: publications
 permalink: /publication/data-frabic-overview
 excerpt: '
@@ -9,7 +9,7 @@ How? Through metadata.'
 date: 2024-02-17
 ---
 
-## Data Fabric simply explained
+## Integrated Data for a Data Fabric
 ***What?*** Enterprise wide consisted data management design.
 ***Why?*** Reduce the time to deliver data integration and interoperability
 ***How?*** Through metadata.
