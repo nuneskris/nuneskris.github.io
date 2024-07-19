@@ -14,29 +14,46 @@ There is basically three components of the storage layer in a data analytics arc
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/9675c2a4-8d5a-4c12-b9f7-bd8c46e42f13">
 
 # Storage
-The choices are simple and the decision as to why choose one over the other is complex. The good news is we can choose all three based on preferences of each domains and move cleansed data around. There is a cost to this but we will get in this in another topic. However, irrespective of the cloud vendors (or a mix) which are chosen, below are the best practices into how we build the storage layer.
 
-More and more data is moving towards decentralization. By this, we may have solved a data swamp, but we need to be careful in loozing control on how data is stored within domains. I have written an article on my thouhts on [data domains](https://nuneskris.github.io/publication/Domain-Oriented-Business-Capability-Map). There needs to be clear guidance on the expectations on how domains store data.
+## Best Practices for Building a Cloud Storage Layer
+The choices for cloud storage solutions are straightforward, but deciding why to choose one over the other can be complex. The good news is that all three solutions can be chosen based on the preferences of each domain, and cleansed data can be moved around as needed. While this approach incurs costs, which we will discuss in another topic, the following best practices are applicable regardless of the cloud vendors (or a mix thereof) chosen.
 
-## Manage Buckets
-There is often confusion in oraganing data into storgae buckets across data domains, maintaining data across different stages as it goes through the transformation process and categorization of data based access. I have already written generic [best practices managing buckets](https://nuneskris.github.io/talks/CloudStorage-Best-Practices). 
+### Decentralization and Data Control
+As data increasingly moves towards decentralization, we may have solved the problem of data swamps but need to be vigilant about maintaining control over how data is stored within domains. I have written an article on [data domains](https://nuneskris.github.io/publication/Domain-Oriented-Business-Capability-Map) that provides guidance on the expectations for how domains should store data.
+
+### Manage Buckets
+Organizing data into storage buckets across data domains can be confusing, especially when maintaining data across different stages of the transformation process and categorizing data based on access. I have already written generic [best practices managing buckets](https://nuneskris.github.io/talks/CloudStorage-Best-Practices). 
 
 ### Data Volume
-How much data is there to store data analytics sytems irrespective of the arhictecture involved (Data Lake,CDW, DLH, DataMesh, Data Fabric etc)? To answer this questions is tough. Very often we get quesions like, do we need to include replicated data across layers, data copies, archived data etc. The way I like to measure this is, going to the source applications and measure volume there. Use multiple ways to measure such as (1) Size (GB, TB), (2) number of tables, (3) average number of rows and columns (4) data growth. This gives a good idea on how much of data we are dealing with within a application, domain and enterprise.
+Determining how much data is needed for data analytics systems, regardless of the architecture involved (Data Lake, CDW, DLH, Data Mesh, Data Fabric, etc.), is challenging. Common questions include whether to include replicated data across layers, data copies, archived data, etc. The best approach is to measure data volume at the source applications. Use multiple metrics to gauge this, such as:
 
-### Keep Raw Layer "raw"
-The main objective is to ingest data into Raw as quickly and efficiently.
-### Maintain raw data in its original format.
-When extracting data from source applications, it's crucial to maintain the data and file formats in their raw state. This approach ensures that the data is easily extractable and stays true to its source. Source application systems (tools, people, processes) are often not designed to manipulate data once it leaves the system. Instead of forcing these systems to process data into a prescribed format, focus on extracting the data efficiently in a manner that aligns with the source application's natural capabilities and limitations. Also let the source system define the size of the files based on its constraints. Let the processing happen in the subsequent stages.
+* Size (GB, TB)
+* Number of tables
+* Average number of rows and columns
+* Data growth
+
+This approach provides a good estimate of the data volume within an application, domain, and enterprise. Cost is a function of data size. Once we have a good idea on the size we are dealing with, we can apply cost management and monitoring on storage costs. The Cloud Vendors provide excellent management tools to track spending.
+
+Utilize tiered storage solutions to balance performance and cost. Store frequently accessed data in high-performance storage and move infrequently accessed data to lower-cost storage tiers.
+
+Define and enforce data retention policies to manage the lifecycle of data. Automatically archive or delete data that is no longer needed to reduce storage costs and minimize risk.
+
+### Keep the Raw Layer "Raw"
+The main objective is to ingest data into the raw layer quickly and efficiently, maintaining raw data in its original format. Do not apply any transformtion on the data. Implement data archival strategies for long-term storage of historical data. Use cost-effective storage solutions for archival data that is infrequently accessed but needs to be retained for compliance or historical analysis. Implement robust backup strategies to ensure data can be recovered in the event of data loss or corruption from the raw layer. Regularly test backup and recovery procedures.
+
+#### Maintain Raw Data in Its Original Format
+When extracting data from source applications, it's crucial to keep the data and file formats in their raw state. This approach ensures that the data is easily extractable and stays true to its source. Source application systems (tools, people, processes) are often not designed to manipulate data once it leaves the system. Instead of forcing these systems to process data into a prescribed format, focus on extracting the data efficiently in a manner that aligns with the source application's natural capabilities and limitations. Allow the source system to define the file sizes based on its constraints and let the processing occur in subsequent stages.
 
 For example, in two separate organizations, data extraction was performed via REST APIs. This method proved to be slow and taxing on the source application, leading to delays and recovery difficulties. The data teams had standardized JSON as the data format for extraction, which may be appropriate for higher layers of the architecture but not ideal for initial extraction. The application teams were more than willing to use their existing REST APIs, but by directly querying the database for data extraction, performance improved by a factor of 20.
 
-### No Transformation or changes to raw data
-Data archive is maintained at this layer we use this as a point to rollback from an processing. Hense it is important to restrict access to end users to this layer. Use automatic policies to compress and arhive data to reduce cost.
-No overriding is allowed, which means handling duplicates and different versions of the same data. 
+#### No Transformation or Changes to Raw Data
+Data archives are maintained at this layer, serving as a rollback point for any processing. It's important to restrict end-user access to this layer. Use automatic policies to compress and archive data to reduce costs. No overriding is allowed, which means handling duplicates and different versions of the same data.
 
-### Organizing raw layer
-Within each domain, we segregate the data based on the souce system. Further partition based on time of ingestion helps in archival and retrival. There are multiple tags which can used on the objects which are ingested for example the time of batch ingestion at source (used to calcualte cutoff).
+#### Organizing the Raw Layer
+Within each domain, segregate the data based on the source system. Further partitioning based on the time of ingestion helps with archiving and retrieval. Multiple tags can be used on the ingested objects, such as the time of batch ingestion at the source, which is used to calculate cutoff times.
+
+### Security and Access Management
+Data Encryption: Ensure that all data, both at rest and in transit, is encrypted using industry-standard encryption methods. This helps protect sensitive information and comply with regulatory requirements. Access Controls: Implement strict access controls using IAM (Identity and Access Management) policies to ensure that only authorized users and services have access to the data. Regularly review and update these policies to maintain security. Enable logging and monitoring to track data access, usage patterns, and system performance. Use these logs to detect anomalies, troubleshoot issues, and optimize performance. Regularly audit data access  and usage to to production areas to ensure compliance with internal policies and regulatory requirements. Maintain detailed audit logs for accountability and transparency.
 
 # File Format
 
