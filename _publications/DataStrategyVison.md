@@ -1,8 +1,8 @@
 ---
-title: ""
+title: "What is it that we want from our data architecture"
 collection: teaching
 type: "Data Strategy"
-permalink: /teaching/DataStrategy
+permalink: /teaching/DataStrategyVison
 date: 2024-06-01
 venue: "Vision"
 date: 2024-06-01
