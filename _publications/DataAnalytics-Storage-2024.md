@@ -58,21 +58,35 @@ Data Encryption: Ensure that all data, both at rest and in transit, is encrypted
 # File Format
 
 # Table Format
+Managing data in files across distributed storage has evolved significantly to mirror the capabilities of a traditional data warehouse. A table format organizes data files and allows interaction with the data within these files as if they were a single table. It includes the schema representing the data within the files, a timeline/history of records updated or deleted, and supports efficient row-level ACID operations for updates and deletes, as well as data partitioning for query performance.
 
-There has been large efforts to manage data in files across distributed storage like we do in a datwawarehouse.  A table format oraganizes data files and interacts with the data within the files as a single table. It contains the schema of the table representing the data within the files,timeline/history of records updated or deleted into the files, data within the files to support efficient  row-level ACID operation for updates/deletes, and data-partitions for query performance.  
+Hive was the technology of choice for early data lakes, but it had many limitations. Its primary shortcoming was its poor performance with interactive queries and lack of robust support for updates and deletes.
 
-Hive was the technology of choice and a large part of how we developed data lakes but they had many limitations. According to me, the main limitation was its shortcomming with interactive queries due to it slow performance and it not support update and deletes.
+Data warehouses allow updates and transformations of data within the same system, a feature that was missing in early data lakes. With the introduction of table formats like Iceberg, Hudi, and Delta Lake, we can now merge the best features of both data lakes and data warehouses. This evolution is known as the Data Lakehouse architecture. Among these technologies, Iceberg is seeing significant adoption.
 
-The key to datawarehouses was we could update the data with new records and transform the data for serving within the same system. With the introduction of Table formats Iceberg, Hudi and Delta Lake, we are able to merge the best of both Data Lakes and Datawarehouse. This is the Data Lakehouse architecture. I believe these 3 technologies will provide the same features and the choice would not make a difference. I am seeing larger adoption of Iceberg.
+## Key Features Comparison: Lakehouse Formats vs. Data Lake Formats (Hive)
+These Lakehouse table formats deliver significant advantages in terms of performance, flexibility, and ease of management over Apache Hive. They are more aligned with the needs of modern data engineering, providing robust support for both streaming and batch processing, schema and partition evolution, and efficient data management.
 
-## The key features comparison between Lakehouse formats and Datalake formats (Hive)
+<img width="954" alt="image" src="https://github.com/user-attachments/assets/baddcf74-27fd-405a-9a75-ae3602a9300a">
 
-***Schema Evolution and Data Management***: Schema evoles all the time. We race to deliver MVPs so that we can get buy-in and incremently add featurs with agile development. Hive has limited support for schema evolution which requires mightmare operations which leads to multiple bugs.  The mordern tables provide robust support for schema evolution, allowing for adding, dropping, and renaming columns without needing to rewrite entire tables. It maintains a history of schema changes.
-
-***ACID Transactions***: While Hive does have some support for transactional tables, it is not as robust or efficient as the support found in Iceberg, Hudi and Delta Lake. This means that the analytics system can reliably and consistently handle data operations such as delete and update atomically.
-
-***Performance and Scalability***: Traditionally, Hive's performance has been limited by its reliance on the Hadoop MapReduce framework. Although newer versions of Hive use Tez or Spark as execution engines, it still lags behind Iceberg and Hudi in terms of performance optimizations and scalability. This enables interactive analytics support.
-
-***Efficient Upserts and Deletes***: Hive handles upserts and deletes in a cumbersome and inefficient way, often requiring workarounds such as rewriting entire partitions. Iceberg supports upserts (update or insert) and deletes efficiently, making it suitable for use cases like Change Data Capture (CDC). Hudi specializes in handling upserts and deletes, designed for streaming data ingestion and near real-time analytics.
-
-***Data Versioning and Time Travel*** Hive: Does not natively support time travel queries or data versioning, making it less flexible for historical data analysis. The Lakehouse table formats supports time travel queries, allowing users to query historical versions of data easily. This is useful for debugging, auditing, and rollback scenarios.
+### Schema Evolution and Data Management
+Hive: Limited support for schema evolution, which often requires complex operations and can lead to bugs.
+Lakehouse Formats (Iceberg, Hudi, Delta Lake): Robust support for schema evolution, allowing for adding, dropping, and renaming columns without needing to rewrite entire tables. They maintain a history of schema changes.
+### ACID Transactions
+Hive: Some support for transactional tables, but not as robust or efficient as modern table formats.
+Lakehouse Formats: Provide reliable and consistent handling of data operations such as deletes and updates, supporting atomic operations.
+### Performance and Scalability
+Hive: Performance has been limited by reliance on the Hadoop MapReduce framework. Newer versions use Tez or Spark, but still lag behind modern table formats in terms of performance optimizations and scalability.
+Lakehouse Formats: Designed for better performance and scalability, enabling support for interactive analytics.
+### Efficient Upserts and Deletes
+Hive: Handles upserts and deletes inefficiently, often requiring entire partitions to be rewritten.
+Lakehouse Formats: Support efficient upserts (update or insert) and deletes, making them suitable for use cases like Change Data Capture (CDC). Hudi, in particular, is designed for streaming data ingestion and near real-time analytics.
+### Data Versioning and Time Travel
+Hive: Does not natively support time travel queries or data versioning.
+Lakehouse Formats: Support time travel queries, allowing users to query historical versions of data easily. This is useful for debugging, auditing, and rollback scenarios.
+### Partition Evolution
+Lakehouse Formats: Supports partition evolution, which means you can change the partitioning scheme of a table without rewriting all the data. This is useful for optimizing query performance over time..
+Hive: Partition management in Hive is static and changing the partitioning scheme usually requires significant data rewriting and operational overhead.
+### Data Compaction and Optimization
+Lakehouse Formats: Automatically handles compaction and data file optimization, reducing fragmentation and improving query performance.
+Hive: Data compaction and optimization typically require manual intervention and custom tooling, which can be cumbersome and error-prone.
