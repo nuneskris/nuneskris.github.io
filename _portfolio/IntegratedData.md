@@ -1,6 +1,6 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "Integrated Data"
+excerpt: "Combining data from different sources and providing a unified view.<br/><img src='/images/_101/.png'>"
 collection: portfolio
 ---
 
