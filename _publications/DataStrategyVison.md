@@ -14,5 +14,5 @@ This is the dream: We envision a system where users can go to a ***single place*
 
 Users should not need technical team support to consume the data and start utilizing it. They should be able to help themselves. Finally, any new type of data generated within the enterprise should be curated and integrated into the platform seamlessly. This ideal world does not yet exist, and we, as architects, need to strive to get close to it. The challenges are many, but technological innovations are helping us move in that direction.
 
-<img width="656" alt="image" src="https://github.com/user-attachments/assets/48f7edb6-94bb-4e2e-8179-983a63830bb8">
+<img width="656" alt="image" src="/images/pub_vision_dream.png">
 
