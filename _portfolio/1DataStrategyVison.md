@@ -1,6 +1,6 @@
 ---
 title: "What is it that we want from our data architecture"
-excerpt: "<br/><img src='/images/portfolio/pub_vision_dream.png'>"
+excerpt: "ok <br/><img src='/images/portfolio/pub_vision_dream.png'>"
 collection: portfolio
 date: 2024-01-01
 venue: 'Vision'
