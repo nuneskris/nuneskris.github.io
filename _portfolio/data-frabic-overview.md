@@ -1,7 +1,6 @@
 ---
 title: "Data Fabric simply explained"
-collection: publications
-permalink: /publication/data-frabic-overview
+collection: portfolio
 excerpt: '
 What? Enterprise wide consisted data management design.
 Why? Reduce the time to deliver data integration and interoperability
