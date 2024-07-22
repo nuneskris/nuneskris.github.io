@@ -1,13 +1,13 @@
 ---
 title: "What is it that we want from our data architecture"
-excerpt: "This is the dream. <br/><img src='/images/portfolio/pub_vision_dream.png'>"
+excerpt: "This is the dream.  We strive for a unified and usable data and analytic platform<br/><img src='/images/portfolio/pub_vision_dream.png'>"
 collection: portfolio
 date: 2024-01-01
 venue: 'Vision'
 ---
 
 
-This is the dream: 
+This is the dream:  We strive for a unified and usable data and analytic platform
 # Unfied
 We envision a system where users can go to a ***single place*** to get their data. This does not mean that the data needs to reside in a single location. A single point of access refers to a unified interface or entry point through which users can access multiple datasets or services on top of these datasets. Once users are there, they should be able to interact with a wide range of datasets integrated in such a way that they do not even realize they are dealing with data from disparate sources. The data appears to them as unified, supported by a cohesive data model.
 # Usable
