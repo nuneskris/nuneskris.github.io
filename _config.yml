@@ -202,9 +202,6 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
-  markdown:
-    output: true
-    permalink: /:collection/:path/
 
 
 # Defaults
@@ -262,15 +259,6 @@ defaults:
       layout: talk
       author_profile: true
       share: true
-  # markdowns
-  - scope:
-      path: ""
-      type: markdown
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
 
 
 # Sass/SCSS
