@@ -202,7 +202,7 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
-  markdowns:
+  markdown:
     output: true
     permalink: /:collection/:path/
 
@@ -265,7 +265,7 @@ defaults:
   # markdowns
   - scope:
       path: ""
-      type: markdowns
+      type: markdown
     values:
       layout: single
       author_profile: true
