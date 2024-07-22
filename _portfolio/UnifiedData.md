@@ -6,9 +6,9 @@ date: 2024-01-03
 venue: 'Vision'
 ---
 
-# The Same Data Is Defined Inconsistently Across Multiple Systems
+The Same Data Is Defined Inconsistently Across Multiple Systems. 
 
-Different systems are designed and built in isolation, storing data in native data model schemas and formats. A key challenge to integrating data is to relate data across these silos. Very often, the same data is defined inconsistently across multiple systems. Let's take customer data as an example.
+<img width="612" alt="image" src="/images/portfolio/UnifiedDataExample.png">
 
 A Sales process would refer to a customer within its database table, and to integrate the sales process with marketing, the customer identifiers in the tables of both the Sales system and the Marketing system need to match.
 
