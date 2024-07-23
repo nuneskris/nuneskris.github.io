@@ -1,6 +1,6 @@
 ---
 title: "What is unified data"
-excerpt: " <br/><img src='/images/portfolio/UnfiedDataMain.png'>"
+excerpt: "A single, coherent, and consistent view of the data across the organization <br/><img src='/images/portfolio/UnfiedDataMain.png'>"
 collection: portfolio
 venue: 'Vision'
 date: 2024-02-17
