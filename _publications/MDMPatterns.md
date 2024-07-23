@@ -5,57 +5,58 @@ permalink: /publication/MDMPatterns
 excerpt: 'Leverage Business Capability Maps for Data Domains'
 ---
 
-Understanding the 4 main MDM patterns goes a long way to building a viable architecture for managing master data. I am seeing Master Data architecture being simplified with business transaction processing applications maturing in its MDM capabilities.
+Understanding the four main MDM patterns goes a long way toward building a viable architecture for managing master data. I am seeing Master Data architecture being simplified with business transaction processing applications maturing in their MDM capabilities.
 
-However, when we assess the current landscape of an enterprise most of the MDM implementaions would fall within these 4 main patterns.
+However, when we assess the current landscape of an enterprise, most of the MDM implementations would fall within these four main patterns.
 
 <img width="612" alt="image" src="/images/publications/MDMPatterns.png">
 
 # Consolidation Pattern
-Most of the legacy MDM implementations I have seen would fall into this pattern. The consolidation pattern centralizes master data from multiple sources into a single hub, creating a golden record through data cleansing, matching, and merging. The main driver was to improve the data quality to create a single version of truth of the master data which was then used to further support analytics initiatives. 
+Most of the legacy MDM implementations I have seen fall into this pattern. The consolidation pattern centralizes master data from multiple sources into a single hub, creating a golden record through data cleansing, matching, and merging. The main driver was to improve data quality to create a single version of truth for the master data, which was then used to further support analytics initiatives.
 
-However I have these implementaions struggling to keep up with data integration as source systems evolve and reconciling the source systems with the cleansed record especially when there are frequent changes or inconsistencies in the source systems. 
+However, I have seen these implementations struggle to keep up with data integration as source systems evolve and reconciling the source systems with the cleansed record, especially when there are frequent changes or inconsistencies in the source systems.
 
 # Transaction Pattern
-In parallel, business appplications started improviding their  MDM Capabilities and MDM transactions (Create/Read/Update/Delete) would be integrated into the business process they were supporting. These system would then further pushdown curated records to downstream consumers. This was ideal as long there is strong centralization of the source of truth of the data entity within the single application supporting the MDM transactions. 
+Over the years, business applications started improving their MDM capabilities and MDM transactions (Create/Read/Update/Delete), and these features would be integrated into the business process the application supports (e.g., SAP MDG). These systems would then push down curated records to downstream consumers. This was ideal as long as there was strong centralization of the source of truth of the data entity within the single application supporting the MDM transactions.
 
-They would typically not try to create golden records by matching and merging with other sources of the master data entity. This high dependencies tend to break down as soon as the organization started growing with parallel business applications supporting various business lines started proping up with M&A and new product line rollouts.
+They typically did not try to create golden records by matching and merging with other sources of the master data entity. This high dependency tends to break down as soon as the organization starts growing, with parallel business applications supporting various business lines emerging due to mergers, acquisitions, and new product line rollouts.
 
 # Coexistence Pattern
-To resolve to the issues with the above 2 patters (reconciling the master record with the source systems and recognizing the existence of applications manging large volumes of MDM transactions) the coexistence pattern would synchronize to the source system with the curated record and most importantly share responsibilties. 
+To resolve the issues with the above two patterns (reconciling the master record with the source systems and recognizing the existence of applications managing large volumes of MDM transactions), the coexistence pattern synchronizes with the source system using the curated record and, most importantly, synchronizes responsibilities. For example, if there is a key transactional MDM along with a few peripheral sources of master data, then including a central MDM for matching and merging, having golden records reconciled with the sources. There are multiple combinations we can come up with in this pattern.
 
-## Irrespective of the above 3 patterns below are the lessons learnt.
-* Changes in data formats, structures, or new data sources require continuous updates to integration processes. They are very expensive and we would need to plan ahead and realistically estimate cost to support these changes.
-* Reconciling source data with the cleansed golden record is vert difficult because of the implementation constraints source applications further exasperated when there are frequent changes or inconsistencies in the source systems.
-* Matching and Merging is SME intensive. High levels of sponsorship and stewrdship is very important.
+## Regardless of the above three patterns, below are the main challenges:
+* Changes in Data Formats and Structures: Continuous updates to integration processes are required to accommodate changes in data formats, structures, or new data sources. These updates are costly and need thorough planning and realistic cost estimation.
+* Reconciling Source Data: Reconciling source data with the cleansed golden record is challenging due to implementation constraints in source applications, especially when there are frequent changes or inconsistencies.
+* Matching and Merging: This process is resource-intensive and requires significant subject matter expertise. High levels of sponsorship and stewardship are crucial.
 
 # Registry Pattern
-Description: The registry pattern involves creating a central registry that indexes master data records from various source systems without physically moving the data.
-Use Case: Ideal for organizations that need a consolidated view of master data without changing the existing data architecture.
-Advantages: Minimal disruption to existing systems, low implementation cost.
-Challenges: May face issues with data consistency and latency, limited data governance capabilities.
+Recognizing the challenges as a reality, we need to accept that multiple source and MDM systems can exist within an organization, each at varying levels of maturity in mastering records and reconciliation. The registry pattern involves creating a central registry that indexes master data records from various source systems without physically moving the data.
 
-# Federation Pattern
-Description: The federation pattern distributes master data across multiple systems but manages it as if it were in a single location using a virtual integration approach.
-Use Case: Suitable for organizations with geographically dispersed data systems.
-Advantages: Scalability, reduced data movement, and duplication.
-Challenges: Complex implementation, potential latency issues.
+## Key Components of a Registry MDM
 
-# Hybrid Pattern
-Description: The hybrid pattern combines elements from multiple patterns to meet specific business requirements, such as using consolidation for some data domains and registry for others.
-Use Case: Ideal for large organizations with diverse data management needs.
-Advantages: Flexibility to tailor MDM solutions to specific needs.
-Challenges: High complexity, requires careful planning and management.
-Considerations for Choosing an MDM Pattern
-Business Requirements: Understand the specific needs and goals of the organization.
-Data Volume and Complexity: Consider the amount and complexity of data to be managed.
-Existing Infrastructure: Evaluate the current data architecture and integration capabilities.
-Data Quality Needs: Assess the importance of data quality and governance for the organization.
-Scalability and Performance: Ensure the chosen pattern can scale with the organization's growth.
-Cost and Resources: Consider the cost of implementation and the availability of resources.
+<img width="612" alt="image" src="/images/publications/RegistryMDM.png">
 
+The core component of the registry MDM is the ***Registry Database***. I have used a document-oriented database to effectively design this component. Design the database to manage the following:
 
-## Best Practices for Overcoming Challenges
+* Unique Identifiers: Manage unique identifiers (index) for master data records from various source systems, source system references, and additional metadata around the identifier. Assign smart unique identifiers to each master data record to facilitate mapping and linking.
+* Data Definitions and Formats: Store data definitions and formats for each source system.
+* Data Lineage: Maintain data lineage information to track the origin and transformations of data.
+* Governance Policies: Store governance policies and data quality rules.
+
+The key capability of the Registry MDM is ***Data Mapping and Linking***. This enables the registry MDM to map the unique identifier within the registry database to the source managing the master data and link to that record physically stored at the source to create a unified view. Often, sources of master data manage different aspects of the master data. Variants in master data occur when different source systems have different versions or representations of the same entity, such as customer preferences versus customer profiles. Below are the features we would need to support to map and link data:
+
+* Define rules to link records that represent the same entity but have different attributes or values.
+* Group linked records together to form a composite view of the entity, preserving variations from source systems.
+* Define a canonical data model that represents the ideal structure and format of master data.
+* Map attributes from source systems to the canonical model, handling variations in data formats and structures.
+* Implement rules to standardize data formats and values across source systems.
+* Normalize data to a common format before mapping it to the registry.
+
+Optionally, we can have ***Data Matching*** capabilities. I recommend buying an AI-driven tool to identify and match records across source systems. Define matching criteria to identify duplicate or related records across source systems. Implement fuzzy matching algorithms to handle variations in data, such as misspellings or different formats. Use a scoring system to determine the likelihood of matches and set thresholds for automatic and manual review. I have used Tamr, which was great for this.
+
+Additionally, we would need ***APIs and Connectors***. These interfaces connect to source systems for real-time or batch data access. Implement APIs and connectors to allow real-time access to master data from the registry. Support batch processing for initial data loading and periodic updates. Ensure that changes in source systems are synchronized with the registry in real-time or at scheduled intervals. I have used fast cache databases which mapped to the sources, were refreshed, and would publish master data from the sources.
+
+# Best Practices for Overcoming Challenges
 * Agile Data Integration: Implement agile integration methods to quickly adapt to changes in source systems. Use modern data integration platforms that support real-time or near-real-time data synchronization.
 * Incremental Updates: Use incremental data loading techniques to update only the changed data, reducing the integration load and latency.
 * Continuous Data Quality Monitoring: Implement ongoing data quality monitoring and automated correction mechanisms to maintain the integrity of the golden record.
@@ -63,5 +64,4 @@ Cost and Resources: Consider the cost of implementation and the availability of 
 * Data Lineage and Auditing: Maintain comprehensive data lineage and auditing capabilities to track the origin and transformations of data, facilitating easier reconciliation and compliance.
 * Stakeholder Collaboration: Foster close collaboration between IT and business stakeholders to ensure alignment on data definitions, quality standards, and governance policies.
 
-Conclusion
 Selecting the right MDM implementation pattern is crucial for the success of an MDM initiative. Each pattern has its own advantages and challenges, and the choice should be guided by the organization's specific requirements, existing infrastructure, and long-term data management goals. By carefully evaluating these factors, organizations can implement an effective MDM solution that ensures data consistency, quality, and governance across the enterprise.
