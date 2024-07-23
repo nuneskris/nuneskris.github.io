@@ -6,7 +6,7 @@ collection: portfolio
 
 <img width="612" alt="image" src="/images/portfolio/Integratedata.png">
 
-Integrated data refers to the process of combining data from different sources and providing a unified view. This process is crucial for organizations that need to analyze data from multiple systems or departments to make informed decisions. Integrated data ensures consistency, accuracy, and completeness by merging data into a cohesive dataset.
+Integrated data refers to the process of combining data from multiple busines functiona to provide comprehensive view of the business rather an an isolated view of a single business function. This process is crucial for organizations that need to analyze data from multiple systems or departments to make informed decisions. Integrated data ensures consistency, accuracy, and completeness by merging data into a cohesive dataset.
 
 # The Challenge
 Data is stored and managed in desperate data stores and are not automatically integrated together. 
