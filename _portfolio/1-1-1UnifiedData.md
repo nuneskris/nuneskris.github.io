@@ -6,6 +6,8 @@ date: 2024-01-03
 venue: 'Vision'
 ---
 
+<img width="612" alt="image" src="/images/portfolio/UnfiedDataMain.png">
+
 We require to ask questions which requires a single answer which is framed by combining parts of the answer from multiple business functions or departments of an organization. Unified Data is the organization's ability to be able to consolidate meaning of the what parts of the answer and integrate all the parts of the answer from various relevant sources. 
 
 This happens by deploying a system of people, process and tools for integrating and consolidating data from various sources and systems within an organization to create a single, coherent, and consistent view of the data. The goal of unified data is to ensure that all relevant data is accessible, accurate, and consistent across different departments and applications, facilitating better decision-making, improved operational efficiency, and enhanced data analytics.
