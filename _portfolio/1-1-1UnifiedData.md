@@ -11,35 +11,25 @@ We require to ask questions which requires a single answer which is framed by co
 This happens by deploying a system of people, process and tools for integrating and consolidating data from various sources and systems within an organization to create a single, coherent, and consistent view of the data. The goal of unified data is to ensure that all relevant data is accessible, accurate, and consistent across different departments and applications, facilitating better decision-making, improved operational efficiency, and enhanced data analytics.
 
 # Main Considerations of Unified Data
+By ***integrating*** and ***consolidating*** data from various sources, organizations can achieve a comprehensive and accurate view of their data, leading to improved decision-making, enhanced analytics, and greater operational efficiency.
 
 ## Integrated Data
 Integrated data refers to the process of combining data from multiple business functions to provide a comprehensive view of the business rather than an isolated view of a single business function. We build applications to support functionality within specific business functions. Data is generated within these applications and is typically managed and owned by these applications, with limited regard to how the data can be integrated with data from other systems.
 
 Integrating data has been the major driver in data and analytics systems, as they strive to combine data from disparate sources, such as databases, applications, and external systems. We use integration tools and techniques such as ETL (Extract, Transform, Load) processes, data warehousing, and data lakes to achieve this integration. This is explored further in this seperate [article](https://nuneskris.github.io/portfolio/1-1-2IntegratedData/).
 
+### Unfied Data Example Scenario
+Imagine a retail company that has separate systems for sales, inventory, customer relationship management (CRM), and finance. Each system stores data independently, leading to inconsistencies and difficulties in gaining a holistic view of the business.
+<img width="612" alt="image" src="/images/portfolio/IntegrateDataScenario.png">
+
 ## Consolidated Data
 <img width="612" alt="image" src="/images/portfolio/UnifiedData.png">
+
 Consolidated data typically involves integrating data related to a specific entity or dataset from multiple sources into a single, comprehensive dataset. The goal is to aggregate data to provide a unified view for reporting, analysis, or decision-making purposes. The aggregation of data is related to a particular entity (e.g., customer, product, financial transaction) is collected from various source systems. Example: Collecting customer data from the CRM, sales database, and customer support system. 
 
 A key step towards this goal is standardization of data to ensure consistency in format, definitions, and values. Example: Ensuring that customer IDs, names, and contact details follow a uniform format across all sources.
 
-    Consistency:
-    Ensures that data definitions, formats, and values are standardized across the organization.
-    Reduces data redundancy and discrepancies by aligning data from different sources.
-    
-    Accessibility:
-    Makes data readily available to stakeholders across the organization, ensuring that users have access to the information they need.
-    Implements data governance and access control mechanisms to secure and manage data access.
-    
-    Accuracy:
-    Maintains high data quality by validating, cleansing, and enriching data from various sources.
-    Regularly updates and synchronizes data to reflect the most current information.
-    
-    Contextualization:
-    Provides a holistic view of the data by combining related data points from different sources.
-    Enhances data understanding by providing context and relationships between data elements.
-
-### Example Scenario
+### Consolidated Data Example Scenario
 * Entity: Customer Data
 * Source Systems:
 *   RM System: Stores customer contact details and interaction history.
@@ -48,15 +38,14 @@ A key step towards this goal is standardization of data to ensure consistency in
 * Result:
 *   A consolidated customer dataset that includes contact information, purchase history, and support interactions, providing a 360-degree view of the customer.
 
-### Differences with Unified Data:
+#### Difference of Consolidated data with Unified Data:
+There is much confusion here. I like to use the below to differentiate between unified and consolidated data.
+
 While consolidated data focuses on integrating specific data entities from multiple sources, unified data takes a broader approach. Unified data aims to create a consistent and coherent data environment across the entire organization, involving comprehensive data integration, standardization, and governance across all business functions and systems.
 
-## Example
-Imagine a retail company that has separate systems for sales, inventory, customer relationship management (CRM), and finance. Each system stores data independently, leading to inconsistencies and difficulties in gaining a holistic view of the business.
-<img width="612" alt="image" src="/images/portfolio/IntegrateDataScenario.png">
+# Questions we can ask
 By unifying this data, the company can achieve the following:
 * Single Customer View: Combine customer information from the sales and CRM systems to get a complete profile of John Doe, including his purchase history and interactions.
 * Integrated Product Data: Merge product information from the sales and inventory systems to monitor stock levels and sales performance.
 * Consolidated Financial Data: Integrate financial transactions with sales data to analyze revenue and customer spending patterns.
 
-Unified data is essential for organizations aiming to leverage their data assets effectively. By integrating and consolidating data from various sources, organizations can achieve a comprehensive and accurate view of their data, leading to improved decision-making, enhanced analytics, and greater operational efficiency.
