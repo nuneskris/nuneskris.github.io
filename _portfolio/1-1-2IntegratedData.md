@@ -1,8 +1,7 @@
 ---
 title: "Integrated Data"
-excerpt: "Combining data from different sources and providing a unified view<br/><img src='/images/portfolio/Integratedata.png'>"
+excerpt: "Combining data from different sources and providing a unified view <br/><img src='/images/portfolio/Integratedata.png'>"
 collection: portfolio
-date: 2024-02-17
 ---
 
 <img width="612" alt="image" src="/images/portfolio/Integratedata.png">
