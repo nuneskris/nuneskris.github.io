@@ -10,12 +10,14 @@ We require to ask questions which requires a single answer which is framed by co
 
 This happens by deploying a system of people, process and tools for integrating and consolidating data from various sources and systems within an organization to create a single, coherent, and consistent view of the data. The goal of unified data is to ensure that all relevant data is accessible, accurate, and consistent across different departments and applications, facilitating better decision-making, improved operational efficiency, and enhanced data analytics.
 
-# Features of Unified Data
+# Considerations of Unified Data
 
 ## Integrated Data:
+ntegrated data refers to the process of combining data from multiple business functions to provide a comprehensive view of the business rather than an isolated view of a single business function. We build applications to support functionality within specific business functions. Data is generated within these applications and is typically managed and owned by these applications, with limited regard to how the data can be integrated with data from other systems.
 
-Combine data from disparate sources, such as databases, applications, and external systems.
-Uses integration tools and techniques, such as ETL (Extract, Transform, Load) processes, data warehousing, and data lakes.
+Integrating data has been a major driver in data and analytics systems, as they strive to combine data from disparate sources, such as databases, applications, and external systems. We use integration tools and techniques such as ETL (Extract, Transform, Load) processes, data warehousing, and data lakes to achieve this integration. 
+
+This is explored further in this seperate article.
 
 Consistency:
 
