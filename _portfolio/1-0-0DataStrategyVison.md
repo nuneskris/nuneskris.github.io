@@ -2,7 +2,6 @@
 title: "What is it that we want from our data architecture"
 excerpt: "This is the dream:  We strive for a unified and usable data and analytic platform <br/><img src='/images/portfolio/pub_vision_dream.png'>"
 collection: portfolio
-venue: 'Vision'
 ---
 
 
