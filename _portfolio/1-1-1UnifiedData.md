@@ -3,6 +3,7 @@ title: "What is unified data"
 excerpt: " <br/><img src='/images/portfolio/UnfiedDataMain.png'>"
 collection: portfolio
 venue: 'Vision'
+date: 2024-02-17
 ---
 
 <img width="612" alt="image" src="/images/portfolio/UnfiedDataMain.png">
