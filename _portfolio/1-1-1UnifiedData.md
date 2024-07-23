@@ -20,9 +20,11 @@ Integrating data has been the major driver in data and analytics systems, as the
 
 ### Unfied Data Example Scenario
 Imagine a retail company that has separate systems for sales, inventory, customer relationship management (CRM), and finance. Each system stores data independently, leading to inconsistencies and difficulties in gaining a holistic view of the business.
+
 <img width="612" alt="image" src="/images/portfolio/IntegrateDataScenario.png">
 
 ## Consolidated Data
+
 <img width="612" alt="image" src="/images/portfolio/UnifiedData.png">
 
 Consolidated data typically involves integrating data related to a specific entity or dataset from multiple sources into a single, comprehensive dataset. The goal is to aggregate data to provide a unified view for reporting, analysis, or decision-making purposes. The aggregation of data is related to a particular entity (e.g., customer, product, financial transaction) is collected from various source systems. Example: Collecting customer data from the CRM, sales database, and customer support system. 
