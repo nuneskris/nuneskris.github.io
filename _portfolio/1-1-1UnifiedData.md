@@ -34,11 +34,11 @@ A key step towards this goal is standardization of data to ensure consistency in
 ### Consolidated Data Example Scenario
 * Entity: Customer Data
 * Source Systems:
-*   RM System: Stores customer contact details and interaction history.
-*   Sales System: Records purchase transactions and sales metrics.
-*   Support System: Tracks customer support tickets and service interactions.
+  * RM System: Stores customer contact details and interaction history.
+  * Sales System: Records purchase transactions and sales metrics.
+  * Support System: Tracks customer support tickets and service interactions.
 * Result:
-*   A consolidated customer dataset that includes contact information, purchase history, and support interactions, providing a 360-degree view of the customer.
+  *  A consolidated customer dataset that includes contact information, purchase history, and support interactions, providing a 360-degree view of the customer.
 
 #### Difference of Consolidated data with Unified Data:
 There is much confusion here. I like to use the below to differentiate between unified and consolidated data.
