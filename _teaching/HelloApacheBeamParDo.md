@@ -9,7 +9,7 @@ date: 2024-06-01
 location: "Local"
 ---
 
-We had performed the same demonstration using SimpleFuntions. We will be using Pardo Function for this.
+We had performed the same demonstration using SimpleFuntions. Refer [Page](https://nuneskris.github.io/teaching/HelloApacheBeam).  We will be using Pardo Function for this.
 Refer https://github.com/nuneskris/hello-apache-beam for detailed description of the demo without Pardo.
 
 ```java
