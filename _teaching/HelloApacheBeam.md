@@ -1,5 +1,5 @@
 ---
-title: "Apache Beam Model. Clean and  Simple"
+title: "Apache Beam Model. Clean and Simple"
 collection: teaching
 type: "Data Processing"
 permalink: /teaching/HelloApacheBeam
@@ -15,7 +15,9 @@ DataFlow is based on the open-source Apache Beam project, which allows for defin
 
 # Demo
 
-This project can be run locally. The screen shots are attached at the bottom
+This project can be run locally. The screen shots are attached.
+
+<img width="612" alt="image" src="/images/teachings/beam/CricketDatascreenshot.png">
 
 The data I will be using is from IPL cricket data with the following columns. The objective is to demonstrate the ease of quickly developing using the Apache Beam model.
 
@@ -182,6 +184,7 @@ Call the various functions on the pipeline and finally call pipeline.
     }
     
  ```
+<img width="612" alt="image" src="/images/teachings/beam/CreicketBeamOutput.png">
  
 ## Build
 Deployment XML
@@ -202,3 +205,5 @@ Deployment XML
 
     </dependencies>
 ```
+
+You can find the code base with the input files in [github](https://github.com/nuneskris/hello-apache-beam)
