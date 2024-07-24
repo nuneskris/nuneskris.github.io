@@ -1,8 +1,7 @@
 ---
 title: "What is usable data"
-excerpt: "we need it to have an acceptable quality, readily available and easily accessible."
+excerpt: "We need data to have an acceptable quality, readily available and easily accessible."
 collection: portfolio
-date: 2024-01-01
 venue: 'Vision'
 ---
 
@@ -20,11 +19,30 @@ Once the user is able to know that the data which they have disovered to support
 
 It can additional provide information to the users to understand how data can be organized and providing guidance on how the data can be combined with other data with links to types of queries that can be executed on the datasets, code snippets, demonstractions on the data, comments from other users and major usecases where the datasets have been used 
 
-# 
+> Before I go any further there is a great online resource which publishes the [FAIR](https://www.go-fair.org/fair-principles/) principles for data.  "provides guidelines to improve the Findability, Accessibility, Interoperability, and Reuse of digital assets. The principles emphasise machine-actionability (i.e., the capacity of computational systems to find, access, interoperate, and reuse data with none or minimal human intervention) because humans increasingly rely on computational support to deal with data as a result of the increase in volume, complexity, and creation speed of data."
 
-Before I go any further there is a great online resource which publishes the [FAIR](https://www.go-fair.org/fair-principles/) principles for data. 
-> provides guidelines to improve the Findability, Accessibility, Interoperability, and Reuse of digital assets. The principles emphasise machine-actionability (i.e., the capacity of computational systems to find, access, interoperate, and reuse data with none or minimal human intervention) because humans increasingly rely on computational support to deal with data as a result of the increase in volume, complexity, and creation speed of data.
- 
+# Findable
+Data Mesh refers to Findability as Addressable. As indicated by FAIR Principles, providing ***Globally unique*** and ***persistent identifiers*** is arguably the most important aspect of ensuring data is findable. I have used URI URL API endpoints which rerouted requests to where the data is is actually sourced as the standard as the address of published datasets. In the below example, Sales order datasets are sourced from a service SRV4/SalesOrders but are actually uniquely and persistently addressed from https://dataprogram.company.com/dataproduct/SalesOrders. Even if the service changes the API endpoint which routes would persist.
+
+<img width="612" alt="image" src="/images/portfolio/URLAddressable.png">
+
+# Acceptable Quality
+The main Data Quality Issues which plague data and drastically reduce the usability of data is 
+1. Data Duplication
+2. Referential Integrity Issues
+3. Missing Data (Completeness)
+4. Non Standard Data
+5. Inaccurate Data
+6. Timeliness (Refresh delays causing stale data)
+From my experience data quality needs to be addressed as projects just like automation is addressed. Addressing DQ at an enterprise level is difficult because of sponsorship. Just as organization built a culture and awareness around automation, we need to build an awareness around data quality and federate sponsorship of these data quality issues by funding them just like IT automation projects with ROI and KPI measures and build a development lifecycle with requirements and concrete objectives. Data mesh formalizes a framework to provide guarantees on the quality of data using service-level objectives (SLOs)—objective on datasets which are published as products.
 
 
-Data Mesh refers to Findability as Addressable. But it also 
+# Assessable and Secure
+Operational qualities
+Freshness, general availability, performance
+Lineage
+The data transformation journey from source to here
+
+# Interoperatable
+
+
