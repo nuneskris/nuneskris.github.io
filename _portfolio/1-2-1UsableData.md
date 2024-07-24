@@ -26,6 +26,9 @@ Data Mesh refers to Findability as Addressable. As indicated by FAIR Principles,
 
 <img width="612" alt="image" src="/images/portfolio/URLAddressable.png">
 
+# Assessable
+Once users finds the required data, they would need to know how they can be accessed, possibly including authentication and authorisation. There are multiple types of consumers (Data Sceintists, Data Analysts, Business SMEs, Data Integrators etc) and this is where we would need to know consumption patterns. ***Administrative metadata*** which includes access permissions, locations, data type, file name and size, ownership information (for access approval), access protocols etc support users on how to access the data.
+
 # Acceptable Quality
 The main Data Quality Issues which plague data and drastically reduce the usability of data is 
 1. Data Duplication
@@ -34,15 +37,19 @@ The main Data Quality Issues which plague data and drastically reduce the usabil
 4. Non Standard Data
 5. Inaccurate Data
 6. Timeliness (Refresh delays causing stale data)
-From my experience data quality needs to be addressed as projects just like automation is addressed. Addressing DQ at an enterprise level is difficult because of sponsorship. Just as organization built a culture and awareness around automation, we need to build an awareness around data quality and federate sponsorship of these data quality issues by funding them just like IT automation projects with ROI and KPI measures and build a development lifecycle with requirements and concrete objectives. Data mesh formalizes a framework to provide guarantees on the quality of data using service-level objectives (SLOs)—objective on datasets which are published as products.
 
+From my experience data quality needs to be addressed as projects just like automation is addressed. Addressing DQ at an enterprise level is difficult because of sponsorship. Just as organization built a culture and awareness around automation, we need to build an awareness around data quality and federate sponsorship of these data quality issues by funding them just like IT automation projects with ROI and KPI measures and build a development lifecycle with requirements and concrete objectives. 
 
-# Assessable and Secure
+Data mesh formalizes a framework to provide guarantees on the quality of data using service-level objectives (SLOs)—objective on datasets which are published as products.
+
+# Interoperatable
+
+# Secure
+
 Operational qualities
 Freshness, general availability, performance
 Lineage
 The data transformation journey from source to here
 
-# Interoperatable
 
 
