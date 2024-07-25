@@ -1,15 +1,15 @@
 # main links links
 main:
-  - title: "Data Foundation"
+  - title: "Foundation"
     url: /portfolio/
     
-  - title: "Data Architecture"
+  - title: "Architecture"
     url: /publications/
 
-  - title: "Data Engineering"
+  - title: "Engineering"
     url: /talks/    
 
-  - title: "Data Technology"
+  - title: "Technology"
     url: /teaching/    
        
   - title: "Machine Learning"
