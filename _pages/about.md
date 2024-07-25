@@ -2,6 +2,9 @@
 permalink: /
 title: "Data Strategy and architecture in practice"
 author_profile: true
+date: 2024-07-01
+venue: "Home"
+location: "Home"
 redirect_from: 
   - /about/
   - /about.html
