@@ -8,19 +8,16 @@ tags:
   - Management
 ---
 
-We need to ensure all the needed capabilites of data such as availability, usability, integrity, and security of data used in an organization are delivered based on what was prescribed. This involves establishing policies, procedures, and standards to ensure data is accurate, consistent, and accessible. We need to make informed decisions, comply with regulations, and protect sensitive information. This is done through data Governance needs to be a ***realistic*** and ***pragmatic***.
+<img width="612" alt="image" src="/images/portfolio/DataGovernance.png">
 
-Just like we govern anything large and complex, we would need to beakdown things downs into smaller governable units. We ***structure ownership*** to ensure funding and accountability on the data. Irrespective of the size of the organization, there is a major shift towards a federated data architecture where data is managed within domains. This is reflected in the rise of Logical data warehouses (connect) architectures and data mesh, and made possible with cloud data platform technologies. Designing domain structures by respecting and aligning to organization dynamics reduces impedance and promotes accountability. The structures would need to include roles and responsibilities defined such as data owners, data stewards, and data custodians, along with their responsibilities.
+We need to ensure all data capabilities such as availability, usability, integrity, and security are delivered as prescribed. This involves establishing policies, procedures, and standards to ensure data is accurate, consistent, and accessible. Effective data governance helps make informed decisions, comply with regulations, and protect sensitive information. It must be ***realistic and pragmatic***.
 
-We cannot govern everything. We need a platform to prioritize data capabilities which are important to the business needs so that implementation efforts are appropriately sponsored. These ***decisions*** are based on organization's data strategy and this governing body would need to resolve priority conflicts across the governable units and arbitrate consensus on how data is described, organized, integrated and shared.
+Like governing anything complex, we break things down into smaller governable units. We ***structure ownership*** to ensure funding and accountability. Regardless of organization size, there's a shift towards federated data architecture where data is managed within domains, as seen in the rise of logical data warehouses and data mesh, enabled by cloud data platforms. Aligning domain structures with organizational dynamics reduces friction and promotes accountability. This includes defining roles such as data owners, stewards, and custodians.
 
-Finally we would need a mechanism to enforce decisions are appropirately implemented within the governable units and measure outcomes from them. We would need ***manage performance*** based on objectives set on these governable units to deliver data management disciplines such Data quality, Data Integration, Master Data, MetaData Management and Data Product Management.
+We can't govern everything. We need a platform to prioritize data capabilities based on business needs, ensuring appropriate sponsorship. These ***decisions*** align with the organization's data strategy, resolving priority conflicts and arbitrating consensus on data description, organization, integration, and sharing.
 
-Governance = Operating Model (Structure, Decision Management and Performance) + Policy
+We also need mechanisms to enforce decisions and measure outcomes within the governable units and measure outcomes from them. ***Managing performance*** based on objectives within governable units ensures the delivery of data management disciplines like data quality, integration, master data, metadata management, and data product management.
 
-Policy —> Context : Decision : Consequence
-Types of policies
-1. Isolation, Access Control, Security
-2. Discoverability, Documentation. Interoperability
-3. Privacy & Compliance, Quality, Audit/Monitoring
-4. Ownership, Contracts, Funding
+We have a decent operating model to define structures, arbitrate decisions and manage performance. Now we need binding system of guidelines to guide decisions and achieve outcomes. So we defines policies as statement of intent which includes procedures, standards, mertrics and guidelines. Each of the policies would include the context of the policy, a decision and a consequence of the decision.
+
+The combination of the operating model and policies forms what we call data governance. Various frameworks exist, but they all rely on these two aspects.
