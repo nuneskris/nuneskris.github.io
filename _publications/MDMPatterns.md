@@ -3,6 +3,11 @@ title: "MDM Patterns. All are relevant and can coexist"
 collection: publications
 permalink: /publication/MDMPatterns
 excerpt: 'Leverage Business Capability Maps for Data Domains'
+date: 2024-05-01
+venue: 'Master Data'
+tags:
+  - Integration
+  - Master Data
 ---
 
 Understanding the four main MDM patterns goes a long way toward building a viable architecture for managing master data. I am seeing Master Data architecture being simplified with business transaction processing applications maturing in their MDM capabilities.
