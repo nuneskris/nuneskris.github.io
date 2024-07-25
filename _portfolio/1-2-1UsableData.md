@@ -3,6 +3,9 @@ title: "What is usable data"
 excerpt: "We need data to have an acceptable quality, readily available and easily accessible.<br/><img src='/images/portfolio/UsableData.png'>"
 collection: portfolio
 venue: 'Vision'
+tags:
+  - Governance
+  - Foundation
 ---
 
 For data to be usable for analytics purposes, we need it to have an acceptable quality, readily available and easily accessible. 
