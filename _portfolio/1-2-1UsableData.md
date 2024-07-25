@@ -46,9 +46,12 @@ From my experience data quality needs to be addressed as projects just like auto
 
 Data mesh formalizes a framework to provide guarantees on the quality of data using service-level objectives (SLOs)—objective on datasets which are published as products.
 
-# Secure
-
 # Interoperable
 In the [Integrated data page](https://nuneskris.github.io/portfolio/1-1-2IntegratedData/), we highlighted the necessity of integrating data for it to be useful in analytics. This can be achieved through either physical or logical data integration.
 
 Beyond integration, it is essential to enable data to be transferred from its source system to other applications and workflow systems that are logically and physically separate. This data should seamlessly integrate with the resident data within the new system. This capability, where data can integrate seamlessly with external applications or workflows, is referred to as interoperable data.
+
+I have worked extensively on this problem, and the way I see it, achieving this capability involves building on how we integrate data and scale data linking across multiple disparate applications. For instance, we need unique identifiers that are globally applicable across the enterprise. For this to work effectively, file and data formats should adhere to open standards, making them usable in other systems. Additionally, schemas should be designed to link outside the analytics systems for which they were originally defined.
+
+# Secure
+All the above capabilities push for democratization of data, making it easier for data to be consumed and leveraged to improve business productivity and decision-making. Security ensures that this is done in a safe and compliant way.
