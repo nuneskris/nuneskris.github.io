@@ -3,6 +3,11 @@ title: "My Master Data Management Reference Architecture"
 collection: publications
 permalink: /publication/MasterDataArchitecture
 excerpt: 'Leverage Business Capability Maps for Data Domains'
+date: 2024-05-01
+venue: 'Master Data'
+tags:
+  - Integration
+  - Master Data
 ---
 
 # Master Data Management Patterns
