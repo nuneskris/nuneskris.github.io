@@ -38,20 +38,6 @@ Utilize tiered storage solutions to balance performance and cost. Store frequent
 
 Define and enforce data retention policies to manage the lifecycle of data. Automatically archive or delete data that is no longer needed to reduce storage costs and minimize risk.
 
-### Keep the Raw Layer "Raw"
-The main objective is to ingest data into the raw layer quickly and efficiently, maintaining raw data in its original format. Do not apply any transformtion on the data. Implement data archival strategies for long-term storage of historical data. Use cost-effective storage solutions for archival data that is infrequently accessed but needs to be retained for compliance or historical analysis. Implement robust backup strategies to ensure data can be recovered in the event of data loss or corruption from the raw layer. Regularly test backup and recovery procedures.
-
-#### Maintain Raw Data in Its Original Format
-When extracting data from source applications, it's crucial to keep the data and file formats in their raw state. This approach ensures that the data is easily extractable and stays true to its source. Source application systems (tools, people, processes) are often not designed to manipulate data once it leaves the system. Instead of forcing these systems to process data into a prescribed format, focus on extracting the data efficiently in a manner that aligns with the source application's natural capabilities and limitations. Allow the source system to define the file sizes based on its constraints and let the processing occur in subsequent stages.
-
-For example, in two separate organizations, data extraction was performed via REST APIs. This method proved to be slow and taxing on the source application, leading to delays and recovery difficulties. The data teams had standardized JSON as the data format for extraction, which may be appropriate for higher layers of the architecture but not ideal for initial extraction. The application teams were more than willing to use their existing REST APIs, but by directly querying the database for data extraction, performance improved by a factor of 20.
-
-#### No Transformation or Changes to Raw Data
-Data archives are maintained at this layer, serving as a rollback point for any processing. It's important to restrict end-user access to this layer. Use automatic policies to compress and archive data to reduce costs. No overriding is allowed, which means handling duplicates and different versions of the same data.
-
-#### Organizing the Raw Layer
-Within each domain, segregate the data based on the source system. Further partitioning based on the time of ingestion helps with archiving and retrieval. Multiple tags can be used on the ingested objects, such as the time of batch ingestion at the source, which is used to calculate cutoff times.
-
 ### Security and Access Management
 Data Encryption: Ensure that all data, both at rest and in transit, is encrypted using industry-standard encryption methods. This helps protect sensitive information and comply with regulatory requirements. Access Controls: Implement strict access controls using IAM (Identity and Access Management) policies to ensure that only authorized users and services have access to the data. Regularly review and update these policies to maintain security. Enable logging and monitoring to track data access, usage patterns, and system performance. Use these logs to detect anomalies, troubleshoot issues, and optimize performance. Regularly audit data access  and usage to to production areas to ensure compliance with internal policies and regulatory requirements. Maintain detailed audit logs for accountability and transparency.
 
