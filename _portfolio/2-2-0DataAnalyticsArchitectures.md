@@ -1,6 +1,6 @@
 ---
 title: "Data Analytics Architectures"
-excerpt: "All can play their part<br/><img src='/images/portfolio/DataArchitectures.png'>"
+excerpt: "A Brief History <br/><img src='/images/portfolio/DataArchitectures.png'>"
 collection: portfolio
 venue: 'Engineering'
 tags:
@@ -8,7 +8,6 @@ tags:
   - Management
 ---
 
-# A Brief History
 We can understand where we are currently by understanding how we got here.
 
 ## Early Data Processing (1960s-1970s):Mainframes
@@ -21,19 +20,18 @@ To overcome these limitations, separate OLAP applications were developed. These 
 
 The historical development of data analytics architectures has evolved from the mainframe era focused on batch processing and straightforward reporting, to the advent of data warehousing and the separation of transactional and analytical workloads to handle more complex, multidimensional data analysis. The transition included the adoption of comprehensive data models, the introduction of ETL processes, and the use of data marts and dimensional modeling to improve performance and manageability.
 
-I would like to note that the Kimbal based architecture lives till today and is still used to build data warehouses. 
+I would like to note that the Kimbal based architecture lives till today and is still used to build data warehouses. I started by career in data in working on data warehouses and ETL.
 
 ## Big Data Era (2000s): Information and Data Revolution
-Volume of data grew to volume which could not be containted with in a single storage unit. There were a few solutions like Terradata and Netezza (I have no clue working on it). The internet companies came to the rescue and build techologies leveraging commodity compute and storage by combining and corrdinating many of them to perform to scale and support the data volumes. Map-reduce by Google for data processing and Hadoop for storage was the foundation on which this architecture was based on we term this data as Big data.  Data was not stored using strict structured models and was stored as files and table formats which were not confined to strict SQL standards. These databases which handled unstructured and semi-structured data are called NoSQL databses.
+Data volumes grew beyond the capacity of single storage units. Solutions like Teradata and Netezza emerged, but the internet companies introduced more scalable technologies. I have no experience on this technology though they were around. Google developed MapReduce for processing, and Hadoop was used for distributed storage. This technological foundations marked the beginning of the Big Data era. Data was stored in files and table formats, not confined to strict SQL standards, leading to the rise of NoSQL databases. However, managing and interacting with these systems was difficult due to data immutability, meaning files could not be updated or deleted easily.
 
-# Real-Time Analytics (2010s):
+# Real-Time Analytics and Cloud Computing (2010s) :
 
+We were focusing on data processed in batches. However, internet companies had use cases to process data as soon as it was generated. This meant we could not wait for data to be collected, stored, and then processed for curation and analysis. We needed to do this in-memory and immediately as the data was collected, and that's exactly what streaming technologies like Apache Spark enabled.
 
+While big data showed a lot of promise, organizations struggled to configure pools of storage and compute systems to deliver it. This included not knowing how much of these systems they would need to procure and set up. There were many more failures than successes. With the rise of faster internet connectivity, companies started offering computing systems consumed by organizations over the internet. This cloud computing kick-started the next generation of transformation, which companies embraced to reduce their dependence on managing scalable infrastructure.
 
-In-Memory Computing: Technologies like Apache Spark enabled real-time data processing.
-Cloud Computing: Cloud platforms offered scalable storage and computing resources.
+# Modern Data Architectures (2020s):
+Internet companies again came to the rescue by developing technologies that could manage files in data lakes just like how we handle tables in an SQL database, like a data warehouse. Combining data lakes and data warehouses, we call this architecture Data Lakehouses. Additionally, there is a better organization of data from a centralized system to collaborative decentralized ownership called Data Mesh and unifying data management end-to-end called Data Fabric.
 
-Modern Data Architectures (2020s):
-Data Lakes: Use of data lakes for storing raw, unprocessed data.
-Data Lakehouses: Combining data lakes and data warehouses to unify analytics.
-Data Mesh and Data Fabric: Emphasis on decentralized data ownership (Data Mesh) and unified data management frameworks (Data Fabric).
+These architectures reflect the ongoing evolution and adaptation to increasing data volumes, real-time processing needs, and the shift towards more flexible and scalable data management solutions.
