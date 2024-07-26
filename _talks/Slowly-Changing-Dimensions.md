@@ -1,5 +1,5 @@
 ---
-title: "Slowly Changing Dimensions - Type 2"
+title: "Slowly Changing Dimensions - Type 2 with demo"
 collection: talks
 type: "Data Modeling"
 permalink: /talks/Slowly-Changing-Dimensions
@@ -8,6 +8,7 @@ venue: "SCD2"
 date: 2024-06-01
 location: "AWS"
 ---
+Demo tools: AWS, Glue Spark on a Iceberg Datalake House. We will be demonstrating to explainin a few best practices on slowly changing dimensions. 
 
 ## General Best Practices for SCD Implementatio*
 * ****Alignment with Business*** Ensure the business undertand the SCD rules for handling historical data and changes so that they understand and use dimensional data for reporting.
