@@ -22,6 +22,7 @@ There are 3 types of data loads our collect architecture would need to handle an
   * The source system maintains a timestamp field that identifies if data has been added, updated, or deleted.
   * The source system creates and updates files on data changes.
   * Your raw data lake is composed of your landing and conformance containers. Each container uses a 100% mandatory folder structure specific to its purpose.
+* Streaming Data - TBD
 
 ### Maintain Raw Data in Its Original Format. No Transformation or Changes to Raw Data
 * The primary goal is to ingest data quickly and efficiently into the raw layer, maintaining its original format without transformations.
