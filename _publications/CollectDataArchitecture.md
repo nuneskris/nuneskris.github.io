@@ -5,9 +5,11 @@ permalink: /publication/CollectDataArchitecture
 excerpt: 'Keep the Raw Layer "Raw"'
 date: 2024-05-01
 venue: 'Processing'
-slidesurl: ''
-paperurl: 'http://academicpages.github.io/files/paper1.pdf'
+tags:
+  - Integration
+  - Collect
 ---
+
 Source systems are typically designed for transaction processing and we will not be able to curate, transform and integrate the data within the source sytem. We would need to collect the data from its source system. We usually collect this data into a cloud storage. This cloud storage is paritioned off into its seperate layer of the larger data anaylics architecture. This layer is what we call the raw layer and data is stored in it the original source system state.
 
 There are 3 types of data loads our collect architecture would need to handle and they are determined by the sources of the data.
