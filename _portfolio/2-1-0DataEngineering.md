@@ -27,7 +27,10 @@ Data residing in the source application needs to be captured for an initial load
 > In some cases, even the initial load may be too large for the source system to handle, requiring it to be broken into smaller batches. These batches need to be tested early. Additionally, we need the capability to rebase the entire dataset from the source when issues with the data arise.
 
 ## Data Extraction
-Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. There are essentially only one wa extracting data espcially from on-prem to cloud. Compress and batch transfer as encrypt in flight. 
+Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. Below are the the most important considerations.
+* Batch Transfer Data
+* Compresss data
+* Encrypt Data
 
 ## Raw Layer
 * We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
