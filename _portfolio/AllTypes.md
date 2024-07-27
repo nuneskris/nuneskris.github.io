@@ -75,21 +75,8 @@ Disadvantages:
 
 Complexity in implementation and management.
 Requires integration of various tools and technologies.
-Summary Table
-Feature/Aspect	Data Warehouse	Data Lake	Data Lakehouse
-Data Types	Structured	Structured, Semi-structured, Unstructured	All types
-Schema	Schema-on-write	Schema-on-read	Schema-on-read and write
-Storage	Expensive, optimized for query speed	Cost-effective, scalable	Cost-effective, optimized
-Performance	High	Variable	High
-Data Processing	ETL (Extract, Transform, Load)	ELT (Extract, Load, Transform)	ELT and ETL
-Use Cases	BI, Reporting, Analytics	Big Data Analytics, Data Science	Unified Analytics, BI, Data Science
-Data Consistency	Strong (ACID transactions)	Variable	Strong (ACID transactions)
-Flexibility	Limited	High	High
-Governance	Strong	Requires additional tools	Strong
-Conclusion
-: Best for structured data and traditional business intelligence and reporting with high performance and strong data governance.
-: Ideal for storing vast amounts of raw data in various formats, supporting big data analytics, data exploration, and machine learning.
-Data Lakehouse: Combines the strengths of both data warehouses and data lakes, providing a unified platform for diverse data types and analytics workloads, supporting advanced data management and high-performance queries.
+
+
 
 | Feature/Aspect          | Data Warehouse         |   Data Lake          |    Data Lake          |    
 | ----------------------  | ---------------------- | -------------------- | --------------------- |
@@ -100,5 +87,10 @@ Data Lakehouse: Combines the strengths of both data warehouses and data lakes, p
 | Data Processing | ETL (Extract, Transform, Load) | ELT (Extract, Load, Transform | ELT and ETL |
 | Use Cases | BI, Reporting, Analytics | Big Data Analytics, Data Science | Unified Analytics, BI, Data Science |
 | Data Consistency | Strong (ACID transactions) | Variable | Strong (ACID transactions) |
-| Use Cases | BI, Reporting, Analytics | Big Data Analytics, Data Science | Unified Analytics, BI, Data Science |
-| Use Cases | BI, Reporting, Analytics | Big Data Analytics, Data Science | Unified Analytics, BI, Data Science |
+| Flexibility | Limited | High | High |
+| Governance | Strong |Requires additional tools | Strong |
+
+# Conclusion
+Data Warehouse: Best for structured data and traditional business intelligence and reporting with high performance and strong data governance.
+Data Lake: Ideal for storing vast amounts of raw data in various formats, supporting big data analytics, data exploration, and machine learning.
+Data Lakehouse: Combines the strengths of both data warehouses and data lakes, providing a unified platform for diverse data types and analytics workloads, supporting advanced data management and high-performance queries.
