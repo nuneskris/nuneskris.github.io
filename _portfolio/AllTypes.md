@@ -93,5 +93,12 @@ Data Lakehouse: Combines the strengths of both data warehouses and data lakes, p
 
 | Feature/Aspect          | Data Warehouse         |   Data Lake          |    Data Lake          |    
 | ----------------------  | ---------------------- | -------------------- | --------------------- |
-| Data Types              | Structured             | Structured, Semi-structured, Unstructured| All Types|
-| Schema                  | Schema-on-write        | Schema-on-read|Schema-on-read and write |
+| Data Types              | Structured             | Structured, Semi-structured, Unstructured| All Types |
+| Schema  | Schema-on-write        | Schema-on-read | Schema-on-read and write |
+| Storage | Expensive, optimized for query speed | Cost-effective, scalable | Cost-effective, optimized |
+| Performance | High | Variable | High |
+| Data Processing | ETL (Extract, Transform, Load) | ELT (Extract, Load, Transform | ELT and ETL |
+| Use Cases | BI, Reporting, Analytics | Big Data Analytics, Data Science | Unified Analytics, BI, Data Science |
+| Data Consistency | Strong (ACID transactions) | Variable | Strong (ACID transactions) |
+| Use Cases | BI, Reporting, Analytics | Big Data Analytics, Data Science | Unified Analytics, BI, Data Science |
+| Use Cases | BI, Reporting, Analytics | Big Data Analytics, Data Science | Unified Analytics, BI, Data Science |
