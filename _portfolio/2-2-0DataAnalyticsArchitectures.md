@@ -1,6 +1,6 @@
 ---
 title: "Data Analytics Architectures"
-excerpt: "A Brief History <br/><img src='/images/portfolio/DataArchitectures.png'>"
+excerpt: "A Brief History <br/><img src='/images/portfolio/DataHistory.png'>"
 collection: portfolio
 venue: 'Engineering'
 tags:
@@ -8,12 +8,14 @@ tags:
   - Management
 ---
 
+<img src='/images/portfolio/DataHistory.png'>
+
 We can understand where we are currently by understanding how we got here.
 
-## Early Data Processing (1960s-1970s):Mainframes
+# Early Data Processing (1960s-1970s):Mainframes
 I started worrking in the begining of 2005 and the team which sat next to me was the mainframe team. Data processing was primarily handled by large mainframe computers. These systems were designed for batch processing and performed straightforward reporting tasks within a single, integrated system.
 
-## Data Warehousing (1980s-1990s): OLAP and OLTP
+# Data Warehousing (1980s-1990s): OLAP and OLTP
 The rise of Online Analytical Processing (OLAP) and Online Transaction Processing (OLTP) enabled businesses to manage and analyze data more effectively. OLTP systems supported transactional workloads, while OLAP systems facilitated multidimensional data analysis. Each business function typically had its own OLTP application, which limited compute capacity and had locked-in data models unsuitable for complex, cross-functional reporting.
 
 To overcome these limitations, separate OLAP applications were developed. These systems used ETL (Extract, Transform, Load) processes to consolidate and transform data from multiple sources into a format optimized for analytics. The first step in this process was the creation of a comprehensive data model that integrated data from various sources. This approach, known as the ***Inmon Architecture***, used a third normal form (3NF) for data modeling. The 3NF models were not optimized for complex queries. To address these challenges, data was broken down into subsystems called data marts, and dimensional modeling was adopted to enhance query performance. This approach focused on simplifying data structures to support analytical queries more efficiently. This approach, known as the ***Kimbal Architecture***
@@ -22,8 +24,8 @@ The historical development of data analytics architectures has evolved from the 
 
 I would like to note that the Kimbal based architecture lives till today and is still used to build data warehouses. I started by career in data in working on data warehouses and ETL.
 
-## Big Data Era (2000s): Information and Data Revolution
-Data volumes grew beyond the capacity of single storage units. Solutions like Teradata and Netezza emerged, but the internet companies introduced more scalable technologies. I have no experience on this technology though they were around. Google developed MapReduce for processing, and Hadoop was used for distributed storage. This technological foundations marked the beginning of the Big Data era. Data was stored in files and table formats, not confined to strict SQL standards, leading to the rise of NoSQL databases. However, managing and interacting with these systems was difficult due to data immutability, meaning files could not be updated or deleted easily.
+# Big Data Era (2000s): Information and Data Revolution
+Data volumes grew beyond the capacity of single storage units. Solutions like Teradata and Netezza emerged, but the internet companies introduced more scalable technologies. I have no experience on this technology though they were around. Google developed MapReduce for processing, and Hadoop was used for distributed storage. This technological foundations marked the beginning of the Big Data era. Data was stored in files and table formats, not confined to strict SQL standards, leading to the rise of NoSQL databases. Key aspect of this architecture was we could write data into the database without defining a schema and define a schema only when we had to read it. This architecture is termed as Data Lakes. However, managing and interacting with these systems was difficult due to data immutability, meaning files could not be updated or deleted easily.
 
 # Real-Time Analytics and Cloud Computing (2010s) :
 
