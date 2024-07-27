@@ -1,13 +1,13 @@
 ---
 title: "Data Warehouse, Lake and Lakehouse"
-excerpt: "Yesterday, Today and Tomorrow of Data Processing"
+excerpt: "Yesterday, Today and Tomorrow of Data Processing <br/><img src='/images/portfolio/DataArchitectures.png'>"
 collection: portfolio
 venue: 'Processing'
 tags:
   - Engineering
   - Processing
 ---
-
+<img src='/images/portfolio/DataArchitectures.png'>
 # Data Warehouse
 
 A data warehouse is a centralized repository designed to store structured data from various sources. It is optimized for query performance and is used primarily for reporting and analysis.
