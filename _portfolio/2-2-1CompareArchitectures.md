@@ -1,5 +1,5 @@
 ---
-title: "Data Warehouse, Lake and Lakehouse"
+title: "Data: Warehouse, Lake and Lakehouse"
 excerpt: "Yesterday, Today and Tomorrow of Data Processing <br/><img src='/images/portfolio/DataArchitectures.png'>"
 collection: portfolio
 venue: 'Processing'
@@ -7,59 +7,28 @@ tags:
   - Engineering
   - Processing
 ---
+
+I briefly referred to these three data architectures in the [page](https://nuneskris.github.io/portfolio/2-2-0DataAnalyticsArchitectures/) where discussed about the history of analytics data architectures.
+
+We will spend some more time to discuss the comparisons of these three data architectures as we use them in 2024.
+
 <img src='/images/portfolio/DataArchitectures.png'>
+
 # Data Warehouse
+A data warehouse is a ***centralized repository*** designed to store structured data from various sources within the system and the data model is optimized for query performance via SQL.Since we have to load data into a model which is predefined (schema-on-write) data needs to transformed and cleaned before it is loaded (ETL - Extract, Transform, Load). The underlyting architecture is based on RDMS system which allows consistency and integrity and there by enforces data consistency and integrity through ACID transactions. This allows strong data governance and quality. Business intelligence, reporting, and complex analytics are the main usecases of Data warehouses.
 
-A data warehouse is a centralized repository designed to store structured data from various sources. It is optimized for query performance and is used primarily for reporting and analysis.
+We have been building systems based on this architecture for more than 3 decades now and we know enough about it build integrated technologies, talent and development processes which ensures success. Snowflake brought life back into this architecture when organizations were either moving towards datalakes.
 
-Key Characteristics:
+However they are very expensive to scale (Performance and data volume) and there was a high constraints on data neededing to be structured which required heavy ETL processes and development.
 
-* Schema-on-write: Data is transformed and cleaned before it is loaded (ETL - Extract, Transform, Load).
-* Structured Data: Stores structured data in predefined schemas.
-* Optimized for Read: High performance for complex queries and analytics.
-* Consistency and Integrity: Enforces data consistency and integrity through ACID transactions.
-* Data Integration: Integrates data from multiple sources for unified analysis.
-* Query Language: Typically uses SQL for querying data.
-* Usage: Primarily used for business intelligence, reporting, and complex analytics.
-
-Advantages:
-
-High query performance.
-Strong data governance and quality.
-Optimized for complex analytical queries.
-Disadvantages:
-
-Expensive to scale.
-Time-consuming ETL processes.
-Less flexibility in handling unstructured data.
-Data Lake
-Definition:
-A data lake is a storage repository that holds a vast amount of raw data in its native format, including structured, semi-structured, and unstructured data. It is designed to handle high volumes of data with various formats and structures.
-
-Key Characteristics:
-
-* Schema-on-read: Data is ingested in its raw form and transformed when read (ELT - Extract, Load, Transform).
-* All Data Types: Can store structured, semi-structured, and unstructured data.
-* Cost-effective Storage: Uses low-cost storage solutions.
-* Scalability: Highly scalable to accommodate large volumes of data.
-* Data Variety: Supports a wide variety of data formats, such as JSON, XML, CSV, images, and videos.
-* Usage: Used for big data analytics, machine learning, data exploration, and data science.
-
-
-Advantages:
-
-Cost-effective storage for large datasets.
-Flexibility to store various types of data.
-Supports advanced analytics and machine learning.
-
-Disadvantages:
+# Data Lake
+There is a complete paradigm shift with datalakes. A data lake typically uses distributed storage like HDFS or Cloud storages. They can store vast amount of raw data in its native format (JSON, XML, CSV) including structured, semi-structured, and unstructured data. Rather than transform the raw data first and load data into a predefined schema, in data lakes we can ingest or laod data first in its raw form and then transform when we read. We refer to this as ELT - Extract, Load, Transform). We are able to  develop cost-effective storage solutions as we can use multiple commodity storage infrastructure for this and thus are highly scalable to accommodate large volumes of data. Big data analytics, machine learning, data exploration, and data science are the major use cases for this data architecture.
 
 Can become a "data swamp" if not properly managed.
 Slower query performance compared to data warehouses.
 Requires robust data governance and metadata management.
 
-Data Lakehouse
-Definition:
+# Data Lakehouse
 A data lakehouse is a modern data architecture that combines the best features of data lakes and data warehouses. It provides the data management capabilities and high performance of a data warehouse with the flexibility and scalability of a data lake.
 
 Key Characteristics:
@@ -99,6 +68,6 @@ Requires integration of various tools and technologies.
 | Governance | Strong |Requires additional tools | Strong |
 
 # Conclusion
-Data Warehouse: Best for structured data and traditional business intelligence and reporting with high performance and strong data governance.
+Data Warehsourses Best for structured data and traditional business intelligence and reporting with high performance and strong data governance.
 Data Lake: Ideal for storing vast amounts of raw data in various formats, supporting big data analytics, data exploration, and machine learning.
 Data Lakehouse: Combines the strengths of both data warehouses and data lakes, providing a unified platform for diverse data types and analytics workloads, supporting advanced data management and high-performance queries.
