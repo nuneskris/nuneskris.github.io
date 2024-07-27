@@ -8,18 +8,20 @@ tags:
   - Processing
 ---
 
-Data Warehouse
-Definition:
+# Data Warehouse
+
 A data warehouse is a centralized repository designed to store structured data from various sources. It is optimized for query performance and is used primarily for reporting and analysis.
 
 Key Characteristics:
+
 * Schema-on-write: Data is transformed and cleaned before it is loaded (ETL - Extract, Transform, Load).
-Structured Data: Stores structured data in predefined schemas.
-Optimized for Read: High performance for complex queries and analytics.
-Consistency and Integrity: Enforces data consistency and integrity through ACID transactions.
-Data Integration: Integrates data from multiple sources for unified analysis.
-Query Language: Typically uses SQL for querying data.
-Usage: Primarily used for business intelligence, reporting, and complex analytics.
+* Structured Data: Stores structured data in predefined schemas.
+* Optimized for Read: High performance for complex queries and analytics.
+* Consistency and Integrity: Enforces data consistency and integrity through ACID transactions.
+* Data Integration: Integrates data from multiple sources for unified analysis.
+* Query Language: Typically uses SQL for querying data.
+* Usage: Primarily used for business intelligence, reporting, and complex analytics.
+
 Advantages:
 
 High query performance.
@@ -36,43 +38,49 @@ A data lake is a storage repository that holds a vast amount of raw data in its 
 
 Key Characteristics:
 
-Schema-on-read: Data is ingested in its raw form and transformed when read (ELT - Extract, Load, Transform).
-All Data Types: Can store structured, semi-structured, and unstructured data.
-Cost-effective Storage: Uses low-cost storage solutions.
-Scalability: Highly scalable to accommodate large volumes of data.
-Data Variety: Supports a wide variety of data formats, such as JSON, XML, CSV, images, and videos.
-Usage: Used for big data analytics, machine learning, data exploration, and data science.
+* Schema-on-read: Data is ingested in its raw form and transformed when read (ELT - Extract, Load, Transform).
+* All Data Types: Can store structured, semi-structured, and unstructured data.
+* Cost-effective Storage: Uses low-cost storage solutions.
+* Scalability: Highly scalable to accommodate large volumes of data.
+* Data Variety: Supports a wide variety of data formats, such as JSON, XML, CSV, images, and videos.
+* Usage: Used for big data analytics, machine learning, data exploration, and data science.
+
+
 Advantages:
 
 Cost-effective storage for large datasets.
 Flexibility to store various types of data.
 Supports advanced analytics and machine learning.
+
 Disadvantages:
 
 Can become a "data swamp" if not properly managed.
 Slower query performance compared to data warehouses.
 Requires robust data governance and metadata management.
+
 Data Lakehouse
 Definition:
 A data lakehouse is a modern data architecture that combines the best features of data lakes and data warehouses. It provides the data management capabilities and high performance of a data warehouse with the flexibility and scalability of a data lake.
 
 Key Characteristics:
 
-Unified Architecture: Combines the storage and processing capabilities of data lakes with the management and performance features of data warehouses.
-ACID Transactions: Ensures data consistency and reliability with ACID transactions.
-Schema Evolution: Supports schema changes without significant disruption.
-Flexible Storage: Stores data in various formats (e.g., Parquet, ORC) and supports structured, semi-structured, and unstructured data.
-Performance: Optimized for high-performance queries and analytics.
-Data Governance: Strong data governance and metadata management capabilities.
-Usage: Ideal for a wide range of analytics, including BI, data science, and real-time analytics.
+* Unified Architecture: Combines the storage and processing capabilities of data lakes with the management and performance features of data warehouses.
+* ACID Transactions: Ensures data consistency and reliability with ACID transactions.
+* Schema Evolution: Supports schema changes without significant disruption.
+* Flexible Storage: Stores data in various formats (e.g., Parquet, ORC) and supports structured, semi-structured, and unstructured data.
+* Performance: Optimized for high-performance queries and analytics.
+* Data Governance: Strong data governance and metadata management capabilities.
+* Usage: Ideal for a wide range of analytics, including BI, data science, and real-time analytics.
+
+
 Advantages:
 
 Unified platform for all types of data and analytics.
 Combines low-cost storage with high-performance analytics.
 Supports real-time and batch processing.
 Facilitates advanced analytics and machine learning.
-Disadvantages:
 
+Disadvantages:
 Complexity in implementation and management.
 Requires integration of various tools and technologies.
 
