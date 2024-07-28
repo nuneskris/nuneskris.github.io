@@ -18,7 +18,8 @@ Data profiling is an essential first step in understanding the quality, structur
 
 Below is a template I have used to much success in multiple occasions.
 
-## Dataset Information: Provide information about the dataset as a whole. It will include multiple tables.
+## Dataset Information: 
+Provide information about the dataset as a whole. It will include multiple tables.
 * Dataset Name:  ex: Customer Data
 * Source System Name:  ex: CRM
 * Source System Data SME Name: Tom.Hardy@kfnstudyorg.com
