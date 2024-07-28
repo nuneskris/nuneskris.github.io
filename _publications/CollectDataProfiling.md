@@ -10,8 +10,23 @@ tags:
   - Collect
 ---
 
-# Structural Analysis Template
+Data profiling is essential begining step in understanding the quality, structure, and consistency of data. Profiling helps to reduce the risk of errors and failures in the ETL process by identifying and addressing potential issues upfront. Understanding data volume and complexity helps in optimizing ETL processes for better performance and resource utilization.
+Avoid Rework: Profiling helps avoid rework by identifying issues early, preventing the need for repeated ETL runs due to unexpected data issues.I have seen many projects not paying attention to this phase and struggling with many surprises which could have been identified and planned at an early. Remember this is a quick exercise and scope the time and effort which we would want to spend for this. Use data profiling tools that automate profiling the data. I have seen engineers building SQL scripts to profile data and burning time and money. Most mordern tools offer most profiling capabilities like statistical analysis, pattern recognition, and anomaly detection. 
+
+The deliverable findings need to be reviewed and signed off by business and data owners to validate the understanding the context of the data, and the architect needs to be accountable on the findings of the deliverables from this phase. There may be more we uncover as we start builing the pipelines, and we need to go back and update the profiling results and have the results regularly reviewed by the stakeholders.
+
+Review and Refine: 
+
 The dataset contains various data quality issues, including missing values, invalid email formats, and future birthdate entries.
+
+## Business Context Analysis
+
+Business Relevance:
+Describe how the dataset fits within the broader business context.
+Usage Scenarios:
+Identify potential use cases for the data.
+Stakeholders:
+List the stakeholders who are interested in or affected by the data.
 
 ## Dataset Information: Provide information about the dataset as a whole. It will include multiple tables.
 * Dataset Name:  ex: Customer Data
@@ -118,3 +133,5 @@ List all detected data inconsistencies and note any obvious errors in the data (
 * It is important for the data architect to summarize the the issues and provide an estimate on the effort required by downstream processing systems to fix the issues.
 * Include Overall Data Quality and provide recommendations for improvement which will trigger detailed requirements. Suggest steps to improve data quality (e.g., data cleaning, validation rules).
 * Add Any additional observations or noteworthy points regarding the dataset.
+* Create a Data Dictionary: Document the structure, types, and constraints of the data.
+Profile Reports: Maintain detailed reports of profiling results, including identified issues and their potential impact.
