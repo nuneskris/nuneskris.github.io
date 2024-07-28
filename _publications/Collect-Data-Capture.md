@@ -1,7 +1,7 @@
 ---
 title: "Collect: Data Capture"
 collection: publications
-permalink: /publication/CollectDataProfiling
+permalink: /publication/Collect-Data-Capture
 excerpt: 'CDC'
 date: 2024-05-01
 venue: 'Processing'
