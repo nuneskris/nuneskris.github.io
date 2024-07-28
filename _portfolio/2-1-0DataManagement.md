@@ -1,6 +1,6 @@
 ---
-title: "Making Data Useful and Integrated: Data management"
-excerpt: " <br/><img src='/images/portfolio/DataManagement.png'>"
+title: "Data Management"
+excerpt: "Making Data Useful and Integrated: <br/><img src='/images/portfolio/DataManagement.png'>"
 collection: portfolio
 venue: 'Engineering'
 tags:
@@ -42,12 +42,13 @@ Typically we would capture the data changes as files. Connect to the source syst
 * Compresss data
 * Encrypt Data
 
+# Store
+
 ## Raw Layer
 * We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
 
 I have written best practices for this later in this [page](https://nuneskris.github.io/publication/CollectDataArchitecture)
 
-# Store
 
 # Curate
 Organizing, cleaning, and enriching the collected data to ensure its quality and usability. 
