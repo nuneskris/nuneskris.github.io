@@ -2,7 +2,7 @@
 title: "Data Analytics Storage in 2024"
 collection: publications
 permalink: /publication/DataAnalytics-Storage-2024
-excerpt: 'Storage is foundational. The choices are simplified by the maturing technolgies. Providing a technical overview <br/><img src='https://github.com/user-attachments/assets/9675c2a4-8d5a-4c12-b9f7-bd8c46e42f13'>'
+excerpt: 'Storage is foundational. The choices are simplified by the maturing technolgies. Providing a technical overview <br/> <img src="https://github.com/user-attachments/assets/9675c2a4-8d5a-4c12-b9f7-bd8c46e42f13">'
 venue: 'Storage'
 tags:
   - Engineering
