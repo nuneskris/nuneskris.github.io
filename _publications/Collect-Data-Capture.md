@@ -2,7 +2,7 @@
 title: "Collect: Data Capture"
 collection: publications
 permalink: /publication/Collect-Data-Capture
-excerpt: 'CDC'
+excerpt: 'Capture data from source system for processing in an Analytics System'
 date: 2024-05-01
 venue: 'Processing'
 tags:
