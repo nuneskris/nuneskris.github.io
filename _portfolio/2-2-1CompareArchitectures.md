@@ -4,7 +4,6 @@ excerpt: "Yesterday, Today and Tomorrow of Data Processing <br/><img src='/image
 collection: portfolio
 venue: 'Processing'
 tags:
-  - Engineering
   - Processing
 ---
 
