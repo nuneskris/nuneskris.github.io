@@ -29,8 +29,6 @@ I have template I have used to much success in multiple occasions in this [page]
 ## Data Capture
 Data residing in the source application needs to be captured for an initial load when moving into production, along with updates to the data (deletions, edits, and insertions) during each periodic transfer. These updates are referred to as change data capture, which is the most critical task in the collect component.
 
-> Implementation Tip: Very often the inital load is not a simple query on the enitre table because we will hit into size contraints either because of data query tools hit a limit, transfer contraints or downstream systems are not able to read large files. We would need to break these large captures into smaller batches. These batches need to be tested early. Additionally, we need the capability to rebase the entire dataset from the source when issues with the data arise.
-
 However the complexity is in the capturing changes. Below are the key steps to capture data for changes
 
 1. Identify the changed source data within the larger dataset to allow a select on only the changes. This shouhld include all changes (deletes, updates, and inserts).
