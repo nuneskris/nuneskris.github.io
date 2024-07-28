@@ -12,9 +12,9 @@ tags:
 
 Data profiling is an essential first step in understanding the quality, structure, and consistency of data. Profiling helps to reduce the risk of errors and failures in the ETL process by identifying and addressing potential issues upfront. Understanding data volume and complexity helps in optimizing ETL processes for better performance and resource utilization. Many projects fail to pay attention to this phase and struggle with surprises that could have been identified and planned for early on.
 
-Remember, this is a quick exercise to scope the time and effort required. Use data profiling tools that automate profiling. I've seen engineers build SQL scripts to profile data, wasting time and money. Most modern tools offer comprehensive profiling capabilities like statistical analysis, pattern recognition, and anomaly detection.
+> Implementation Tip: Remember, this is a quick exercise to scope the time and effort required. Use data profiling tools that automate profiling. I've seen engineers build SQL scripts to profile data, wasting time and money. Most modern tools offer comprehensive profiling capabilities like statistical analysis, pattern recognition, and anomaly detection.
 
-The findings need to be reviewed and signed off by business and data owners to validate the understanding of the data context. The architect needs to be accountable for the deliverables from this phase. There may be more uncovered as we start building the pipelines, necessitating updates to the profiling results and regular reviews by stakeholders. Use the deliverables to communicate and collaborate with business stakeholders; it should not be hidden within the data engineering team.
+> Implementation Tip: The findings need to be reviewed and signed off by business and data owners to validate the understanding of the data context. The architect needs to be accountable for the deliverables from this phase. There may be more uncovered as we start building the pipelines, necessitating updates to the profiling results and regular reviews by stakeholders. Use the deliverables to communicate and collaborate with business stakeholders; it should not be hidden within the data engineering team.
 
 Below is a template I have used to much success in multiple occasions.
 
