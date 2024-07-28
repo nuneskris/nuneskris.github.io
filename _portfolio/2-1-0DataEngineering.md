@@ -32,7 +32,7 @@ Data residing in the source application needs to be captured for an initial load
 However the complexity is in the capturing changes. Below are the key steps to capture data for changes
 
 1. Identify the changed source data within the larger dataset to allow a select on only the changes. This shouhld include all changes (deletes, updates, and inserts).
-2. Add metadata on the data files we captures to identify the change capture batch.
+2. Add metadata on the data files we captures to identify the change capture batch. Implement a watermarking strategy where the last successfully extracted timestamp is recorded. This will be used as the starting point for the next extraction.
 3. Add metadata at a row level to indicate whether a row is a delete, update or insert.
 4. Test changes capture for deletes, updates and inserts.
 
