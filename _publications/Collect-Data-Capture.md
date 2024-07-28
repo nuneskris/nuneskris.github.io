@@ -36,54 +36,88 @@ We need to ensure that the extraction process considers transaction boundaries. 
 
 <img width="612" alt="image" src="/images/publications/CDCTimeStamp.png">
 
+Perform a Date Range Check to verify that date columns fall within expected ranges.
+Implementation: Check for invalid date ranges.
+``` sql
+SELECT id, date_column  FROM source_table 
+WHERE date_column < 'LAST_CUT_OFF' OR date_column > 'CURRENT_CUT_OFF';
+```
 # No timestamp column - We would need to compare the rows.
 
 This is a resource intensive approach where we build a full difference compare query between the data which is in the application system and data which is in the analytics system. Use this option **only** when we do not have other otions.
 
 ## Comparison Logic
-* Ensure every table has a primary key or a unique identifier to accurately identify records. There was a case where we Computed hash values for the significant columns we were interested in and used that to easily compare data between snapshots. The logic is simple and similar to the below logic.
+* Ensure every table has a primary key or a unique identifier to accurately identify records. The logic is simple and similar to the below logic but very often missed with dire consequences.
 
  ```sql
 -- Current state of the data
 WITH current_data AS (
-    SELECT id, col1, col2
-    FROM source_table
+    SELECT id, col1, col2  FROM source_table
 ),
 -- Previous state of the data (last snapshot)
 previous_data AS (
-    SELECT id, col1, col2
-    FROM staging_table
+    SELECT id, col1, col2 FROM staging_table
 ),
 -- Identify new records
 new_records AS (
-    SELECT c.id, c.col1, c.col2
-    FROM current_data c
-    LEFT JOIN previous_data p ON c.id = p.id
-    WHERE p.id IS NULL
+    SELECT c.id, c.col1, c.col2 FROM current_data c LEFT JOIN previous_data p ON c.id = p.id WHERE p.id IS NULL
 ),
 -- Identify updated records
 updated_records AS (
-    SELECT c.id, c.col1, c.col2
-    FROM current_data c
-    JOIN previous_data p ON c.id = p.id
-    WHERE c.col1 != p.col1 OR c.col2 != p.col2
+    SELECT c.id, c.col1, c.col2 FROM current_data c JOIN previous_data p ON c.id = p.id WHERE c.col1 != p.col1 OR c.col2 != p.col2
 ),
 -- Identify deleted records
 deleted_records AS (
-    SELECT p.id, p.col1, p.col2
-    FROM previous_data p
-    LEFT JOIN current_data c ON p.id = c.id
-    WHERE c.id IS NULL
+    SELECT p.id, p.col1, p.col2 FROM previous_data p
+    LEFT JOIN current_data c ON p.id = c.id  WHERE c.id IS NULL
 )
 -- Combine all changes
-SELECT * FROM new_records
-UNION ALL
-SELECT * FROM updated_records
-UNION ALL
-SELECT * FROM deleted_records;
+SELECT * FROM new_records UNION ALL SELECT * FROM updated_records UNION ALL SELECT * FROM deleted_records;
 ```
-### Very import recommendations
+
+### There was a case where we computed hash values for the significant columns we were interested in and used that to easily compare data between snapshots.
+```sql
+-- Generate hash values
+SELECT id, MD5(CONCAT_WS('|', col1, col2)) AS source_hash FROM source_table;
+SELECT id, MD5(CONCAT_WS('|', col1, col2)) AS target_hashFROM target_table;
+-- Compare hash values
+SELECT s.id
+FROM (SELECT id, MD5(CONCAT_WS('|', col1, col2)) AS source_hash FROM source_table) s
+JOIN (SELECT id, MD5(CONCAT_WS('|', col1, col2)) AS target_hash FROM target_table) t ON s.id = t.id
+WHERE s.source_hash != t.target_hash;
+```
+## Consistency Checks
+
+### Record Count Check
+This needs to be a test we conduct though the development and maintenance of the extraction job. We need to reconsile the total count of records in the source matches the sum of new, updated, and deleted records in the target after each load.
+* Many of the analytics systems do not enforce "Primary Key Uniqueness Checks". We would need to perform them manually. I recommend so this to be part of a monitoring job and this ensures that there are no duplicates. It is a simple query but never validated.
+```sql
+SELECT id, COUNT(*)  FROM source_table  GROUP BY id HAVING COUNT(*) > 1;
+```
+### Primary Key Source and Target Consistency Check
+Develop a query to verify that all primary keys in the source table are present in the target table and vice versa. An important tool to check for missing Primary Keys.
+```sql
+SELECT id FROM landing_db.source_table WHERE id NOT IN (SELECT id FROM stagingdb.target_table);
+SELECT id FROM landing_db.target_table WHERE id NOT IN (SELECT id FROM stagingdb.source_table);
+```
+### Delta Verification Check
+If we have implemented a diff query because we did not have a timestamp audit column, we would need to develop a query to ensure that the changes captured by the diff query accurately reflect the actual changes. Create a manual verification sample ensure that the sample 
+``` sql
+SELECT id FROM manual_verification_sample WHERE id NOT IN (SELECT id FROM canges_table);
+```
+### Referential Integrity Check
+We can tend miss rows because or batch window bugs. So we would need to ensure that all foreign key references in the target table are valid and available. Another check which needs to run through the pipeline lifecyle so that there are not orphan rows.
+```sql
+SELECT fk_id FROM target_table WHERE fk_id NOT IN (SELECT pk_id FROM referenced_table);
+```
+### Column Value Check
+When we combine data from multiple application system sources there are situations where need to perform checks at a column level to ensure data formats and contraints like non-null values are validaed. These requirements checks need to performed as soo as data is captured to ensure they are handled early.
+```sql
+SELECT id FROM source_table WHERE col1 IS NULL OR col2 IS NULL;
+```
+# Very import recommendations
 * Use ETL tools or scripts if possible. Dont build this. These typically support legacy applications and the solutions which we would build may only be temporary.
 * The AMS Team needs to continuously monitor the process to ensure it is working correctly and efficiently. Establish month audits and have validation queries to ensure counts and values are correct.
 * Document the entire process, including the logic used for diff queries and any assumptions made.
+* Embed consistency checks into the ETL pipelines to catch issues early in the data integration process. Use tools such as DBT to automate consistency checks and constantly keep testing. The Data Architect is required to regularly review consistency checks performed by the data engineers adn ensuure to adapt to changes in the source or target systems and business requirements.
 
