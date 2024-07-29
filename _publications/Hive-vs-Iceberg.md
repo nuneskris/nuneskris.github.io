@@ -8,6 +8,8 @@ tags:
   - Store
 ---
 
+Note: I have a detailed demo on [Spark ETL on Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg-ETL) on this very topic.
+
 # Schema Evolution
 Our analytics systems are built iteratively and very often we start with a base model and then refine/expand the model in subsequently. Schema evolution refers to the capability to adapt to changes in the schema (structure) of the data over time. This includes adding, deleting, or modifying columns in a table without requiring a complete rewrite of the table or data loss.
 
@@ -51,7 +53,6 @@ ALTER TABLE employee_temp RENAME TO employee;
 ```
 
 ## How do we evolve Schema in Iceberg?
-Note: I have a detailed demo on [Spark ETL on Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg-ETL) on this very topic.
 
 When you change a column type in Iceberg, the new schema version is recorded, and the readers and writers understand how to interpret the data based on the schema version. Here is an example of how to change a column type in Iceberg using PySpark:
 
@@ -80,9 +81,9 @@ Insert data
 ```python
 spark.sql("""
 INSERT INTO glue_catalog.db.employee VALUES
-(1, 'John Doe', 30, 50000.0),
-(2, 'Jane Smith', 25, 60000.0),
-(3, 'Alice Johnson', 35, 70000.0)
+(1, 'Kris Nunes', 30, 50000.0),
+(2, 'Tom Hardy', 25, 60000.0),
+(3, 'Iris Murdoch', 35, 70000.0)
 """)
 
 df_before = spark.sql("SELECT * FROM glue_catalog.db.employee")
@@ -91,9 +92,9 @@ df_before.show()
 
 | id|        name|age|  salary|
 |--|-----------|--|-------|
-|  1|    John Doe| 30|50000.0 |
-|  2|  Jane Smith| 25|60000.0 |
-|  3|Alice Johnson| 35|70000.0 |
+|  1|    Kris Nunes| 30|50000.0 |
+|  2|  Tom Hardy| 25|60000.0 |
+|  3|Iris Murdoch| 35|70000.0 |
 
 
 ### Simple alter statement will Alter table and its data. 
@@ -108,8 +109,8 @@ Now lets test and see what happened.
 # Insert more data
 spark.sql("""
 INSERT INTO glue_catalog.db.employee VALUES
-(4, 'Bob Brown', 40, 80000.0),
-(5, 'Charlie Green', 45, 90000.0)
+(4, 'Mag Atwood', 40, 80000.0),
+(5, 'Paul Scott', 45, 90000.0)
 """)
 # Query data after changing the column type
 df_after = spark.sql("SELECT * FROM glue_catalog.db.employee")
@@ -118,15 +119,123 @@ df_after.show()
 
 | id|         name|age|  salary|
 |---|------------|--|------|
-|  1|   John Doe  | 30|50000.0 |
-|  2| Jane Smith  | 25|60000.0 |
-|  3|Alice Johnson| 35|70000.0 |
-|  4|  Bob Brown  | 40|80000.0 |
-|  5|Charlie Green| 45|90000.0 |
+|  1|   Kris Nunes  | 30|50000.0 |
+|  2| Tom Hardy  | 25|60000.0 |
+|  3|Iris Murdoch| 35|70000.0 |
+|  4|  Mag Atwood  | 40|80000.0 |
+|  5|Paul Scott| 45|90000.0 |
 
 
 As we have seen when the column type is changed, Iceberg updates the schema metadata but does not rewrite the data files. The old data files are read with the old schema, and new data files are written with the new schema. This is possible because Iceberg tracks the schema version for each file, allowing it to handle mixed schema versions seamlessly. Iceberg's advanced schema evolution capabilities mean that you typically do not need to rewrite the entire table when changing a column type. Instead, Iceberg manages schema changes through metadata updates, ensuring efficient and backward-compatible schema evolution. This is a significant advantage over traditional systems like Hive, where such changes often require costly and time-consuming data rewrites.
 ----------
+
+# Time Travel
+
+Time Travel in the context of data management refers to the ability to query and access historical versions of data at different points in time. This feature allows users to view the state of data as it was at a specific moment in the past, which is valuable for auditing, debugging, and recovering from accidental changes.
+
+***Historical Queries*** is a ability of Time travel which enables querying data as it existed at a particular snapshot or timestamp. This is useful for understanding changes over time, auditing, and rolling back to a previous state. Data systems that support time travel often take ***periodic snapshots*** of the data. Each snapshot represents the state of the data at a specific time, allowing users to access different versions of the data. Time travel is typically implemented by ***versioning data***. Each version corresponds to a snapshot, and users can specify which version to query based on its identifier or timestamp.
+
+### The usecases are just beyond analytics usecases.
+The ability supports recovery from errors or unintended changes. If data is modified or deleted by mistake, users can query the previous state and restore the data if needed. It supports auditing by allowing users to review historical changes and understand how the data evolved over time. This is useful for compliance and traceability.
+
+## An Example
+
+### Setup: let us  create an Iceberg table.
+
+```python
+from pyspark.sql import SparkSession
+
+# Initialize Spark session with Iceberg configurations
+spark = SparkSession.builder \
+    .config("spark.sql.catalog.glue_catalog", "org.apache.iceberg.spark.SparkCatalog") \
+    .config("spark.sql.catalog.glue_catalog.type", "hadoop") \
+    .config("spark.sql.catalog.glue_catalog.warehouse", "s3://your-bucket/warehouse") \
+    .getOrCreate()
+
+# Create the Iceberg table
+# Perform some updates
+spark.sql("""
+    UPDATE spark_catalog.default.employee
+    SET salary = 2500.0
+    WHERE id = 1
+""")
+
+# Insert more data
+spark.sql("""
+    INSERT INTO spark_catalog.default.employee VALUES
+    (4, 'David', 3000.0)
+""")
+```
+
+###  Setup: Query the data in the table.
+```python
+df_initial = spark.sql("SELECT * FROM glue_catalog.db.time_travel_example")
+df_initial.show()
+```
+
+| id|      name| salary|
+|---|----------|--------|
+|  1|  John Doe|50000.0|
+|  2|Jane Smith|60000.0|
+
+###  Test Time Travel: Update Data
+```python
+spark.sql("""
+UPDATE glue_catalog.db.time_travel_example
+SET salary = 55000.0
+WHERE id = 1
+""")
+
+# Insert additional data
+spark.sql("""
+INSERT INTO glue_catalog.db.time_travel_example VALUES
+(3, 'Alice Johnson', 70000.0)
+""")
+```
+
+### Query Historical Data Using Time Travel
+Iceberg supports querying historical snapshots of the table. You can use the versionAsOf option to query data as of a specific snapshot version or timestamp.
+
+```python
+# List all snapshots to find the version number or timestamp
+snapshots_df = spark.sql("SELECT * FROM glue_catalog.db.time_travel_example.snapshots")
+snapshots_df.show()
+```
+Assume we get the following snapshot IDs:
+
+Snapshot 1: 994875543435455698272
+Snapshot 2: 657465496797328734634
+Snapshot 3: 233438345678434562938
+
+# Query the table at the first snapshot
+spark.sql("SELECT * FROM spark_catalog.default.employee VERSION AS OF 994875543435455698272").show()
+
+# Query the table at the second snapshot
+spark.sql("SELECT * FROM spark_catalog.default.employee VERSION AS OF 657465496797328734634").show()
+
+Snapshot 1:
+| id|   name|salary|
+|---|-------|------|
+|  1|  Alice|1000.0|
+|  2|    Bob|1500.0|
+|  3|Charlie|2000.0|
+
+Snapshot 2: The salary is updated to 2500
+| id|   name|salary|
+|---|-------|------|
+|  1|  Alice|2500.0|
+|  2|    Bob|1500.0|
+|  3|Charlie|2000.0|
+
+Snapshot 3: New row is added
+
+| id|   name|salary|
+|---|-------|------|
+|  1|  Alice|2500.0|
+|  2|    Bob|1500.0|
+|  3|Charlie|2000.0|
+|  4|  David|3000.0|
+
 
 Hidden Partitioning:
 
@@ -136,14 +245,7 @@ ACID Transactions:
 
 Iceberg: Provides full ACID transaction support including snapshot isolation, allowing for complex multi-row updates and deletes.
 Hive: While Hive supports ACID transactions, they are often less performant and more complex to manage compared to Iceberg.
-Time Travel:
 
-Iceberg: Supports time travel, enabling queries on historical snapshots of data, which is useful for debugging, auditing, and reproducing reports.
-Hive: Does not natively support time travel capabilities.
-Data Compaction:
-
-Iceberg: Automatically handles data compaction in the background, optimizing the data layout and reducing read amplification.
-Hive: Requires manual intervention and scheduling for compaction, which can lead to maintenance overhead.
 Efficient File Management:
 
 Iceberg: Manages data files at the table level, allowing for better control over file sizes, fewer small files, and optimized read performance.
