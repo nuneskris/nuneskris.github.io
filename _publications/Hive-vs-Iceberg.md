@@ -246,8 +246,127 @@ Iceberg supports multiple data formats (e.g., Parquet, Avro, ORC) with consisten
 I have a detailed [demonstration](https://nuneskris.github.io/talks/Parquet-BestPracticeDemo) on the best practices on Parquet.
 
 # Hidden Partitioning:
-Iceberg: Allows for hidden partitioning, meaning partition columns do not need to be part of the schema, and partitioning logic can change without rewriting data.
-Hive: Requires explicit partition columns in the schema, making schema changes and partitioning logic changes more complex.
+
+Hidden partitioning in Iceberg refers to the concept where the partitioning scheme is defined once at table creation and then abstracted away from the user during data manipulation and querying. Unlike traditional partitioning schemes, where you must be aware of and handle partition columns explicitly in your queries, Iceberg allows you to work with the data without needing to know the specifics of the partitioning strategy.
+
+* Users do not need to include partition columns in their queries explicitly. Iceberg handles the partition pruning automatically, simplifying query writing.
+* Iceberg uses the partitioning information to optimize query execution under the hood. This means that partition pruning and data skipping are handled transparently, leading to better performance without additional user effort.
+* Iceberg supports schema evolution without breaking the partitioning scheme. This flexibility allows you to add, remove, or rename columns without having to redefine the partitioning strategy or reorganize your data.
+
+## How Does Hive Handle Partition
+Hive handles partitions differently from Iceberg. In Hive, partitioning is explicitly managed and visible to the user. You need to specify the partition columns both when creating the table and when querying the data. This explicit partitioning scheme can make querying more cumbersome, as users must be aware of the partition structure to write efficient queries In Hive, partitioning is a technique to divide a large table into smaller, more manageable pieces. Each partition corresponds to a specific value or set of values of one or more columns. This helps in reducing the amount of data scanned during queries, leading to improved query performance.
+
+### Example of Hive Partitioning
+
+#### Create a Hive Table with Partitions
+The PARTITIONED BY clause specifies the columns to be used for partitioning. In this case, the employee table is partitioned by year and month.
+```sql
+CREATE TABLE employee (
+    id INT,
+    name STRING,
+    department STRING,
+    salary FLOAT
+)
+PARTITIONED BY (year INT, month INT)
+STORED AS PARQUET;
+```
+#### Load Data into the Hive Table
+When loading data into a partitioned table, you need to specify the partition values explicitly. When we insert data we need to define the partition values also.
+Data is stored in directories corresponding to the partition values (e.g., year=2023/month=1).
+```sql
+-- Load data into partition (year=2023, month=01)
+INSERT INTO employee PARTITION (year=2023, month=1)
+VALUES
+    (1, 'Kris', 'HR', 70000),
+    (2, 'Juan', 'Engineering', 80000);
+
+-- Load data into partition (year=2023, month=02)
+INSERT INTO employee PARTITION (year=2023, month=2)
+VALUES
+    (3, 'Nunes', 'Marketing', 75000),
+    (4, 'Roach', 'Finance', 85000);
+```
+#### Query the Partitioned Data
+When querying a partitioned table in Hive, you should include the partition columns in the query for optimal performance.
+You need to include the partition columns in the WHERE clause to take advantage of partition pruning. This helps in scanning only the relevant partitions, reducing the amount of data read during the query.
+```sql
+-- Query data for January 2023
+SELECT id, name, department, salary
+FROM employee
+WHERE year = 2023 AND month = 1;
+
+-- Query data for all months in 2023
+SELECT id, name, department, salary
+FROM employee
+WHERE year = 2023;
+```
+
+## How Does Iceberg Handle Partition
+
+## Setup
+Ensure you have the necessary dependencies and configurations for PySpark and Iceberg.
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("IcebergExample") \
+    .config("spark.sql.catalog.my_catalog", "org.apache.iceberg.spark.SparkCatalog") \
+    .config("spark.sql.catalog.my_catalog.type", "hadoop") \
+    .config("spark.sql.catalog.my_catalog.warehouse", "s3://my-bucket/my-warehouse") \
+    .getOrCreate()
+
+# Define the schema for the table
+schema = """
+    id INT,
+    data STRING,
+    category STRING,
+    event_date DATE
+"""
+
+# Create the Iceberg table with hidden partitioning
+spark.sql(f"""
+    CREATE TABLE my_catalog.db.my_table (
+        {schema}
+    ) USING iceberg
+    PARTITIONED BY (bucket(16, id), days(event_date))
+""")
+```
+The PARTITIONED BY clause defines how the table is partitioned. In this case, we use bucket(16, id) and days(event_date). This means the data will be partitioned by bucketing the id column into 16 buckets and by day for the event_date column.
+
+## Now let us insert data
+You can insert data into the table without worrying about how the data will be partitioned. Iceberg handles this based on the defined partitioning scheme
+```python
+from pyspark.sql.functions import lit
+from datetime import date
+
+# Sample data
+data = [
+    (1, "data1", "A", date(2023, 1, 1)),
+    (2, "data2", "B", date(2023, 1, 2)),
+    (3, "data3", "A", date(2023, 1, 3)),
+    (4, "data4", "C", date(2023, 1, 4)),
+    (5, "data5", "B", date(2023, 1, 5))
+]
+
+# Create a DataFrame
+df = spark.createDataFrame(data, ["id", "data", "category", "event_date"])
+
+# Write the DataFrame to the Iceberg table
+df.writeTo("my_catalog.db.my_table").append()
+```
+Step 4: Query the Data
+When querying the data, you do not need to include partition columns in your query explicitly. Iceberg will automatically use the partitioning information to optimize the query execution. When filtering by event_date, Iceberg will use the partitioning scheme to minimize the amount of data scanned, resulting in more efficient queries.
+```python
+
+# Query the table without knowing the partitioning scheme
+df = spark.read.format("iceberg").load("my_catalog.db.my_table")
+df.show()
+
+# Filter by event_date to demonstrate hidden partitioning efficiency
+df.filter("event_date = '2023-01-01'").show()
+```
+
+
 
 # ACID Transactions:
 Iceberg: Provides full ACID transaction support including snapshot isolation, allowing for complex multi-row updates and deletes.
