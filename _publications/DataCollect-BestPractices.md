@@ -11,8 +11,9 @@ tags:
 
 # Understand the Source Data
 Teams that work with the source applications know the source data best. Every hop data takes away from the source, the knowledge of the source data degrades. In my opinion, most delays in development teams occur because they struggle with the source model. They have decent clarity on the target models but require constant support from source application data SMEs, which creates bottlenecks and rework.
-
 > ***Case Study***: The best option is to include a member from the source team within the ETL team. This happened only once in my experience, but the resource was able to incredibly improve communication efficiencies and query resolution, fast-tracking the development effort. The resource may not have known ETL and cloud data engineering, but they knew the source data model and the data intimately.
+
+Documentation is key here. We would need to leverage what is existing and build with new know uncovered. Discussions between the source application/data team and the ETL happen on email and informal discussions. Formally record these discussions before they are lost.
 
 # Collect is only to collect
 Try not to process the source data. 
