@@ -1,11 +1,9 @@
 ---
-title: "AWS Glue 4 Loves Iceberg"
+title: "Iceberg on AWS: Part 2 - Glue 4 Loves Iceberg"
 collection: teaching
 type: "Lakehouse"
 permalink: /teaching/AWS-Glue-Iceberg
-date: 2024-06-01
 venue: "Glue"
-date: 2024-06-01
 location: "AWS"
 ---
 
