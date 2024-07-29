@@ -1,11 +1,9 @@
 ---
-title: "Iceberg on AWS - Hello World"
+title: "Iceberg on AWS: Part 1 - Hello World"
 collection: teaching
 type: "Lakehouse"
 permalink: /teaching/LakeHouse-Play-Iceberg-AWS
-date: 2024-06-01
 venue: "Iceberg"
-date: 2024-06-01
 location: "AWS"
 ---
 You pay for what you get! Getting things started with Iceberg on AWS was a beeeze. I was actaully plesantly supprised to find out the Iceberg is a first class table format along with AWS Glue. They must be seing promise with the technology. 
