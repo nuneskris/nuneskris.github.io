@@ -10,6 +10,9 @@ tags:
 
 Note: I have a detailed demo on [Spark ETL on Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg-ETL) on this very topic.
 
+Note: I have a demo simple demo on launching [Hive on AWS EMR Serverless](https://nuneskris.github.io/teaching/Hive-EMR-Serverless). 
+
+
 # Schema Evolution
 Our analytics systems are built iteratively and very often we start with a base model and then refine/expand the model in subsequently. Schema evolution refers to the capability to adapt to changes in the schema (structure) of the data over time. This includes adding, deleting, or modifying columns in a table without requiring a complete rewrite of the table or data loss.
 
@@ -127,7 +130,7 @@ df_after.show()
 
 
 As we have seen when the column type is changed, Iceberg updates the schema metadata but does not rewrite the data files. The old data files are read with the old schema, and new data files are written with the new schema. This is possible because Iceberg tracks the schema version for each file, allowing it to handle mixed schema versions seamlessly. Iceberg's advanced schema evolution capabilities mean that you typically do not need to rewrite the entire table when changing a column type. Instead, Iceberg manages schema changes through metadata updates, ensuring efficient and backward-compatible schema evolution. This is a significant advantage over traditional systems like Hive, where such changes often require costly and time-consuming data rewrites.
-----------
+
 
 # Time Travel
 
@@ -391,9 +394,11 @@ DELETE FROM employee WHERE id = 2;
 Delta Files Creation:
 Mechanism: When a delete or update operation is performed in Hive, it doesn't modify the existing data files directly. Instead, Hive creates delta files that record the changes (deletions or new versions of rows).
 Overhead: These delta files accumulate over time, leading to a proliferation of small files that can degrade query performance and increase storage costs.
+
 Compaction Requirements:
 Minor and Major Compaction: Hive requires periodic compaction to merge these delta files with the original data files. Minor compaction merges small delta files into larger delta files, while major compaction merges all delta files with the base files.
 Resource-Intensive: Compaction is a resource-intensive process that can consume significant CPU and I/O resources, impacting the performance of the Hive cluster. Compaction needs to be scheduled and managed carefully to avoid impacting regular query performance.
+
 Concurrency Issues:
 Locking Mechanism: Hive uses a locking mechanism to manage concurrent access to tables during delete and update operations. This can lead to contention and reduced concurrency, especially in environments with high write throughput.
 Transaction Management: Hive’s transaction management system is not as sophisticated as modern ACID-compliant systems, leading to potential bottlenecks and reduced performance under heavy concurrent load.
@@ -403,6 +408,7 @@ Complexity in Query Execution: The presence of delta files complicates query exe
 Manual Maintenance:
 Scheduled Compaction: Administrators need to manually schedule and manage compaction jobs to ensure that the delta files are periodically merged. This requires careful planning and monitoring to avoid disruptions.
 Housekeeping Tasks: Ongoing housekeeping tasks, such as managing old delta files and monitoring the health of the transaction log, add operational overhead.
+
 Limited Support for Deletes:
 Partition-Level Deletes: Hive’s delete operations are generally more efficient when applied at the partition level rather than the row level. Row-level deletes are less efficient and can lead to a large number of small delta files.
 Configuration Complexity: Properly configuring Hive for efficient delete operations requires tuning various settings and parameters, which can be complex and error-prone.
