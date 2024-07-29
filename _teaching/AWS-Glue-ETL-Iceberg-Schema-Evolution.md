@@ -1,11 +1,9 @@
 ---
-title: "AWS Glue Spark Evolves Iceberg Schema"
+title: "Iceberg on AWS: Part 3 - Glue Spark Evolves Schema"
 collection: teaching
 type: "Lakehouse"
 permalink: /teaching/AWS-Glue-ETL-Iceberg-Schema-Evolution
-date: 2024-06-01
 venue: "Glue Spark, Iceberg"
-date: 2024-06-01
 location: "AWS"
 ---
 
