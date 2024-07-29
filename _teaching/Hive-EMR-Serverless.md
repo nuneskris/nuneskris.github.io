@@ -9,6 +9,8 @@ date: 2024-06-01
 location: "AWS"
 ---
 
+AWS EMR Serverless is magic to launch Hive. I remember spending a week mnay years back to get Hive working on my local machine. This is so easy on AWS, it is cheating!
+
 # Pre-setup
 
 ## Create EMR Access Role
