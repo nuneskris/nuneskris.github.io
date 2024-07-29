@@ -372,6 +372,8 @@ df.filter("event_date = '2023-01-01'").show()
 Iceberg: Provides full ACID transaction support including snapshot isolation, allowing for complex multi-row updates and deletes.
 Hive: While Hive supports ACID transactions, they are often less performant and more complex to manage compared to Iceberg.
 
+
+
 # Efficient File Management:
 Iceberg: Manages data files at the table level, allowing for better control over file sizes, fewer small files, and optimized read performance.
 Hive: Can suffer from small file problems, especially in scenarios with frequent updates and deletes.
