@@ -1,5 +1,5 @@
 ---
-title: "Data Collect: Best Practices"
+title: "Collect: Best Practices"
 collection: publications
 permalink: /publication/DataCollect-BestPractices
 excerpt: ''
@@ -10,9 +10,11 @@ tags:
 ---
 
 # Understand the Source Data
-Teams who work with the source applications know the source data the best and every hop data takes away from the source, the knowledge on the source data degrades.
+Teams that work with the source applications know the source data best. Every hop data takes away from the source, the knowledge of the source data degrades. In my opinion, most delays in development teams occur because they struggle with the source model. They have decent clarity on the target models but require constant support from source application data SMEs, which creates bottlenecks and rework.
 
-# Collect is only to collect. 
+> ***Case Study***: The best option is to include a member from the source team within the ETL team. This happened only once in my experience, but the resource was able to incredibly improve communication efficiencies and query resolution, fast-tracking the development effort. The resource may not have known ETL and cloud data engineering, but they knew the source data model and the data intimately.
+
+# Collect is only to collect
 Try not to process the source data. 
 
 > ***Case Study***: An organization's source applications team had more influence and secured a collection budget. They set up a team to extract data from the source system and convinced the business that they would provide near-ready data for analytics. The team developed complex extraction queries that required specialized skills tied to the source application. Five years later, when enhancements were needed, they couldn't find skilled resources within the budget to build upon the existing extraction scripts. I was called in to develop the components within budget and time. I quickly realized the effort required to continue with the current design. I utilized a single mid-experienced SQL developer and two experienced cloud analytics developers to completely migrate the entire solution. We simplified the extraction process in the source application and handled all the transformations in the analytics platform. We were able to deliver this within budget and ahead of schedule by 10%. This approach also reduced the effort needed for future enhancements by 70%.
