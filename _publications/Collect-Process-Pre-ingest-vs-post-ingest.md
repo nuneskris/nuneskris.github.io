@@ -25,36 +25,24 @@ Minimizing load on the source system by extracting raw data ensures it can focus
 ### Collect is only to collect
 > ***Case Study***: An organization's source applications team had more influence and secured a collection budget. They set up a team to extract data from the source system and convinced the business that they would provide near-ready data for analytics. The team developed complex extraction queries that required specialized skills tied to the source application. Five years later, when enhancements were needed, they couldn't find skilled resources within the budget to build upon the existing extraction scripts. I was called in to develop the components within budget and time. I quickly realized the effort required to continue with the current design. I utilized a single mid-experienced SQL developer and two experienced cloud analytics developers to completely migrate the entire solution. We simplified the extraction process in the source application and handled all the transformations in the analytics platform. We were able to deliver this within budget and ahead of schedule by 10%. This approach also reduced the effort needed for future enhancements by 70%.
 
-# Understand the Source Data
+## Understand the Source Data
 Teams that work with the source applications know the source data best. Every hop data takes away from the source, the knowledge of the source data degrades. In my opinion, most delays in development teams occur because they struggle with the source model. They have decent clarity on the target models but require constant support from source application data SMEs, which creates bottlenecks and rework.
 > ***Case Study***: The best option is to include a member from the source team within the ETL team. This happened only once in my experience, but the resource was able to incredibly improve communication efficiencies and query resolution, fast-tracking the development effort. The resource may not have known ETL and cloud data engineering, but they knew the source data model and the data intimately.
 
-Documentation is key here. We would need to leverage what is existing and build with new know uncovered. Discussions between the source application/data team and the ETL happen on email and informal discussions. Formally record these discussions before they are lost.
+## Documentation is key here
+We would need to leverage what is existing and build with new know uncovered. Discussions between the source application/data team and the ETL happen on email and informal discussions. Formally record these discussions before they are lost.
 
-
-
-# Write Modular Queries
-Writing modular queries for data extraction involves breaking down complex queries into smaller, reusable components. This approach enhances readability, maintainability, and reusability of SQL code. Here are some best practices and strategies for writing modular queries:
-
-# Some SQL Best Practices
+## Some SQL Best Practices Applicable for Collect
 1. Extract data which is needed. This help in not having to deal with columns and tables which are would not be consumed downstream.
 2. Reduce Joins unless we want to avoid techical columns references.
-3. 
+3. Write Modular Queries: Writing modular queries for data extraction involves breaking down complex queries into smaller, reusable components. This approach enhances readability, maintainability, and reusability of SQL code. Use CTE, views, stored procedures to create modular queries.
+4. Optimize Query Performance by leveraging existing indexes. Create new indexes if necessary to improve performance. Use appropriate join types and ensure joins are based on indexed columns. Apply filters early in the query to limit the dataset size using the WHERE clause.
+5. Explicitly specify the columns you need rather than using SELECT * to reduce the amount of data transferred and processed.
+6. Minimize the number of joins and avoid complex joins where possible.
 
-
-1. Design time improvements
-    1. End to end data engineering teams
-    2. Extract necessary data only: The entire pipeline gets stressed when we extract more data than needed. 
-    3. Secure data both at rest and transfer
-    4. Ensure data quality at source
-2. Build time improvements
-    1. Breaking larger jobs into smaller ones
-    2. Compress data whenever possible (Transfer and Archival)
-    3. Manage error and reject record handling: Review if we can handle rejected records separately rather than failing the entire job.
-    4. Review portioning of data for parallel or bulk processing
-        1. A Salesforce Load component which took 7 hours was designed with a realtime load vs bulk load which improved the load time by 10 fold.
-3. Runtime improvements
-    1. Automate manual interventions across the pipeline
-        1. There was a 4 hour job which had 8 stages under a single AutoSys sequence. These jobs would fail individually this forced the support engineers to keep monitoring each job fix an issue and trigger the subsequent jobs. Simple solution of having separate Austosys routine for each data stage job which is triggered from the end of the subsequent job, with delay alarms. 
-    2. Appropriate logging, monitoring and alerting
-    3. Strive to move maintenance tasks to L1. Ex: Files not arriving, Restart jobs etc.
+# Develop to Handle Errors: 
+1. Always develop to handle errors with detialed logging.
+2. Requirements need to detailed for every type of possible error, with test cases.
+3. Implement robust error handling to capture and manage extraction errors. Ensure the process can recover gracefully and test these scenarios.
+4. Log extraction activities, including timestamps, row counts, and any errors encountered. This helps with monitoring and debugging.
+5. Continously compare extracted data against source data to ensure accuracy and completeness.
