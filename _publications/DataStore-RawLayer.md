@@ -1,7 +1,7 @@
 ---
 title: "Data Store: Raw Layer"
 collection: publications
-permalink: /publication/DataStoreRawLayer
+permalink: /publication/DataStore-RawLayer
 excerpt: 'Keep the Raw Layer "Raw"'
 date: 2024-05-01
 venue: 'Processing'
