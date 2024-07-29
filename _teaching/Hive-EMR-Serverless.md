@@ -170,5 +170,3 @@ The Table is available in AWS Glue
 
 The data can additionally queried in Athena
 ![image](https://github.com/user-attachments/assets/b56f25dd-57b3-4b73-9ef8-6e668bb48d9d)
-
-
