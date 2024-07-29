@@ -370,94 +370,56 @@ df.filter("event_date = '2023-01-01'").show()
 ```
 
 # Overhead of Deletes and Updates in Hive
+One of the simplest methods was to read the data into an external processing framework (like MapReduce, Spark, or Pig), apply the necessary transformations (updates or deletes), and then write the processed data back into a new table. Afterward, the old table would be dropped, and the new table would be renamed to replace the old one. We would create a temporary table with the desired modifications and then swap the temporary table with the original table. This approach involved creating a new table, applying updates or deletes during the data load process, and then replacing the original table with the modified table. Partitions were also leveraged for this but it also came with much effort. 
 
-Hive’s implementation of deletes and updates introduces several overheads and complexities due to its design and reliance on underlying Hadoop Distributed File System (HDFS) architecture. Here’s a detailed look at the specific challenges and overheads associated with delete and update operations in Hive:
+There is a an update to Hive, when a delete or update operation is performed in Hive, it doesn't modify the existing data files directly. Instead, Hive creates delta files that record the changes (deletions or new versions of rows). Hive also requires periodic compaction to merge the small delta files with the original data files which very resource intensive.
 
-```sql
-CREATE TABLE employee (
-    id INT,
-    name STRING,
-    salary INT
-)
-CLUSTERED BY (id) INTO 3 BUCKETS
-STORED AS ORC
-TBLPROPERTIES ('transactional'='true');
---- Insert Initial Data:
-INSERT INTO employee VALUES (1, 'Alice', 1000), (2, 'Bob', 1200);
---- Update Operation:
-UPDATE employee SET salary = 1100 WHERE id = 1;
---- Delete Operation:
-DELETE FROM employee WHERE id = 2;
+## Iceberg
+Update and deletes are very simple in ICEBERG. I have [demonstration](https://nuneskris.github.io/talks/Slowly-Changing-Dimensions) on SCD2 dimensions using ICEBERG and spark were I perform mutliple update opeations.
+
+```python
+# Create initial DataFrame
+data = [(1, 'Kris Nunes', 50000), (2, 'Nunes Kris', 60000)]
+df = spark.createDataFrame(data, ["id", "name", "salary"])
+
+# Write to Iceberg table
+df.writeTo("my_catalog.db.employee").append()
+
 ```
 
+| id|    name| salary|
+|--|-------|-------|
+|  1|Kris Nunes|50000.0|
+|  2|Nunes Kris|60000.0|
 
-Delta Files Creation:
-Mechanism: When a delete or update operation is performed in Hive, it doesn't modify the existing data files directly. Instead, Hive creates delta files that record the changes (deletions or new versions of rows).
-Overhead: These delta files accumulate over time, leading to a proliferation of small files that can degrade query performance and increase storage costs.
+```python
+from pyspark.sql.functions import col
 
-Compaction Requirements:
-Minor and Major Compaction: Hive requires periodic compaction to merge these delta files with the original data files. Minor compaction merges small delta files into larger delta files, while major compaction merges all delta files with the base files.
-Resource-Intensive: Compaction is a resource-intensive process that can consume significant CPU and I/O resources, impacting the performance of the Hive cluster. Compaction needs to be scheduled and managed carefully to avoid impacting regular query performance.
+# Load the table in the 
+employee_df = spark.table("my_catalog.db.employee")
 
-Concurrency Issues:
-Locking Mechanism: Hive uses a locking mechanism to manage concurrent access to tables during delete and update operations. This can lead to contention and reduced concurrency, especially in environments with high write throughput.
-Transaction Management: Hive’s transaction management system is not as sophisticated as modern ACID-compliant systems, leading to potential bottlenecks and reduced performance under heavy concurrent load.
-Read Performance Degradation:
-File Scanning: When querying a table with many delta files, Hive needs to scan both the base files and the delta files, which increases the read latency. The more delta files there are, the more files Hive needs to scan, which can significantly degrade query performance.
-Complexity in Query Execution: The presence of delta files complicates query execution plans, as the query engine needs to reconcile the base and delta files to provide the current view of the data.
-Manual Maintenance:
-Scheduled Compaction: Administrators need to manually schedule and manage compaction jobs to ensure that the delta files are periodically merged. This requires careful planning and monitoring to avoid disruptions.
-Housekeeping Tasks: Ongoing housekeeping tasks, such as managing old delta files and monitoring the health of the transaction log, add operational overhead.
+# Update data
+updated_df = employee_df.withColumn("salary", 
+              col("salary").when(col("id") == 1, 70000).otherwise(col("salary")))
 
-Limited Support for Deletes:
-Partition-Level Deletes: Hive’s delete operations are generally more efficient when applied at the partition level rather than the row level. Row-level deletes are less efficient and can lead to a large number of small delta files.
-Configuration Complexity: Properly configuring Hive for efficient delete operations requires tuning various settings and parameters, which can be complex and error-prone.
+# Overwrite the table with updated data
+updated_df.writeTo("my_catalog.db.employee").overwritePartitions()
+```
 
+| id|    name| salary|
+|--|-------|-------|
+|  1|Kris Nunes|70000.0|
+|  2|Nunes Kris|60000.0|
 
+```python
+# Filter out the row to delete and overwrite the table
+filtered_df = employee_df.filter(col("id") != 2)
+filtered_df.writeTo("my_catalog.db.employee").overwritePartitions()
+```
 
+| id|    name| salary|
+|--|-------|-------|
+|  1|Kris Nunes|70000.0|
 
-Compaction Example:
-
-Minor Compaction:
-sql
-Copy code
-ALTER TABLE employee COMPACT 'MINOR';
-Major Compaction:
-sql
-Copy code
-ALTER TABLE employee COMPACT 'MAJOR';
-Impact of Compaction:
-Minor Compaction: Merges small delta files into larger delta files to reduce the number of files, but doesn’t merge with base files.
-Major Compaction: Merges all delta files with the base files to create a new set of base files, significantly reducing the number of files but consuming more resources.
-Summary
-Hive's approach to handling deletes and updates through delta files and compaction introduces significant overheads. The need for periodic compaction to maintain performance, the accumulation of small files, and the manual management of these processes add complexity and resource demands. These overheads can impact the overall performance and scalability of Hive in environments with frequent delete and update operations.
-
-
-# ACID Transactions:
-Iceberg: Provides full ACID transaction support including snapshot isolation, allowing for complex multi-row updates and deletes.
-Hive: While Hive supports ACID transactions, they are often less performant and more complex to manage compared to Iceberg.
-
-
-
-# Efficient File Management:
-Iceberg: Manages data files at the table level, allowing for better control over file sizes, fewer small files, and optimized read performance.
-Hive: Can suffer from small file problems, especially in scenarios with frequent updates and deletes.
-
-# Query Performance:
-Iceberg: Optimized for query performance with features like column-level stats and file-level pruning, which minimize the amount of data scanned during queries.
-Hive: Generally less optimized for these aspects, leading to potentially higher query latencies for large datasets.
-
-# Data Layout Optimizations:
-Iceberg: Supports data layout optimization features like automatic partitioning and clustering.
-Hive: Data layout optimizations are more manual and require explicit configuration and management.
-
-# Built-in Support for Multiple Engines:
-Iceberg: Provides native support for multiple compute engines, including Apache Spark, Flink, Presto, Trino, and more.
-Hive: Primarily optimized for the Hive query engine, though integrations with other engines exist but are not as seamless.
-
-# Snapshot Isolation:
-Iceberg: Offers snapshot isolation, allowing concurrent reads and writes without locking, which enhances performance in concurrent environments.
-Hive: ACID transactions in Hive might require more locking, impacting performance.
-
-Conclusion
-Apache Iceberg provides a modern approach to data lake management with features that simplify data management, improve performance, and support evolving data use cases. Its advanced capabilities, such as schema evolution, hidden partitioning, and time travel, make it a powerful tool for handling large-scale analytics and data warehousing tasks that go beyond the traditional capabilities of Apache Hive.
+# Other important Reasons
+Iceberg provides full ACID transaction support including snapshot isolation, allowing for complex multi-row updates and deletes. While Hive supports ACID transactions, they are often less performant and more complex to manage compared to Iceberg. Hive is an old technology and Iceberg is optimized for query performance with features like column-level stats and file-level pruning, which minimize the amount of data scanned during queries. Iceberg provides native support for multiple compute engines, including Apache Spark, Flink, Presto, Trino, and more. Apache Iceberg provides a modern approach to data lake management with features that simplify data management, improve performance, and support evolving data use cases. Its advanced capabilities, such as schema evolution, hidden partitioning, and time travel, make it a powerful tool for handling large-scale analytics and data warehousing tasks that go beyond the traditional capabilities of Apache Hive.
