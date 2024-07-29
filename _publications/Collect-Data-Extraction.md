@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/Collect-Data-Extraction
 excerpt: 'A Tale of Two Extractions'
 venue: 'Processing'
+date: 2024-05-01
 tags:
   - Collect
 ---
