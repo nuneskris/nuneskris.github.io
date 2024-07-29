@@ -1,7 +1,7 @@
 ---
 title: "Collect: Best Practices"
 collection: publications
-permalink: /publication/DataCollect-BestPractices
+permalink: /publication/Collect-BestPractices
 excerpt: ''
 date: 2024-05-01
 venue: 'Processing'
