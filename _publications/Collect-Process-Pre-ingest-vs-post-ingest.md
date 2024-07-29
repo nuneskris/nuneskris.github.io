@@ -1,15 +1,14 @@
 ---
-title: "Collect: Best Practices"
+title: "Collect: Pre-ingest vs Post-ingest Processing"
 collection: publications
-permalink: /publication/Collect-BestPractices
-excerpt: ''
+permalink: /publication/Collect-Process-Pre-ingest-vs-post-ingest
+excerpt: 'I do not tend to draw hard lines between applying processing logic directly on the source system before extracting the data or performing transformations post-ingestion in an analytics platform. Both approaches are valid, depending on factors such as data volume, complexity, real-time requirements, and system architecture. However, most modern data scale needs require processing to be done post-ingestion.'
 date: 2024-05-01
 venue: 'Processing'
 tags:
   - Collect
 ---
 
-# Pre-ingest vs post-ingest
 I do not tend to draw hard lines between applying processing logic directly on the source system before extracting the data or performing transformations post-ingestion in an analytics platform. Both approaches are valid, depending on factors such as data volume, complexity, real-time requirements, and system architecture. However, most modern data scale needs require processing to be done post-ingestion.
 
 ## Pre-ingest processing
