@@ -36,7 +36,7 @@ However the complexity is in the capturing changes. Below are the key steps to c
 3. Add metadata at a row level to indicate whether a row is a delete, update or insert.
 4. Test changes capture for deletes, updates and inserts.
 
-I get into details in this page on [Data Gapture](https://nuneskris.github.io/publication/Collect-Data-Capture) where I get into recommendations and considerations.
+I get into details in this page on [Data Capture](https://nuneskris.github.io/publication/Collect-Data-Capture) where I get into recommendations and considerations.
 
 ### Data Extraction
 Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. Below are the the most important considerations.
@@ -50,13 +50,16 @@ Compressing data during ETL ingestion into the cloud offers several benefits, pr
 Although not a direct benefit of compression, smaller data sizes can make encryption and decryption processes more efficient, enhancing data security during transfer and storage.
 
 Please take a look at this [Page](https://nuneskris.github.io/publication/Collect-Data-Extraction) where I get into details on a couple of case studies. 
+
 ## Store
 
 ### Raw Layer
-* We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
+We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
 
-I have written best practices for this later in this [page](https://nuneskris.github.io/publication/CollectDataArchitecture)
+I have written best practices for this later in this [page](https://nuneskris.github.io/publication/DataStoreRawLayer).
 
+### Lakehouse Storage Layer
+There has been interesting movement in modern storae layer to enable reality of a lakehouse. I have a simple explaintion of what I call [Lakehouse (Modern) Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024). There is basically three components of the storage layer in a data analytics architecture. Where are we going to store it? Cloud Storage; How is the data stored? FileFormat; How do we interact with the stored data? Table Format. It is very important to know your storage layer.
 
 # Curate
 Organizing, cleaning, and enriching the collected data to ensure its quality and usability. 
