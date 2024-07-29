@@ -207,13 +207,16 @@ Snapshot 1: 994875543435455698272
 Snapshot 2: 657465496797328734634
 Snapshot 3: 233438345678434562938
 
+```python
 # Query the table at the first snapshot
 spark.sql("SELECT * FROM spark_catalog.default.employee VERSION AS OF 994875543435455698272").show()
 
 # Query the table at the second snapshot
 spark.sql("SELECT * FROM spark_catalog.default.employee VERSION AS OF 657465496797328734634").show()
+```
 
 Snapshot 1:
+
 | id|   name|salary|
 |---|-------|------|
 |  1|  Alice|1000.0|
@@ -221,6 +224,7 @@ Snapshot 1:
 |  3|Charlie|2000.0|
 
 Snapshot 2: The salary is updated to 2500
+
 | id|   name|salary|
 |---|-------|------|
 |  1|  Alice|2500.0|
@@ -236,39 +240,38 @@ Snapshot 3: New row is added
 |  3|Charlie|2000.0|
 |  4|  David|3000.0|
 
+# Data Format Agnostic:
+Iceberg supports multiple data formats (e.g., Parquet, Avro, ORC) with consistent management and performance optimizations. Hive primarily optimized for ORC format, though it supports other formats.
 
-Hidden Partitioning:
+I have a detailed [demonstration](https://nuneskris.github.io/talks/Parquet-BestPracticeDemo) on the best practices on Parquet.
 
+# Hidden Partitioning:
 Iceberg: Allows for hidden partitioning, meaning partition columns do not need to be part of the schema, and partitioning logic can change without rewriting data.
 Hive: Requires explicit partition columns in the schema, making schema changes and partitioning logic changes more complex.
-ACID Transactions:
 
+# ACID Transactions:
 Iceberg: Provides full ACID transaction support including snapshot isolation, allowing for complex multi-row updates and deletes.
 Hive: While Hive supports ACID transactions, they are often less performant and more complex to manage compared to Iceberg.
 
-Efficient File Management:
-
+# Efficient File Management:
 Iceberg: Manages data files at the table level, allowing for better control over file sizes, fewer small files, and optimized read performance.
 Hive: Can suffer from small file problems, especially in scenarios with frequent updates and deletes.
-Query Performance:
 
+# Query Performance:
 Iceberg: Optimized for query performance with features like column-level stats and file-level pruning, which minimize the amount of data scanned during queries.
 Hive: Generally less optimized for these aspects, leading to potentially higher query latencies for large datasets.
-Data Layout Optimizations:
 
+# Data Layout Optimizations:
 Iceberg: Supports data layout optimization features like automatic partitioning and clustering.
 Hive: Data layout optimizations are more manual and require explicit configuration and management.
-Built-in Support for Multiple Engines:
 
+# Built-in Support for Multiple Engines:
 Iceberg: Provides native support for multiple compute engines, including Apache Spark, Flink, Presto, Trino, and more.
 Hive: Primarily optimized for the Hive query engine, though integrations with other engines exist but are not as seamless.
-Snapshot Isolation:
 
+# Snapshot Isolation:
 Iceberg: Offers snapshot isolation, allowing concurrent reads and writes without locking, which enhances performance in concurrent environments.
 Hive: ACID transactions in Hive might require more locking, impacting performance.
-Data Format Agnostic:
 
-Iceberg: Supports multiple data formats (e.g., Parquet, Avro, ORC) with consistent management and performance optimizations.
-Hive: Primarily optimized for ORC format, though it supports other formats.
 Conclusion
 Apache Iceberg provides a modern approach to data lake management with features that simplify data management, improve performance, and support evolving data use cases. Its advanced capabilities, such as schema evolution, hidden partitioning, and time travel, make it a powerful tool for handling large-scale analytics and data warehousing tasks that go beyond the traditional capabilities of Apache Hive.
