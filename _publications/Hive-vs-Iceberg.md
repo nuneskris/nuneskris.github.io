@@ -88,7 +88,7 @@ INSERT INTO glue_catalog.db.employee VALUES
 df_before = spark.sql("SELECT * FROM glue_catalog.db.employee")
 df_before.show()
 ```
-+---+------------+---+--------+
+
 | id|        name|age|  salary|
 |--|-----------|--|-------|
 |  1|    John Doe| 30|50000.0 |
@@ -115,7 +115,7 @@ INSERT INTO glue_catalog.db.employee VALUES
 df_after = spark.sql("SELECT * FROM glue_catalog.db.employee")
 df_after.show()
 ```
----------------------------------
+
 | id|         name|age|  salary|
 |---|------------|--|------|
 |  1|   John Doe  | 30|50000.0 |
@@ -125,14 +125,7 @@ df_after.show()
 |  5|Charlie Green| 45|90000.0 |
 
 
-
-
-
-No Rewrites Needed
-When the column type is changed, Iceberg updates the schema metadata but does not rewrite the data files. The old data files are read with the old schema, and new data files are written with the new schema. This is possible because Iceberg tracks the schema version for each file, allowing it to handle mixed schema versions seamlessly.
-
-Conclusion
-Iceberg's advanced schema evolution capabilities mean that you typically do not need to rewrite the entire table when changing a column type. Instead, Iceberg manages schema changes through metadata updates, ensuring efficient and backward-compatible schema evolution. This is a significant advantage over traditional systems like Hive, where such changes often require costly and time-consuming data rewrites.
+As we have seen when the column type is changed, Iceberg updates the schema metadata but does not rewrite the data files. The old data files are read with the old schema, and new data files are written with the new schema. This is possible because Iceberg tracks the schema version for each file, allowing it to handle mixed schema versions seamlessly. Iceberg's advanced schema evolution capabilities mean that you typically do not need to rewrite the entire table when changing a column type. Instead, Iceberg manages schema changes through metadata updates, ensuring efficient and backward-compatible schema evolution. This is a significant advantage over traditional systems like Hive, where such changes often require costly and time-consuming data rewrites.
 ----------
 
 Hidden Partitioning:
