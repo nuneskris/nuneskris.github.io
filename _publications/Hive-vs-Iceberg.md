@@ -1,8 +1,8 @@
 ---
-title: "Key Features and Advantages of Apache Iceberg"
+title: "Modern Table Formats"
 collection: publications
 permalink: /publication/Hive-vs-Iceberg
-excerpt: ''
+excerpt: 'A comparative analysis between Hive and Iceberg'
 venue: 'Lakehouse'
 tags:
   - Store
@@ -366,6 +366,65 @@ df.show()
 df.filter("event_date = '2023-01-01'").show()
 ```
 
+# Overhead of Deletes and Updates in Hive
+
+Hive’s implementation of deletes and updates introduces several overheads and complexities due to its design and reliance on underlying Hadoop Distributed File System (HDFS) architecture. Here’s a detailed look at the specific challenges and overheads associated with delete and update operations in Hive:
+
+```sql
+CREATE TABLE employee (
+    id INT,
+    name STRING,
+    salary INT
+)
+CLUSTERED BY (id) INTO 3 BUCKETS
+STORED AS ORC
+TBLPROPERTIES ('transactional'='true');
+--- Insert Initial Data:
+INSERT INTO employee VALUES (1, 'Alice', 1000), (2, 'Bob', 1200);
+--- Update Operation:
+UPDATE employee SET salary = 1100 WHERE id = 1;
+--- Delete Operation:
+DELETE FROM employee WHERE id = 2;
+```
+
+
+Delta Files Creation:
+Mechanism: When a delete or update operation is performed in Hive, it doesn't modify the existing data files directly. Instead, Hive creates delta files that record the changes (deletions or new versions of rows).
+Overhead: These delta files accumulate over time, leading to a proliferation of small files that can degrade query performance and increase storage costs.
+Compaction Requirements:
+Minor and Major Compaction: Hive requires periodic compaction to merge these delta files with the original data files. Minor compaction merges small delta files into larger delta files, while major compaction merges all delta files with the base files.
+Resource-Intensive: Compaction is a resource-intensive process that can consume significant CPU and I/O resources, impacting the performance of the Hive cluster. Compaction needs to be scheduled and managed carefully to avoid impacting regular query performance.
+Concurrency Issues:
+Locking Mechanism: Hive uses a locking mechanism to manage concurrent access to tables during delete and update operations. This can lead to contention and reduced concurrency, especially in environments with high write throughput.
+Transaction Management: Hive’s transaction management system is not as sophisticated as modern ACID-compliant systems, leading to potential bottlenecks and reduced performance under heavy concurrent load.
+Read Performance Degradation:
+File Scanning: When querying a table with many delta files, Hive needs to scan both the base files and the delta files, which increases the read latency. The more delta files there are, the more files Hive needs to scan, which can significantly degrade query performance.
+Complexity in Query Execution: The presence of delta files complicates query execution plans, as the query engine needs to reconcile the base and delta files to provide the current view of the data.
+Manual Maintenance:
+Scheduled Compaction: Administrators need to manually schedule and manage compaction jobs to ensure that the delta files are periodically merged. This requires careful planning and monitoring to avoid disruptions.
+Housekeeping Tasks: Ongoing housekeeping tasks, such as managing old delta files and monitoring the health of the transaction log, add operational overhead.
+Limited Support for Deletes:
+Partition-Level Deletes: Hive’s delete operations are generally more efficient when applied at the partition level rather than the row level. Row-level deletes are less efficient and can lead to a large number of small delta files.
+Configuration Complexity: Properly configuring Hive for efficient delete operations requires tuning various settings and parameters, which can be complex and error-prone.
+
+
+
+
+Compaction Example:
+
+Minor Compaction:
+sql
+Copy code
+ALTER TABLE employee COMPACT 'MINOR';
+Major Compaction:
+sql
+Copy code
+ALTER TABLE employee COMPACT 'MAJOR';
+Impact of Compaction:
+Minor Compaction: Merges small delta files into larger delta files to reduce the number of files, but doesn’t merge with base files.
+Major Compaction: Merges all delta files with the base files to create a new set of base files, significantly reducing the number of files but consuming more resources.
+Summary
+Hive's approach to handling deletes and updates through delta files and compaction introduces significant overheads. The need for periodic compaction to maintain performance, the accumulation of small files, and the manual management of these processes add complexity and resource demands. These overheads can impact the overall performance and scalability of Hive in environments with frequent delete and update operations.
 
 
 # ACID Transactions:
