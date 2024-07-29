@@ -6,7 +6,6 @@ excerpt: 'Keep the Raw Layer "Raw"'
 date: 2024-05-01
 venue: 'Processing'
 tags:
-  - Integration
   - Collect
 ---
 
