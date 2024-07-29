@@ -122,10 +122,9 @@ CREATE DATABASE IF NOT EXISTS emrdb;
 CREATE EXTERNAL TABLE emrdb.employee
     (
     `id` 	INT, 	
-	`name` 	STRING,	
-	`salary`	 	STRING
+    `name` 	STRING,	
+     `salary`   STRING
     )
-CLUSTERED BY (id) INTO 3 BUCKETS
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
@@ -160,3 +159,16 @@ Updaded data in the above location: s3://emr-hive-serverless-kfn-study/inputdata
 ```
 
 ![image](https://github.com/user-attachments/assets/0f071377-0481-458a-9d63-1746cfc75175)
+
+# Validate Job
+
+Validating the data in the S3.
+![image](https://github.com/user-attachments/assets/64f8d258-a498-47ea-b74d-7a2a6ae8412c)
+
+The Table is available in AWS Glue
+![image](https://github.com/user-attachments/assets/54f74020-8bd6-4962-a436-3e9aa01e831f)
+
+The data can additionally queried in Athena
+![image](https://github.com/user-attachments/assets/b56f25dd-57b3-4b73-9ef8-6e668bb48d9d)
+
+
