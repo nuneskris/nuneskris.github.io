@@ -1,12 +1,11 @@
 ---
-title: "Data Profiling"
+title: "Collect: Data Profiling"
 collection: publications
 permalink: /publication/CollectDataProfiling
 excerpt: 'Data profiling is essential for understanding the quality, structure, and consistency of data'
 date: 2024-05-01
 venue: 'Processing'
 tags:
-  - Integration
   - Collect
 ---
 
