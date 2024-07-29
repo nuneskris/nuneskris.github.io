@@ -11,7 +11,21 @@ tags:
 
 # Move Compresssed data
 Compressing data during ETL ingestion into the cloud offers several benefits, primarily related to performance, cost, and efficiency. Cloud storage costs are typically based on the amount of data stored. Compressing data reduces its size, leading to lower storage costs.
-Most importantly, compressed data is smaller, which means it can be transferred more quickly over the network. This is particularly important when moving large volumes of data to the cloud, as it
+Most importantly, compressed data is smaller, which means it can be transferred more quickly over the network. This is particularly important when moving large volumes of data to the cloud, as it speeds up the ingestion process and reduces the load on network resources, saving on bandwidth costs and time, which can be significant, especially when dealing with large volumes of data. An added bonus is cloud analytics tools naturally perform better with compressed data because they need to read less data from storage.
+
+I have a demo on how we can naturally use compressed formats on this [page](https://nuneskris.github.io/talks/Parquet-BestPracticeDemo).
+
+```python
+# Write the table to a Parquet file with dictionary encoding for 'category' and default encoding for others
+pyarpq.write_table(
+    pyar.Table.from_pandas(df_salesOrder, preserve_index=False),
+    'Data/SalesOrders.parquet',
+    use_dictionary=['SALESORG','LIFECYCLESTATUS','BILLINGSTATUS','DELIVERYSTATUS'],  # Specify dictionary encoding for the 'category' column
+    compression='SNAPPY',  # Use compression for better storage efficiency
+    data_page_version='2.0',  # Use data page version 2.0 for better performance
+    write_statistics=True
+)
+```
 
 ## Context
 I have asked to analyze ETL issues which plagued a large manufacturing company. Data Stage was used for around 400 ETL Jobs to move and curate data from DB2 to AWS data warehousing needs. 
