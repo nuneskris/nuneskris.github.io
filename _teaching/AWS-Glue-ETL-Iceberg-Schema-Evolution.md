@@ -6,6 +6,7 @@ permalink: /teaching/AWS-Glue-ETL-Iceberg-Schema-Evolution
 venue: "Glue Spark, Iceberg"
 location: "AWS"
 ---
+<img width="714" alt="image" src="https://github.com/user-attachments/assets/1ece4200-f409-4d4d-92d6-4e382f8c78fd">
 
 One of the main features of Data Lakehouses is Schema Evolution. I will demonstrate how Glue/Spark is able to easily (with some gaps) do it. I am sure future releases will fix the gaps.
 
