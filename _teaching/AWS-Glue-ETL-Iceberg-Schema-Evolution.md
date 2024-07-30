@@ -5,6 +5,7 @@ type: "Lakehouse"
 permalink: /teaching/AWS-Glue-ETL-Iceberg-Schema-Evolution
 venue: "Glue Spark, Iceberg"
 location: "AWS"
+date: 2024-07-01
 ---
 <img width="714" alt="image" src="https://github.com/user-attachments/assets/1ece4200-f409-4d4d-92d6-4e382f8c78fd">
 
