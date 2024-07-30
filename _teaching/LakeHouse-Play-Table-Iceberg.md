@@ -9,7 +9,7 @@ date: 2024-06-01
 location: "Docker"
 ---
 
-<img width="354" alt="image" src="images/teachings/iceberg/Icebergdockerminio.png">
+<img width="354" alt="image" src="/images/teachings/iceberg/Icebergdockerminio.png">
 
 The objective of this demonstration is to highlight how we can seemlessly manage tables and contrast it to the issues we had hive. We will reserve this to schema evolution.
 
