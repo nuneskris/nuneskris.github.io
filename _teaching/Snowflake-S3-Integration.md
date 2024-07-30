@@ -7,10 +7,11 @@ venue: "S3"
 date: 2024-06-01
 location: "Snowflake"
 ---
+I had used the Template SQL Worksheet provided by Snowflake with an end to end process to load data from Amazon S3. It worked like a champ. Also used the Snowflake [documentation](https://docs.snowflake.com/en/sql-reference/functions/system_validate_storage_integration).
 
 # Setup
 ```sql
-In this Worksheet we will walk through templated SQL for the end to end process required to load data from Amazon S3,
+
 /*--
 
 Helpful Snowflake Documentation:
@@ -175,7 +176,34 @@ create stage kfn_s3_stage
 ![image](https://github.com/user-attachments/assets/1bfba479-9435-4cd1-b7bc-c7ba01530305)
 
 ```sql
-
+list @kfn_s3_stage;
 ```
+![image](https://github.com/user-attachments/assets/b0f954fd-1460-4824-b560-39f9a43fd4e4)
+
+# Load Data
+```sql
+-------------------------------------------------------------------------------------------
+    -- Step 7: Load Data from Stages
+-------------------------------------------------------------------------------------------
+
+---> Load data from the Amazon S3 Stage into the Table
+    -- Copying Data from an S3 Stage: https://docs.snowflake.com/en/user-guide/data-load-s3-copy
+    -- COPY INTO <table>: https://docs.snowflake.com/en/sql-reference/sql/copy-into-table
+
+COPY INTO db_prestage.ERP.business_partners
+  FROM @kfn_s3_stage
+    FILES = ( 'BusinessPartners.csv' ) 
+ file_format = (type = csv skip_header = 1 field_delimiter = ',');
+
+-------------------------------------------------------------------------------------------
+    -- Step 8: Start querying your Data!
+-------------------------------------------------------------------------------------------
+
+---> Great job! You just successfully loaded data from your cloud provider into a Snowflake table
+---> through an external stage. You can now start querying or analyzing the data.
+
+SELECT * FROM db_prestage.ERP.business_partners;
+```
+![image](https://github.com/user-attachments/assets/c60bdac3-28ba-4cb5-bc6f-3be2e7183751)
 
 
