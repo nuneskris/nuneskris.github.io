@@ -6,6 +6,8 @@ permalink: /teaching/LakeHouse-Play-Iceberg-AWS
 venue: "Iceberg"
 location: "AWS"
 ---
+<img width="354" alt="image" src="/images/teachings/iceberg/IcebergAWS.png">
+
 You pay for what you get! Getting things started with Iceberg on AWS was a beeeze. I was actaully plesantly supprised to find out the Iceberg is a first class table format along with AWS Glue. They must be seing promise with the technology. 
 
 # Setup
