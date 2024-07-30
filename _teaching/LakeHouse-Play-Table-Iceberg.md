@@ -1,5 +1,5 @@
 ---
-title: "Iceberg Setup with Spark ETL and Nessie Catalog"
+title: "Iceberg Setup with Spark ETL and Nessie Catalog - Part 1"
 collection: teaching
 type: "Lakehouse"
 permalink: /teaching/LakeHouse-Play-Table-Iceberg
