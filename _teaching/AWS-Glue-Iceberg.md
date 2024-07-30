@@ -11,7 +11,7 @@ I remember trying to work with Iceberg with Glue 3 and finding it difficult to g
 
 # Major Takeaways:
 
-> The of using Iceberg in AWS is its integration with other services. Using Athena to manage the Iceberg tables is a natural usecase as there more folks are used to SQL to difine and manage tables. There is an added bonus of automatic integration with the Glue Data Catalog.
+> The advantage of using Iceberg in AWS is its integration with other services. Using Athena to manage the Iceberg tables is a natural usecase as there more folks are used to SQL to difine and manage tables. There is an added bonus of automatic integration with the Glue Data Catalog.
 
 > The pipeline can be used to integrate to both Iceberg and non iceberg datasource.
 
