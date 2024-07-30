@@ -6,7 +6,7 @@ permalink: /teaching/AWS-Glue-Iceberg
 venue: "Glue"
 location: "AWS"
 ---
-
+<img width="354" alt="image" src="/images/teachings/iceberg/IcebergAWSETL.png">
 I remember trying to work with Iceberg with Glue 3 and finding it difficult to getting it to work. Glue 4 loves Iceberg.
 
 # Major Takeaways:
