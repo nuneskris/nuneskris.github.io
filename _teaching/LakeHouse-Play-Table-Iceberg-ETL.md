@@ -3,15 +3,12 @@ title: "Iceberg Setup with Spark ETL and Nessie Catalog - Part 2"
 collection: teaching
 type: "Lakehouse"
 permalink: /teaching/LakeHouse-Play-Table-Iceberg-ETL
-date: 2024-07-01
 venue: "Iceberg, Spark"
 date: 2024-06-01
 location: "Docker"
 ---
-
-This is a continuation from the post which focused on [Setup, Table Management and Schema Evolution of Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg)
-
 <img width="354" alt="image" src="/images/teachings/iceberg/Icebergdockerminio.png">
+This is a continuation from the post which focused on [Setup, Table Management and Schema Evolution of Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg)
 
 The main reason for using Spark on Iceberg, is for it to provide ETL services on a table. This demo aims to perform the below
 
