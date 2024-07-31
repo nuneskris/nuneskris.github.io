@@ -81,7 +81,7 @@ END AS FISCALQUARTER
 
 #### Conditional Transformations
 Apply transformations based on conditions.
-```
+```sql
 	CASE 
 	WHEN ADDRESSTYPE = 1 THEN 'BILL'
         WHEN ADDRESSTYPE = 2 THEN 'SHIP'
@@ -91,7 +91,7 @@ Apply transformations based on conditions.
 
 #### Handling Missing Values
 Fill, drop, or impute missing values
-```
+```sql
 coalesce(NAME_FIRST, '') as NAME_FIRST
 ```
 #### PENDING Augmentation: Adding additional data from external sources to enrich the dataset (e.g., appending geographic information based on IP addresses).
