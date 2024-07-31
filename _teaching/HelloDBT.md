@@ -7,32 +7,42 @@ venue: "S3"
 date: 2024-06-01
 location: "Snowflake"
 ---
-Installation notes
-1. The below is what I always use to setup DBT Cloud on Snowflake
-* The main configuration is the default schema: ERP_SCHEMA
-https://docs.getdbt.com/guides/snowflake?step=4
-2. Configure DBT on Github if needed.
 
+I will be Using DBT to run some tranformations on Snowflake. I will be using the ERP data which I have used in multiple demos. 
+Data was loaded into Snowflake stages from this [demo](https://nuneskris.github.io/teaching/Snowflake-S3-Integration).
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/062203d2-9899-4635-af22-51546adc694f">
 
-# Column Level Transformations
+# Objectives
 
+#### Column Level Transformations
 1. Renaming Columns: Change column names for consistency or clarity. ``` LOGINNAME as USERNAME```
 2. Column Data Type Conversion: Changing data type ```{{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE```
 3. Column Merging: Combine multiple columns into one. ``` CONCAT_WS(' ', NAME_FIRST, NAME_MIDDLE, NAME_LAST, NAME_INITIALS) as full_name,```
 4. Handling Missing Values: Fill, drop, or impute missing values : ``` coalesce(NAME_FIRST, '') as NAME_FIRST```
 
-# First Run
+#### Other
+1. Macros developmennt
+2. 
+
+# Installation notes
+1. The below is what I always use to setup DBT Cloud on Snowflake
+* The main configuration is the default schema: ERP_SCHEMA
+https://docs.getdbt.com/guides/snowflake?step=4
+2. Configure DBT on Github if needed.
+
+# Hello DBT
+
+We will staging data from the src by performing column transformtions on the Employee table This is the inputdata
+![image](https://github.com/user-attachments/assets/c5db2e55-1735-411a-9557-0b2c2bf6a1f7)
 
 ## Using the default package.
 The first run will have only one model which will be a src extraction.
 ![image](https://github.com/user-attachments/assets/396a8156-afc0-4bb0-840f-0e04380ec24e)
 
-## Using a simple project.yml
+## Using a simple dbt_project.yml
 * name: 'dbterp' : Name of the project
-* +materialized: view : I am setting this as view so that I am able to look at the outcomes in snowflake.9☺️☺️
-
+* +materialized: view : I am setting this as view so that I am able to look at the outcomes in snowflake.
 ```yml
-
 name: 'dbterp'
 version: '1.0.0'
 config-version: 2
@@ -127,8 +137,10 @@ I have additionally used macros for the column transformation: A dbt macro is a 
 {% endmacro %}
 ```
 
+# First Run
+A view is created in Snowflake when we run the above model.
 
-
+![image](https://github.com/user-attachments/assets/480a6b19-c494-484e-8d09-d55db50f4e63)
 
 
 
@@ -152,9 +164,11 @@ Example: Fill missing values in age column with the median age.
 String Transformations:
 Perform operations like trimming, padding, and case conversion.
 Example: Convert product_name to lowercase.
+
 Aggregations:
 Perform aggregate functions like sum, average, min, max on columns.
 Example: Calculate the average salary for each department.
+
 Conditional Transformations:
 Apply transformations based on conditions.
 Example: Assign a category based on a value range in the score column.
