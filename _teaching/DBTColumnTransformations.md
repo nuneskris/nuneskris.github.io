@@ -136,7 +136,7 @@ The First Model which sources and creates the first staging layer which focuses 
 * Column Merging: merging names into a single column
 * Column Data Type Conversion: casting interger date types into a date
 
-```sql
+```
 -- models/src/erp/employees/prestage_employees.sql
 {% set columns = ["NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "NAME_INITIALS"] %}
 -- Renaming Columns: LOGINNAME as USERNAME
@@ -202,7 +202,7 @@ A view is created in Snowflake when we run the above model.
 * Conditional Transformations: ADDRESSTYPE
 * String Transformations: CITY
 
-```sql
+```
 -- models/src/erp/addresses/prestage_addresses.sql
 -- Column Filtering: STREET BUILDING
 -- Column Splitting: ADDRESSTYPE
@@ -241,7 +241,7 @@ PRESTAGE_ADDRESSES
 
 I extracted a FISCALYEARPERIOD which was in the format YYYYMMM into YEAR, MONTH and QUATER
 
-```sql
+```
 -- models/src/erp/salesorders/prestage_salesorders.sql
 -- Date and Time Transformations: FISCALYEARPERIOD as FISCALYEAR, FISCALMONTH, FISCALQUARTER
 {{
@@ -289,7 +289,7 @@ FROM
 ```
 Performed a Regular Expression Transformation to remove the domain form the 
 
-```sql
+```
 -- models/src/erp/salesorderitems/prestage_businesspartners.sql
 -- Regular Expression Transformations
 {{
