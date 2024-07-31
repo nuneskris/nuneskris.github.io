@@ -145,7 +145,7 @@ The First Model which sources and creates the first staging layer which focuses 
 
 #### Performed a Regular Expression Transformation to remove the domain form the 
 
-```
+```sql
 -- models/src/erp/salesorderitems/prestage_businesspartners.sql
 -- Regular Expression Transformations
 {{
