@@ -136,3 +136,46 @@ The First Model which sources and creates the first staging layer which focuses 
 * Column Merging: merging names into a single column
 * Column Data Type Conversion: casting interger date types into a date
 
+
+
+
+
+
+
+
+#### Performed a Regular Expression Transformation to remove the domain form the 
+
+```
+-- models/src/erp/salesorderitems/prestage_businesspartners.sql
+-- Regular Expression Transformations
+{{
+  config(
+    schema='erp_etl'
+  )
+}}
+WITH PRESTAGE_BUSINESS_PARTNERS AS ( SELECT
+*,
+  REGEXP_SUBSTR(
+            REGEXP_REPLACE(WEBADDRESS, 'https?://|www\.|/$', ''),  -- Remove common URL parts
+            '^[^/]+'
+        ) AS EXTRACTED_DOMAIN
+FROM
+DB_PRESTAGE.ERP.BUSINESS_PARTNERS
+)
+SELECT
+    PARTNERID,
+	PARTNERROLE,
+	EMAILADDRESS,
+	PHONENUMBER,
+	EXTRACTED_DOMAIN AS WEBADDRESS,
+	ADDRESSID,
+	COMPANYNAME,
+	LEGALFORM,
+	CREATEDBY,
+	{{to_date_number_YYYYMMDD('CREATEDAT') }} as CREATEDAT,
+	CHANGEDBY,
+    {{to_date_number_YYYYMMDD('CHANGEDAT') }} as CHANGEDAT,
+	CURRENCY
+FROM
+PRESTAGE_BUSINESS_PARTNERS
+```
