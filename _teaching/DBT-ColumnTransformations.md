@@ -1,12 +1,13 @@
 ---
-title: "Hello DBT"
+title: "DBT-ColumnTransformations"
 collection: teaching
-type: "Datawarehouse"
-permalink: /teaching/HelloDBTColumTransform
-venue: "S3"
+type: "DataLake"
+permalink: /teaching/DBT-ColumnTransformations
 date: 2024-06-01
-location: "Snowflake"
+venue: "Glue"
+location: "AWS"
 ---
+
 
 I will be Using DBT to run some tranformations on Snowflake. I will be using the ERP data which I have used in multiple demos. 
 Data was loaded into Snowflake stages from this [demo](https://nuneskris.github.io/teaching/Snowflake-S3-Integration).
