@@ -7,6 +7,9 @@ venue: "S3"
 date: 2024-06-01
 location: "Snowflake"
 ---
+
+<img width="354" alt="image" src="/images/teachings/snowflake/snowflakesetup.png"> 
+
 I had used the Template SQL Worksheet provided by Snowflake with an end to end process to load data from Amazon S3 which I play around with. It worked like a champ. Also used the Snowflake [documentation](https://docs.snowflake.com/en/sql-reference/functions/system_validate_storage_integration).
 
 # Setup
