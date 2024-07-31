@@ -18,42 +18,42 @@ Data was loaded into Snowflake stages from this [demo](https://nuneskris.github.
 
 #### Column Level Transformations
 1. Renaming Columns: Change column names for consistency or clarity.
-```
+```sql
  LOGINNAME as USERNAME
 ```
 2. Column Data Type Conversion: Changing data type
-```
+```sql
 {{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE
 ```
 3. Column Merging: Combine multiple columns into one.
-```
+```sql
 CONCAT_WS(' ', NAME_FIRST, NAME_MIDDLE, NAME_LAST, NAME_INITIALS) as full_name
 ```
 4. Handling Missing Values: Fill, drop, or impute missing values
-```
+```sql
 coalesce(NAME_FIRST, '') as NAME_FIRST
 ```
-6. Regular Expression Transformations: Use expressions on string values
-```
+5. Regular Expression Transformations: Use expressions on string values
+```sql
 REGEXP_SUBSTR(
 	REGEXP_REPLACE
 		(  WEBADDRESS, 'https?://|www\.|/$', ''), '^[^/]+') AS EXTRACTED_DOMAIN
 ```
-7. Conditional Transformations: Apply transformations based on conditions.
-```
+6. Conditional Transformations: Apply transformations based on conditions.
+```sql
 	CASE 
 	WHEN ADDRESSTYPE = 1 THEN 'BILL'
         WHEN ADDRESSTYPE = 2 THEN 'SHIP'
         ELSE CAST(ADDRESSTYPE AS STRING)
 	END AS ADDRESSTYPE_TRANSFORMED
 ```
-8. String Transformations: Perform operations like trimming, padding, and case conversion.
-```
+7. String Transformations: Perform operations like trimming, padding, and case conversion.
+```sql
    UPPER(CITY) AS CITY
 ```
-9. Column Filtering: Remove unwanted columns from the dataset.
-10. Date and Time Transformations: Extract parts of dates, convert time zones, or format dates.
-```
+8. Column Filtering: Remove unwanted columns from the dataset.
+9. Date and Time Transformations: Extract parts of dates, convert time zones, or format dates.
+```sql
 CAST(SUBSTRING(CAST(FISCALYEARPERIOD AS STRING), 1, 4) AS INTEGER) AS FISCALYEAR,
 CAST(SUBSTRING(CAST(FISCALYEARPERIOD AS STRING), 5, 3) AS INTEGER) AS FISCALMONTH,
 CASE
@@ -63,11 +63,21 @@ CASE
     ELSE 4
 END AS FISCALQUARTER
 ```
-11. Column Splitting: Split a column into multiple columns based on a delimiter.
-```
+10. Column Splitting: Split a column into multiple columns based on a delimiter.
+```sql
 SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN
 ```
-
+11. Column Value Imputation: Imputing a column value of Short Description from Medium Desc column only when the Medium Desc column is not null.
+```sql
+CASE
+	WHEN MEDIUM_DESCR IS NOT NULL THEN {{ trim_text('MEDIUM_DESCR') }} 
+	 ELSE  {{ trim_text('SHORT_DESCR') }}
+END AS DESCRIPTION
+```
+12. Trimming Column Text: Medium Descito
+```
+TRIM({{ column }})
+```
 #### Other
 1. Macros developmennt
 
@@ -281,12 +291,20 @@ FROM
 PRESTAGE_BUSINESS_PARTNERS
 ```
 
+## ProductText Table - Text Processing
+* Column Value Imputation: Imputing a column value of Short Description from Medium Desc column only when the Medium Desc column is not null.
+* Trimming Column Text: Medium Descito
+
 ![image](https://github.com/user-attachments/assets/f9b65273-f549-44d5-a7c0-17fabbc4ddda)
 
+Used a macro to handle trimming.
 ```
-sql
+ TRIM({{ column }})
+```
+```sql
 -- models/src/erp/salesorderitems/prestage_businesspartners.sql
--- Regular Expression Transformations
+-- Column Value Imputation: Imputing a column value of Short Description from Medium Desc column only when the Medium Desc column is not null.
+-- Trimming Column Text: Medium Descito
 {{
   config(
     schema='erp_etl'
