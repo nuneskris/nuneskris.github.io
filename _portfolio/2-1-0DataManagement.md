@@ -51,6 +51,9 @@ Although not a direct benefit of compression, smaller data sizes can make encryp
 
 Please take a look at this [Page](https://nuneskris.github.io/publication/Collect-Data-Extraction) where I get into details on a couple of case studies. 
 
+### Data Loading
+
+
 ## Store
 
 ### Raw Layer
