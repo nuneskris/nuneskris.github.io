@@ -130,12 +130,33 @@ models:
       +materialized: table
 ```
 
-
+## First Model
+The First Model which sources and creates the first staging layer which focuses on Column Transformation
+* Renaming Columns: LOGINNAME as USERNAME
+* Handling Missing Values: Names. coalesce: Replace null values with a specified value (empty string in this case) to prevent nulls from affecting concatenation.
+* Column Merging: merging names into a single column
+* Column Data Type Conversion: casting interger date types into a date
 #### Cleaning up Addresses
 
 * Column Filtering: STREET BUILDING
 * Conditional Transformations: ADDRESSTYPE
 * String Transformations: CITY
+
+I have additionally used macros for the column transformation: A dbt macro is a reusable piece of code written in Jinja, a templating language. Macros help automate repetitive tasks, making your dbt project more efficient and maintainable. You can think of a macro as a function that you can call with specific arguments to perform a task or generate code dynamically.
+
+```
+-- macros/to_date.sql
+{% macro to_date_number_YYYYMMDD(column) %}
+  TO_DATE(CAST({{ column }} AS STRING), 'YYYYMMDD')
+{% endmacro %}
+```
+![image](https://github.com/user-attachments/assets/6315b3ca-3382-457b-9eac-54f37280657d)
+
+
+## First Run
+A view is created in Snowflake when we run the above model.
+
+<img src='/images/teachings/snowflake/FirstDBTRun.png'>
 
 ```sql
 -- models/src/erp/addresses/prestage_addresses.sql
