@@ -329,3 +329,42 @@ PRESTAGE_PRODUCT_TEXTS
 ```
 ### Output
 ![image](https://github.com/user-attachments/assets/07e68e5c-c139-4f21-92c2-d43d10bc12c7)
+
+# Other Tables
+### Products
+```sql
+-- models/src/erp/products/prestage_products.sql
+{{
+  config(
+    schema='erp_etl'
+  )
+}}
+WITH PRESTAGE_PRODUCTS AS ( SELECT
+    *
+FROM
+DB_PRESTAGE.ERP.PRODUCTS
+)
+SELECT
+    PRODUCTID,
+	TYPECODE,
+	PRODCATEGORYID,
+	CREATEDBY,
+	{{to_date_number_YYYYMMDD('CREATEDAT') }} AS CREATEDAT,
+	CHANGEDBY,
+    {{to_date_number_YYYYMMDD('CHANGEDAT') }} AS CHANGEDAT,
+	SUPPLIER_PARTNERID,
+	TAXTARIFFCODE,
+	QUANTITYUNIT,
+	WEIGHTMEASURE,
+	WEIGHTUNIT,
+	CURRENCY,
+	PRICE,
+	WIDTH,
+	DEPTH,
+	HEIGHT,
+	DIMENSIONUNIT,
+	PRODUCTPICURL
+    
+FROM
+PRESTAGE_PRODUCTS
+```
