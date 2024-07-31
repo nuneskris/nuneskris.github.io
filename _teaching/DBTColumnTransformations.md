@@ -145,7 +145,7 @@ The First Model which sources and creates the first staging layer which focuses 
 I have additionally used macros for the column transformation: A dbt macro is a reusable piece of code written in Jinja, a templating language. Macros help automate repetitive tasks, making your dbt project more efficient and maintainable. You can think of a macro as a function that you can call with specific arguments to perform a task or generate code dynamically.
 
 
-<img src='/images/teachings/snowflake/FirstDBTRun.png'>
+<img src='/images/teachings/snowflake/firstdbtmodel.png'>
 
 
 ## First Run
