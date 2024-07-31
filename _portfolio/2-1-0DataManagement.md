@@ -54,6 +54,8 @@ Please take a look at this [Page](https://nuneskris.github.io/publication/Collec
 ## Store
 
 ### Raw Layer
+Stroe data from collection: Gathering and aggregating data from various sources.
+
 We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
 
 I have written best practices for this later in this [page](https://nuneskris.github.io/publication/DataStoreRawLayer).
@@ -62,8 +64,40 @@ I have written best practices for this later in this [page](https://nuneskris.gi
 There has been interesting movement in modern storae layer to enable reality of a lakehouse. I have a simple explaintion of what I call [Lakehouse (Modern) Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024). There is basically three components of the storage layer in a data analytics architecture. Where are we going to store it? Cloud Storage; How is the data stored? FileFormat; How do we interact with the stored data? Table Format. It is very important to know your storage layer.
 
 # Curate
-Organizing, cleaning, and enriching the collected data to ensure its quality and usability. 
-This process involves removing errors, filling gaps, and adding relevant metadata.
+Organizing, cleaning, and enriching the collected data to ensure its quality and usability. This process involves removing errors, filling gaps, and adding relevant metadata.
+
+## Data Cleansing
+Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies. This process includes:
+
+### Error Correction
+Fixing known errors in data (e.g., typos, incorrect values).
+
+### Handling Missing Values
+Imputing, deleting, or flagging missing values.
+
+### Standardization
+Ensuring data follows a common format (e.g., date formats, text casing).
+
+### Deduplication
+Identifying and removing duplicate records.
+
+### Validation
+Ensuring data conforms to rules and constraints (e.g., data types, ranges).
+
+## Data Annotation
+Adding metadata, tags, or annotations to enhance understanding and usability.
+
+## Data Integration
+Combining data from different sources into a unified dataset.
+
+## Data Transformation
+Changing the structure or format of data to make it more useful or compatible.
+
+## Data Preservation
+Ensuring long-term storage and accessibility of data.
+
+## Data Governance
+Establishing policies and procedures to manage data quality, security, and privacy.
 
 # Integrate
 Combining curated data from different sources into a unified view. 
