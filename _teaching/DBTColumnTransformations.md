@@ -293,7 +293,7 @@ PRESTAGE_BUSINESS_PARTNERS
 
 ## ProductText Table - Text Processing
 * Column Value Imputation: Imputing a column value of Short Description from Medium Desc column only when the Medium Desc column is not null.
-* Trimming Column Text: Medium Descito
+* Trimming Column Text: Medium Description is trimmed for leadning.
 
 ![image](https://github.com/user-attachments/assets/f9b65273-f549-44d5-a7c0-17fabbc4ddda)
 
@@ -327,3 +327,5 @@ SELECT
 FROM
 PRESTAGE_PRODUCT_TEXTS
 ```
+### Output
+![image](https://github.com/user-attachments/assets/07e68e5c-c139-4f21-92c2-d43d10bc12c7)
