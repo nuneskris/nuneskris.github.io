@@ -130,56 +130,6 @@ models:
       +materialized: table
 ```
 
-		-- models/src/erp/employees/prestage_employees.sql
-		{% set columns = ["NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "NAME_INITIALS"] %}
-		-- Renaming Columns: LOGINNAME as USERNAME
-		-- Handling Missing Values: Names. coalesce: Replace null values with a specified value (empty string in this case) to prevent nulls from affecting concatenation.
-		-- Column Merging: merging names into a single column
-		-- Column Data Type Conversion: casting interger date types into a date
-		{{
-		  config(
-		    schema='erp_etl'
-		  )
-		}}
-		WITH PRESTAGE_EMPLOYEES AS ( SELECT
-		    EMPLOYEEID,
-		    coalesce(NAME_FIRST, '') as NAME_FIRST,
-		    coalesce(NAME_MIDDLE, '') as NAME_MIDDLE,
-		    coalesce(NAME_LAST, '') as NAME_LAST,
-		    coalesce(NAME_INITIALS, '') as NAME_INITIALS,
-		    SEX,
-		    LANGUAGE,
-		    PHONENUMBER,
-		    EMAILADDRESS,
-		    SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN,
-		    LOGINNAME,
-		    ADDRESSID,
-		    VALIDITY_STARTDATE,
-		    VALIDITY_ENDDATE
-		FROM
-		DB_PRESTAGE.ERP.EMPLOYEES
-		)
-		SELECT
-		    EMPLOYEEID,
-		    CONCAT_WS(' ', NAME_FIRST, NAME_MIDDLE, NAME_LAST, NAME_INITIALS) as full_name,
-		    SEX,
-		    LANGUAGE,
-		    PHONENUMBER,
-		    EMAILDOMAIN,
-		    EMAILADDRESS,
-		    LOGINNAME as USERNAME,
-		    ADDRESSID,
-		    {{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE,
-		    {{to_date_number_YYYYMMDD('VALIDITY_ENDDATE') }} as VALIDITY_ENDDATE
-		    
-		FROM
-		PRESTAGE_EMPLOYEES
-
-
-
-
-
-
 
 #### Cleaning up Addresses
 
