@@ -90,7 +90,7 @@ The first run will have only one model which will be a src extraction.
 * name: 'dbterp' : Name of the project
 * +materialized: view : I am setting this as view so that I am able to look at the outcomes in snowflake.
 
-```yaml
+```
 name: 'dbterp'
 version: '1.0.0'
 config-version: 2
@@ -204,7 +204,7 @@ A view is created in Snowflake when we run the above model.
 * Conditional Transformations: ADDRESSTYPE
 * String Transformations: CITY
 
-```sql
+```
 -- models/src/erp/addresses/prestage_addresses.sql
 -- Column Filtering: STREET BUILDING
 -- Column Splitting: ADDRESSTYPE
@@ -240,8 +240,9 @@ SELECT
 FROM
 PRESTAGE_ADDRESSES
 ```
+
 I extracted a FISCALYEARPERIOD which was in the format YYYYMMM into YEAR, MONTH and QUATER
-```sql
+```
 -- models/src/erp/salesorders/prestage_salesorders.sql
 -- Date and Time Transformations: FISCALYEARPERIOD as FISCALYEAR, FISCALMONTH, FISCALQUARTER
 {{
@@ -288,7 +289,8 @@ FROM
 
 ```
 Performed a Regular Expression Transformation to remove the domain form the 
-```sql
+
+```
 -- models/src/erp/salesorderitems/prestage_businesspartners.sql
 -- Regular Expression Transformations
 {{
