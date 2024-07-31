@@ -34,3 +34,10 @@ https://docs.getdbt.com/guides/snowflake?step=4
 # Hello DBT
 
 We will staging data from the src by performing column transformtions on the Employee table This is the inputdata
+
+![image](https://github.com/user-attachments/assets/c5db2e55-1735-411a-9557-0b2c2bf6a1f7)
+
+## Using the default package.
+The first run will have only one model which will be a src extraction.
+
+![image](https://github.com/user-attachments/assets/396a8156-afc0-4bb0-840f-0e04380ec24e)
