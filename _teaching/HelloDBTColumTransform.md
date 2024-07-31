@@ -2,7 +2,7 @@
 title: "Hello DBT"
 collection: teaching
 type: "Datawarehouse"
-permalink: /teaching/HelloDBT
+permalink: /teaching/HelloDBTColumTransform
 venue: "S3"
 date: 2024-06-01
 location: "Snowflake"
@@ -10,6 +10,7 @@ location: "Snowflake"
 
 I will be Using DBT to run some tranformations on Snowflake. I will be using the ERP data which I have used in multiple demos. 
 Data was loaded into Snowflake stages from this [demo](https://nuneskris.github.io/teaching/Snowflake-S3-Integration).
+
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/062203d2-9899-4635-af22-51546adc694f">
 
 # Objectives
@@ -33,10 +34,12 @@ https://docs.getdbt.com/guides/snowflake?step=4
 # Hello DBT
 
 We will staging data from the src by performing column transformtions on the Employee table This is the inputdata
+
 ![image](https://github.com/user-attachments/assets/c5db2e55-1735-411a-9557-0b2c2bf6a1f7)
 
 ## Using the default package.
 The first run will have only one model which will be a src extraction.
+
 ![image](https://github.com/user-attachments/assets/396a8156-afc0-4bb0-840f-0e04380ec24e)
 
 ## Using a simple dbt_project.yml
