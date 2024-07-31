@@ -141,7 +141,97 @@ The First Model which sources and creates the first staging layer which focuses 
 
 
 
+#### Cleaning up Addresses
 
+* Column Filtering: STREET BUILDING
+* Conditional Transformations: ADDRESSTYPE
+* String Transformations: CITY
+
+```sql
+-- models/src/erp/addresses/prestage_addresses.sql
+-- Column Filtering: STREET BUILDING
+-- Column Splitting: ADDRESSTYPE
+-- String Transformations: CITY
+{{
+  config(
+    schema='erp_etl'
+  )
+}}
+WITH PRESTAGE_ADDRESSES AS ( SELECT
+    *,
+    CASE 
+        WHEN ADDRESSTYPE = 1 THEN 'BILL'
+        WHEN ADDRESSTYPE = 2 THEN 'SHIP'
+        ELSE CAST(ADDRESSTYPE AS STRING)
+    END AS ADDRESSTYPE_TRANSFORMED
+FROM
+DB_PRESTAGE.ERP.ADDRESSES
+)
+SELECT
+    ADDRESSID,
+	UPPER(CITY) AS CITY,
+	POSTALCODE,
+	STREET,
+	BUILDING,
+	COUNTRY,
+	REGION,
+	ADDRESSTYPE_TRANSFORMED as ADDRESSTYPE,
+	{{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE,
+    {{to_date_number_YYYYMMDD('VALIDITY_ENDDATE') }} as VALIDITY_ENDDATE,
+	LATITUDE FLOAT,
+	LONGITUDE FLOAT
+FROM
+PRESTAGE_ADDRESSES
+```
+
+I extracted a FISCALYEARPERIOD which was in the format YYYYMMM into YEAR, MONTH and QUATER
+
+```sql
+-- models/src/erp/salesorders/prestage_salesorders.sql
+-- Date and Time Transformations: FISCALYEARPERIOD as FISCALYEAR, FISCALMONTH, FISCALQUARTER
+{{
+  config(
+    schema='erp_etl'
+  )
+}}
+
+WITH PRESTAGE_SALES_ORDERS AS (
+    SELECT
+        *,
+        CAST(SUBSTRING(CAST(FISCALYEARPERIOD AS STRING), 1, 4) AS INTEGER) AS FISCALYEAR,
+        CAST(SUBSTRING(CAST(FISCALYEARPERIOD AS STRING), 5, 3) AS INTEGER) AS FISCALMONTH,
+        CASE
+            WHEN CAST(SUBSTRING(CAST(FISCALYEARPERIOD AS STRING), 5, 3) AS INTEGER) IN (1, 2, 3) THEN 1
+            WHEN CAST(SUBSTRING(CAST(FISCALYEARPERIOD AS STRING), 5, 3) AS INTEGER) IN (4, 5, 6) THEN 2
+            WHEN CAST(SUBSTRING(CAST(FISCALYEARPERIOD AS STRING), 5, 3) AS INTEGER) IN (7, 8, 9) THEN 3
+            ELSE 4
+        END AS FISCALQUARTER
+    FROM
+        DB_PRESTAGE.ERP.SALES_ORDERS
+)
+
+SELECT
+    SALESORDERID,
+    CREATEDBY,
+    {{to_date_number_YYYYMMDD('CREATEDAT') }} AS CREATEDAT,
+    CHANGEDBY,
+    {{to_date_number_YYYYMMDD('CHANGEDAT') }} AS CHANGEDAT,
+    FISCALYEAR,
+    FISCALMONTH,
+    FISCALQUARTER,
+    PARTNERID,
+    SALESORG,
+    CURRENCY,
+    GROSSAMOUNT,
+    NETAMOUNT,
+    TAXAMOUNT,
+    LIFECYCLESTATUS,
+    BILLINGSTATUS,
+    DELIVERYSTATUS
+FROM
+    PRESTAGE_SALES_ORDERS
+
+```
 
 #### Performed a Regular Expression Transformation to remove the domain form the 
 
