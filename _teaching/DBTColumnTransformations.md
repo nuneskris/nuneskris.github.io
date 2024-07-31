@@ -195,5 +195,3 @@ I have additionally used macros for the column transformation: A dbt macro is a 
 # First Run
 A view is created in Snowflake when we run the above model.
 
-<img width="300" alt="image" src="/images/teachings/snowflake/FirstDBTRun.png">
-
