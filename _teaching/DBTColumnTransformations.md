@@ -280,3 +280,32 @@ SELECT
 FROM
 PRESTAGE_BUSINESS_PARTNERS
 ```
+
+![image](https://github.com/user-attachments/assets/f9b65273-f549-44d5-a7c0-17fabbc4ddda)
+
+```
+sql
+-- models/src/erp/salesorderitems/prestage_businesspartners.sql
+-- Regular Expression Transformations
+{{
+  config(
+    schema='erp_etl'
+  )
+}}
+WITH PRESTAGE_PRODUCT_TEXTS AS ( SELECT
+    *,
+        CASE
+            WHEN MEDIUM_DESCR IS NOT NULL THEN {{ trim_text('MEDIUM_DESCR') }} 
+            ELSE  {{ trim_text('SHORT_DESCR') }}
+        END AS DESCRIPTION
+    ,
+FROM
+DB_PRESTAGE.ERP.PRODUCT_TEXTS
+)
+SELECT
+    PRODUCTID,
+	LANGUAGE,
+	DESCRIPTION
+FROM
+PRESTAGE_PRODUCT_TEXTS
+```
