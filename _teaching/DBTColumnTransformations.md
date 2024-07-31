@@ -150,7 +150,7 @@ I have additionally used macros for the column transformation: A dbt macro is a 
   TO_DATE(CAST({{ column }} AS STRING), 'YYYYMMDD')
 {% endmacro %}
 ```
-![image](https://github.com/user-attachments/assets/6315b3ca-3382-457b-9eac-54f37280657d)
+<img src='/images/teachings/snowflake/FirstDBTRun.png'>
 
 
 ## First Run
