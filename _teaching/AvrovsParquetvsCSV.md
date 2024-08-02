@@ -8,7 +8,11 @@ location: "Local"
 date: 2024-06-01
 ---
 
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/cbda03bb-977d-4e3a-ad82-546317aedbb5">
+
 I dont want to debate the pros and cons of Parquet and Avro. I will to a performance test.
+
+the [github](https://github.com/nuneskris/FileFormatCompare.git): 
 
 # The data
 Using the Parquet Best Practices. We will be using the SalesOrderItems whic has 1930 rows with the below schema.
