@@ -96,7 +96,7 @@ Compression Ratio: 1.0
 After compression 178.MB
 Compression ratio: ~40
 
-```
+```python
 import pandas as pd
 import fastavro
 import numpy as np
