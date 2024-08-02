@@ -13,6 +13,8 @@ date: 2024-06-01
 Loading data into Snowflake can be tricky. Loading needs many consideration for a successful data pipeline. Airflow can be a pain to manage. 
 AWS has a decent job here. I am sure I would have struggled to get this without this being a managed service.
 
+https://github.com/nuneskris/AWS_MWAA_Airflow_Play.git
+
 As always use the official help to [set things up](https://aws.amazon.com/blogs/big-data/use-snowflake-with-amazon-mwaa-to-orchestrate-data-pipelines/) https://aws.amazon.com/blogs/big-data/use-snowflake-with-amazon-mwaa-to-orchestrate-data-pipelines/
 
 
