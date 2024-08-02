@@ -8,7 +8,7 @@ location: "AWS"
 date: 2024-06-01
 ---
 
-<img width="354" alt="image" src="/images/teachings/iceberg/AWSAirflow.png">
+<img width="354" alt="image" src="/images/teachings/snowflake/AWSAirflow.png">
 
 Loading data into Snowflake can be tricky. Loading needs many consideration for a successful data pipeline. Airflow can be a pain to manage. 
 AWS has a decent job here. I am sure I would have struggled to get this without this being a managed service.
@@ -59,6 +59,8 @@ snowflake-sqlalchemy
 apache-airflow-providers-snowflake
 apache-airflow-providers-amazon
 ```
+
+> Note:There are webservers logs which are very useful
 
 # Development 
 
@@ -171,6 +173,109 @@ with DAG(
 add_connection >> delay_python_task >> test_connection
 ```
 
+### The Run
+
+I had some issues in the begining with the connection which I resolved (Account not correctly defined and the cache)
+
+![image](https://github.com/user-attachments/assets/0d89401e-956f-425c-a878-008afa06856a)
+
+    The logs also indicated there was no issues
+    2024-08-01, 22:49:17 UTC] {cursor.py:1149} INFO - Number of results in first chunk: 1
+    [2024-08-01, 22:49:17 UTC] {sql.py:487} INFO - Running statement: select distinct ORGANIZATION_NAME from SNOWFLAKE.ORGANIZATION_USAGE.RATE_SHEET_DAILY;, parameters: None
+    [2024-08-01, 22:49:23 UTC] {cursor.py:1149} INFO - Number of results in first chunk: 1
+    [2024-08-01, 22:49:23 UTC] {sql.py:496} INFO - Rows affected: 1
+    [2024-08-01, 22:49:23 UTC] {snowflake.py:410} INFO - Rows affected: 1
+
+## The fun part - The second DAG
+In this DAG we will run the snowflake command to copy into the table multiple files and also move the files away into a seprate S3 folder via S3 command so that they will not be processed in the next run. Another common patter.
+
+### loading into snowflake
+
+```python
+# snowflake_conn_id will configure Snowflake oprator to use the connection snowflake_conn_accountadmin 
+# which we had defined in the previous dag
+DEFAULT_ARGS = {
+    'owner': 'airflow',
+    'snowflake_conn_id': 'snowflake_conn_accountadmin',
+    'depends_on_past': False,
+    'start_date': datetime(now.year, now.month, now.day, now.hour),
+    'retries': 3,
+    'retry_delay': timedelta(minutes=1),
+}
+```
+
+The DAG is very simple. It will call the SnowflakeOperator which executes all the sql in the file.
+
+```python
+  # load datebase. the sql is saved in the file as indicated below
+    loaddatabase = SnowflakeOperator(
+        task_id='load_database',
+        sql='kfnstudy_snowflake_queries/load_database.sql'
+    )
+```
+The file has the below SQLs. Note we do not have to hard code the SQL. We can send paramters for this. Probably will do it in another demo.
+```sql
+USE DATABASE DB_PRESTAGE;
+USE SCHEMA ERP;
+COPY INTO SALES_ORDERS
+  FROM @KFN_S3_STAGE/sales_orders/ 
+  PATTERN='.*.csv'
+  ON_ERROR = 'skip_file';
+```
+
   
+### Moving files
+
+```python
+def move_files_s3(src_bucket, src_prefix, dest_bucket, dest_prefix, aws_conn_id='aws_default'):
+    s3 = S3Hook(aws_conn_id=aws_conn_id)
+    
+    try:
+        # List files in source prefix
+        files = s3.list_keys(bucket_name=src_bucket, prefix=src_prefix)
+        if not files:
+            logger.info(f'No files found in {src_bucket}/{src_prefix}')
+            return
+        
+        for file_key in files:
+            src_key = file_key
+            dest_key = file_key.replace(src_prefix, dest_prefix, 1)
+
+            logger.info(f'Moving file from {src_bucket}/{src_key} to {dest_bucket}/{dest_key}')
+            
+            # Copy the file to the destination
+            s3.copy_object(
+                source_bucket_name=src_bucket,
+                source_bucket_key=src_key,
+                dest_bucket_name=dest_bucket,
+                dest_bucket_key=dest_key
+            )
+
+            # Delete the file from the source
+            s3.delete_objects(bucket=src_bucket, keys=src_key)
+            logger.info(f'Deleted file from {src_bucket}/{src_key}')
+    except Exception as e:
+        logger.error(f'Error while moving files: {str(e)}')
+        raise
+```
+
+## The Run
+
+There were 2 files which I had placed in the /erp/sales_orders/ folder.
+
+![image](https://github.com/user-attachments/assets/8c1709fd-282d-4e8e-94cc-7f4ca856fe25)
+
+Snowflake table is laoded with 2 files with 334 rows each.
+
+![image](https://github.com/user-attachments/assets/ed67f9bc-d121-4675-a0ac-00bce2c269b6)
+
+The files are also moved into another location for arhival.
+
+![image](https://github.com/user-attachments/assets/cf762b3b-2034-4424-b607-24f3add0eb17)
 
 
+# Closing Notes
+
+I would recommend not to try AIRFLOW without dedicated engineers with this skill. But as a Managed Service doing all the heavy lifiting, I now consider this the superior orchestrator in the market. 
+
+All the best!
