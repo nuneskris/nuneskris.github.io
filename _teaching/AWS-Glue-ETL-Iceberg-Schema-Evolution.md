@@ -72,7 +72,6 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
-
 # Read data from Iceberg table
 df = spark.read \
     .format("iceberg") \
