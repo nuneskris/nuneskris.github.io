@@ -46,10 +46,12 @@ Typically we would capture the data changes as files. Connect to the source syst
 
 ## Stream Transfer Data
 
-## Compresss data
+## [Compresss data](https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress)
 Compressing data during ETL ingestion into the cloud offers several benefits, primarily related to performance, cost, and efficiency. Cloud storage costs are typically based on the amount of data stored. Compressing data reduces its size, leading to lower storage costs. Most importantly, compressed data is smaller, which means it can be transferred more quickly over the network. This is particularly important when moving large volumes of data to the cloud, as it speeds up the ingestion process and reduces the load on network resources.
 
 Please take a look at this [Page](https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress) where I get into details on a couple of case studies.
+
+I also did a [demo](https://nuneskris.github.io/talks/Avro-Parquet-CSV-Gzip) to compare compression and speed of CSV, AVRO gzip and Parquet.
 
 ## Encrypt Data
 Although not a direct benefit of compression, smaller data sizes can make encryption and decryption processes more efficient, enhancing data security during transfer and storage.
@@ -60,4 +62,5 @@ Although not a direct benefit of compression, smaller data sizes can make encryp
 # Related Pages
 * https://nuneskris.github.io/publication/CollectDataProfiling
 * https://nuneskris.github.io/publication/Collect-Data-Capture
-* 
+* https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress
+* https://nuneskris.github.io/talks/Avro-Parquet-CSV-Gzip
