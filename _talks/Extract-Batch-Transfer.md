@@ -46,8 +46,31 @@ We would need to edit and add the schedule to the crontab
     
 <img width="1020" alt="image" src="https://github.com/user-attachments/assets/5d17d42e-67ce-414c-9eed-e5723edb8831">
 
-# Run
+# Design
 
+##  Operational excellence
+We can achieving operational excellence with a Python cron job by adopting simple but effective best practices to ensure reliability, scalability, security, and maintainability. 
+
+### Automate Error Handling (Reliability)
+Errors can happen because of network issues. There 2 points which we need to take into considertion. 
+1. Transfer of Data
+2. Sending Notificaiton on the the job.
+
+#### Retry Logic
+Implementing retry logic within the Python script to handle transient errors is straight forward. This can be done using libraries like tenacity for retries.
+
+```python
+@tenacity.retry(wait=tenacity.wait_fixed(60), stop=tenacity.stop_after_attempt(5))
+def publish_message(project_id, topic_id, message):
+
+@tenacity.retry(wait=tenacity.wait_fixed(5), stop=tenacity.stop_after_attempt(5))
+def upload_to_gcs(local_file_path, bucket_name, destination_blob_name, json_credentials_path):
+```
+
+Error Logging: Log errors and successes for monitoring and debugging purposes. Ensure logs are stored persistently and can be accessed easily.
+
+
+# Run 
 
 ### Parquet Files Loaded in the Onprem extract source location.
 
