@@ -42,6 +42,7 @@ Implementation: Check for invalid date ranges.
 SELECT id, date_column  FROM source_table 
 WHERE date_column < 'LAST_CUT_OFF' OR date_column > 'CURRENT_CUT_OFF';
 ```
+
 # No timestamp column - We would need to compare the rows.
 
 This is a resource intensive approach where we build a full difference compare query between the data which is in the application system and data which is in the analytics system. Use this option **only** when we do not have other otions.
@@ -86,6 +87,7 @@ FROM (SELECT id, MD5(CONCAT_WS('|', col1, col2)) AS source_hash FROM source_tabl
 JOIN (SELECT id, MD5(CONCAT_WS('|', col1, col2)) AS target_hash FROM target_table) t ON s.id = t.id
 WHERE s.source_hash != t.target_hash;
 ```
+
 ## Consistency Checks
 
 ### Record Count Check
@@ -94,27 +96,32 @@ This needs to be a test we conduct though the development and maintenance of the
 ```sql
 SELECT id, COUNT(*)  FROM source_table  GROUP BY id HAVING COUNT(*) > 1;
 ```
+
 ### Primary Key Source and Target Consistency Check
 Develop a query to verify that all primary keys in the source table are present in the target table and vice versa. An important tool to check for missing Primary Keys.
 ```sql
 SELECT id FROM landing_db.source_table WHERE id NOT IN (SELECT id FROM stagingdb.target_table);
 SELECT id FROM landing_db.target_table WHERE id NOT IN (SELECT id FROM stagingdb.source_table);
 ```
+
 ### Delta Verification Check
 If we have implemented a diff query because we did not have a timestamp audit column, we would need to develop a query to ensure that the changes captured by the diff query accurately reflect the actual changes. Create a manual verification sample ensure that the sample 
 ``` sql
 SELECT id FROM manual_verification_sample WHERE id NOT IN (SELECT id FROM canges_table);
 ```
+
 ### Referential Integrity Check
 We can tend miss rows because or batch window bugs. So we would need to ensure that all foreign key references in the target table are valid and available. Another check which needs to run through the pipeline lifecyle so that there are not orphan rows.
 ```sql
 SELECT fk_id FROM target_table WHERE fk_id NOT IN (SELECT pk_id FROM referenced_table);
 ```
+
 ### Column Value Check
 When we combine data from multiple application system sources there are situations where need to perform checks at a column level to ensure data formats and contraints like non-null values are validaed. These requirements checks need to performed as soo as data is captured to ensure they are handled early.
 ```sql
 SELECT id FROM source_table WHERE col1 IS NULL OR col2 IS NULL;
 ```
+
 # Very import recommendations
 * Use ETL tools or scripts if possible. Dont build this. These typically support legacy applications and the solutions which we would build may only be temporary.
 * The AMS Team needs to continuously monitor the process to ensure it is working correctly and efficiently. Establish month audits and have validation queries to ensure counts and values are correct.
