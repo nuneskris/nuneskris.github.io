@@ -17,43 +17,6 @@ Now we are getting into the realms where many architecture solutions come into p
 ## Collect
 Source systems are typically designed for transaction processing and cannot curate, transform, or integrate data within themselves. We need to collect data from various sources, such as databases, applications, streams, or external sources, into a data platform for processing. This data is usually collected into cloud storage, which is partitioned into a separate layer of the larger data analytics architecture. This layer is what we call the raw layer and data is stored in it the original source system state.
 
-### Data Profiling
-We need to analyze the source data to understand its structure and consistency. I strongly believe, and frequently emphasize to the teams I lead, that data engineering does not deal with large problems but rather a large number of small problems related to data issues. The main objective of profiling data is to scope the size of the data engineering effort, which is a function of the complexity of the structure and inconsistencies of the data.
-
-> Very often, we develop data engineering pipelines based on test data that does not reveal the true extent of the data quality problems we will encounter in production scenarios. This is why it is important to break down data engineering projects into smaller, end-to-end agile cycles where we test the pipelines with production data early, rather than face inevitable surprises from bad data.
-
-> Invest in data profiling tools. I have seen organizations trying to write numerous queries to understand the data. Data engineering is about extracting and transforming data, not writing throwaway queries to understand it.
-
-I have template I have used to much success in multiple occasions in this [page](https://nuneskris.github.io/publication/CollectDataProfiling).
-
-### Data Capture
-Data residing in the source application needs to be captured for an initial load when moving into production, along with updates to the data (deletions, edits, and insertions) during each periodic transfer. These updates are referred to as change data capture, which is the most critical task in the collect component.
-
-However the complexity is in the capturing changes. Below are the key steps to capture data for changes
-
-1. Identify the changed source data within the larger dataset to allow a select on only the changes. This shouhld include all changes (deletes, updates, and inserts).
-2. Add metadata on the data files we captures to identify the change capture batch. Implement a watermarking strategy where the last successfully extracted timestamp is recorded. This will be used as the starting point for the next extraction.
-3. Add metadata at a row level to indicate whether a row is a delete, update or insert.
-4. Test changes capture for deletes, updates and inserts.
-
-I get into details in this page on [Data Capture](https://nuneskris.github.io/publication/Collect-Data-Capture) where I get into recommendations and considerations.
-
-### Data Extraction
-Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. Below are the the most important considerations.
-
-#### Batch Transfer Data
-
-#### Compresss data
-Compressing data during ETL ingestion into the cloud offers several benefits, primarily related to performance, cost, and efficiency. Cloud storage costs are typically based on the amount of data stored. Compressing data reduces its size, leading to lower storage costs. Most importantly, compressed data is smaller, which means it can be transferred more quickly over the network. This is particularly important when moving large volumes of data to the cloud, as it speeds up the ingestion process and reduces the load on network resources.
-
-#### Encrypt Data
-Although not a direct benefit of compression, smaller data sizes can make encryption and decryption processes more efficient, enhancing data security during transfer and storage.
-
-Please take a look at this [Page](https://nuneskris.github.io/publication/Collect-Data-Extraction) where I get into details on a couple of case studies. 
-
-### Data Loading
-
-
 ## Store
 
 ### Raw Layer
