@@ -1,7 +1,7 @@
 ---
 title: "Collect - Extraction: Transfer Compressed Data "
 collection: publications
-permalink: /publication/Collect-Data-Extraction_Compress
+permalink: /publication/Collect-Data-Extraction-Compress
 excerpt: 'Move Compresssed data'
 venue: 'Processing'
 date: 2024-05-01
