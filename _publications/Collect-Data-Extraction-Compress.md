@@ -2,14 +2,13 @@
 title: "Collect: Data Extraction"
 collection: publications
 permalink: /publication/Collect-Data-Extraction_Compress
-excerpt: 'A Tale of Two Extractions'
+excerpt: 'Move Compresssed data'
 venue: 'Processing'
 date: 2024-05-01
 tags:
   - Collect
 ---
 
-# Move Compresssed data
 Compressing data during ETL ingestion into the cloud offers several benefits, primarily related to performance, cost, and efficiency. Cloud storage costs are typically based on the amount of data stored. Compressing data reduces its size, leading to lower storage costs.
 Most importantly, compressed data is smaller, which means it can be transferred more quickly over the network. This is particularly important when moving large volumes of data to the cloud, as it speeds up the ingestion process and reduces the load on network resources, saving on bandwidth costs and time, which can be significant, especially when dealing with large volumes of data. An added bonus is cloud analytics tools naturally perform better with compressed data because they need to read less data from storage.
 
