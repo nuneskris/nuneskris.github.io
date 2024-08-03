@@ -1,7 +1,7 @@
 ---
 title: "Table Formats Comparison Demo"
 collection: talks
-permalink: /talks/Iceberg-vs-Avro
+permalink: /talks/Iceberg-vs-Hive
 date: 2024-06-30
 ---
 
