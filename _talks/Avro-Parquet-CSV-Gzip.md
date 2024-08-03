@@ -1,5 +1,5 @@
 ---
-title: "Avro vs Parquet vs CSV"
+title: "Avro vs Parquet vs CSV Demo"
 collection: talks
 type: "Do not wait for a schedule to trigger a pipeline"
 permalink: /talks/Avro-Parquet-CSV-Gzip
