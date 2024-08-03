@@ -13,7 +13,7 @@ This happens by deploying a system of people, process and tools for integrating 
 # Main Considerations of Unified Data
 By ***integrating*** and ***consolidating*** data from various sources, organizations can achieve a comprehensive and accurate view of their data, leading to improved decision-making, enhanced analytics, and greater operational efficiency.
 
-## Integrated Data
+## [Integrated Data](https://nuneskris.github.io/portfolio/1-1-2IntegratedData/)
 Integrated data refers to the process of combining data from multiple business functions to provide a comprehensive view of the business rather than an isolated view of a single business function. We build applications to support functionality within specific business functions. Data is generated within these applications and is typically managed and owned by these applications, with limited regard to how the data can be integrated with data from other systems.
 
 Integrating data has been the major driver in data and analytics systems, as they strive to combine data from disparate sources, such as databases, applications, and external systems. We use integration tools and techniques such as ETL (Extract, Transform, Load) processes, data warehousing, and data lakes to achieve this integration. This is explored further in this seperate [article](https://nuneskris.github.io/portfolio/1-1-2IntegratedData/).
@@ -50,3 +50,6 @@ By unifying this data, the company can achieve the following:
 * Single Customer View: Combine customer information from the sales and CRM systems to get a complete profile of John Doe, including his purchase history and interactions.
 * Integrated Product Data: Merge product information from the sales and inventory systems to monitor stock levels and sales performance.
 * Consolidated Financial Data: Integrate financial transactions with sales data to analyze revenue and customer spending patterns.
+
+# Related Pages
+* https://nuneskris.github.io/portfolio/1-1-2IntegratedData/
