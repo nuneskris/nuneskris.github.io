@@ -14,3 +14,8 @@ We envision a system where users can go to a ***single place*** to get their dat
 Users should not need technical team support to consume the data and start utilizing it. They should be able to help themselves. Finally, any new type of data generated within the enterprise should be curated and integrated into the platform seamlessly. This ideal world does not yet exist, and we, as architects, need to strive to get close to it. The challenges are many, but technological innovations are helping us move in that direction.
 
 
+#References:
+
+* https://nuneskris.github.io/portfolio/1-1-1UnifiedData/
+* https://nuneskris.github.io/portfolio/1-2-1UsableData/
+
