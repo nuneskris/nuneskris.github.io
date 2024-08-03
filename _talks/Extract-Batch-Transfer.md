@@ -23,18 +23,28 @@ I am creating a base for interest of time. I would usually have the bucket name 
 
 ![image](https://github.com/user-attachments/assets/38cbaca1-19c2-4909-a49f-ab5e593baa00)
 
-
-
 ## Schedule
 
-* * * * *
-| | | | |
-| | | | └─── Day of the week (0 - 7) (Sunday is both 0 and 7)
-| | | └───── Month (1 - 12)
-| | └─────── Day of the month (1 - 31)
-| └───────── Hour (0 - 23)
-└─────────── Minute (0 - 59)
+Cron is a tried and tested option to schedule jobs. With proper documentation and maintenance, it can be a very reliable solution.
+![image](https://github.com/user-attachments/assets/3b1349f8-1a24-49c4-9738-b3e3eccad443)
 
+#### First we would need to find the correct Python path
+
+    which python3
+
+#### Edit the crontab
+We would need to edit and add the schedule to the crontab
+   
+    crontab -e
+    
+#### Update the cron job entry with the correct Python path
+
+    */5 * * * * /<path to python>/python3 /<path to code>/upload_to_gcs_scheduler.py >> /<path to log>/upload_to_gcs_scheduler.log 2>&1
+
+#### We can verify the cron job
+    crontab -l
+    
+<img width="1020" alt="image" src="https://github.com/user-attachments/assets/5d17d42e-67ce-414c-9eed-e5723edb8831">
 
 # Run
 
