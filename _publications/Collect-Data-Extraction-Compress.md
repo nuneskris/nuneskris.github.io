@@ -1,5 +1,5 @@
 ---
-title: "Collect: Data Extraction"
+title: "Collect - Extraction: Transfer Compressed Data "
 collection: publications
 permalink: /publication/Collect-Data-Extraction_Compress
 excerpt: 'Move Compresssed data'
