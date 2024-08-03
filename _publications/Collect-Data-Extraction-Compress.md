@@ -1,7 +1,7 @@
 ---
 title: "Collect: Data Extraction"
 collection: publications
-permalink: /publication/Collect-Data-Extraction
+permalink: /publication/Collect-Data-Extraction_Compress
 excerpt: 'A Tale of Two Extractions'
 venue: 'Processing'
 date: 2024-05-01
