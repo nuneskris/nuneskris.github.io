@@ -50,8 +50,6 @@ I proposed a simple fix of compressing the files. The reason data was transferre
 Compressed large files and sent to S3. The current gzip operation compressed 5GB file to ~100 MB (~ compression ratio of 50) reducing it by 98%, bringing the 8hrs to 10mins. 
 Use server-less solution:  Lambda function are trigger on arrival of the large file which triggers Glue to un-compress the file back to S3. This would incur a cost or $25 for Lambda and Glue.
 
-### Pricing
+## Pricing
 Lambda would need memory of 128 MB allocation. Even with 30 million invocation each month would cost $11 per month.
 An AWS Glue job of type Python shell can be allocated either 1 DPU or 0.0625 DPU. By default, AWS Glue allocates 0.0625 DPU to each Python shell job. You are billed $0.44 per DPU-Hour in increments of 1 second, rounded up to the nearest second, with a 1-minute minimum duration for each job of type Python shell. Max cost of $15 per month
-
-# Batch Transfer Data
