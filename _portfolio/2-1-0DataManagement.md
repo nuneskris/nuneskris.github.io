@@ -14,7 +14,7 @@ Now we are getting into the realms where many architecture solutions come into p
 
 # Data Processing Capabilities.
 
-## Collect
+## [Collect](https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/)
 Source systems are typically designed for transaction processing and cannot curate, transform, or integrate data within themselves. We need to collect data from various sources, such as databases, applications, streams, or external sources, into a data platform for processing. This data is usually collected into cloud storage, which is partitioned into a separate layer of the larger data analytics architecture. This layer is what we call the raw layer and data is stored in it the original source system state.
 
 <img src='/images/portfolio/CollectArchitecture.png'>
@@ -98,3 +98,6 @@ Describing data helps users understand its structure, source, and how it should 
 Data Implementing encompasses the deployment of data solutions and systems. 
 This involves setting up databases, data warehouses, data lakes, and other storage solutions, as well as implementing data processing workflows and pipelines. 
 The implementation phase ensures that data infrastructure supports the organization’s data strategy and operational needs. 
+
+# Related Pages
+* https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/
