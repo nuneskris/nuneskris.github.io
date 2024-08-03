@@ -17,6 +17,17 @@ Now we are getting into the realms where many architecture solutions come into p
 ## Collect
 Source systems are typically designed for transaction processing and cannot curate, transform, or integrate data within themselves. We need to collect data from various sources, such as databases, applications, streams, or external sources, into a data platform for processing. This data is usually collected into cloud storage, which is partitioned into a separate layer of the larger data analytics architecture. This layer is what we call the raw layer and data is stored in it the original source system state.
 
+<img src='/images/portfolio/CollectArchitecture.png'>
+
+The sub components to the collect architecture are below.
+
+* Profile: Understand the source data's structure and consistency so we can design and plan the data for analytics processing.
+* Capture: Define, isolate and filter only the data which is required for analytics processing.
+* Extract: Move the data from source system into the target system enviorment. (Usually On-prem/Cloud to Cloud).
+* Load: Loading the data into the analytics processing system incrementally.
+
+I get into more details about collect architecture in in this [page](https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/).
+
 ## Store
 
 ### Raw Layer
