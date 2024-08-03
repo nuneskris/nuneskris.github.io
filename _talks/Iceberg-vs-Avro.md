@@ -7,11 +7,8 @@ date: 2024-06-30
 
 <img width="577" alt="image" src="https://github.com/user-attachments/assets/097d29af-2355-4b6d-a272-3f4d39b3e95e">
 
-
-Note: I have a detailed demo on [Spark ETL on Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg-ETL) on this very topic.
-
-Note: I have a demo simple demo on launching [Hive on AWS EMR Serverless](https://nuneskris.github.io/teaching/Hive-EMR-Serverless). 
-
+* Note: I have a detailed demo on [Spark ETL on Iceberg](https://nuneskris.github.io/teaching/LakeHouse-Play-Table-Iceberg-ETL) on this very topic.
+* Note: I have a demo simple demo on launching [Hive on AWS EMR Serverless](https://nuneskris.github.io/teaching/Hive-EMR-Serverless). 
 
 # Schema Evolution
 Our analytics systems are built iteratively and very often we start with a base model and then refine/expand the model in subsequently. Schema evolution refers to the capability to adapt to changes in the schema (structure) of the data over time. This includes adding, deleting, or modifying columns in a table without requiring a complete rewrite of the table or data loss.
