@@ -17,7 +17,7 @@ Cron is a tried and tested option to schedule jobs. With proper documentation an
 ![image](https://github.com/user-attachments/assets/3b1349f8-1a24-49c4-9738-b3e3eccad443)
 
 #### First we would need to find the correct Python path
-```sh
+```console
     which python3
 ```
 
