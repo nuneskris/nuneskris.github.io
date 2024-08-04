@@ -4,7 +4,7 @@ collection: teaching
 type: "Lakehouse"
 permalink: /teaching/Table-Iceberg-ETL
 venue: "Iceberg, Spark"
-date: 2024-06-01
+date: 2024-01-01
 location: "Docker"
 ---
 <img width="354" alt="image" src="/images/teachings/iceberg/Icebergdockerminio.png">
