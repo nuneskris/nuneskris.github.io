@@ -135,6 +135,9 @@ TBLPROPERTIES ('skip.header.line.count'='1')
 ;
 ```
 
+The DB Scripts are saved in a folder which needs to be defined in the job.
+![image](https://github.com/user-attachments/assets/8e554f8d-21df-4a70-b4a5-392f82705175)
+
 # Sample data 
 Updaded data in the above location: s3://emr-hive-serverless-kfn-study/inputdata/
 
