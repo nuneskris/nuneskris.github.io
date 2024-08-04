@@ -2,7 +2,7 @@
 title: "Iceberg on AWS: Part 1 - Hello World"
 collection: teaching
 type: "Lakehouse"
-permalink: /teaching/LakeHouse-Play-Iceberg-AWS
+permalink: /teaching/Iceberg-AWS
 venue: "Iceberg"
 location: "AWS"
 date: 2024-06-01
