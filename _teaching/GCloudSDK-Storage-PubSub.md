@@ -7,7 +7,7 @@ venue: "GCP"
 date: 2024-06-02
 ---
 
-<img width="187" alt="image" src="/images/teachings/gcp/gcloudsdk.png">
+<img src="/images/teachings/gcp/gcloudsdk.png">
 
 ## Cloud Security - IAM Service Account
 ![image](https://github.com/user-attachments/assets/716b99cf-74de-449c-8121-a2dcdc24f455)
