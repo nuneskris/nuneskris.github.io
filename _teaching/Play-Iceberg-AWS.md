@@ -5,7 +5,7 @@ type: "Lakehouse"
 permalink: /teaching/Iceberg-AWS
 venue: "Iceberg"
 location: "AWS"
-date: 2024-06-01
+date: 2024-02-01
 ---
 <img width="354" alt="image" src="/images/teachings/iceberg/IcebergAWS.png">
 
