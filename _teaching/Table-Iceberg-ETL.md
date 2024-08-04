@@ -8,6 +8,7 @@ date: 2024-01-01
 location: "Docker"
 ---
 <img width="354" alt="image" src="/images/teachings/iceberg/Icebergdockerminio.png">
+
 This is a continuation from the post which focused on [Setup, Table Management and Schema Evolution of Iceberg](https://nuneskris.github.io/teaching/Table-Iceberg)
 
 The main reason for using Spark on Iceberg, is for it to provide ETL services on a table. This demo aims to perform the below
