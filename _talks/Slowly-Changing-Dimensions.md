@@ -1,5 +1,5 @@
 ---
-title: "Slowly Changing Dimensions - Type 2 with demo"
+title: "Slowly Changing Dimensions - Type 2 with Glue, Pyspark and Iceberg"
 collection: talks
 type: "Data Modeling"
 permalink: /talks/Slowly-Changing-Dimensions
@@ -8,6 +8,9 @@ venue: "SCD2"
 date: 2024-06-01
 location: "AWS"
 ---
+
+<img width="613" alt="image" src="https://github.com/user-attachments/assets/a072ec41-d8f2-4007-bca0-3130f122c2ac">
+
 Demo tools: AWS, Glue Spark on a Iceberg Datalake House. We will be demonstrating to explainin a few best practices on slowly changing dimensions. 
 
 ## General Best Practices for SCD Implementatio*
