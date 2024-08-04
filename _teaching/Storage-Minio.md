@@ -5,7 +5,7 @@ type: "Lakehouse"
 permalink: /teaching/Storage-Minio
 date: 2024-06-01
 venue: "Minio"
-date: 2024-06-01
+date: 2024-01-02
 location: "Docker"
 ---
 
