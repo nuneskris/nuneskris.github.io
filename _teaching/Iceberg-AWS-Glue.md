@@ -2,7 +2,7 @@
 title: "Iceberg on AWS: Part 2 - Glue 4 Loves Iceberg"
 collection: teaching
 type: "Lakehouse"
-permalink: /teaching/AWS-Glue-Iceberg
+permalink: /teaching/Iceberg-AWS-Glue
 venue: "Glue"
 location: "AWS"
 date: 2024-06-01
