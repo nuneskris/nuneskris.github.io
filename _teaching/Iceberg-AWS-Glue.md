@@ -34,7 +34,7 @@ There are only 2 config changes which are to be made to enable Iceberg for AWS G
 > NOTE: I have never able to get the notebook working. It would been a nice to have but not a roadblock. 
 
 Objectives of this demo:
-Ingest data from S3 into Iceberg table which is managed by Athena. I have already created a table in Athena: [Refer](https://nuneskris.github.io/teaching/LakeHouse-Play-Iceberg-AWS) . Focus is on the setup.
+Ingest data from S3 into Iceberg table which is managed by Athena. I have already created a table in Athena: [Refer](https://nuneskris.github.io/teaching/Iceberg-AWS) . Focus is on the setup.
 
 # Setup
 
