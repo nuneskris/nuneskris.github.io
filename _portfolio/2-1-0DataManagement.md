@@ -35,7 +35,7 @@ Stroe data from collection: Gathering and aggregating data from various sources.
 
 We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
 
-I have written best practices for this later in this [page](https://nuneskris.github.io/publication/DataStoreRawLayer).
+I have written best practices for this later in this [page](https://nuneskris.github.io/publication/DataStore-RawLayer).
 
 ### Lakehouse Storage Layer
 There has been interesting movement in modern storae layer to enable reality of a lakehouse. I have a simple explaintion of what I call [Lakehouse (Modern) Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024). There is basically three components of the storage layer in a data analytics architecture. Where are we going to store it? Cloud Storage; How is the data stored? FileFormat; How do we interact with the stored data? Table Format. It is very important to know your storage layer.
