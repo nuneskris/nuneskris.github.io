@@ -21,4 +21,44 @@ In this scenario we would want to know that the on-prem job was initiated succes
 # Objectives
 1. Create a Cloud Function to be triggered when the a message is received by Pub/Sub
 2. Cloud Function to log the message using Cloud Logging
-3. Use Cloud Monitoring to create a Metric and Policy to monitor for a message that the lo
+3. Use Cloud Monitoring to create a Metric and Policy to monitor for a message arrival.
+4. An Cloud Alert would need to send a email notificaiton when a message does not arrive within a timeframe.
+
+# 1. Create a Cloud Function
+
+```python
+import base64
+import google.cloud.logging
+from cloudevents.http import CloudEvent
+import functions_framework
+
+# Triggered from a message on a Cloud Pub/Sub topic.
+@functions_framework.cloud_event
+def subscribe(cloud_event: CloudEvent) -> None:
+    # Create a Cloud Logging Client
+    client = google.cloud.logging.Client()
+    client.setup_logging()
+    # Create a Logger
+    logger = client.logger("cronjob_erp_salesorderitems_pubsub_logger")
+    # Create a Log Message
+    message = base64.b64decode(cloud_event.data["message"]["data"]).decode()
+    # Log the message
+    logger.log_text(message)
+```
+
+This Cloud Function requires 2 libraries which we would need to configure in a ***requirements.txt***
+```console
+google-cloud-logging
+pytest==8.2.0
+```
+
+## Deploy the Cloud Function
+```console
+gcloud functions deploy python-onprem-logreader-pubsub-function \
+--gen2 \
+--runtime=python312 \
+--region=us-west1 \
+--source=. \
+--entry-point=subscribe \
+--trigger-topic=topic-play-kfnstudy-trigger-cloudFunction
+```
