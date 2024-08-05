@@ -22,19 +22,23 @@ Here are some common reasons for extraction query failures and their mitigation 
 3. ***Disk Space for Extracted Files***: Extracting very large data sets can cause performance degradation or failures due to insufficient disk space for temporary files or output. I have seen major incidents caused by this. It is advisable to delete files from on-premises once they are transferred to the cloud and use the cloud for archiving.
 4. ***Query Complexity***: Complex joins, subqueries, heavy aggregation, and grouping operations can lead to performance issues or timeouts. Simplify queries where possible to avoid these issues.
 5. ***Uncoordinated System Maintenance Downtimes***: Unexpected maintenance windows during extraction schedules can cause query failures. Regularly coordinate with system administrators to avoid conflicts.
-6. ***Permission and Access Issues: Ensure stable access permissions by using service accounts instead of individual user accounts. Necessary permissions to access data or execute queries can change, or previously granted access can be revoked.
+6. ***Permission and Access Issues***: Ensure stable access permissions by using service accounts instead of individual user accounts. Necessary permissions to access data or execute queries can change, or previously granted access can be revoked.
 7. ***Data Issues***: While simple extraction queries typically avoid data issues, converting data into compressed formats, especially those that are schema-sensitive, can encounter mismatched data types or unexpected null values causing logic errors.
 
 ### Recommendations
 Maintain regular coordination between the source application and data teams to plan for any changes. Include exception handling for schema-related constraints to ensure that data encountered is as expected. Automate extraction processes and set up monitoring to quickly identify and resolve issues.
 
-8. Efficient Data Transfer
-Compression: Compress data before transfer to reduce the amount of data being sent over the network, which can speed up the transfer and reduce costs.
-Chunking: Break down large datasets into smaller, manageable chunks to avoid overwhelming the network and to facilitate easier retries in case of failure.
-9. Security
+# Efficient Data Transfer
+This is very straight forward and the most important architecture decision in collect subsystem. But this is where most of the mistakes are made.
+1. Compress data before transfer to reduce the amount of data being sent over the network, which can speed up the transfer and reduce costs. I have a case study on a how multiple delays in pipeline was attributes to not handling move over the network effienciently. Refer [Collect - Extraction: Transfer Compressed Data](https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress).
+2. Be carefull with Pull Based APIs: I have seen situations where REST based calls over the network being used espcially with SAP data. They had to go through multiple iterations and breakdown the pull into smaller pulls and coordinate delays. It worked but it was a brittle solution which did not scale. I had recommended to move a simpler push solution atleast for the large tables.
+3. Break down large datasets into smaller, manageable chunks to avoid overwhelming the network and to facilitate easier retries in case of failure.
+
+# Security
 Encryption: Encrypt data in transit using secure protocols (e.g., TLS) to protect sensitive information from being intercepted.
 Authentication: Use strong authentication methods to ensure that only authorized users and systems can initiate data transfers.
 Access Controls: Implement strict access controls to limit who can access the data and the transfer mechanisms.
+
 10. Reliability and Monitoring
 Retry Mechanism: Implement retry logic to handle transient network issues and ensure that data transfer can resume from the point of failure.
 Logging: Keep detailed logs of the transfer process to monitor for errors and to have an audit trail.
