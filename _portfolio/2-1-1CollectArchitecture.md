@@ -42,7 +42,8 @@ I get into details in this page on [Data Capture](https://nuneskris.github.io/pu
 # Data Extraction
 Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. A question which I encounter is whether we apply [minor transformation in extraction queries (Pre-ingest) or extract as is from source (Post-ingest)](https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest). Though most situtations we need to extrct data as-is, we need to also keep in mind what makes sense.
 
-## Batch Transfer Data
+## [Batch Transfer Data](https://nuneskris.github.io/publication/Collect-Data-Extraction-Batch)
+The most common scenario we would encouter is to move data in batches. We need to extract data from source applications using simple queries for each table, outputting the results into flat files. These files are then ingested into analytics platforms in the cloud. I have often observed that pipelines make significant mistakes in this subsystem, especially when transferring data from on-premises to the cloud. This is primarily due to the need for coordination between two teams: the application team, which owns the source application, and the data team, which owns the analytics applications.
 
 ## Stream Transfer Data
 
@@ -58,9 +59,9 @@ Although not a direct benefit of compression, smaller data sizes can make encryp
 
 # Data Loading
 
-
 # Related Pages
 * https://nuneskris.github.io/publication/CollectDataProfiling
 * https://nuneskris.github.io/publication/Collect-Data-Capture
 * https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress
 * https://nuneskris.github.io/talks/Avro-Parquet-CSV-Gzip
+* https://nuneskris.github.io/publication/Collect-Data-Extraction-Batch
