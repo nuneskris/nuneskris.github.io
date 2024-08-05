@@ -8,6 +8,7 @@ date: 2024-05-01
 tags:
   - Collect
 ---
+<img width="560" alt="image" src="https://github.com/user-attachments/assets/910cc30b-7269-4962-ac39-03733bb3470e">
 
 We need to extract data from source applications using simple queries for each table, outputting the results into flat files. These files are then ingested into analytics platforms in the cloud. I have often observed that pipelines make significant mistakes in this subsystem, especially when transferring data from on-premises to the cloud. This is primarily due to the need for coordination between two teams: the application team, which owns the source application, and the data team, which owns the analytics applications.
 
@@ -41,13 +42,14 @@ This is very straight forward and the most important architecture decision in co
 3. Implement strict access controls to limit who can access the data and the transfer mechanisms.
 
 # Reliability and Monitoring
-1. Implement retry logic to handle transient network issues and ensure that data transfer can resume from the point of failure.
-2. Keep detailed logs of the transfer process to monitor for errors and to have an audit trail.
-3. Use monitoring tools to keep track of the transfer status, performance, and any anomalies.
+1. Implement retry logic to handle network issues and ensure that data transfer can resume from the point of failure.
+3. Keep detailed logs of the transfer process to monitor for errors and to have an audit trail.
+4. Use monitoring tools to keep track of the transfer status, performance, and any anomalies.
 
 # Automation and Scheduling
 1. Automate the batch transfer process to minimize manual intervention and reduce the risk of human error.
 2. Schedule transfers during off-peak hours to minimize the impact on network performance and to ensure timely updates.
+3. Ensure there are handshakes on whether the 
 
 # Testing and Validation
 1. Conduct test transfers to ensure that the process works as expected and that the data integrity is maintained.
