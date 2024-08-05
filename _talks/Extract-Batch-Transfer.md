@@ -59,6 +59,7 @@ logging.basicConfig(filename='/Users/xxxxx/DataEngineering/ETL/Collect/Ingest/GC
 # logging
 logging.info(f"INFO: {datetime.now().strftime('%Y%m%d%H%M%S')}: File {local_file_path} uploaded to {destination_blob_name}")
 ```
+
 ![image](https://github.com/user-attachments/assets/3d27dca3-0e91-47c7-8a27-f99e3cbd7bcb)
 
 If there is a need to pesist the logs in a more robus soltuion, we could publish these messages to the cloud via pub/sub.
@@ -84,6 +85,7 @@ Implementing retry logic within the Python script to handle transient errors is 
 def publish_message(project_id, topic_id, message):
 ```
 Testing the retry logic by turning of the internet. There is a pause for 5 mins and retries. It was able to successfully send the message on the retry after I turned on the internet.
+
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/5d0c41e6-7d73-423f-9a66-41ada488cecd">
 
 ****Retry logic for Transfer of Data****
@@ -106,8 +108,6 @@ Step 1: Add print statements
 ```python
 
 ```
-
-
 
 # Design
 
