@@ -8,7 +8,7 @@ date: 2024-05-01
 tags:
   - Collect
 ---
-<img width="560" alt="image" src="https://github.com/user-attachments/assets/910cc30b-7269-4962-ac39-03733bb3470e">
+<img width="988" alt="image" src="https://github.com/user-attachments/assets/bc5856ad-0453-494f-a0eb-c00a9038e5e7">
 
 We need to extract data from source applications using simple queries for each table, outputting the results into flat files. These files are then ingested into analytics platforms in the cloud. I have often observed that pipelines make significant mistakes in this subsystem, especially when transferring data from on-premises to the cloud. This is primarily due to the need for coordination between two teams: the application team, which owns the source application, and the data team, which owns the analytics applications.
 
