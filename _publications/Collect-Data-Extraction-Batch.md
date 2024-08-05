@@ -8,78 +8,49 @@ date: 2024-05-01
 tags:
   - Collect
 
-We would need to extract data from source applications which is accmplished by using a simple query for each table into flat files which then need to be ingested into analytics platform which are in the cloud. I have seen way too often pipelines makes the biggest mistakes in this subsystem where we move data from on-prem to cloud. 
-This is usually because we have 2 teams who would need to coordinate there. 
-The application team who owns the source application and the data teams for owns the analytics applications. 
-I would like to provide a framework to build a subsystem architecture which would provide to ensure efficiency, reliability, and security.
+We need to extract data from source applications using simple queries for each table, outputting the results into flat files. These files are then ingested into analytics platforms in the cloud. I have often observed that pipelines make significant mistakes in this subsystem, especially when transferring data from on-premises to the cloud. This is primarily due to the need for coordination between two teams: the application team, which owns the source application, and the data team, which owns the analytics applications.
+
+To address these issues, I propose a framework to build a subsystem architecture that ensures efficiency, reliability, and security.
 
 # Extraction Query
-Extraction queries need to be free from failures. Mordern business applications provide a decent data integrity checks before persisting them into their systems.
-A good rule of thumb is to not to have too much of pre-ingest processing and have straight forward queries to extract the data as a batch and relying only on time windows to filter.
-However if there is a need to apply processing logic on the extract query, we would need to ensure these queries dont lead to failures.
+Extraction queries need to be robust and free from failures. Modern business applications typically provide decent data integrity checks before persisting data. A good rule of thumb is to minimize pre-ingest processing and use straightforward queries to extract data in batches, relying on time windows for filtering. However, if processing logic must be applied within the extract query, we need to ensure these queries do not lead to failures.
 
-However I have seen many failures here due to
-1. Syntax Errors from Schema Evolution: Table schema changes without informing pipeline teams and leads to disruptions. This is a larger change and governanc problem which will not be discussed here, but we would need to embrace this and design our queries to handle it.
-2. Query Memory and CPU Resource Limitations: Many source applications have this limit. So breaking queries down into sub-batches is recommended.
-3. Disk Space where we extract files: This typically happens in extracting very large data sets causing performance degradation or failures. I have seen a P1 incident becaus of this. Insufficient disk space for temporary files or output. I recommend deleting the files from on-prem once they are transfered and using the cloud to archive.
-4. Query Complexity: Complex joins, subqueries, heavy aggregation and grouping operations can lead to performance issues or timeouts.
-5. Uncoordinated System Maintenance downtimes: Unexpected maintenance windows during extraction schedules fails extraction queries. Another maintenance issue I have seen.
-6. Permission and Access Issues of the query: Ensure we have stable access permissions here. Use service agent and not named acess. This happens even today because ncessary permissions to access data or execute queries can change or acces previously granted but later revoked.
-7. Data Issues: This again typically does not happen if we use very simple extraction queries. However if we are converting data into compressed formats espcially which are schema sensitive we can get encounter mismatched data types causing casting errors and unexpected null values causing logic errors.
+Here are some common reasons for extraction query failures and their mitigation strategies:
 
-9. Network Issues
-Connectivity: Network interruptions or latency affecting data source connectivity.
-Timeouts: Network timeouts due to slow responses or heavy traffic.
+1. Syntax Errors from Schema Evolution: Table schema changes without informing pipeline teams can lead to disruptions. While this is a larger governance issue, we need to design our queries to handle schema changes gracefully.
+2. Query Memory and CPU Resource Limitations: Many source applications have resource limits. It is recommended to break queries down into sub-batches to avoid exceeding these limits.
+3. Disk Space for Extracted Files: Extracting very large data sets can cause performance degradation or failures due to insufficient disk space for temporary files or output. I have seen major incidents caused by this. It is advisable to delete files from on-premises once they are transferred to the cloud and use the cloud for archiving.
+4. Query Complexity: Complex joins, subqueries, heavy aggregation, and grouping operations can lead to performance issues or timeouts. Simplify queries where possible to avoid these issues.
+5. Uncoordinated System Maintenance Downtimes: Unexpected maintenance windows during extraction schedules can cause query failures. Regularly coordinate with system administrators to avoid conflicts.
+6. Permission and Access Issues: Ensure stable access permissions by using service accounts instead of individual user accounts. Necessary permissions to access data or execute queries can change, or previously granted access can be revoked.
+7. Data Issues: While simple extraction queries typically avoid data issues, converting data into compressed formats, especially those that are schema-sensitive, can encounter mismatched data types or unexpected null values causing logic errors.
 
-11. Configuration and Environment
-Configuration Errors: Misconfigurations in database settings or query options.
-Environment Changes: Changes in the execution environment, such as database upgrades or migrations.
-12. External Dependencies
-Service Dependencies: Dependencies on external services or APIs that might be down or slow.
-File Dependencies: Missing or inaccessible external files or data sources.
-13. Execution Plan Changes
-Optimizer Plans: Changes in the database optimizer's execution plan leading to suboptimal performance.
-Statistics: Outdated or inaccurate statistics affecting query planning.
+### Recommendations
+Maintain regular coordination between the source application and data teams to plan for any changes. Include exception handling for schema-related constraints to ensure that data encountered is as expected. Automate extraction processes and set up monitoring to quickly identify and resolve issues.
 
-17. Data Source Changes
-Schema Changes: Changes in the data source schema leading to compatibility issues.
-Data Source Moves: Migration of data sources to new locations without updating the query configuration.
-
-
-
-
-
-ee
------
-
-
-----
-
-Data Cleaning: Ensure that the data is clean and free of errors before the transfer. This reduces the risk of corrupt data causing issues in the target system.
-Data Validation: Validate the data to ensure it meets the expected format and schema requirements.
-2. Efficient Data Transfer
+8. Efficient Data Transfer
 Compression: Compress data before transfer to reduce the amount of data being sent over the network, which can speed up the transfer and reduce costs.
 Chunking: Break down large datasets into smaller, manageable chunks to avoid overwhelming the network and to facilitate easier retries in case of failure.
-3. Security
+9. Security
 Encryption: Encrypt data in transit using secure protocols (e.g., TLS) to protect sensitive information from being intercepted.
 Authentication: Use strong authentication methods to ensure that only authorized users and systems can initiate data transfers.
 Access Controls: Implement strict access controls to limit who can access the data and the transfer mechanisms.
-4. Reliability and Monitoring
+10. Reliability and Monitoring
 Retry Mechanism: Implement retry logic to handle transient network issues and ensure that data transfer can resume from the point of failure.
 Logging: Keep detailed logs of the transfer process to monitor for errors and to have an audit trail.
 Monitoring: Use monitoring tools to keep track of the transfer status, performance, and any anomalies.
-5. Automation and Scheduling
+11. Automation and Scheduling
 Automation: Automate the batch transfer process to minimize manual intervention and reduce the risk of human error.
 Scheduling: Schedule transfers during off-peak hours to minimize the impact on network performance and to ensure timely updates.
-6. Testing and Validation
+12. Testing and Validation
 Test Transfers: Conduct test transfers to ensure that the process works as expected and that the data integrity is maintained.
 Validation: Validate the transferred data to ensure it matches the source data and that no data loss or corruption occurred during the transfer.
-7. Scalability
+13. Scalability
 Scalable Solutions: Choose solutions and tools that can scale with your data volume. This is especially important as your data grows over time.
 Parallel Transfers: If dealing with very large datasets, consider parallel transfers to speed up the process.
-8. Cost Management
+14. Cost Management
 Cost Analysis: Monitor and analyze the cost of data transfer, including network costs and cloud storage costs.
 Optimization: Optimize the transfer process to reduce unnecessary data movement and storage, thereby reducing costs.
-9. Documentation and Governance
+15. Documentation and Governance
 Documentation: Document the transfer process, including the tools used, the schedule, and any specific configurations.
 Governance: Ensure compliance with data governance policies and regulations, particularly if dealing with sensitive or regulated data.
