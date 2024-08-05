@@ -41,26 +41,26 @@ This is very straight forward and the most important architecture decision in co
 3. Implement strict access controls to limit who can access the data and the transfer mechanisms.
 
 # Reliability and Monitoring
-Retry Mechanism: Implement retry logic to handle transient network issues and ensure that data transfer can resume from the point of failure.
-Logging: Keep detailed logs of the transfer process to monitor for errors and to have an audit trail.
-Monitoring: Use monitoring tools to keep track of the transfer status, performance, and any anomalies.
+1. Implement retry logic to handle transient network issues and ensure that data transfer can resume from the point of failure.
+2. Keep detailed logs of the transfer process to monitor for errors and to have an audit trail.
+3. Use monitoring tools to keep track of the transfer status, performance, and any anomalies.
 
 # Automation and Scheduling
-Automation: Automate the batch transfer process to minimize manual intervention and reduce the risk of human error.
-Scheduling: Schedule transfers during off-peak hours to minimize the impact on network performance and to ensure timely updates.
+1. Automate the batch transfer process to minimize manual intervention and reduce the risk of human error.
+2. Schedule transfers during off-peak hours to minimize the impact on network performance and to ensure timely updates.
 
 # Testing and Validation
-Test Transfers: Conduct test transfers to ensure that the process works as expected and that the data integrity is maintained.
-Validation: Validate the transferred data to ensure it matches the source data and that no data loss or corruption occurred during the transfer.
+1. Conduct test transfers to ensure that the process works as expected and that the data integrity is maintained.
+2. Validate the transferred data to ensure it matches the source data and that no data loss or corruption occurred during the transfer.
 
 # Scalability
-Scalable Solutions: Choose solutions and tools that can scale with your data volume. This is especially important as your data grows over time.
-Parallel Transfers: If dealing with very large datasets, consider parallel transfers to speed up the process.
+1. Scalable Solutions: Choose solutions and tools that can scale with your data volume. This is especially important as your data grows over time.
+2. Parallel Transfers: If dealing with very large datasets, consider parallel transfers to speed up the process.
 
 # Cost Management
-Cost Analysis: Monitor and analyze the cost of data transfer, including network costs and cloud storage costs.
-Optimization: Optimize the transfer process to reduce unnecessary data movement and storage, thereby reducing costs.
+1. Cost Analysis: Monitor and analyze the cost of data transfer, including network costs and cloud storage costs.
+2. Optimization: Optimize the transfer process to reduce unnecessary data movement and storage, thereby reducing costs.
 
 # Documentation and Governance
-Documentation: Document the transfer process, including the tools used, the schedule, and any specific configurations.
-Governance: Ensure compliance with data governance policies and regulations, particularly if dealing with sensitive or regulated data.
+1. Documentation: Document the transfer process, including the tools used, the schedule, and any specific configurations.
+2. Governance: Ensure compliance with data governance policies and regulations, particularly if dealing with sensitive or regulated data.
