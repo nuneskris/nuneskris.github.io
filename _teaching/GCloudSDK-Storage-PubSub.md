@@ -9,6 +9,8 @@ date: 2024-06-02
 
 <img src="/images/teachings/gcp/gcloudsdk.png">
 
+The objective of this demo is to be able to use gcloud and simulate on-prem data engineering capabilities required in multiple scenarios. We will use gcloud python SDK to (1) upload data files to GCP Cloud Storage and (2) Publish status notificaiton to GCP Pub/Sub on whether the ingest happened.
+
 ## Cloud Security - IAM Service Account
 ![image](https://github.com/user-attachments/assets/716b99cf-74de-449c-8121-a2dcdc24f455)
 
@@ -64,7 +66,11 @@ def publish_message(project_id, topic_id, message):
 
 # Run
 
+Data is loaded into the bucket. We can see the parquet files uploaded based on the filenames passed to the funciton defined above.
+
 ![image](https://github.com/user-attachments/assets/e8e9b58c-e593-43fa-b33d-bfbb2e565f62)
+
+The subcription also has recevied the notifications as we can see below.
 
 ![image](https://github.com/user-attachments/assets/e326798b-07b3-4f2c-8b1d-3f00ed75af07)
 
