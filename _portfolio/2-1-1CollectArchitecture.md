@@ -40,7 +40,7 @@ However the complexity is in the capturing changes. Below are the key steps to c
 I get into details in this page on [Data Capture](https://nuneskris.github.io/publication/Collect-Data-Capture) where I get into recommendations and considerations.
 
 # Data Extraction
-Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. Below are the the most important considerations.
+Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. A question which I encounter is whether we apply [minor transformation in extraction queries (Pre-ingest) or extract as is from source (Post-ingest)](https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest). Though most situtations we need to extrct data as-is, we need to also keep in mind what makes sense.
 
 ## Batch Transfer Data
 
