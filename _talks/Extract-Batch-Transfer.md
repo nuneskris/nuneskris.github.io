@@ -5,7 +5,7 @@ permalink: /talks/Extract-Batch-Transfer
 date: 2024-06-29
 ---
 
-<img width="354" alt="image" src="/images/talks/BatchTransferCron.png">
+<img width="600" alt="image" src="/images/talks/BatchTransferCron.png">
 
 
 Typicall workloads begin with flatfiles which are extracted from the source system which are either in CSV or Parquet. We will require to transfer these files into the cloud. The solution is very straight forward
