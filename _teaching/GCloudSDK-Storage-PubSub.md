@@ -7,7 +7,7 @@ venue: "GCP"
 date: 2024-06-02
 ---
 
-<img width="354" alt="image" src="/images/teachings/gcp/gcloudsdk.png">
+<img width="454" alt="image" src="/images/teachings/gcp/gcloudsdk.png">
 
 The objective of this demo is to be able to use gcloud and simulate on-prem data engineering capabilities required in multiple scenarios. We will use gcloud python SDK to (1) upload data files to GCP Cloud Storage and (2) Publish status notificaiton to GCP Pub/Sub on whether the ingest happened.
 
