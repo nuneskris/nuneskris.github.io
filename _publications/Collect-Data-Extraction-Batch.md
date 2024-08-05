@@ -22,16 +22,11 @@ However I have seen many failures here due to
 1. Syntax Errors from Schema Evolution: Table schema changes without informing pipeline teams and leads to disruptions. This is a larger change and governanc problem which will not be discussed here, but we would need to embrace this and design our queries to handle it.
 2. Query Memory and CPU Resource Limitations: Many source applications have this limit. So breaking queries down into sub-batches is recommended.
 3. Disk Space where we extract files: This typically happens in extracting very large data sets causing performance degradation or failures. I have seen a P1 incident becaus of this. Insufficient disk space for temporary files or output. I recommend deleting the files from on-prem once they are transfered and using the cloud to archive.
-4. Avoid Query Complexity:  Complex joins, subqueries, heavy aggregation and grouping operations can lead to performance issues or timeouts.
-5. Coordinate System Maintenance downtimes: Unexpected maintenance windows during extraction schedules fails extraction queries. Another maintenance issue I have seen.
-6. Permission and Access Issues of the query. Ensure we have stable access permissions here. Use service agent and not named acess. This happens even today because ncessary permissions to access data or execute queries can change or acces previously granted but later revoked.
-7. Data Issues
-Data Corruption: Corrupted data files or records.
-Inconsistent Data Types: Mismatched data types causing casting errors.
-Null Values: Unexpected null values causing logic errors.
-8. Concurrency Issues
-Locking and Deadlocks: Simultaneous queries causing locks or deadlocks.
-Resource Contention: Multiple queries contending for the same resources.
+4. Query Complexity: Complex joins, subqueries, heavy aggregation and grouping operations can lead to performance issues or timeouts.
+5. Uncoordinated System Maintenance downtimes: Unexpected maintenance windows during extraction schedules fails extraction queries. Another maintenance issue I have seen.
+6. Permission and Access Issues of the query: Ensure we have stable access permissions here. Use service agent and not named acess. This happens even today because ncessary permissions to access data or execute queries can change or acces previously granted but later revoked.
+7. Data Issues: This again typically does not happen if we use very simple extraction queries. However if we are converting data into compressed formats espcially which are schema sensitive we can get encounter mismatched data types causing casting errors and unexpected null values causing logic errors.
+
 9. Network Issues
 Connectivity: Network interruptions or latency affecting data source connectivity.
 Timeouts: Network timeouts due to slow responses or heavy traffic.
