@@ -37,9 +37,12 @@ This is very straight forward and the most important architecture decision in co
 3. Break down large datasets into smaller, manageable chunks to avoid overwhelming the network and to facilitate easier retries in case of failure.
 
 # Security
-1. Encrypt data in transit using secure protocols (e.g., TLS) to protect sensitive information from being intercepted.
-2. Use strong authentication methods to ensure that only authorized users and systems can initiate data transfers.
-3. Implement strict access controls to limit who can access the data and the transfer mechanisms.
+1. ***Encrypt data in transit*** using secure protocols (e.g., TLS) to protect sensitive information from being intercepted.
+2. ***Use strong authentication*** methods to ensure that only authorized users and systems can initiate data transfers.
+3. ***Implement strict access controls to limit who can access*** the data and the transfer mechanisms. Utilize Identity and Access Management (IAM) Solutions to manage user identities and access rights centrally. Define and enforce access policies that specify who can access which resources and under what conditions.
+4. ***Regularly Audit and Monitor Access*** and maintain detailed logs of authentication attempts, access requests, and data transfers. If we are dealing with sensite data, we would need to monitor logs for suspicious activities and conduct regular audits to ensure compliance with security policies.
+5. ***Use service agents*** to connect to source and target of the data transfer, and implement Role-Based Access Control (RBAC) based on ***Least Privilege***. Define roles with specific access rights only to read from source and write into target.
+6. ***Use encrypted tokens and API keys*** for authenticating API calls. I have seen this happening but we also need to store tokens and keys securely (e.g., using environment variables or secret management services). Secret Managers provided by cloud services are ideal for ensuring we do not expose passwords or other authenticating details lying around.
 
 # Reliability and Monitoring
 1. Implement retry logic to handle network issues and ensure that data transfer can resume from the point of failure.
@@ -54,6 +57,7 @@ This is very straight forward and the most important architecture decision in co
 # Testing and Validation
 1. Conduct test transfers to ensure that the process works as expected and that the data integrity is maintained.
 2. Validate the transferred data to ensure it matches the source data and that no data loss or corruption occurred during the transfer.
+3. 
 
 # Scalability
 1. Scalable Solutions: Choose solutions and tools that can scale with your data volume. This is especially important as your data grows over time.
