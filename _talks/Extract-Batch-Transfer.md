@@ -4,9 +4,7 @@ collection: talks
 permalink: /talks/Extract-Batch-Transfer
 date: 2024-06-29
 ---
-
 <img width="600" alt="image" src="/images/talks/BatchTransferCron.png">
-
 
 Typicall workloads begin with flatfiles which are extracted from the source system which are either in CSV or Parquet. We will require to transfer these files into the cloud. The solution is very straight forward
 * Python gcloud sdk to upload the files
@@ -14,7 +12,7 @@ Typicall workloads begin with flatfiles which are extracted from the source syst
 
 However, many would say that this solution is not enterprise grade. I will use the architecture pillars and enhance the subsytems to deliver a system which is secure, reliable, performant and cost optimized while conforming to operational excelence standards.
 
-#  Automation and Scheduling
+#  1. Automation and Scheduling
 
 We need a mechanism which can be easily be scheduled. We are basically trying to not rely on complex orchestration tools which either need to be deployed on-prem or struggle with a solution which needs to get across the cloud network into the on-prem which can be a nightmare with threat controls.
 
@@ -45,7 +43,7 @@ crontab -e
 
 <img width="1020" alt="image" src="https://github.com/user-attachments/assets/5d17d42e-67ce-414c-9eed-e5723edb8831">
 
-## logging
+# 2. Logging
 An often forgotten aspect of substems which support the pipeline is the logging. Since we have complete control on the susbystem, we can customize logging based on our needs. Python supports simple solution for loggig.
 
 ```python
@@ -61,23 +59,23 @@ logging.basicConfig(filename='/Users/xxxxx/DataEngineering/ETL/Collect/Ingest/GC
 # logging
 logging.info(f"INFO: {datetime.now().strftime('%Y%m%d%H%M%S')}: File {local_file_path} uploaded to {destination_blob_name}")
 ```
+![image](https://github.com/user-attachments/assets/3d27dca3-0e91-47c7-8a27-f99e3cbd7bcb)
 
+If there is a need to pesist the logs in a more robus soltuion, we could publish these messages to the cloud via pub/sub.
 
-•Alerting: 
+# 3. Pub/Sub Notification
+We can publish logs to Cloud Pub/Sub and leverage cloud storage persist, logging and monitoring capabilities to build the needed reliability. Below are the typical logs which we would need to publish.
+1. Job Stareted
+2. Job Info Logs
+3. Job Complete
+4. Job Error
 
-### Alerting: Pub/Sub Notification
+I have a [demo on how to publish notificaitons to Pub/Sub from an on-prem client](https://nuneskris.github.io/teaching/GCloudSDK-Storage-PubSub).
 
-Output Logs: Redirect cron job output to log files and monitor these logs for any errors or anomalies.
-Alerting: Set up email alerts or integrate with monitoring tools (e.g., Prometheus, Grafana) to notify when the job fails.
+I have another [demo: Building Reliability in On-prem Data Upload Jobs Through Log Monitoring](https://nuneskris.github.io/teaching/GCP-Onprem-PubSub-CF-Monitoring) on how to monitor message using Cloud Function for Cloud Logging and use Cloud Monitoring for Alerting, Notification and Incident Management 
 
-### Automate Error Handling (Reliability)
-Errors can happen because of network issues. There 2 points which we need to take into considertion. 
-1. Transfer of Data
-2. Sending Notificaiton on the the job.
-
-#### Automate Error Handling (Reliability): Retry Logic
+# 4. Retry Logic
 Implementing retry logic within the Python script to handle transient errors is straight forward. This can be done using libraries like tenacity for retries.
-
 ****Retry logic for sending Notificaiton on the the job****
 
 ```python
