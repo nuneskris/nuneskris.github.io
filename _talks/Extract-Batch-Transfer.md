@@ -5,7 +5,7 @@ permalink: /talks/Extract-Batch-Transfer
 date: 2024-06-29
 ---
 
-<img width="354" alt="image" src="/images/_talks/BatchTransferCron.png">
+<img width="354" alt="image" src="/images/talks/BatchTransferCron.png">
 
 
 Typicall workloads begin with flatfiles which are extracted from the source system which are either in CSV or Parquet. We will require to transfer these files into the cloud. The solution is very straight forward
@@ -14,10 +14,9 @@ Typicall workloads begin with flatfiles which are extracted from the source syst
 
 However, many would say that this solution is not enterprise grade. I will use the architecture pillars and enhance the subsytems to deliver a system which is secure, reliable, performant and cost optimized while conforming to operational excelence standards.
 
-#  Operational excellence
+#  Automation and Scheduling
 
-## Scheduled and automated workloads
-We need a mechanism which can be easily scheduled. We are basically trying to not rely on complex orchestration tools which either need to be deployed on-prem or struggle with a solution which needs to get across the cloud network into the on-prem which can be a nightmare with threat controls.
+We need a mechanism which can be easily be scheduled. We are basically trying to not rely on complex orchestration tools which either need to be deployed on-prem or struggle with a solution which needs to get across the cloud network into the on-prem which can be a nightmare with threat controls.
 
 Cron is a tried and tested option to schedule jobs. With proper documentation and maintenance, it can be a very reliable solution.
 
@@ -43,7 +42,7 @@ crontab -e
 ```console
     crontab -l
 ```
-   
+
 <img width="1020" alt="image" src="https://github.com/user-attachments/assets/5d17d42e-67ce-414c-9eed-e5723edb8831">
 
 ## logging
