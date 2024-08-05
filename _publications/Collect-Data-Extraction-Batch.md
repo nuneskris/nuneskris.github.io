@@ -17,13 +17,13 @@ Extraction queries need to be robust and free from failures. Modern business app
 
 Here are some common reasons for extraction query failures and their mitigation strategies:
 
-1. Syntax Errors from Schema Evolution: Table schema changes without informing pipeline teams can lead to disruptions. While this is a larger governance issue, we need to design our queries to handle schema changes gracefully.
-2. Query Memory and CPU Resource Limitations: Many source applications have resource limits. It is recommended to break queries down into sub-batches to avoid exceeding these limits.
-3. Disk Space for Extracted Files: Extracting very large data sets can cause performance degradation or failures due to insufficient disk space for temporary files or output. I have seen major incidents caused by this. It is advisable to delete files from on-premises once they are transferred to the cloud and use the cloud for archiving.
-4. Query Complexity: Complex joins, subqueries, heavy aggregation, and grouping operations can lead to performance issues or timeouts. Simplify queries where possible to avoid these issues.
-5. Uncoordinated System Maintenance Downtimes: Unexpected maintenance windows during extraction schedules can cause query failures. Regularly coordinate with system administrators to avoid conflicts.
-6. Permission and Access Issues: Ensure stable access permissions by using service accounts instead of individual user accounts. Necessary permissions to access data or execute queries can change, or previously granted access can be revoked.
-7. Data Issues: While simple extraction queries typically avoid data issues, converting data into compressed formats, especially those that are schema-sensitive, can encounter mismatched data types or unexpected null values causing logic errors.
+1. ***Syntax Errors from Schema Evolution***: Table schema changes without informing pipeline teams can lead to disruptions. While this is a larger governance issue, we need to design our queries to handle schema changes gracefully.
+2. ***Query Memory and CPU Resource Limitations***: Many source applications have resource limits. It is recommended to break queries down into sub-batches to avoid exceeding these limits.
+3. ***Disk Space for Extracted Files***: Extracting very large data sets can cause performance degradation or failures due to insufficient disk space for temporary files or output. I have seen major incidents caused by this. It is advisable to delete files from on-premises once they are transferred to the cloud and use the cloud for archiving.
+4. ***Query Complexity***: Complex joins, subqueries, heavy aggregation, and grouping operations can lead to performance issues or timeouts. Simplify queries where possible to avoid these issues.
+5. ***Uncoordinated System Maintenance Downtimes***: Unexpected maintenance windows during extraction schedules can cause query failures. Regularly coordinate with system administrators to avoid conflicts.
+6. ***Permission and Access Issues: Ensure stable access permissions by using service accounts instead of individual user accounts. Necessary permissions to access data or execute queries can change, or previously granted access can be revoked.
+7. ***Data Issues***: While simple extraction queries typically avoid data issues, converting data into compressed formats, especially those that are schema-sensitive, can encounter mismatched data types or unexpected null values causing logic errors.
 
 ### Recommendations
 Maintain regular coordination between the source application and data teams to plan for any changes. Include exception handling for schema-related constraints to ensure that data encountered is as expected. Automate extraction processes and set up monitoring to quickly identify and resolve issues.
