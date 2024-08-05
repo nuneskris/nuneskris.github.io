@@ -9,7 +9,7 @@ tags:
   - Curate
 ---
 
-## 1. Column Standardization
+# 1. Column Standardization
 Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).
 This also includes ***data type conversions** to appropriate types (e.g., string to date, float to integer). Below are common examples
 
@@ -105,8 +105,6 @@ CASE
 END AS DESCRIPTION
 ```
 
-
-
 # Data Validation
 Type Checking: Ensuring data types are correct (e.g., integers, dates).
 Range Checking: Ensuring values fall within a specified range (e.g., age between 0 and 120).
@@ -126,7 +124,6 @@ Removing Duplicates: Deleting redundant duplicate records.
 Anonymization: Masking or anonymizing sensitive data (e.g., replacing names with pseudonyms, masking credit card numbers).
 Redaction: Removing or hiding sensitive data (e.g., removing social security numbers).
 
-
 # Data Integrity Checks:
 Referential Integrity: Ensuring relationships between tables are maintained (e.g., foreign key constraints).
 Unique Constraints: Ensuring that specific columns contain unique values (e.g., email addresses, primary keys).
@@ -137,7 +134,6 @@ Geocoding: Converting addresses to geographic coordinates (latitude and longitud
 
 Aggregating: Summarizing or aggregating data (e.g., total sales per month).
 Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data).
-
 
 9. Column Filtering: Remove unwanted columns from the dataset.
 
