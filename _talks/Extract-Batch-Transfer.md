@@ -60,16 +60,27 @@ logging.basicConfig(filename='/Users/xxxxx/DataEngineering/ETL/Collect/Ingest/GC
 logging.info(f"INFO: {datetime.now().strftime('%Y%m%d%H%M%S')}: File {local_file_path} uploaded to {destination_blob_name}")
 ```
 
-![image](https://github.com/user-attachments/assets/3d27dca3-0e91-47c7-8a27-f99e3cbd7bcb)
+![image](https://github.com/user-attachments/assets/f84321ef-7c82-4897-b4b1-2643047be4a4)
+
+
 
 If there is a need to pesist the logs in a more robus soltuion, we could publish these messages to the cloud via pub/sub.
 
 # 3. Pub/Sub Notification
 We can publish logs to Cloud Pub/Sub and leverage cloud storage persist, logging and monitoring capabilities to build the needed reliability. Below are the typical logs which we would need to publish.
-1. Job Stareted
+1. Job Started
+![image](https://github.com/user-attachments/assets/64a8860c-1dfe-4281-8e19-e907b2e8e425)
+
 2. Job Info Logs
+![image](https://github.com/user-attachments/assets/d32f31ab-e678-4097-af6c-317a0c872f5b)
+
 3. Job Complete
+![image](https://github.com/user-attachments/assets/c02bd344-f80f-4547-963c-9f777b836721)
+
 4. Job Error
+![image](https://github.com/user-attachments/assets/b012010c-302d-4b16-987d-2789739c8284)
+
+![image](https://github.com/user-attachments/assets/3d27dca3-0e91-47c7-8a27-f99e3cbd7bcb)
 
 I have a [demo on how to publish notificaitons to Pub/Sub from an on-prem client](https://nuneskris.github.io/teaching/GCloudSDK-Storage-PubSub).
 
@@ -94,23 +105,6 @@ Testing the retry logic by turning of the internet. There is a pause for 5 mins 
 @tenacity.retry(wait=tenacity.wait_fixed(5), stop=tenacity.stop_after_attempt(5))
 def upload_to_gcs(local_file_path, bucket_name, destination_blob_name, json_credentials_path):
 ```
-
-#### Automate Error Handling (Reliability): Error Logging
-Log errors and successes for monitoring and debugging purposes. Based on compliance needs to be would to build robust solutions to ensure logs are stored persistently and can be accessed.
-
-We have 2 solutions: 
-
-****1. Local On-Prem server soltution****
-
-We can locally log data locally in a file for maintenance short term maintainance.
-
-Step 1: Add print statements 
-```python
-
-```
-
-# Design
-
 
 # Run 
 
