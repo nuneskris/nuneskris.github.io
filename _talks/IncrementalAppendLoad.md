@@ -7,25 +7,36 @@ venue: "Delta"
 date: 2024-06-01
 location: "Airbyte"
 ---
-1
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/3b691ec4-9060-4302-b42e-60ce548bf610">
+
+An append-only incremental upload is a data loading pattern where new records are continually added (appended) to a dataset without modifying or deleting existing records. This approach is often used when historical data must be preserved for audit, analysis, or other purposes.
+
+Data is preserved and every new batch of data is added to the existing dataset without altering or removing past data. This is a simple method and is straightforward to implement since it avoids the complexity of handling updates and deletions. It is ideal for systems where data grows over time and past records need to be preserved. Very often we would need an audit trail for historical data analytics and this method maintains a complete history of all data, which is useful for auditing and tracking changes over time.
+Common Use Cases for Append-Only Incremental Upload
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/27c6bd56-51c4-4b7b-b761-465cce524e78">
 
-2
+# Set up.
+Detailed [configuration and setup of Airbyte](https://nuneskris.github.io/teaching/Postgres-Airbyte-S3) and [incremental apppend + duplicate](https://nuneskris.github.io/talks/IncrementalLoadWithDemo) is already covered and I will be continuing from there.
 
-![image](https://github.com/user-attachments/assets/2b253edd-bfd8-4102-b903-14a7bd41979f)
+The most import configuraiton is we need to identify the cursor similar to incremental apppend + duplicate, and setting the increment as append only.
 
-3
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/2b253edd-bfd8-4102-b903-14a7bd41979f">
 
-![image](https://github.com/user-attachments/assets/2a823214-dfb4-441a-9f1c-d5c1b0079c46)
+# Data Setup
+We will be using a more simplyfied dataset with only 10 rows on a fresh database both at the Postgress source ans Snowflake target.
 
-4
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/2a823214-dfb4-441a-9f1c-d5c1b0079c46">
 
-![image](https://github.com/user-attachments/assets/80e31dd6-a9c6-4198-ab59-169c3a84c0fd)
+# Running the Airbyte Syc
 
-5
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/80e31dd6-a9c6-4198-ab59-169c3a84c0fd">
 
-![image](https://github.com/user-attachments/assets/ca5adf20-f8e4-4c24-8d1e-c048ad1d9349)
+# Validating snowflake
+We can see that there are 10 rows of the inital load which has been upoloaded into Snowflake.
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/ca5adf20-f8e4-4c24-8d1e-c048ad1d9349">
 
 6
 
