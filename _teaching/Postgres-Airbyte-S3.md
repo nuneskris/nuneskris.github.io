@@ -12,6 +12,7 @@ date: 2024-06-01
 
 # Set Up
 
+## Install Postgres
 * For interst of time, I installed Postgress via an installer
 
 ```sql
@@ -92,6 +93,7 @@ finally:
         print("PostgreSQL connection is closed")
 ```
 
+## Install Airbyte
 ****clone Airbyte from GitHub****
 ```console
 git clone --depth=1 https://github.com/airbytehq/airbyte.git
@@ -106,5 +108,34 @@ cd airbyte
 ```console
 ./run-ab-platform.sh
 ```
+
+Using the default config
+* Host: http://localhost:8000/
+* User: airbyte and password is password
+
+## S3
+
+* Create a user with access to the Bucket. Generate access key
+* Create a folder.
+
+![image](https://github.com/user-attachments/assets/0ca2cc32-1b45-4c0a-8ad3-cbeedef0ec12)
+
+# Configure Airbyte
+
+## Source: Postgress
+![image](https://github.com/user-attachments/assets/e534e0c4-4a22-4d73-b5c1-333ed60b6aed)
+
+I am using the basic update.
+![image](https://github.com/user-attachments/assets/75f7a4ca-2454-4959-874d-51f530e67923)
+
+
+# Running a sync
+
+![image](https://github.com/user-attachments/assets/7794fe7f-74a5-47b7-8ca6-16d88a10c9e8)
+
+# Validating in S3
+![image](https://github.com/user-attachments/assets/296a9883-872b-4148-a5ba-cb7f32edcf63)
+
+
 
 
