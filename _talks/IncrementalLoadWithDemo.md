@@ -238,11 +238,25 @@ finally:
 
 We will be updating the below 4 rows.
 ```sql
-select * from sales_order where salesorderid in (500000100,500000101,500000102,500000103);
+select * from sales_order where salesorderid in (500000100,500000101,500000102,500000103, 500000000, 500000001);
 ```
 
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/ce38ebdf-5fec-4794-a9c2-53819c8bfc8a">
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/c86bd623-49e8-445b-b73a-860d3e843ba4">
 
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/f30c5758-14a4-4e8f-8835-b7ed5232ffdf">
+<img width="613" alt="image" src="https://github.com/user-attachments/assets/33f9cdc1-4971-4b19-afbd-3b9c7185bd04">
+
+![image](https://github.com/user-attachments/assets/01dd2234-0e02-4b1a-a20b-9a594916af45)
+
+![image](https://github.com/user-attachments/assets/cc1dfc77-f496-413b-8522-a0972cc15b93)
+
+![image](https://github.com/user-attachments/assets/5921a24d-04d6-47e7-be75-d83a5fcbe456)
+
+![image](https://github.com/user-attachments/assets/8941d1f4-c99f-42f5-be35-dd91dff55c42)
+
+
+## 4. Delete
+
+
+
 
 
