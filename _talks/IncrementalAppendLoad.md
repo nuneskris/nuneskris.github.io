@@ -36,7 +36,9 @@ We can see that there are 10 rows of the inital load which has been upoloaded in
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/80e31dd6-a9c6-4198-ab59-169c3a84c0fd">
 
-
+# Inserted new rows.
+* One row updating a anount values with ones
+* One row to update the note as DELETE to indicate that the row is deleted.
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/ca5adf20-f8e4-4c24-8d1e-c048ad1d9349">
 
