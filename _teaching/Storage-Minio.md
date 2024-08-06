@@ -6,7 +6,6 @@ permalink: /teaching/Storage-Minio
 date: 2024-06-01
 venue: "Minio"
 date: 2024-01-02
-location: "Docker"
 ---
 
 When I play with new technologies, I like to plat it on my machine locally. Minio is a perfect simulation of cloud storage locally. You can deploy it locally and interact it like a S3 object storage.
