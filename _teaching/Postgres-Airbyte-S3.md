@@ -1,5 +1,5 @@
 ---
-title: "Collect: Airbyte Extract And Load to S3"
+title: "Collect: Airbyte Extract And Load to both S3 and Snowflake"
 collection: teaching
 type: "Lakehouse"
 permalink: /teaching/Postgres-Airbyte-S3
@@ -7,8 +7,7 @@ venue: "Airflow"
 date: 2024-06-01
 ---
 
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/f0286140-40f4-4396-810e-d05d4d028e40">
-
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/073f9c90-298d-4b64-819b-141eed984b6a">
 
 # Set Up
 
@@ -135,9 +134,17 @@ I am using the basic update.
 
 ![image](https://github.com/user-attachments/assets/7794fe7f-74a5-47b7-8ca6-16d88a10c9e8)
 
-# Validating in S3
+## Validating in S3
 ![image](https://github.com/user-attachments/assets/296a9883-872b-4148-a5ba-cb7f32edcf63)
 
+
+# Configuring Snowflake
+
+![image](https://github.com/user-attachments/assets/415b9943-c908-4d32-9775-9a308529d857)
+
+Syncing into Snowflake
+
+![image](https://github.com/user-attachments/assets/54b44e1b-59a2-460f-934f-926a0fe0b0d6)
 
 
 
