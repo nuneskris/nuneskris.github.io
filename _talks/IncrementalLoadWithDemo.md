@@ -15,7 +15,7 @@ The objective of this demo is to be able to query a source table in Postgres, pe
 * Update Change Records
 * Update With Delete Change
 
-We will leverage audit colum CHANGEAT to capture
+
 
 # Setup
 
