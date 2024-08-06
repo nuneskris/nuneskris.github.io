@@ -8,6 +8,7 @@ date: 2024-06-01
 location: "Airbyte"
 ---
 1
+
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/27c6bd56-51c4-4b7b-b761-465cce524e78">
 
 2
@@ -53,6 +54,34 @@ location: "Airbyte"
 12
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/c91feffc-f6f1-4e0a-9842-33e10abe7553">
+
+13
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/561e478b-ace3-4b87-8141-d8db0b8d159b">
+
+14
+
+![image](https://github.com/user-attachments/assets/97d8abf4-9766-45d4-bcaf-905e275ef2ed)
+
+15
+
+![image](https://github.com/user-attachments/assets/57cd3973-da42-472a-8104-7614f7668c6c)
+
+16
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/ec6a5bcf-0b90-457b-892b-3e64660ed4b7">
+
+17
+
+![image](https://github.com/user-attachments/assets/1fe8369d-c473-4056-b40c-f9d6afb2e775)
+
+18
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/ffda5ed8-74ce-46d1-b7bb-07e68021cb31">
+
+
+
+
 
 
 
