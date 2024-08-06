@@ -157,7 +157,11 @@ We are able to get the run synid and query the records which were inserted.
 
 <img width="666" alt="image" src="https://github.com/user-attachments/assets/a06a9646-3a64-406c-b652-f7d6e3da4a42">
 
+
 ## 3. Update Change Records
+
+#### Updating a record which was 
+My original dataset had 2
 
 Code to UDPATE DATA into postgres using current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') for CHANGEAT DATETIME.
 ```python
