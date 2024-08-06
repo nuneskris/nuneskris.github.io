@@ -140,6 +140,8 @@ I am using the basic update.
 
 # Configuring Snowflake
 
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/415b9943-c908-4d32-9775-9a308529d857">
+
 ![image](https://github.com/user-attachments/assets/415b9943-c908-4d32-9775-9a308529d857)
 
 Syncing into Snowflake
