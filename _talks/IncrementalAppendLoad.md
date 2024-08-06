@@ -55,51 +55,41 @@ We can see a new syn job in Snowflake with job id 38.
 
 When we query for the row inserted with the job 38, we find the 2 rows which were loaded as expected.
 
-![image](https://github.com/user-attachments/assets/1667938e-f448-439d-9857-7f9add4406e3)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/1667938e-f448-439d-9857-7f9add4406e3">
 
-10
+We can also see there 10 original and 2 new rows, totalling 12 rows.
 
-![image](https://github.com/user-attachments/assets/406e7a9b-df67-4601-8805-f13a538d09ac)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/0b02d872-22e4-4dfa-a353-fe3b91a8e0b5">
 
-11
+# 3. Update/Delete Rows
 
-![image](https://github.com/user-attachments/assets/0b02d872-22e4-4dfa-a353-fe3b91a8e0b5)
-
-12
-
+## Data setup for Update/delete
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/c91feffc-f6f1-4e0a-9842-33e10abe7553">
 
-13
+## Updating Postgress Source
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/561e478b-ace3-4b87-8141-d8db0b8d159b">
 
-14
+## Running the Sync job for the Update/delete rows
 
-![image](https://github.com/user-attachments/assets/97d8abf4-9766-45d4-bcaf-905e275ef2ed)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/97d8abf4-9766-45d4-bcaf-905e275ef2ed">
 
-15
+15 ## Validating the syc of the 2 new rows.
+We can see a new syn job in Snowflake with job id 39.
 
-![image](https://github.com/user-attachments/assets/57cd3973-da42-472a-8104-7614f7668c6c)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/57cd3973-da42-472a-8104-7614f7668c6c">
 
-16
+We can see the 2 rows. One for the update and one with the delete.
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/ec6a5bcf-0b90-457b-892b-3e64660ed4b7">
 
-17
+When we look the at count of rows, updates create new rows unlike the append+deduplicate patter.
 
-![image](https://github.com/user-attachments/assets/1fe8369d-c473-4056-b40c-f9d6afb2e775)
-
-18
-
-<img width="612" alt="image" src="https://github.com/user-attachments/assets/ffda5ed8-74ce-46d1-b7bb-07e68021cb31">
-
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/1fe8369d-c473-4056-b40c-f9d6afb2e775">
 
 * One row updating a anount values with ones
 * One row to update the note as DELETE to indicate that the row is deleted.
 
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/ffda5ed8-74ce-46d1-b7bb-07e68021cb31">
 
-
-
-
-
-
+Append-only incremental uploads are a simple and effective but this needs maintenance and validation regularly. By following best practices for efficient indexing, partitioning, data validation, backup and recovery, monitoring, and data retention we can run a stable extract and load.
