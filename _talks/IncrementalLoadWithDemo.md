@@ -133,6 +133,32 @@ We can see there is somemetadata also added by airbyte.
 <img width="666" alt="image" src="https://github.com/user-attachments/assets/ecefaf43-15c1-4556-be55-9def483eefe6">
 
 ## 2. Insert New Records
+
+We will be inserting 2 new records.
+
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/d4a4f3b7-076b-4eec-93ac-eeaf0fef1272">
+
+After running the insert query.
+
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/0684a094-9d5a-4859-ad92-9f9cd8e6864f">
+
+### Running Airbyte Sync
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/18030ce5-9e85-45a0-905b-5fb49483b6f2">
+
+### Validating Data in Snowflake
+Running a count we see there are 2 new records added taking the count to 672.
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/f018a012-9709-4c78-a6cf-2a6348b5a73e">
+
+We can query the metadata and we can see that there was a new run.
+
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/67d378bf-8f06-49d8-a9cc-90f83c851bd6">
+
+We are able to get the run synid and query the records which were inserted.
+
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/a06a9646-3a64-406c-b652-f7d6e3da4a42">
+
+## 3. Update Change Records
+
 Code to UDPATE DATA into postgres using current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') for CHANGEAT DATETIME.
 ```python
 import pandas as pd
@@ -206,25 +232,13 @@ finally:
 
 ```
 
-We will be inserting 2 new records.
+We will be updating the below 4 rows.
+```sql
+select * from sales_order where salesorderid in (500000100,500000101,500000102,500000103);
+```
 
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/d4a4f3b7-076b-4eec-93ac-eeaf0fef1272">
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/ce38ebdf-5fec-4794-a9c2-53819c8bfc8a">
 
-After running the insert query.
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/f30c5758-14a4-4e8f-8835-b7ed5232ffdf">
 
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/0684a094-9d5a-4859-ad92-9f9cd8e6864f">
 
-### Running Airbyte Sync
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/18030ce5-9e85-45a0-905b-5fb49483b6f2">
-
-### Validating Data in Snowflake
-Running a count we see there are 2 new records added taking the count to 672.
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/f018a012-9709-4c78-a6cf-2a6348b5a73e">
-
-We can query the metadata and we can see that there was a new run.
-
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/67d378bf-8f06-49d8-a9cc-90f83c851bd6">
-
-We are able to get the run synid and query the records which were inserted.
-
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/a06a9646-3a64-406c-b652-f7d6e3da4a42">
