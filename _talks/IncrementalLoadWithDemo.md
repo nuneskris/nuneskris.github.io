@@ -28,21 +28,23 @@ Please refer a Sanbox demo to set up [Postgres, Airbyte and Snowflake](https://n
 
 <img width="666" alt="image" src="https://github.com/user-attachments/assets/b305513c-ae76-47cc-98ee-03b5bd77e4c9">
 
+## Destination
+Airbyte created a table in Snowflake with the source columns along with some additional columns.
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/d8739752-77d8-4fd4-951c-31ecc5d5f0c9">
 
-# Configuring the Stream Cursor.
+## Configuring the Stream Cursor.
 A cursor is the value used to track whether a record extracted in an incremental sync. We will be using CHANGEAT for this.
 
 We would need to configure the cursor which will be used to handle the delta updates.
 <img width="666" alt="image" src="https://github.com/user-attachments/assets/6e2b09cf-dcfd-45f0-baf9-0f690e443c9a">
 
-
-# Data Setup
+## Data Setup
 
 We will leverage the table from the previous demo. But I have upadted the table to use a primarykey.
 ```sql
 ALTER TABLE SALES_ORDER ADD PRIMARY KEY (SALESORDERID)
 ```
-![image](https://github.com/user-attachments/assets/a023a772-3731-4388-a1aa-224d0007a773)
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/a023a772-3731-4388-a1aa-224d0007a773">
 
 I had used a python script to load the CSV using the currentdatetime for the CHANGEAT AND CREATEAT DATETIME.
 
@@ -106,10 +108,28 @@ finally:
         print("PostgreSQL connection is closed")
 ```
 
-![image](https://github.com/user-attachments/assets/5f42fca9-fa2d-4a02-87cc-1cdfa7ab9f68)
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/5f42fca9-fa2d-4a02-87cc-1cdfa7ab9f68">
 
-![image](https://github.com/user-attachments/assets/0646dc76-f3f1-405a-861e-5347ee04a416)
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/0646dc76-f3f1-405a-861e-5347ee04a416">
 
+
+# Demo Run
+## 1. Full Load
+The FULL LOAD should move all the data in the table. All the 670 rows was syced by Airbyte.
+
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/b8291e60-8633-484d-9038-3eaae566dd4f">
+
+### Validating the change
+There were 670 records also created in Snowflake table.
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/52d39966-e569-413a-a146-7d583c5a54f7">
+
+Below is a sample data of the table
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/1012d328-85a8-42ca-95db-97a164f1c215">
+
+We can see there is somemetadata also added by airbyte.
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/ecefaf43-15c1-4556-be55-9def483eefe6">
+
+## 2. Insert New Records
 
 Code to UDPATE DATA into postgres using current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') for CHANGEAT DATETIME.
 ```python
