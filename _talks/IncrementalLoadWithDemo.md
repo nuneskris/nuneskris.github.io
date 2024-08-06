@@ -256,6 +256,13 @@ select * from sales_order where salesorderid in (500000100,500000101,500000102,5
 
 ## 4. Delete
 
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/23e30936-a7ab-4b9e-9904-534f477c36bd">
+
+![image](https://github.com/user-attachments/assets/9bbd3fe4-a500-4c1d-8726-2f74a4c10a04)
+
+![image](https://github.com/user-attachments/assets/a6ea6fec-7d85-43ce-a27d-4a27df12702c)
+
+
 
 
 
