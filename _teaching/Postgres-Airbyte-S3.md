@@ -128,6 +128,8 @@ Using the default config
 I am using the basic update.
 ![image](https://github.com/user-attachments/assets/75f7a4ca-2454-4959-874d-51f530e67923)
 
+## Target: S3
+![image](https://github.com/user-attachments/assets/80d4ffd6-5507-4980-8b85-58ffe9a7897c)
 
 # Running a sync
 
