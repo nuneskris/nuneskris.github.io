@@ -4,7 +4,7 @@ excerpt: "Combining data from different sources and providing a unified view <br
 collection: portfolio
 ---
 
-<img width="612" alt="image" src="/images/portfolio/Integratedata.png">
+<img width="450" alt="image" src="/images/portfolio/Integratedata.png">
 
 Integrated data refers to the process of combining data from multiple busines functiona to provide comprehensive view of the business rather an an isolated view of a single business function. This process is crucial for organizations that need to analyze data from multiple systems or departments to make informed decisions. Integrated data ensures consistency, accuracy, and completeness by merging data into a cohesive dataset.
 
@@ -13,7 +13,7 @@ Data is stored and managed in desperate data stores and are not automatically in
 
 The Same Data Is Defined Inconsistently Across Multiple Systems. Different systems are designed and built in isolation, storing data in native data model schemas and formats. A key challenge to integrating data is to relate data across these silos. Very often, the same data is defined inconsistently across multiple systems.  
 
-<img width="612" alt="image" src="/images/portfolio/UnifiedDataExample.png">
+<img width="450" alt="image" src="/images/portfolio/UnifiedDataExample.png">
 
 A Sales process would refer to a customer within its database table, and to integrate the sales process with marketing, the customer identifiers in the tables of both the Sales system and the Marketing system need to match.
 
