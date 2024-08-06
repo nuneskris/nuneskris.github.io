@@ -125,24 +125,24 @@ Using the default config
 ![image](https://github.com/user-attachments/assets/e534e0c4-4a22-4d73-b5c1-333ed60b6aed)
 
 I am using the basic update.
-![image](https://github.com/user-attachments/assets/75f7a4ca-2454-4959-874d-51f530e67923)
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/75f7a4ca-2454-4959-874d-51f530e67923">
 
 ## Target: S3
-![image](https://github.com/user-attachments/assets/80d4ffd6-5507-4980-8b85-58ffe9a7897c)
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/80d4ffd6-5507-4980-8b85-58ffe9a7897c">
 
 # Running a sync
 
-![image](https://github.com/user-attachments/assets/7794fe7f-74a5-47b7-8ca6-16d88a10c9e8)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/7794fe7f-74a5-47b7-8ca6-16d88a10c9e8">
 
 ## Validating in S3
-![image](https://github.com/user-attachments/assets/296a9883-872b-4148-a5ba-cb7f32edcf63)
 
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/296a9883-872b-4148-a5ba-cb7f32edcf63">
 
 # Configuring Snowflake
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/415b9943-c908-4d32-9775-9a308529d857">
-
-![image](https://github.com/user-attachments/assets/415b9943-c908-4d32-9775-9a308529d857)
 
 Syncing into Snowflake
 
