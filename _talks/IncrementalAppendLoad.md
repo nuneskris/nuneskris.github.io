@@ -46,13 +46,14 @@ We can see that there are 10 rows of the inital load which has been upoloaded in
 
 ## Running Sync for the new rows
 
-![image](https://github.com/user-attachments/assets/68f3d240-222a-4bdc-a7de-aa54654b889b)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/68f3d240-222a-4bdc-a7de-aa54654b889b">
 
-8
+## Validating the syc of the 2 new rows.
+We can see a new syn job in Snowflake with job id 38.
 
-![image](https://github.com/user-attachments/assets/f766f280-93ae-44a3-a0b3-3384c49fce49)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/f766f280-93ae-44a3-a0b3-3384c49fce49">
 
-9
+When we query for the row inserted with the job 38, we find the 2 rows which were loaded as expected.
 
 ![image](https://github.com/user-attachments/assets/1667938e-f448-439d-9857-7f9add4406e3)
 
