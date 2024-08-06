@@ -28,6 +28,14 @@ Please refer a Sanbox demo to set up [Postgres, Airbyte and Snowflake](https://n
 
 <img width="666" alt="image" src="https://github.com/user-attachments/assets/b305513c-ae76-47cc-98ee-03b5bd77e4c9">
 
+
+# Configuring the Stream Cursor.
+A cursor is the value used to track whether a record extracted in an incremental sync. We will be using CHANGEAT for this.
+
+We would need to configure the cursor which will be used to handle the delta updates.
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/6e2b09cf-dcfd-45f0-baf9-0f690e443c9a">
+
+
 # Data Setup
 
 We will leverage the table from the previous demo. But I have upadted the table to use a primarykey.
