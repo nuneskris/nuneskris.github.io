@@ -27,26 +27,24 @@ We will be using a more simplyfied dataset with only 10 rows on a fresh database
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/2b253edd-bfd8-4102-b903-14a7bd41979f">
 
-# Running the Airbyte Syc
+# 1. Full Load
+
+## Running the Airbyte Syc
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/2a823214-dfb4-441a-9f1c-d5c1b0079c46">
 
-# Validating snowflake
+## Validating snowflake
 We can see that there are 10 rows of the inital load which has been upoloaded into Snowflake.
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/80e31dd6-a9c6-4198-ab59-169c3a84c0fd">
 
-# Inserted new rows.
-* One row updating a anount values with ones
-* One row to update the note as DELETE to indicate that the row is deleted.
-
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/ca5adf20-f8e4-4c24-8d1e-c048ad1d9349">
 
-6
+# 2. Inserted new rows.
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/c4e284b5-bd61-4ba3-8149-fd6ea7ec641f">
 
-7
+## Running Sync for the new rows
 
 ![image](https://github.com/user-attachments/assets/68f3d240-222a-4bdc-a7de-aa54654b889b)
 
@@ -95,7 +93,8 @@ We can see that there are 10 rows of the inital load which has been upoloaded in
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/ffda5ed8-74ce-46d1-b7bb-07e68021cb31">
 
 
-
+* One row updating a anount values with ones
+* One row to update the note as DELETE to indicate that the row is deleted.
 
 
 
