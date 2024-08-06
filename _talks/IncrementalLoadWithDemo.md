@@ -1,5 +1,5 @@
 ---
-title: "Incremental Load with Airbyte Demo"
+title: "Incremental (Append and Deduplicate) Load with Airbyte Demo"
 collection: talks
 permalink: /talks/IncrementalLoadWithDemo
 date: 2024-03-01
@@ -7,15 +7,23 @@ venue: "Delta"
 date: 2024-06-01
 location: "Airbyte"
 ---
-<img width="666" alt="image" src="https://github.com/user-attachments/assets/dbdfc4e6-ed1c-41cc-b1ec-f29d7abe7a96">
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/344cb01e-204a-44a3-9b02-a1aef9e4099c">
+
+An "Incremental Append + Deduped Load" is a data integration pattern commonly used in ETL to ensure that duplicate records are avoided at the target database and are maintained at the source table too. This is used when we want to add data directly into a staging layer.
+* Append: Adding only the new or changed records from the source system to the target system.
+* Deduplication: Ensuring that any duplicate records that might have been introduced during the append process are removed or handled appropriately.
+
+Incremental Append involves extracting only the new or modified records from the source system. This can be achieved by typically using a cursor timestamp audit column. Using a timestamp column (e.g., last_modified or updated_at) to filter and extract only the records that have been updated or created since the last load. Then we use the difference (delta) between the current state and the last state of the data to capture the delta. We could potentially also use CDC tools or techniques to identify and extract only the records that have changed since the last extraction but it can add some complexity.
+
+Once the new and updated records are appended to the target system, deduplication ensures that no duplicate records exist. Deduplication can be done by using primary keys to enforce uniqueness. The we would need to use a MERGE Statement to combine new data with existing data, ensuring that duplicates are handled based on specified conditions. Finally we would use a SQL window functions to identify and remove duplicates, keeping only the latest record based on a timestamp or version column.
+
+SCD1 (Slowly Changing Dimension Type 1) is a suitable use case for the Incremental Append + Deduped Load pattern. SCD1 is used to manage changes in a dimension table where the changes overwrite the existing records. This means that when a change occurs in the source data, the corresponding record in the dimension table is updated with the new information. We need to load only the new or updated records from the source system. This can be achieved by identifying the records that have changed since the last load using a timestamp or some change tracking mechanism. After loading the new and updated records, you need to ensure that the dimension table contains the latest version of each record. This involves removing any older versions of the records that have been updated.
 
 The objective of this demo is to be able to query a source table in Postgres, perform an extract from the source table and load in a desination analytics environment. However this would to most importantly perform only delta changes.
 * Full Load
 * Insert New Records
 * Update Change Records
 * Update With Delete Change
-
-
 
 # Setup
 
@@ -255,6 +263,8 @@ select * from sales_order where salesorderid in (500000100,500000101,500000102,5
 
 
 ## 4. Delete
+
+The delete will use a Note column to indicate that the row is deleted and perform a row update.
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/23e30936-a7ab-4b9e-9904-534f477c36bd">
 
