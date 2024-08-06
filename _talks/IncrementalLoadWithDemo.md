@@ -131,6 +131,18 @@ We can see there is somemetadata also added by airbyte.
 
 ## 2. Insert New Records
 
+<img width="666" alt="image" src="https://github.com/user-attachments/assets/d4a4f3b7-076b-4eec-93ac-eeaf0fef1272">
+
+
+
+
+
+
+
+
+
+
+
 Code to UDPATE DATA into postgres using current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') for CHANGEAT DATETIME.
 ```python
 import pandas as pd
