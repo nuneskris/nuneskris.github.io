@@ -117,12 +117,13 @@ Using the default config
 * Create a user with access to the Bucket. Generate access key
 * Create a folder.
 
-![image](https://github.com/user-attachments/assets/0ca2cc32-1b45-4c0a-8ad3-cbeedef0ec12)
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/0ca2cc32-1b45-4c0a-8ad3-cbeedef0ec12">
 
 # Configure Airbyte
 
 ## Source: Postgress
-![image](https://github.com/user-attachments/assets/e534e0c4-4a22-4d73-b5c1-333ed60b6aed)
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/e534e0c4-4a22-4d73-b5c1-333ed60b6aed">
 
 I am using the basic update.
 
