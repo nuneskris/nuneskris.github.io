@@ -8,6 +8,7 @@ venue: "Glue"
 date: 2024-06-01
 location: "AWS"
 ---
+<img width="497" alt="image" src="https://github.com/user-attachments/assets/eb58bbf2-eb10-45c7-8b31-eaf275a298a2">
 
 AWS EMR Serverless is magic to launch Hive. I remember spending a week mnay years back to get Hive working on my local machine. This is so easy on AWS, it is cheating!
 
