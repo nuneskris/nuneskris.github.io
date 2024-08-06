@@ -23,12 +23,20 @@ Please refer a Sanbox demo to set up [Postgres, Airbyte and Snowflake](https://n
 
 <img width="666" alt="image" src="https://github.com/user-attachments/assets/741fff01-aac9-47ae-861f-b03fc9ce80b5">
 
+
 ## Configuring the source.
 
 <img width="666" alt="image" src="https://github.com/user-attachments/assets/b305513c-ae76-47cc-98ee-03b5bd77e4c9">
 
 # Data Setup
-There were 668 rows in the initial load. I had used a python script to load the CSV using the currentdatetime for the CHANGEAT AND CREATEAT DATETIME.
+
+We will leverage the table from the previous demo. But I have upadted the table to use a primarykey.
+```sql
+ALTER TABLE SALES_ORDER ADD PRIMARY KEY (SALESORDERID)
+```
+![image](https://github.com/user-attachments/assets/a023a772-3731-4388-a1aa-224d0007a773)
+
+I had used a python script to load the CSV using the currentdatetime for the CHANGEAT AND CREATEAT DATETIME.
 
 Code to INSERT DATA into postgres using current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') for CHANGEAT AND CREATEAT DATETIME.
 
@@ -90,7 +98,9 @@ finally:
         print("PostgreSQL connection is closed")
 ```
 
-![image](https://github.com/user-attachments/assets/8f6ee2ca-f592-4eb6-97b0-99d6a003ca4f)
+![image](https://github.com/user-attachments/assets/5f42fca9-fa2d-4a02-87cc-1cdfa7ab9f68)
+
+![image](https://github.com/user-attachments/assets/0646dc76-f3f1-405a-861e-5347ee04a416)
 
 
 Code to UDPATE DATA into postgres using current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') for CHANGEAT DATETIME.
