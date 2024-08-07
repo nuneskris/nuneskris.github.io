@@ -18,9 +18,11 @@ The Target system where the data is loaded can either be a schema-on-write where
 
 Every time the process runs, the entire data set is collected from the source into the target analytics system. This is the simplest pattern and I would recommend this for quick implementations where data is needed for analytics in short time and when the data is not too big. Note that ways we can evolve from this pattern to more sophisticated patterns.
 
-* ***Initial Data Load & Data Reconciliation***: This is usually pattern we would need even if we adopt an incremental load during initial loads. Also when we want to rebase or reconcile our data we would need to run have an ability to run a Full Load.
+* ***Initial Data Load***: This is usually pattern we would need even if we adopt an incremental load during initial loads. 
+* ***Data Reconciliation***: There is a potential where the source and target of the extract and laod go out of sync and we would want to rebase them. The Full Load refresh can be use to rebase or reconcile our data.
+* ***Snapshot***: When we want to create snaphots in time of the entire dataset for historical reporting, trend analysis, or auditing.
 * ***Operational Reporting***: I have used fully loads for operational reporting when there is limited capabilities within the source application. Ideally the data would not require complex transformations and integration with data across the enterprise.
-* ***Backup, Recovery, Compliance & Audit***: An abvious reason this pattern is used is when snapshots of the data is completed ingested into Cloud storage for Backup, Recovery, Compliance & Audit. 
+* ***Backup, Recovery, Compliance***: An abvious reason this pattern is used is when snapshots of the data is completed ingested into Cloud storage for Backup, Recovery, Compliance & Audit. 
 * ***Downstream Delta Processing***: This pattern is also used as part of a larger data processing pipeline, where transformation components deal with processing deltas.
 
 # 2. Append Only Load
