@@ -16,6 +16,7 @@ One of the more complicated task in data processing is extracting data which is 
 The Target system where the data is loaded can either be a schema-on-write where data needs to be loaded into a schema like relational-like databases or a schema-on-read database like cloud storage or HDFS. 
 
 # Full Load
+
 <img width="612" alt="image" src="/images/portfolio/FullLoadPattern.png">
 
 Every time the process runs, the entire data set is collected from the source into the target analytics system. This is the simplest pattern and I would recommend this for quick implementations where data is needed for analytics in short time and when the data is not too big. Note that ways we can evolve from this pattern to more sophisticated patterns.
@@ -28,17 +29,18 @@ When do we use this pattern?
 * ***Downstream Delta Processing***: This pattern is also used as part of a larger data processing pipeline, where transformation components deal with processing deltas.
 
 # [Delta Load](https://nuneskris.github.io/talks/Extract-Batch-Transfer)
+
 <img width="612" alt="image" src="/images/portfolio/DeltaPattern.png">
 
-This is an incremental extract pattern where the data is loaded into target location which is isolated for the load cycle without consideration of the previous loaded data. However the multiple deltas can be logically combined with the existing data to create the entire dataset.
+Most often datasets get too big for full load, and collecting data changes will be able to scale. So, any new records in the source since the last sync are appended to the target database without modifying the data already existing. If a record is modified at the source, the new version is appended as a duplicate of the existing row. All incremental loads wihch are described going forward adopt this.
 
-* ***Data Science Layer***: Many of the data science layers (Raw) happens in this layer where raw data is ingested into this layer
+This is an incremental extract pattern where the data is loaded into a target location which is isolated for the load cycle, without consideration of the previous loaded data. However the multiple deltas can be logically combined with the existing data to create the entire dataset. The delta pattern is very commonly used to ingest data into cloud data storage, which is then further processed by downstream data processing applications for datawrehouse and datalakes. 
 
+* ***Landing Area***: Most of the cloud ingestion patterns we use today uses this pattern where data is loaded into a cloud storage. We also call this the [raw layer and I have page on best practices in managing this layer](https://nuneskris.github.io/publication/DataStore-RawLayer).
+* ***Data Science Layer***: Many of the data science layers happens in this layer where raw data is ingested into this layer.
 
 # [Append Only Load](https://nuneskris.github.io/talks/IncrementalAppendLoad)
 <img width="612" alt="image" src="/images/portfolio/AppendLoadPattern.png">
-
-Most often datasets get too big for full load, and collecting data changes will be able to scale. So, any new records in the source since the last sync are appended to the target database without modifying the data already existing. If a record is modified at the source, the new version is appended as a duplicate of the existing row. All incremental loads wihch are described going forward adopt this.
 
 The dataset in the target is continously incremented with the new data appended to it. The load's main functionality is to be able to append the data to the end (logically) of the previous sync.
 
