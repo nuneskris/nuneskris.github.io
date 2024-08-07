@@ -68,3 +68,4 @@ External Reference
 2. https://nuneskris.github.io/talks/Slowly-Changing-Dimensions
 3. https://nuneskris.github.io/talks/IncrementalLoadWithDemo
 4. https://nuneskris.github.io/talks/IncrementalAppendLoad
+5. https://nuneskris.github.io/talks/Extract-Batch-Transfer)
