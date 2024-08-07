@@ -1,4 +1,4 @@
----
+<img width="73" alt="image" src="https://github.com/user-attachments/assets/75d2a515-c4f8-4fe3-87c3-a705a52d7865">---
 title: "Collect - Extract and Load Patterns"
 collection: publications
 permalink: /publication/Collect-ExtractLoad-Patterns
@@ -21,4 +21,12 @@ Every time the process runs, the entire data set is collected from the source in
 # 2. Append Only Load
 <img width="612" alt="image" src="/images/portfolio/AppendLoadPattern.png">
 
-Most often datasets get too big for full load, and collecting data changes will be able to scale. So, any new records in the source since the last sync are appended to the target database without modifying the data already existing. If a record is modified at the source, the new version is appended as a duplicate of the existing row. This is another common dataset in the world of big data where the target databases are immutable and we can only add new data. Most of today's landing zone uses this pattern where focus is on the extraction query and downstream processing systems which need to perform the required.
+Most often datasets get too big for full load, and collecting data changes will be able to scale. So, any new records in the source since the last sync are appended to the target database without modifying the data already existing. If a record is modified at the source, the new version is appended as a duplicate of the existing row. The dataset in the target is continously increments with the new data appended to it. The load's main functionality is to be able to append the data to the end (logically) of the previous sync
+* ***Immutable Target Database***: This is another common dataset in the world of big data where the target databases are immutable and we can only add new data. Most of today's landing zone uses this pattern where focus is on the extraction query offloading the data in a scallable cloud storage filesystems.
+* ***Log File Processing***: 
+* ***Data Science Layer***: Many of the data science layers (Raw) happens in this layer where raw data is ingested into this layer.
+* ***Limited Load Processing Capabilities***: 
+
+# 3. Delta Load
+
+
