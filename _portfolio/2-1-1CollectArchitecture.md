@@ -16,7 +16,7 @@ We will be explain Collect's sub components in this page. I have gone into detai
 * [Profile](https://nuneskris.github.io/publication/CollectDataProfiling): Understand the source data's structure and consistency so we can design and plan the data for analytics processing.
 * [Capture](https://nuneskris.github.io/publication/Collect-Data-Capture): Define, isolate and filter only the data which is required for analytics processing.
 * Extract: Move the data from source system into the target system enviorment. (Usually On-prem/Cloud to Cloud).
-* Load: Loading the data into the analytics processing system incrementally.
+* [Load](https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/): Loading the data into the analytics processing system incrementally.
 
 # [Data Profiling](https://nuneskris.github.io/publication/CollectDataProfiling)
 We need to analyze the source data to understand its structure and consistency. I strongly believe, and frequently emphasize to the teams I lead, that data engineering does not deal with large problems but rather a large number of small problems related to data issues. The main objective of profiling data is to scope the size of the data engineering effort, which is a function of the complexity of the structure and inconsistencies of the data.
