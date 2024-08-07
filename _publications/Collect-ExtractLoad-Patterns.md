@@ -1,12 +1,14 @@
 ---
 title: "Collect - Extract and Load Patterns"
-excerpt: "Transfer data from source to taget <br/><img src='/images/portfolio/ExtractLoad.png'>"
-collection: portfolio
+collection: publications
+permalink: /publication/Collect-ExtractLoad-Patterns
+excerpt: "Transfer data from source to taget"
 venue: 'Processing'
 date: 2024-05-01
 tags:
   - Collect
 ---
+
 <img src='/images/portfolio/ExtractLoad.png'>
 
 One of the more complicated task in data processing is extracting data which is captured at the source, possiblly move it accross the network and load the data into a totally different type of system for analytics processing. By being aware of the patterns for accomplishing this, helps us to make better decions in designing systems to accomplish this.
@@ -30,15 +32,24 @@ When do we use this pattern?
 
 Most often datasets get too big for full load, and collecting data changes will be able to scale. So, any new records in the source since the last sync are appended to the target database without modifying the data already existing. If a record is modified at the source, the new version is appended as a duplicate of the existing row. The dataset in the target is continously increments with the new data appended to it. The load's main functionality is to be able to append the data to the end (logically) of the previous sync
 * ***Immutable Target Database***: This is another common dataset in the world of big data where the target databases are immutable and we can only add new data. Most of today's landing zone uses this pattern where focus is on the extraction query offloading the data in a scallable cloud storage filesystems.
-* ***Log File Processing***: 
+* ***Log File Processing***: This was one patterns which I have used for processing application logs by Splunk. It is very important to design a schema where logs files from multuiple systems can be combined especially timestamp.
 * ***Data Science Layer***: Many of the data science layers (Raw) happens in this layer where raw data is ingested into this layer.
-* ***Limited Load Processing Capabilities***: 
+* ***Limited Load Processing Capabilities***:  
 
 # 3. Delta Load
 <img width="612" alt="image" src="/images/portfolio/DeltaPattern.png">
 
+
+
 # 4. Upsert
 <img width="612" alt="image" src="/images/portfolio/UpsertIcon.png">
 
-# 5. SCD2
+Combines insert and update operations in a single step. If a record exists, it is updated; if it does not exist, it is inserted.
+Use Case: Useful when dealing with datasets where records can be both updated and newly inserted.
+Considerations: Requires handling of primary keys or unique identifiers to match records.
+
+# 5. [SCD2](https://nuneskris.github.io/talks/Slowly-Changing-Dimensions)
 <img width="612" alt="image" src="/images/portfolio/SCD2Pattern.png">
+
+Dimension modeling irrespective of the type of analytics modeling (dimensional vs wide) for analytics requires to track inserts, updates, and deletes of entities to allow querying these changes. SCD2 is when we track the change as a seperate row which I explain in a [demo](https://nuneskris.github.io/talks/Slowly-Changing-Dimensions) using Glue, Pyspark on a Iceberg Datalake. Most data warehousing processing tools such as DBT have multiple built in capabilities to handle SCD2 seemlessly.
+
