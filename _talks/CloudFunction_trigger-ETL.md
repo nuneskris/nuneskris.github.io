@@ -6,11 +6,11 @@ permalink: /talks/CloudFunction_trigger-ETL
 date: 2024-03-01
 ---
 
+<img width="636" alt="image" src="https://github.com/nuneskris/nuneskris.github.io/assets/82786764/63862e3c-d963-44b8-bd31-b07e07a0a842">
+
 Even in 2024, I am seeing pipelines waiting for a schedule rather than being automatically triggered when the data file arrives.
 
 I am called to review troubled data engineering pipelines and I have encountered pipelines in trouble because transformation was waiting on a schedule and losing precious time. Twice I implemented a simple change (once on AWS and once on GCP) and that was enough to solve 50% of its problems or atleast buy enough time before others could be resolved.
-
-<img width="636" alt="image" src="https://github.com/nuneskris/nuneskris.github.io/assets/82786764/63862e3c-d963-44b8-bd31-b07e07a0a842">
 
 ## Component: Cloud Function
 
