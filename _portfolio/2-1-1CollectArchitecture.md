@@ -63,7 +63,7 @@ One of the more complicated task in data processing is extracting data which is 
 
 The Target system where the data is loaded can either be a schema-on-write where data needs to be loaded into a schema like relational-like databases or a schema-on-read database like cloud storage or HDFS.
 
-I get into the various patterns involved in loading data into the data processing systems in this [page](https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/).
+I get into the various patterns involved in loading data into the data processing systems in this [page](https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/). [^1]: https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns
 
 # Related Pages
 * https://nuneskris.github.io/publication/CollectDataProfiling
