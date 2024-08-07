@@ -30,7 +30,7 @@ Most often datasets get too big for full load, and collecting data changes will 
 # 3. Delta Load
 <img width="612" alt="image" src="/images/portfolio/DeltaPattern.png">
 
-# 4. Upasert
+# 4. Upsert
 <img width="612" alt="image" src="/images/portfolio/UpsertIcon.png">
 
 # 5. SCD2
