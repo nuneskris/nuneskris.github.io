@@ -11,10 +11,12 @@ tags:
 
 One of the more complicated task in data processing is extracting data which is captured at the source, possiblly move it accross the network and load the data into a totally different type of system for analytics processing. By being aware of the patterns for accomplishing this, helps us to make better decions in designing systems to accomplish this.
 
+The Target system where the data is loaded can either be a schema-on-write where data needs to be loaded into a schema like relational-like databases or a schema-on-read database like cloud storage or HDFS. 
+
 # 1. Full Load
 <img width="612" alt="image" src="/images/portfolio/FullLoadPattern.png">
 
-Every time the process runs, the entire data set is collected from the source into the target analytics system. 
+Every time the process runs, the entire data set is collected from the source into the target analytics system. This is the simplest pattern and I would recommend this for quick implementations where data is needed for analytics in short time and when the data is not too big. Note that ways we can evolve from this pattern to more sophisticated patterns.
 
 * ***Initial Data Load & Data Reconciliation***: This is usually pattern we would need even if we adopt an incremental load during initial loads. Also when we want to rebase or reconcile our data we would need to run have an ability to run a Full Load.
 * ***Operational Reporting***: I have used fully loads for operational reporting when there is limited capabilities within the source application. Ideally the data would not require complex transformations and integration with data across the enterprise.
