@@ -1,13 +1,13 @@
 ---
 title: "Collect - Extract and Load Patterns"
-collection: publications
-permalink: /publication/Collect-ExtractLoad-Patterns
-excerpt: 'Collect Patterns'
+excerpt: "Transfer data from source to taget <br/><img src='/images/portfolio/ExtractLoad.png'>"
+collection: portfolio
 venue: 'Processing'
 date: 2024-05-01
 tags:
   - Collect
 ---
+<img src='/images/portfolio/ExtractLoad.png'>
 
 # 1. Full Load
 <img width="612" alt="image" src="/images/portfolio/FullLoadPattern.png">
