@@ -17,7 +17,7 @@ The Target system where the data is loaded can either be a schema-on-write where
 <img width="612" alt="image" src="/images/portfolio/FullLoadPattern.png">
 
 Every time the process runs, the entire data set is collected from the source into the target analytics system. This is the simplest pattern and I would recommend this for quick implementations where data is needed for analytics in short time and when the data is not too big. Note that ways we can evolve from this pattern to more sophisticated patterns.
-
+When do we use this pattern?
 * ***Initial Data Load***: This is usually pattern we would need even if we adopt an incremental load during initial loads. 
 * ***Data Reconciliation***: There is a potential where the source and target of the extract and laod go out of sync and we would want to rebase them. The Full Load refresh can be use to rebase or reconcile our data.
 * ***Snapshot***: When we want to create snaphots in time of the entire dataset for historical reporting, trend analysis, or auditing.
