@@ -57,7 +57,7 @@ I also did a [demo](https://nuneskris.github.io/talks/Avro-Parquet-CSV-Gzip) to 
 ## Encrypt Data
 Although not a direct benefit of compression, smaller data sizes can make encryption and decryption processes more efficient, enhancing data security during transfer and storage.
 
-# [Data Loading](https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/)
+# [Data Loading](https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns)
 
 One of the more complicated task in data processing is extracting data which is captured at the source, possiblly move it accross the network and load the data into a totally different type of system for analytics processing. By being aware of the patterns for accomplishing this, helps us to make better decions in designing systems to accomplish this.
 
@@ -71,4 +71,4 @@ I get into the various patterns involved in loading data into the data processin
 * https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress
 * https://nuneskris.github.io/talks/Avro-Parquet-CSV-Gzip
 * https://nuneskris.github.io/publication/Collect-Data-Extraction-Batch
-* https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/
+* https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns
