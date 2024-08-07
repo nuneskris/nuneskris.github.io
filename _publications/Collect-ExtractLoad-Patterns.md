@@ -28,4 +28,10 @@ Most often datasets get too big for full load, and collecting data changes will 
 * ***Limited Load Processing Capabilities***: 
 
 # 3. Delta Load
+<img width="612" alt="image" src="/images/portfolio/DeltaPattern.png">
 
+# 4. Upasert
+<img width="612" alt="image" src="/images/portfolio/UpsertIcon.png">
+
+# 5. SCD2
+<img width="612" alt="image" src="/images/portfolio/SCD2Pattern.png">
