@@ -65,7 +65,7 @@ The Target system where the data is loaded can either be a schema-on-write where
 
 I get into the various patterns involved in loading data into the data processing systems in this [page](https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/). [^1]: https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns
 
-# Related Pages
+# <a href="#footnotes">Related Pages</a>
 * https://nuneskris.github.io/publication/CollectDataProfiling
 * https://nuneskris.github.io/publication/Collect-Data-Capture
 * https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress
