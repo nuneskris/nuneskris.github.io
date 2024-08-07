@@ -33,7 +33,7 @@ When do we use this pattern?
 This is an incremental extract pattern where the data is loaded into target location which is isolated for the load cycle without consideration of the previous loaded data. However the multiple deltas can be logically combined with the existing data to create the entire dataset.
 
 * ***Data Science Layer***: Many of the data science layers (Raw) happens in this layer where raw data is ingested into this layer
-* ***Limited Load Processing Capabilities***: 
+
 
 # [Append Only Load](https://nuneskris.github.io/talks/IncrementalAppendLoad)
 <img width="612" alt="image" src="/images/portfolio/AppendLoadPattern.png">
@@ -44,7 +44,8 @@ The dataset in the target is continously incremented with the new data appended 
 
 * ***Immutable Target Database***: This is another common dataset in the world of big data where the target databases are immutable and we can only add new data. Most of today's landing zone uses this pattern where focus is on the extraction query offloading the data in a scallable cloud storage filesystems.
 * ***Log File Processing***: This was one patterns which I have used for processing application logs by Splunk. It is very important to design a schema where logs files from multuiple systems can be combined especially timestamp.
-
+* ***Limited Load Processing Capabilities***:
+  
 I have a [demo](https://nuneskris.github.io/talks/IncrementalAppendLoad) on Append only extact and load of incremental data using Airbyte from a Postgres SQL Database into a Snowflake datawarehouse
 
 # [Upsert](https://nuneskris.github.io/talks/IncrementalLoadWithDemo)
