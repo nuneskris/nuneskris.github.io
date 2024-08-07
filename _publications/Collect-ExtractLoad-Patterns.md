@@ -21,3 +21,4 @@ Every time the process runs, the entire data set is collected from the source in
 # 2. Append Only Load
 <img width="612" alt="image" src="/images/portfolio/AppendLoadPattern.png">
 
+Most often datasets get too big for full load, and collecting data changes will be able to scale. So, any new records in the source since the last sync are appended to the target database without modifying the data already existing. If a record is modified at the source, the new version is appended as a duplicate of the existing row. This is another common dataset in the world of big data where the target databases are immutable and we can only add new data. Most of today's landing zone uses this pattern where focus is on the extraction query and downstream processing systems which need to perform the required.
