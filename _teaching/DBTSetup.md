@@ -1,5 +1,5 @@
 ---
-title: "Staging with Column Transformations"
+title: "Data Processing with DBT and Snowflake"
 collection: teaching
 type: "Data Warehouse"
 permalink: /teaching/DBTColumnTransformations
