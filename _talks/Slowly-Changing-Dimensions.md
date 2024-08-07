@@ -13,7 +13,7 @@ location: "AWS"
 
 Demo tools: AWS, Glue Spark on a Iceberg Datalake House. We will be demonstrating to explainin a few best practices on slowly changing dimensions. 
 
-## General Best Practices for SCD Implementatio*
+## General Best Practices for SCD Implementation
 * ****Alignment with Business*** Ensure the business undertand the SCD rules for handling historical data and changes so that they understand and use dimensional data for reporting.
 There was major escalation in the reports providing wrong answers. After investigating it was uncovered that there was discrepencies in how SCD2 was developed and how BI reports consumed them.
 Documenting and naming the SCD related columns clearly so that folks understand how to use them goes a long way. (VALIDITY_STARTDATE, VALIDITY_ENDDATE).
