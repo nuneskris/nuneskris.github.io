@@ -1,4 +1,4 @@
-<img width="73" alt="image" src="https://github.com/user-attachments/assets/75d2a515-c4f8-4fe3-87c3-a705a52d7865">---
+---
 title: "Collect - Extract and Load Patterns"
 collection: publications
 permalink: /publication/Collect-ExtractLoad-Patterns
@@ -28,5 +28,4 @@ Most often datasets get too big for full load, and collecting data changes will 
 * ***Limited Load Processing Capabilities***: 
 
 # 3. Delta Load
-
 
