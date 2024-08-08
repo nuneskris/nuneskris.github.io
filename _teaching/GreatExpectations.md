@@ -115,9 +115,13 @@ We can that many expectations are generated.
 
 ![image](https://github.com/user-attachments/assets/880767fa-e913-449c-987b-862d3521d5b3)
 
-We can see a HTML file also created.
+We can see a HTML file also created. It is possible to find the location of the documentation in the great_expectations.yml file.
 
 ![image](https://github.com/user-attachments/assets/d9bf50e7-ebf9-4a78-9a19-e342ef7d270d)
+
+Opening the generated docs.
+
+![image](https://github.com/user-attachments/assets/1c598f3f-df5f-4256-aee2-87db48c4cab8)
 
 
 https://greatexpectations.io/blog/what-is-data-profiling
