@@ -29,6 +29,8 @@ full_path_to_project_directory = '/Users/xxxxxx/Study/python/DataEngineering/ETL
 # The below will create a project
 context = gx.get_context(project_root_dir=full_path_to_project_directory)
 ```
+The key file is the great_expectations.yml which will hold the details of the project.
+
 ![image](https://github.com/user-attachments/assets/3754cc64-683a-4087-954c-a3ad8430ecfa)
 
 ```python
@@ -115,6 +117,7 @@ We can that many expectations are generated.
 
 We can see a HTML file also created.
 
+![image](https://github.com/user-attachments/assets/d9bf50e7-ebf9-4a78-9a19-e342ef7d270d)
 
 
 https://greatexpectations.io/blog/what-is-data-profiling
