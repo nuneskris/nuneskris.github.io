@@ -11,11 +11,13 @@ date: 2024-06-01
 
 Great Expectations can have a learning curve simply because we do not know what to expect. I will use this page to demo how to install and get things started with Great Expectation.
 
+# 1.Install
 Create a Python virtual environment and run.
 ```console
 pip install great_expectations
 ```
 
+# 2. Code Setup
 Open a notebook from the virtual environment.
 ```python
 import great_expectations as gx
@@ -23,6 +25,7 @@ gx.__version__
 ```
 '0.18.19'
 
+# 3. Context
 ```python
 # we first need to create a context which is like a project in my mind. We can also provide a location where this project will be created under a folder gx inside it.
 full_path_to_project_directory = '/Users/xxxxxx/Study/python/DataEngineering/ETL/Observe/kfnproject'
@@ -33,6 +36,7 @@ The key file is the great_expectations.yml which will hold the details of the pr
 
 ![image](https://github.com/user-attachments/assets/3754cc64-683a-4087-954c-a3ad8430ecfa)
 
+# 4. Connecting to the data: Snowflake Landing
 ```python
 # Connecting to a Snowflake database using a connection string based on the below
 # my_connection_string = "snowflake://<USER_NAME>:<PASSWORD>@<ACCOUNT_NAME_OR_LOCATOR>/<DATABASE_NAME>/<SCHEMA_NAME>?warehouse=<WAREHOUSE_NAME>&role=<ROLE_NAME>"
@@ -64,6 +68,8 @@ assets = context.datasources["kfn_datasource"].data_connectors[data_connector_na
 print(assets)
 ```
 ['erp.addresses', 'erp.business_partners', 'erp.employees', 'erp.products', 'erp.product_categories', 'erp.product_texts', 'erp.sales_order', 'erp.sales_orders', 'erp.sales_order_items', 'erp_kris.sales_order', 'erp_kris_erp_etl.prestage_businesspartners', 'erp_schema.load_salesorders', 'erp_schema_erp_etl.prestage_addresses', 'erp_schema_erp_etl.prestage_businesspartners', 'erp_schema_erp_etl.prestage_employees', 'airbyte_internal.ERP_KRIS_raw__stream_sales_order', 'airbyte_internal.ERP_raw__stream_sales_order', 'airbyte_internal._airbyte_destination_state']
+
+# 5. Profiling
 
 ```python
 from great_expectations.core.batch import BatchRequest
@@ -103,11 +109,6 @@ profiler = UserConfigurableProfiler(profile_dataset=validator)
 suite = profiler.build_suite()
 context.save_expectation_suite(suite, "kfn_suite")
 
-# Lets build the docs of this profiler
-context.build_data_docs()
-context.open_data_docs()
-
-
 ```
 <img width="735" alt="image" src="https://github.com/user-attachments/assets/2ae5eb6e-71d8-4409-bd6a-d660b92a8593">
 
@@ -115,14 +116,17 @@ We can that many expectations are generated.
 
 ![image](https://github.com/user-attachments/assets/880767fa-e913-449c-987b-862d3521d5b3)
 
+There is a json file which is created with the name of the suite and the file creates all the expectations.
+
+![image](https://github.com/user-attachments/assets/1384649c-b41a-4ded-b377-25bf3c577bf5)
+
+# 6. Building Docs
+```python
+# Lets build the docs of this profiler
+context.build_data_docs()
+context.open_data_docs()
+```
 We can see a HTML file also created. It is possible to find the location of the documentation in the great_expectations.yml file.
 
 ![image](https://github.com/user-attachments/assets/d9bf50e7-ebf9-4a78-9a19-e342ef7d270d)
-
-Opening the generated docs.
-
-![image](https://github.com/user-attachments/assets/1c598f3f-df5f-4256-aee2-87db48c4cab8)
-
-
-https://greatexpectations.io/blog/what-is-data-profiling
 
