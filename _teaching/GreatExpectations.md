@@ -129,4 +129,3 @@ context.open_data_docs()
 We can see a HTML file also created. It is possible to find the location of the documentation in the great_expectations.yml file.
 
 ![image](https://github.com/user-attachments/assets/d9bf50e7-ebf9-4a78-9a19-e342ef7d270d)
-
