@@ -15,6 +15,11 @@ Data profiling is an essential first step in understanding the quality, structur
 
 > Implementation Tip: The findings need to be reviewed and signed off by business and data owners to validate the understanding of the data context. The architect needs to be accountable for the deliverables from this phase. There may be more uncovered as we start building the pipelines, necessitating updates to the profiling results and regular reviews by stakeholders. Use the deliverables to communicate and collaborate with business stakeholders; it should not be hidden within the data engineering team.
 
+There are 3 main types of information we profile for are
+1. structural
+2. content
+3. relationship information 
+
 Below is a template I have used to much success in multiple occasions.
 
 ## Dataset Information: 
