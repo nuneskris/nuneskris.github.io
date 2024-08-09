@@ -130,6 +130,11 @@ We can see a HTML file also created. It is possible to find the location of the 
 
 ![image](https://github.com/user-attachments/assets/d9bf50e7-ebf9-4a78-9a19-e342ef7d270d)
 
+The HTML created below shows the details of the suite.
+
+![image](https://github.com/user-attachments/assets/fcb147d9-d709-4dcd-a44d-bdfff007845d)
+
+
 # 7. Profiling for multiple tables
 ```python
 # List of tables in the erp schema
