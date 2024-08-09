@@ -168,7 +168,7 @@ context.open_data_docs()
 ![image](https://github.com/user-attachments/assets/7cab3baa-a391-432b-bbb0-ce2ad496a85d)
 
 
-# Remove expectation
+# 8. Remove expectation
 ```python
 from great_expectations.core import ExpectationConfiguration
 
@@ -193,7 +193,7 @@ context.add_or_update_expectation_suite(expectation_suite=suite)
 context.build_data_docs()
 ```
 
-# Update expectation
+# 9. Update expectation
 
 ```python
 updated_config = ExpectationConfiguration(
@@ -213,9 +213,29 @@ suite.add_expectation(updated_config)
 # Save the updated suite
 context.add_or_update_expectation_suite(expectation_suite=suite)
 
-# Regenerate and open data docs
-context.build_data_docs()
 ```
 
-# 
+# 10. Adding Metadata into the docs: Column
+```python
+updated_config = ExpectationConfiguration(
+    expectation_type="expect_column_max_to_be_between",
+    kwargs={
+        "column": "addressid",
+        "min_value":1000000073,
+        "max_value":10010000,
+        "strict_max":False,
+        "strict_min": False
+    },
+    meta={"notes": "Description=This is the primary key of the table. We can add all the metadata in the table."
+    },
+)
+
+# Add the new expectation to the suite
+suite.add_expectation(updated_config)
+
+# Save the updated suite
+context.add_or_update_expectation_suite(expectation_suite=suite)
+```
+
+
 
