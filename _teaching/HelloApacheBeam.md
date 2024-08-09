@@ -9,6 +9,8 @@ date: 2024-06-01
 location: "Local"
 ---
 
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/3de47dad-5648-4b7d-a410-83944703689d">
+
 I was reviewing a decision on utilizing GCP DataFusion versus DataFlow for simple ETL jobs. The rationale given was the complexity of DataFlow and the difficulty in finding resources with the necessary skills.
 
 DataFlow is based on the open-source Apache Beam project, which allows for defining both batch and streaming pipelines within the same model. My plan is to develop a system using this model, starting with running Apache Beam locally and then progressing to running DataFlow on GCP, all using the same use case. I will be resurrecting a codebase I developed previously to experiment with DataFlow.
