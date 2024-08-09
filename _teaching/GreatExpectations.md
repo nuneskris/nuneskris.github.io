@@ -129,3 +129,93 @@ context.open_data_docs()
 We can see a HTML file also created. It is possible to find the location of the documentation in the great_expectations.yml file.
 
 ![image](https://github.com/user-attachments/assets/d9bf50e7-ebf9-4a78-9a19-e342ef7d270d)
+
+# 7. Profiling for multiple tables
+```python
+# List of tables in the erp schema
+tables = ['addresses', 'business_partners', 'employees', 'products', 'product_categories', 'product_texts', 'sales_order', 'sales_order_items',] 
+
+from great_expectations.profile.user_configurable_profiler import UserConfigurableProfiler
+
+for table in tables:
+    # Create a unique Expectation Suite name for each table
+    suite_name = f"erplanding_{table}_expectation_suite"
+    
+    # Create a BatchRequest for each table
+    batch_request = BatchRequest(
+        datasource_name="kfn_datasource",
+        data_connector_name="default_inferred_data_connector_name",
+        data_asset_name=f"erp.{table}",
+    )
+
+    # Get the validator for the current table
+    validator = context.get_validator(batch_request=batch_request)
+    
+    # Initialize the profiler with the validator
+    profiler = UserConfigurableProfiler(profile_dataset=validator)
+
+    # Build the Expectation Suite
+    suite = profiler.build_suite()
+
+    # Save the suite with the unique name
+    context.save_expectation_suite(suite, expectation_suite_name=suite_name)
+
+# Optionally build and view data docs
+context.build_data_docs()
+context.open_data_docs()
+```
+
+![image](https://github.com/user-attachments/assets/7cab3baa-a391-432b-bbb0-ce2ad496a85d)
+
+
+# Remove expectation
+```python
+from great_expectations.core import ExpectationConfiguration
+
+# Load the existing Expectation Suite
+suite = context.get_expectation_suite(expectation_suite_name="erplanding_addresses_expectation_suite")
+
+# Define the expectation to remove
+config_to_remove = ExpectationConfiguration(
+    expectation_type="expect_column_mean_to_be_between",
+    kwargs={"column": "addressid"},
+)
+
+# Remove the specific expectation
+suite.remove_expectation(
+    config_to_remove, match_type="domain", remove_multiple_matches=False
+)
+
+# Save the updated suite
+context.add_or_update_expectation_suite(expectation_suite=suite)
+
+# Rebuild the Data Docs to see the changes
+context.build_data_docs()
+```
+
+# Update expectation
+
+```python
+updated_config = ExpectationConfiguration(
+    expectation_type="expect_column_max_to_be_between",
+    kwargs={
+        "column": "addressid",
+        "min_value":1000000073,
+        "max_value":1001000000,
+        "strict_max":False,
+        "strict_min": False
+    },
+)
+
+# Add the new expectation to the suite
+suite.add_expectation(updated_config)
+
+# Save the updated suite
+context.add_or_update_expectation_suite(expectation_suite=suite)
+
+# Regenerate and open data docs
+context.build_data_docs()
+```
+
+# 
+
