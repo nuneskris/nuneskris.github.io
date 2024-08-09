@@ -11,6 +11,17 @@ date: 2024-06-01
 
 Great Expectations can have a learning curve simply because we do not know what to expect. I will use this page to demo how to install and get things started with Great Expectation.
 
+Objectives:
+1. Install
+2. Code Setup in a python book
+3. Creating a context which is the hook required into the API
+4. Connecting to the source:  Snowflake Landing Database from a previous demo
+5. Profiling to create generate baseinformation on the tables
+6. Generating Documentation
+7. Profiling for multiple tables
+8. Updating Genterated Expectations
+9. Adding Documentation Details
+
 # 1.Install
 Create a Python virtual environment and run.
 ```console
@@ -120,7 +131,7 @@ There is a json file which is created with the name of the suite and the file cr
 
 ![image](https://github.com/user-attachments/assets/1384649c-b41a-4ded-b377-25bf3c577bf5)
 
-# 6. Building Docs
+# 6. Building/Generating Docs
 ```python
 # Lets build the docs of this profiler
 context.build_data_docs()
@@ -172,8 +183,12 @@ context.open_data_docs()
 
 ![image](https://github.com/user-attachments/assets/7cab3baa-a391-432b-bbb0-ce2ad496a85d)
 
+# 8. Updating Genterated Expectations
+Below is the addresses table expectation. As we can see there are multiple expectations which do is not applicable or needs to be updated.
 
-# 8. Remove expectation
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/234af738-731c-4956-8d6e-35002b4c3b41">
+
+## 8.1 Remove expectation
 ```python
 from great_expectations.core import ExpectationConfiguration
 
@@ -198,7 +213,9 @@ context.add_or_update_expectation_suite(expectation_suite=suite)
 context.build_data_docs()
 ```
 
-# 9. Update expectation
+## 8.2 Update expectation
+
+We will update max value to range to 1001000000
 
 ```python
 updated_config = ExpectationConfiguration(
@@ -219,8 +236,15 @@ suite.add_expectation(updated_config)
 context.add_or_update_expectation_suite(expectation_suite=suite)
 
 ```
+Below we can that the expect_column_mean_to_be_between removed, expect_column_max_to_be_between updated
+![image](https://github.com/user-attachments/assets/5e553378-3354-418c-b026-256ef9c606f1)
 
-# 10. Adding Metadata into the docs: Column
+# 9. Adding Documentation Details: 
+
+## 9.1 Column Documentation
+
+Documentation of metadata is very important. Adding metadata to 
+
 ```python
 updated_config = ExpectationConfiguration(
     expectation_type="expect_column_max_to_be_between",
@@ -242,5 +266,38 @@ suite.add_expectation(updated_config)
 context.add_or_update_expectation_suite(expectation_suite=suite)
 ```
 
+![image](https://github.com/user-attachments/assets/4be145bd-19d2-4e09-b81f-83223eadd4ce)
+
+## 9.2 Table Level Documentation
+We would like to add multiple lines into the documentation. I have achieved this by using a breakpoint.
+```python
+updated_config = ExpectationConfiguration(
+    expectation_type="expect_table_columns_to_match_ordered_list",
+    kwargs= {
+        "column_list": [
+          "addressid",
+          "city",
+          "postalcode",
+          "street",
+          "building",
+          "country",
+          "region",
+          "addresstype",
+          "validity_startdate",
+          "validity_enddate",
+          "latitude",
+          "longitude"
+        ]
+      },
+    meta={"notes": "Table Name=ERP.Addresses <br> Description=Contains address details of business partners <br> PrimaryKey=addressid <br> ForeignKeys=None"}
+)
+```
+![image](https://github.com/user-attachments/assets/12abcb51-1ea6-4510-b59b-0db52981b566)
 
 
+# Add the new expectation to the suite
+suite.add_expectation(updated_config)
+
+# Save the updated suite
+context.add_or_update_expectation_suite(expectation_suite=suite)
+```
