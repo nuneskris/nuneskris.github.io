@@ -291,9 +291,6 @@ updated_config = ExpectationConfiguration(
       },
     meta={"notes": "Table Name=ERP.Addresses <br> Description=Contains address details of business partners <br> PrimaryKey=addressid <br> ForeignKeys=None"}
 )
-```
-![image](https://github.com/user-attachments/assets/12abcb51-1ea6-4510-b59b-0db52981b566)
-
 
 # Add the new expectation to the suite
 suite.add_expectation(updated_config)
@@ -301,3 +298,5 @@ suite.add_expectation(updated_config)
 # Save the updated suite
 context.add_or_update_expectation_suite(expectation_suite=suite)
 ```
+
+![image](https://github.com/user-attachments/assets/12abcb51-1ea6-4510-b59b-0db52981b566)
