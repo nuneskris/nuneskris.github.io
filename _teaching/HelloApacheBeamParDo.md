@@ -350,13 +350,14 @@ We canw e job was deployed and also executed.
 
 ![image](https://github.com/user-attachments/assets/fe171b23-f87b-4734-9b45-65d720759ecf)
 
-![image](https://github.com/user-attachments/assets/29f9d79f-1052-414d-8915-c679cabd31e6)
-
-![image](https://github.com/user-attachments/assets/5da7a103-6412-4adc-86e4-25c91a4ca8e2)
+![image](https://github.com/user-attachments/assets/edf595b0-0b4b-476e-bbf5-494d1f8a480f)
 
 
+* File created in the bucket
 
+![image](https://github.com/user-attachments/assets/4bb73c1c-7f3b-49be-aa4c-e39a3f165c4d)
 
+![image](https://github.com/user-attachments/assets/3c1b8888-f914-4847-82f4-f851b06efaef)
 
 
 
