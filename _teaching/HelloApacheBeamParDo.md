@@ -24,6 +24,7 @@ Objectives
 3. Beam Code
 4. Build POM
 5. Deploy
+6. Run and Validate
 
 # 1. Input Storage Bucket and file
 
@@ -48,6 +49,8 @@ import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
+import org.apache.beam.sdk.transforms.GroupByKey;
+import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.KV;
 
 /*
@@ -99,6 +102,11 @@ public class BeamScoreViaOnlyPardo{
     private static void processViaPardo(JobOptions options) {
         Pipeline pipeline = Pipeline.create(options);
         pipeline.apply("Read from GCS", TextIO.read().from(options.getInputFile()))
+				        .apply(ParDo.of(new BeamScoreViaOnlyPardo.ExtractScore()))
+				        .apply(ParDo.of(new BeamScoreViaOnlyPardo.FilterWickets()))
+				        .apply(ParDo.of(new BeamScoreViaOnlyPardo.ConvertToKV()))
+				        .apply(GroupByKey.<String, Integer>create())
+				        .apply(ParDo.of(new BeamScoreViaOnlyPardo.SumUpValuesByKey()))
                 .apply("Write To GCS",TextIO.write().to(options.getOutputFile()).withoutSharding())
                 ;
         pipeline.run().waitUntilFinish();
@@ -165,7 +173,6 @@ public class BeamScoreViaOnlyPardo{
         }
     }
 }
-
 ```
 
 # 4. Build POM
@@ -326,10 +333,23 @@ mvn compile exec:java \
 4. -Dexec.cleanupDaemonThreads=false:
 * This option prevents Maven from attempting to clean up daemon threads upon completion. This is often necessary for long-running tasks or when using certain libraries that spawn threads.
 5. -Dexec.args="...":
-  This flag passes additional arguments to the Java program. These arguments are specific to the Apache Beam pipeline and configure how it runs. Let's break down the arguments:
---project=durable-pipe-431319-g7: Specifies the Google Cloud project ID where the Dataflow job will run.
---region=us-central1: Defines the GCP region where the Dataflow job will be executed.
---inputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020.csv: The input file's location in a Google Cloud Storage (GCS) bucket. The Dataflow job will read data from this file.
---outputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020-Transformed.csv: The output file's location in GCS where the transformed data will be written.
---runner=DataflowRunner: Specifies that the job should be executed on Google Cloud Dataflow, which is a fully managed service for running Apache Beam pipelines.
-Summary
+This flag passes additional arguments to the Java program. These arguments are specific to the Apache Beam pipeline and configure how it runs. Let's break down the arguments:
+* --project=durable-pipe-431319-g7: Specifies the Google Cloud project ID where the Dataflow job will run.
+* --region=us-central1: Defines the GCP region where the Dataflow job will be executed.
+* --inputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020.csv: The input file's location in a Google Cloud Storage (GCS) bucket. The Dataflow job will read data from this file.
+* --outputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020-Transformed.csv: The output file's location in GCS where the transformed data will be written.
+* --runner=DataflowRunner: Specifies that the job should be executed on Google Cloud Dataflow, which is a fully managed service for running Apache Beam pipelines.
+
+# 6. Run and Validate
+
+Run the above command in a terminal
+![image](https://github.com/user-attachments/assets/d63b083c-0c97-4d30-b58e-d01120718cc1)
+
+We canw e job was deployed and also executed.
+
+![image](https://github.com/user-attachments/assets/fe171b23-f87b-4734-9b45-65d720759ecf)
+
+
+
+
+
