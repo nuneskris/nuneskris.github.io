@@ -9,23 +9,45 @@ tags:
   - Curate
 ---
 
-# 1. Column Standardization
-Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).
+Data Cleansing
+
+## Column Standardization
+Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).  In this step we need to ensure that the data types are consistent and correct any discrepancies. 
 This also includes ***data type conversions** to appropriate types (e.g., string to date, float to integer). Below are common examples
 
-#### Renaming Columns
+### Renaming Columns
 Change column names for consistency or clarity.
 ```sql
  LOGINNAME as USERNAME
 ```
 
-#### Column Data Type Conversion
-Changing data type is one of the most common column transformations.
+### Column Data Type Conversion
+Changing data type is one of the most common column transformations. Ensure that similar date fields across different tables or datasets use the same data type (e.g., use DATE or TIMESTAMP consistently for date fields).
 ```sql
 {{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE
 ```
 
-# 2. Column Transformation
+### Apply Proper Precision and Scale
+For numeric fields, ensure the correct precision and scale are applied (e.g., using DECIMAL(10,2) for currency values). I have seen numerals as strings many times which is not accepted. Also know what are integers vs floats etc. I am using the example from Parquet: Modifying float64 to float32 as it would suffice for the values we would need.
+```python
+index = pyar.Schema.get_field_index(myschema, 'TAXAMOUNT')
+myschema = pyar.Schema.set(myschema, index, pyar.field('TAXAMOUNT', pyar.float32()))
+index = pyar.Schema.get_field_index(myschema, 'NETAMOUNT')
+myschema = pyar.Schema.set(myschema, index, pyar.field('NETAMOUNT', pyar.float32()))
+index = pyar.Schema.get_field_index(myschema, 'GROSSAMOUNT')
+myschema = pyar.Schema.set(myschema, index, pyar.field('GROSSAMOUNT', pyar.int32()))
+
+print(f"the new updated schema -> abover 3 columns would be updated to float from double")
+print('----------------------------------------------------------------------------------------------------------')
+updateParquetAndMetaData(df_salesOrder, myschema)
+```
+```
+the new updated schema -> abover 3 columns would be updated to float from double
+----------------------------------------------------------------------------------------------------------
+SALESORDERID: int64,CREATEDBY: int64,CREATEDAT: date32[day],CHANGEDBY: int64,CHANGEDAT: date32[day],FISCVARIANT: string,FISCALYEARPERIOD: int64,PARTNERID: int64,SALESORG: string,CURRENCY: string,GROSSAMOUNT: int32,NETAMOUNT: float,TAXAMOUNT: float,LIFECYCLESTATUS: string,BILLINGSTATUS: string,DELIVERYSTATUS: string
+```
+
+## Column Transformation
 Very often we are required to parsing column text (Strings) to splitting or extracting parts of data (e.g., extracting domain from email, splitting full name into first and last names).
 Also we often would need to combine or merge text from multiple columns to into a single. This will include simple String split based on a char or a regex expression.
 
@@ -49,7 +71,10 @@ Split a column into multiple columns based on a delimiter.
 SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN
 ```
 
-# 3. Consistent Casing and Spacing
+#### Address formating
+Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY etc based on the enterprise standard. I have also converted addresses to geographic coordinates (latitude and longitude) using external APIs.
+
+## Consistent Casing and Spacing
 Another common text processing on columns is converting text data to a consistent case (e.g., all lowercase or all uppercase).  Trimming leading, trailing, or excessive in-between spaces.
 #### String Transformations
 Perform operations like trimming, padding, and case conversion.
@@ -63,7 +88,7 @@ Perform operations like trimming, padding, and case conversion.
 TRIM({{ column }})
 ```
 
-# 4. New Column Imputation
+## New Column Imputation
 Derive and create a new columns based on existing data to either improve on the existing column.
 
 #### Derivation
@@ -89,7 +114,13 @@ Apply transformations based on conditions.
 	END AS ADDRESSTYPE_TRANSFORMED
 ```
 
+#### Column Filtering
+Remove unwanted columns from the dataset. Very often many columns are which are either empty or have only a few values. Work with the business to completely drop them.
+
 #### Handling Missing Values
+ Use Nullable Types When Appropriate: If a field can have null values, ensure that the data type allows nulls (e.g., using Nullable<Integer> instead of just Integer). 
+Usually the strategy to handle these situations should be done at the profiling step.
+ 
 Fill, drop, or impute missing values
 ```sql
 coalesce(NAME_FIRST, '') as NAME_FIRST
@@ -97,7 +128,7 @@ coalesce(NAME_FIRST, '') as NAME_FIRST
 #### PENDING Augmentation: Adding additional data from external sources to enrich the dataset (e.g., appending geographic information based on IP addresses).
 
 #### Column Value Imputation
-Imputing a column value of Short Description from Medium Desc column only when the Medium Desc column is not null.
+Imputing a column value of Short Description from Medium Desc column only when the Medium Desc column is not null. 
 ```sql
 CASE
 	WHEN MEDIUM_DESCR IS NOT NULL THEN {{ trim_text('MEDIUM_DESCR') }} 
@@ -105,28 +136,26 @@ CASE
 END AS DESCRIPTION
 ```
 
+## Data Deduplication
+Have continous validation to identify duplicate records using various techniques. Combining duplicate records into a single record or deleting redundant duplicate records.
+
+## Perform Data Integrity Checks
+Perform Referential Integrity checks by running queries to confirm that the relationships between tables are maintained (e.g., foreign key constraints). If there are unique constraints which are required we would need perform a checks to ensure that specific columns contain unique values (e.g., email addresses, primary keys).
+
 # Data Validation
 Type Checking: Ensuring data types are correct (e.g., integers, dates).
 Range Checking: Ensuring values fall within a specified range (e.g., age between 0 and 120).
 Format Validation: Ensuring data follows a specific format (e.g., phone numbers, email addresses).
 
-# Handling Missing Values:
-Imputation: Filling in missing values using various strategies (mean, median, mode, previous/next value).
-Deletion: Removing records with missing values, if they are not critical.
-Flagging: Marking records with missing values for further review or special handling.
 
-# Data Deduplication:
-Identifying Duplicates: Finding and identifying duplicate records using various techniques (exact match, fuzzy matching).
-Merging Records: Combining duplicate records into a single record.
-Removing Duplicates: Deleting redundant duplicate records.
+
+
 
 # Data Masking:
 Anonymization: Masking or anonymizing sensitive data (e.g., replacing names with pseudonyms, masking credit card numbers).
 Redaction: Removing or hiding sensitive data (e.g., removing social security numbers).
 
-# Data Integrity Checks:
-Referential Integrity: Ensuring relationships between tables are maintained (e.g., foreign key constraints).
-Unique Constraints: Ensuring that specific columns contain unique values (e.g., email addresses, primary keys).
+
 
 # Geocoding:
 Standardizing Addresses: Converting addresses to a standard format.
@@ -135,7 +164,7 @@ Geocoding: Converting addresses to geographic coordinates (latitude and longitud
 Aggregating: Summarizing or aggregating data (e.g., total sales per month).
 Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data).
 
-9. Column Filtering: Remove unwanted columns from the dataset.
+
 
 Data Correction:
 * Error Correction: Correcting known errors in data (e.g., fixing typos, correcting known incorrect values).
