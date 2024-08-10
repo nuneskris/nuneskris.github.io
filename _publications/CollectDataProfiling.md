@@ -13,6 +13,8 @@ Data profiling is an essential first step in understanding the quality, structur
 
 > Implementation Tip: Remember, this is a quick exercise to scope the time and effort required. Use data profiling tools that automate profiling. I've seen engineers build SQL scripts to profile data, wasting time and money. Most modern tools offer comprehensive profiling capabilities like statistical analysis, pattern recognition, and anomaly detection.
 
+Thought it is strictly not a data catalog tool, I have [demo on Great Expectations](https://nuneskris.github.io/teaching/GreatExpectations) on setting up the tool to profile a datasource and publishing documentation. This tool is still in the developer's realm but I am not complaining about it.
+
 > Implementation Tip: The findings need to be reviewed and signed off by business and data owners to validate the understanding of the data context. The architect needs to be accountable for the deliverables from this phase. There may be more uncovered as we start building the pipelines, necessitating updates to the profiling results and regular reviews by stakeholders. Use the deliverables to communicate and collaborate with business stakeholders; it should not be hidden within the data engineering team.
 
 There are 3 main types of information we profile for are
