@@ -1,5 +1,5 @@
 ---
-title: "Apache Beam - Using Pardo"
+title: "Apache Beam Using Pardo in DataFlow"
 collection: teaching
 type: "Data Processing"
 permalink: /teaching/HelloApacheBeamParDo
@@ -22,6 +22,8 @@ Objectives
 1. Input Storage Bucket and file
 2. IAM Service Account with Permissions
 3. Beam Code
+4. Build POM
+5. Deploy
 
 # 1. Input Storage Bucket and file
 
@@ -165,3 +167,169 @@ public class BeamScoreViaOnlyPardo{
 }
 
 ```
+
+# 4. Build POM
+This POM file is set up for an Apache Beam project that can run both locally using the Direct Runner and on Google Cloud Dataflow. It manages dependencies for Beam, SLF4J, and Google Cloud libraries, and it uses Maven plugins to compile the code, package it into a JAR, and bundle all dependencies into a single JAR for easy deployment.
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>HelloApacheBeam</groupId>
+  <artifactId>HelloApacheBeam</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+   <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <beam-version>2.58.0</beam-version>
+    </properties>
+    <dependencies>
+        <!-- Apache Beam SDK -->
+        <dependency>
+            <groupId>org.apache.beam</groupId>
+            <artifactId>beam-sdks-java-core</artifactId>
+            <version>${beam-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+	        <groupId>com.google.cloud</groupId>
+	        <artifactId>google-cloud-bigquery</artifactId>
+	        <version>2.29.0</version>
+    	</dependency>
+    	<dependency>
+	        <groupId>org.apache.beam</groupId>
+	        <artifactId>beam-sdks-java-io-google-cloud-platform</artifactId>
+	        <version>2.46.0</version>
+	    </dependency>
+
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>direct</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <!-- Direct Runner for local execution -->
+                <dependency>
+                    <groupId>org.apache.beam</groupId>
+                    <artifactId>beam-runners-direct-java</artifactId>
+                    <version>${beam-version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>dataflow</id>
+            <dependencies>
+                <!-- Dataflow Runner for execution on GCP -->
+                <dependency>
+                    <groupId>org.apache.beam</groupId>
+                    <artifactId>beam-runners-google-cloud-dataflow-java</artifactId>
+                    <version>${beam-version}</version>
+                    <!--<scope>runtime</scope>-->
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.beam</groupId>
+                    <artifactId>beam-sdks-java-io-google-cloud-platform</artifactId>
+                    <version>${beam-version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${project.artifactId}-bundled-${project.version}</finalName>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/LICENSE</exclude>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+# 5. Deploy
+
+First we would need to set the credetials the service account would need to use.
+This command compiles the Java project, then runs the BeamScoreViaOnlyPardo class as a Dataflow job in Google Cloud. The job reads data from a specified input file in GCS, processes it, and writes the transformed data back to another file in GCS, using the DataflowRunner to execute the pipeline on Google Cloud's Dataflow service.
+
+```console
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-file.json"
+
+mvn compile exec:java \
+-Pdataflow \
+-Dexec.mainClass=com.nuneskris.study.beam.BeamScoreViaOnlyPardo \
+-Dexec.cleanupDaemonThreads=false \
+-Dexec.args=" \
+--project=durable-pipe-431319-g7 \
+--region=us-central1 \
+--inputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020.csv \
+--outputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020-Transformed.csv \
+--runner=DataflowRunner"
+```
+1. mvn compile exec:java:
+* mvn compile: This command compiles the project, ensuring that all Java source files are compiled into bytecode.
+* exec:java: This goal runs a Java program that is part of the project using Maven. It's provided by the exec-maven-plugin.
+2. -Pdataflow:
+* This flag specifies the Maven profile to use when executing the command. In this case, it's the dataflow profile. This profile likely includes dependencies and configurations specific to running the job on Google Cloud Dataflow.
+3. -Dexec.mainClass=com.nuneskris.study.beam.BeamScoreViaOnlyPardo:
+  * This flag specifies the fully qualified name of the Java class containing the main method that will be executed. Here, the class is com.nuneskris.study.beam.BeamScoreViaOnlyPardo.
+4. -Dexec.cleanupDaemonThreads=false:
+* This option prevents Maven from attempting to clean up daemon threads upon completion. This is often necessary for long-running tasks or when using certain libraries that spawn threads.
+5. -Dexec.args="...":
+  This flag passes additional arguments to the Java program. These arguments are specific to the Apache Beam pipeline and configure how it runs. Let's break down the arguments:
+--project=durable-pipe-431319-g7: Specifies the Google Cloud project ID where the Dataflow job will run.
+--region=us-central1: Defines the GCP region where the Dataflow job will be executed.
+--inputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020.csv: The input file's location in a Google Cloud Storage (GCS) bucket. The Dataflow job will read data from this file.
+--outputFile=gs://daflow-ingest-kfn-study/IPLMatches2008-2020-Transformed.csv: The output file's location in GCS where the transformed data will be written.
+--runner=DataflowRunner: Specifies that the job should be executed on Google Cloud Dataflow, which is a fully managed service for running Apache Beam pipelines.
+Summary
