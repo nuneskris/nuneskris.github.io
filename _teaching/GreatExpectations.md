@@ -21,6 +21,7 @@ Objectives:
 7. Profiling for multiple tables
 8. Updating Genterated Expectations
 9. Adding Documentation Details
+10. Validate a suite
 
 # 1.Install
 Create a Python virtual environment and run.
@@ -30,6 +31,12 @@ pip install great_expectations
 
 # 2. Code Setup
 Open a notebook from the virtual environment.
+```console
+source /Users/#####/####/python/sklearn-env/bin/activate
+jupyter notebook
+```
+deactivate: when done
+
 ```python
 import great_expectations as gx
 gx.__version__
@@ -300,3 +307,62 @@ context.add_or_update_expectation_suite(expectation_suite=suite)
 ```
 
 ![image](https://github.com/user-attachments/assets/12abcb51-1ea6-4510-b59b-0db52981b566)
+
+# 10. Validate a suite
+
+> When I tried to contine working on the notebook I was getting an error on the data source already existing. I had to delete it from the yml and continue to work.
+
+```python
+from great_expectations.core import ExpectationConfiguration
+
+# Load the existing Expectation Suite
+suite = context.get_expectation_suite(expectation_suite_name="erplanding_addresses_expectation_suite")
+
+# Create a BatchRequest for each table
+batch_request = BatchRequest(
+    datasource_name="kfn_datasource",
+    data_connector_name="default_inferred_data_connector_name",
+    data_asset_name="erp.addresses",
+)
+
+validator = context.get_validator(
+    batch_request=batch_request,
+    expectation_suite=suite
+)
+
+
+validation_result = validator.validate()
+print(validation_result)
+```
+The result is in a JSON which is annoying. I tried to regenerate the docs and that did not work.
+
+![image](https://github.com/user-attachments/assets/f3e19427-19e2-4eb9-89cd-4461fefa18c7)
+
+After a bit of researching.
+
+```python
+from great_expectations.render.renderer import ValidationResultsPageRenderer
+from great_expectations.render.view import DefaultJinjaPageView
+from great_expectations.render.view import DefaultMarkdownPageView
+
+# Render as HTML
+rendered_content = ValidationResultsPageRenderer().render(validation_result)
+html_content = DefaultJinjaPageView().render(rendered_content)
+
+import webbrowser
+import os
+
+# Save the content to an HTML file
+html_file_path = "validation_results.html"
+with open(html_file_path, "w") as file:
+    file.write(html_content)
+
+# Open the file in the default web browser
+webbrowser.open(f"file://{os.path.abspath(html_file_path)}")
+```
+
+VOILA!!!
+
+I had one expectation to fail to know it worked.
+
+![image](https://github.com/user-attachments/assets/789ee2da-032d-40e3-b67e-92b52cd15514)
