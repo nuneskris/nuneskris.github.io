@@ -350,6 +350,14 @@ We canw e job was deployed and also executed.
 
 ![image](https://github.com/user-attachments/assets/fe171b23-f87b-4734-9b45-65d720759ecf)
 
+![image](https://github.com/user-attachments/assets/29f9d79f-1052-414d-8915-c679cabd31e6)
+
+![image](https://github.com/user-attachments/assets/5da7a103-6412-4adc-86e4-25c91a4ca8e2)
+
+
+
+
+
 
 
 
