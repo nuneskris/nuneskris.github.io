@@ -8,6 +8,7 @@ venue: "Beam"
 date: 2024-06-01
 location: "Local"
 ---
+<img width="581" alt="image" src="https://github.com/user-attachments/assets/651cc19a-a639-4197-b155-b55fc1e2100a">
 
 We had performed the same demonstration using SimpleFuntions. Refer [Page](https://nuneskris.github.io/teaching/HelloApacheBeam).  We will be using Pardo Function for this.
 Refer https://github.com/nuneskris/hello-apache-beam for detailed description of the demo without Pardo.
