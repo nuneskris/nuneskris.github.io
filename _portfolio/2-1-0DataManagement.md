@@ -46,27 +46,20 @@ Organizing, cleaning, and enriching the collected data to ensure its quality and
 <img src='/images/portfolio/CurateProcess.png'>
 
 ## Data Cleansing
-Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies. This process includes:
-
-### Error Correction
-Fixing known errors in data (e.g., typos, incorrect values).
-
-### Handling Missing Values
-Imputing, deleting, or flagging missing values.
-
-### Standardization
-Ensuring data follows a common format (e.g., date formats, text casing).
-
-### Deduplication
-Identifying and removing duplicate records.
+Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies.
 
 ### Validation
-Ensuring data conforms to rules and constraints (e.g., data types, ranges).
 
-## Data Annotation
-Adding metadata, tags, or annotations to enhance understanding and usability.
+## Error Handling
+Fixing known errors in data (e.g., typos, incorrect values).
 
-## Data Integration
+## Conform
+Ensuring data follows a common format (e.g., date formats, text casing). Data Annotation Adding metadata, tags, or annotations to enhance understanding and usability.
+
+
+
+
+# Integrate
 Combining data from different sources into a unified dataset.
 
 ## Data Transformation
