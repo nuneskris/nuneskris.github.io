@@ -43,6 +43,8 @@ There has been interesting movement in modern storae layer to enable reality of 
 # Curate
 Organizing, cleaning, and enriching the collected data to ensure its quality and usability. This process involves removing errors, filling gaps, and adding relevant metadata.
 
+<img src='/images/portfolio/CurateProcess.png'>
+
 ## Data Cleansing
 Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies. This process includes:
 
