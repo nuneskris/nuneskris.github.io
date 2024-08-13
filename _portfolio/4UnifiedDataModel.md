@@ -7,7 +7,7 @@ tags:
   - Integrate
 ---
 
-<img width="612" alt="image" src="/images/portfolio/UnifiedDataModel.png">
+<img width="912" alt="image" src="/images/portfolio/UnifiedDataModel.png">
 
 We defined what is [integrated data](https://nuneskris.github.io/portfolio/1-1-2IntegratedData/). We need a model to act like a guide or a map which we can use to navigate how data is structured across the various domains use it to as a guide to integrate these various domains into a single unified view to achive integrated data.
 
