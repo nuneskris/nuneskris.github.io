@@ -1,4 +1,4 @@
-<img width="212" alt="image" src="https://github.com/user-attachments/assets/a2238065-2bc2-4b15-963e-6f6aa2cc7e22">---
+---
 title: "Curate: Data Cleansing"
 collection: publications
 permalink: /publication/CurateDataCleansing
@@ -8,6 +8,7 @@ venue: 'Processing'
 tags:
   - Curate
 ---
+<img width="212" alt="image" src="https://github.com/user-attachments/assets/a2238065-2bc2-4b15-963e-6f6aa2cc7e22">
 
 # Drop Irrelevant Data
 It is importatn to only process data which we want to present for analytics. If there are columns which are not useful either because they are very parse or they do not do not have semantic value because they maybe technical data which is not not useful to understand or interpret the data. Irrelevant data introduces noise, making it harder to extract meaningful insights. By removing unnecessary data, you ensure that your analysis focuses only on the information that is pertinent to the business problem or research question.
