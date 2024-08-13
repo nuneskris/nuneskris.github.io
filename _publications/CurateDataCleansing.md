@@ -9,7 +9,7 @@ tags:
   - Curate
 ---
 
-# Drop Irrelevant Data
+# 1. Drop Irrelevant Data
 It is importatn to only process data which we want to present for analytics. If there are columns which are not useful either because they are very parse or they do not do not have semantic value because they maybe technical data which is not not useful to understand or interpret the data. Irrelevant data introduces noise, making it harder to extract meaningful insights. By removing unnecessary data, you ensure that your analysis focuses only on the information that is pertinent to the business problem or research question.
 
 > CASE STUDY: I had asked a team to perform a quick analysis of the data within a datawarehouse to measure data quality and the team said it was impossible task as there were around 1000 columns in the main tables of the database and it would take to long to make an analysis. However the data analyst made a quick remark saying that many of the columns were not used. We did an quick investigation and we realized more than 70% of the columns were not important to the business but processed into the datawarehouse which was plagued with quality issues. We brought down the focus to 150 columns which we were able to focus on and improve data quality 400% and most importatly increase the credibility of the reports.
@@ -29,7 +29,7 @@ Use the results of the data profiling to work with stakeholders to understand th
 ### Drops Rows 
 
 
-# Format Normalization
+# 2. Format Normalization
 
 ### Apply Proper Precision and Scale
 For numeric fields, ensure the correct precision and scale are applied (e.g., using DECIMAL(10,2) for currency values). I have seen numerals as strings many times which is not accepted. Also know what are integers vs floats etc. I am using the example from Parquet: Modifying float64 to float32 as it would suffice for the values we would need.
@@ -52,19 +52,19 @@ SALESORDERID: int64,CREATEDBY: int64,CREATEDAT: date32[day],CHANGEDBY: int64,CHA
 ```
 
 
-# Semantic Harmonization
+# 3. Semantic Harmonization
 
 ## Column Transformation
 Very often we are required to parsing column text (Strings) to splitting or extracting parts of data (e.g., extracting domain from email, splitting full name into first and last names).
 Also we often would need to combine or merge text from multiple columns to into a single. This will include simple String split based on a char or a regex expression.
 
-#### Column Merging
+### Column Merging
 Combine multiple columns into one. I once had to combine columns for a text processing usecase.
 ```sql
 CONCAT_WS(' ', NAME_FIRST, NAME_MIDDLE, NAME_LAST, NAME_INITIALS) as full_name
 ```
 
-#### Regular Expression Transformations
+### Regular Expression Transformations
 Use expressions on string values
 ```sql
 REGEXP_SUBSTR(
@@ -72,13 +72,13 @@ REGEXP_SUBSTR(
 		(  WEBADDRESS, 'https?://|www\.|/$', ''), '^[^/]+') AS EXTRACTED_DOMAIN
 ```
 
-#### Column Splitting
+### Column Splitting
 Split a column into multiple columns based on a delimiter.
 ``` sql
 SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN
 ```
 
-#### Address formating
+### Address formating
 Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY etc based on the enterprise standard. I have also converted addresses to geographic coordinates (latitude and longitude) using external APIs.
 
 # Structural Standardization
