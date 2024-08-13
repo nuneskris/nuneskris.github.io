@@ -7,7 +7,7 @@ tags:
   - Engineering
   - Management
 ---
-<img width="612" alt="image" src="/images/portfolio/DataManagement.png">
+<img width="1000" alt="image" src="/images/portfolio/DataManagement.png">
 
 We want transform data into information which can lead to business insights by taking data from multiple business functions to make useful and integrated. 
 Now we are getting into the realms where many architecture solutions come into play to realize this. Irrespective of the architecture solution, there are key management capabilities each of them try to solve. They are
