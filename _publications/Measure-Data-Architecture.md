@@ -48,4 +48,7 @@ Organization: A logistics and supply chain company aiming to optimize warehouse 
 |Technology Gaps - Real-Time Data Processing | 2 | The legacy systems do not support real-time data processing, leading to delays in updating inventory levels and shipment status. |
 |Process Gaps - Manual Data Entry | 2 | Reliance on manual data entry introduces errors and inconsistencies, affecting data quality and accuracy. |
 |Process Gaps - Outdated Reporting | 2 | Reports are generated manually and are often outdated, providing limited value for decision-making. |
+|Skills and Knowledge Gaps - Predictive Analytics Expertise | 2 | There is no in-house expertise in predictive analytics to forecast demand, optimize stock levels, or improve warehouse layout. |
+|Skills and Knowledge Gaps - Data Literacy | 2 | Warehouse staff and management lack the skills to interpret data and utilize advanced analytics tools effectively. |
+|Cultural Gaps - Data-Driven Decision-Making | 2 | The organization does not consistently use data to drive decisions in warehouse operations, leading to inefficiencies and missed opportunities for optimization.. |
 
