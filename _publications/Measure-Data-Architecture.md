@@ -31,7 +31,7 @@ Organization: A logistics and supply chain company aiming to optimize warehouse 
 
 ## Current State Assessment
 
-| Dimension | Score | Justification |
+| Dimension | Score | Justification for current capability |
 |-------- |-------- |-------- |
 | Data Collection | 2 | The company collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems. |
 | Data Quality | 3 | There are inconsistencies in inventory data due to manual data entry errors and lack of real-time updates, leading to discrepancies in stock levels. |
@@ -40,4 +40,12 @@ Organization: A logistics and supply chain company aiming to optimize warehouse 
 | Predictive Analytics | 1 | Predictive analytics capabilities are nonexistent. The organization does not forecast demand or optimize warehouse layouts based on data-driven insights. |
 | Data Culture | 3 | Decisions in warehouse operations are predominantly made based on past experiences and intuition rather than data-driven insights. There is a lack of data literacy among warehouse management and staff. |
 
+
+## Identified Gaps
+| Dimension | Score | Justification of Gap |
+|-------- |-------- |-------- |
+|Technology Gaps - Data Integration | 2 | Current systems lack the ability to integrate data from various warehouse operations and enterprise systems, resulting in siloed data that hinders comprehensive analysis. |
+|Technology Gaps - Real-Time Data Processing | 2 | The legacy systems do not support real-time data processing, leading to delays in updating inventory levels and shipment status. |
+|Process Gaps - Manual Data Entry | 2 | Reliance on manual data entry introduces errors and inconsistencies, affecting data quality and accuracy. |
+|Process Gaps - Outdated Reporting | 2 | Reports are generated manually and are often outdated, providing limited value for decision-making. |
 
