@@ -1,4 +1,4 @@
----
+<img width="212" alt="image" src="https://github.com/user-attachments/assets/a2238065-2bc2-4b15-963e-6f6aa2cc7e22">---
 title: "Curate: Data Cleansing"
 collection: publications
 permalink: /publication/CurateDataCleansing
@@ -15,40 +15,21 @@ It is importatn to only process data which we want to present for analytics. If 
 > CASE STUDY: I had asked a team to perform a quick analysis of the data within a datawarehouse to measure data quality and the team said it was impossible task as there were around 1000 columns in the main tables of the database and it would take to long to make an analysis. However the data analyst made a quick remark saying that many of the columns were not used. We did an quick investigation and we realized more than 70% of the columns were not important to the business but processed into the datawarehouse which was plagued with quality issues. We brought down the focus to 150 columns which we were able to focus on and improve data quality 400% and most importatly increase the credibility of the reports.
 
 Removing irrelevant data during the cleansing process is vital for maintaining high data quality, improving analytical performance, and ensuring that the insights derived are accurate and meaningful. It enhances efficiency, simplifies data management, and contributes to better model performance, clearer reporting, and stronger data governance. By eliminating unnecessary noise, the focus remains on the most important and actionable information, leading to more effective and reliable analytics processes.
+## Processing Step
 
-### Step 1: Data Profiling
+### Data Profiling
 As part of the data profiling step which performed in analyzing the source data we would need to flag the data which is incomplte or of low quality might be irrelevant or harmful to the analysis.
 
-### Step 2: Define Relevance Criteria
+### Define Relevance Criteria
 Use the results of the data profiling to work with stakeholders to understand the business context and identify the specific data elements that are not necessary for decision-making. Develop criteria or rules that determine what constitutes relevant versus irrelevant data. These rules can be based on factors such as data attributes, business logic, timeframes, or specific use cases.
 
-### Step 3: Drops Columns
+### Drops Columns
 
 
+### Drops Rows 
 
 
-Use data profiling tools to examine the structure, content, and relationships within your dataset. This helps identify patterns, inconsistencies, and outliers that might indicate irrelevant data.
-Identify Redundant or Outdated Data: Look for data that is duplicated, redundant, or outdated. For example, data entries that have not been updated in a long time or records that are not relevant to the current analysis.
-
-
-
-
-
-## Column Standardization
-Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).  In this step we need to ensure that the data types are consistent and correct any discrepancies. 
-This also includes ***data type conversions** to appropriate types (e.g., string to date, float to integer). Below are common examples
-
-### Renaming Columns
-Change column names for consistency or clarity.
-```sql
- LOGINNAME as USERNAME
-```
-
-### Column Data Type Conversion
-Changing data type is one of the most common column transformations. Ensure that similar date fields across different tables or datasets use the same data type (e.g., use DATE or TIMESTAMP consistently for date fields).
-```sql
-{{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE
-```
+# Format Normalization
 
 ### Apply Proper Precision and Scale
 For numeric fields, ensure the correct precision and scale are applied (e.g., using DECIMAL(10,2) for currency values). I have seen numerals as strings many times which is not accepted. Also know what are integers vs floats etc. I am using the example from Parquet: Modifying float64 to float32 as it would suffice for the values we would need.
@@ -69,6 +50,9 @@ the new updated schema -> abover 3 columns would be updated to float from double
 ----------------------------------------------------------------------------------------------------------
 SALESORDERID: int64,CREATEDBY: int64,CREATEDAT: date32[day],CHANGEDBY: int64,CHANGEDAT: date32[day],FISCVARIANT: string,FISCALYEARPERIOD: int64,PARTNERID: int64,SALESORG: string,CURRENCY: string,GROSSAMOUNT: int32,NETAMOUNT: float,TAXAMOUNT: float,LIFECYCLESTATUS: string,BILLINGSTATUS: string,DELIVERYSTATUS: string
 ```
+
+
+# Semantic Harmonization
 
 ## Column Transformation
 Very often we are required to parsing column text (Strings) to splitting or extracting parts of data (e.g., extracting domain from email, splitting full name into first and last names).
@@ -96,6 +80,29 @@ SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN
 
 #### Address formating
 Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY etc based on the enterprise standard. I have also converted addresses to geographic coordinates (latitude and longitude) using external APIs.
+
+# Structural Standardization
+
+
+## Column Standardization
+Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).  In this step we need to ensure that the data types are consistent and correct any discrepancies. 
+This also includes ***data type conversions** to appropriate types (e.g., string to date, float to integer). Below are common examples
+
+### Renaming Columns
+Change column names for consistency or clarity.
+```sql
+ LOGINNAME as USERNAME
+```
+
+### Column Data Type Conversion
+Changing data type is one of the most common column transformations. Ensure that similar date fields across different tables or datasets use the same data type (e.g., use DATE or TIMESTAMP consistently for date fields).
+```sql
+{{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE
+```
+
+
+
+
 
 ## Consistent Casing and Spacing
 Another common text processing on columns is converting text data to a consistent case (e.g., all lowercase or all uppercase).  Trimming leading, trailing, or excessive in-between spaces.
