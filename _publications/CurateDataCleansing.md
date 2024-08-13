@@ -145,7 +145,7 @@ Anonymization: Masking or anonymizing sensitive data (e.g., replacing names with
 Redaction: Removing or hiding sensitive data (e.g., removing social security numbers).
 
 Aggregating: Summarizing or aggregating data (e.g., total sales per month).
-Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data).<img width="1687" alt="image" src="https://github.com/user-attachments/assets/7b47c26b-ea55-4765-9e68-786e2734f18f">
+Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data)
 
 # 4. Structural Standardization
 
