@@ -43,7 +43,7 @@ Organization: A logistics and supply chain company aiming to optimize warehouse 
 
 ## Identified Capability Gaps
 | Dimension |Gaps | Score | Justification of Gap |
-|-------- |-------- |-------- |
+|-------- |-------- |-------- |-------- |
 |Technology | Data Integration | 2 | Current systems lack the ability to integrate data from various warehouse operations and enterprise systems, resulting in siloed data that hinders comprehensive analysis. |
 |Technology | Real-Time Data Processing | 2 | The legacy systems do not support real-time data processing, leading to delays in updating inventory levels and shipment status. |
 |Process | Manual Data Entry | 2 | Reliance on manual data entry introduces errors and inconsistencies, affecting data quality and accuracy. |
