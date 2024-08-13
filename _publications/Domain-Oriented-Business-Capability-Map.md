@@ -5,7 +5,7 @@ permalink: /publication/Domain-Oriented-Business-Capability-Map
 excerpt: 'Leverage Business Capability Maps for Data Domains'
 ---
 
-<img width="964" alt="image" src="https://github.com/user-attachments/assets/ee54efcc-abb9-4830-bb34-978017e925a4">
+<img width="964" alt="image" src="/images/publications/datadomain.png">
 
 A federated approach to data management, characterized by domain-oriented decentralized data ownership and architecture, represents a relatively new paradigm that addresses many limitations of traditional centralized data management. This approach promotes scalability, flexibility, and responsiveness, and was a core aspect of the data strategy I worked on in 2017.
 
