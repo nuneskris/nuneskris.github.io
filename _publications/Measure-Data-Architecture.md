@@ -38,14 +38,34 @@ Before I explain this phase, I would like to call out that a current state asses
 
 There is a sense of either overestimating or underestimating the current state of an organization or domain's data and analytics capabilities. There a those who atttent conferences and are easily convinced by the sales pitches and under-rate the current capabilities within the oranization. And there are those who are resistent to change and overrate their current capabilities. So it is important to benchmark against similar business and size industry standard. However best practices are there for a reason and there is much wisdom in it. Compare the organization’s current state against industry best practices and standards. Work with vendors to understand and assess an organization's capabilities. Get multiple opinions so that there is no bias.
 
+## What gaps do we measure?
+* Business Performance & Operational Efficiency: Impact on revenue, cost efficiency, customer satisfaction, or other key business metrics such as process efficiency, resource utilization, or productivity.
+* Compliance and Risk: Impact on regulatory compliance, security, or exposure to risks.
+* Technology Alignment: Impact on the alignment of technology with business needs, scalability, and maintainability.
+* Data Quality and Accessibility: Impact on the quality, accuracy, and accessibility of data.
+* User Experience: Impact on the experience of end-users, including usability and satisfaction.
+* Strategic Alignment: Impact on the alignment of the architecture with the organization’s strategic goals and objectives.
+
+## Gap Impact Scoring System
+Measuring the impact of a gap in an architecture using a scale from 1 to 4 (with 1 being Minor and 4 being Extensive) involves evaluating how the gap affects various aspects of the organization's operations, goals, and performance. Here’s a structured approach to assess the impact.
+
+### 4 - Extensive Impact
+The gap severely disrupts or undermines critical business operations, poses a significant risk to the organization, or completely misaligns with strategic objectives. Ex: A gap that prevents the organization from complying with major regulatory requirements, leading to potential fines or legal actions.
+### 3 - Significant Impact
+The gap considerably affects important areas of the business, causing notable inefficiencies, increased costs, or misalignment with key objectives. Ex. A gap that causes frequent system downtime, significantly impacting customer service and satisfaction.
+### 2 - Moderate Impact
+The gap affects some aspects of the business, but the overall impact is manageable. It may cause some inefficiencies or misalignment but does not critically impair operations. Ex: A gap that leads to data inconsistencies, requiring additional manual work to maintain data accuracy but not significantly disrupting operations.
+### 1 - Minor Impact
+The gap has a minimal effect on the organization. It may cause minor inefficiencies or slight misalignment but does not significantly impact overall performance. Ex: A gap that slightly delays reporting processes but does not affect decision-making timelines.
+
 | Dimension | Impact | Justification for current capability |
 |-------- |-------- |-------- |
-| Data Collection | 2 | The company collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems. |
-| Data Quality | 3 | There are inconsistencies in inventory data due to manual data entry errors and lack of real-time updates, leading to discrepancies in stock levels. |
-| Analytics Infrastructure | 3 | High reliance on legacy systems with limited integration capabilities. Most data is stored in siloed databases, and analytics is performed using basic SQL queries and Excel spreadsheets. |
-| Descriptive Analytics | 1 | Basic reports are generated on warehouse performance metrics, such as order fulfillment rates, but these reports are often outdated and lack actionable insights. |
-| Predictive Analytics | 1 | Predictive analytics capabilities are nonexistent. The organization does not forecast demand or optimize warehouse layouts based on data-driven insights. |
-| Data Culture | 3 | Decisions in warehouse operations are predominantly made based on past experiences and intuition rather than data-driven insights. There is a lack of data literacy among warehouse management and staff. |
+| Technology Alignment | 2 | The domain collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems. |
+| Accessibility | 3 | There are inconsistencies in inventory data due to manual data entry errors and lack of real-time updates, leading to discrepancies in stock levels. |
+| Technology Alignment | 3 | High reliance on legacy systems with limited integration capabilities. Most data is stored in siloed databases, and analytics is performed using basic SQL queries and Excel spreadsheets. |
+| Data Quality | 2 | Basic reports are generated on warehouse performance metrics, such as order fulfillment rates, but these reports are often outdated and lack actionable insights. |
+| Business Performance | 1 | Predictive analytics capabilities are nonexistent. The organization does not forecast demand or optimize warehouse layouts based on data-driven insights. |
+| Data Culture | 1 | Decisions in warehouse operations are predominantly made based on past experiences and intuition rather than data-driven insights. There is a lack of data literacy among warehouse management and staff. |
 
 
 # Identified Capability Gaps
