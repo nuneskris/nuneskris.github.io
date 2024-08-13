@@ -18,6 +18,8 @@ Removing irrelevant data during the cleansing process is vital for maintaining h
 
 ***Profile Data and Define Relevance Criteria***: As part of the data profiling step which performed in analyzing the source data we would need to flag the data which is incomplte or of low quality might be irrelevant or harmful to the analysis. Use the results of the data profiling to work with stakeholders to understand the business context and identify the specific data elements that are not necessary for decision-making. Develop criteria or rules that determine what constitutes relevant versus irrelevant data. These rules can be based on factors such as data attributes, business logic, timeframes, or specific use cases.
 
+We are either remove columns completely or we would want to remove rows. However these decisions need to be documented, published and continously reviewed.
+
 # 2. Format Normalization
 
 ### Apply Proper Precision and Scale
@@ -39,7 +41,6 @@ the new updated schema -> abover 3 columns would be updated to float from double
 ----------------------------------------------------------------------------------------------------------
 SALESORDERID: int64,CREATEDBY: int64,CREATEDAT: date32[day],CHANGEDBY: int64,CHANGEDAT: date32[day],FISCVARIANT: string,FISCALYEARPERIOD: int64,PARTNERID: int64,SALESORG: string,CURRENCY: string,GROSSAMOUNT: int32,NETAMOUNT: float,TAXAMOUNT: float,LIFECYCLESTATUS: string,BILLINGSTATUS: string,DELIVERYSTATUS: string
 ```
-
 
 # 3. Semantic Harmonization
 We need to ensure data is consistent in meaning and interpretation across different systems, datasets, or contexts. For example we need to ensure that  "NY," "N.Y.," and "New York" all refer to the same entity. This includes reference data and terms such as "client," "customer," and "consumer" are used consistently across datasets or are mapped to a single, standardized term. Essentially tt involves aligning data values and terminology to a common set of definitions, categories, or standards.
