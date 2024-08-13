@@ -9,6 +9,8 @@ tags:
   - Curate
 ---
 
+<img width="920" alt="image" src="https://github.com/user-attachments/assets/6a80673e-d62b-47d2-a2d0-f25a43f30d69">
+
 # 1. Drop Irrelevant Data
 It is importatn to only process data which we want to present for analytics. If there are columns which are not useful either because they are very parse or they do not do not have semantic value because they maybe technical data which is not not useful to understand or interpret the data. Irrelevant data introduces noise, making it harder to extract meaningful insights. By removing unnecessary data, you ensure that your analysis focuses only on the information that is pertinent to the business problem or research question.
 
@@ -73,7 +75,7 @@ SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN
 ### Address formating
 Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY etc based on the enterprise standard. I have also converted addresses to geographic coordinates (latitude and longitude) using external APIs.
 
-# Structural Standardization
+# 4. Structural Standardization
 
 
 ## Column Standardization
