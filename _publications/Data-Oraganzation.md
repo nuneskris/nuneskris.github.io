@@ -24,13 +24,13 @@ Below is an example of a data domain and some of the dimensions which we typical
 
 # Current State Assessment
 
-|--------|--------|
-|Data Collection| 2 | The company collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems.|
-|Data Quality| 3 |There are inconsistencies in inventory data due to manual data entry errors and lack of real-time updates, leading to discrepancies in stock levels.|
-|Analytics Infrastructure| 3 | The company relies on legacy systems with limited integration capabilities. Most data is stored in siloed databases, and analytics is performed using basic SQL queries and Excel spreadsheets.|
-|Descriptive Analytics| 1 | Basic reports are generated on warehouse performance metrics, such as order fulfillment rates, but these reports are often outdated and lack actionable insights.|
-|Predictive Analytics| 1 | Predictive analytics capabilities are nonexistent. The organization does not forecast demand or optimize warehouse layouts based on data-driven insights.|
-|Data Collection| 3 | Decisions in warehouse operations are predominantly made based on past experiences and intuition rather than data-driven insights. There is a lack of data literacy among warehouse management and staff.|
+|-------- |-------- |-------- |
+| Data Collection | 2 | The company collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems. |
+| Data Quality | 3 | There are inconsistencies in inventory data due to manual data entry errors and lack of real-time updates, leading to discrepancies in stock levels. |
+| Analytics Infrastructure | 3 | The company relies on legacy systems with limited integration capabilities. Most data is stored in siloed databases, and analytics is performed using basic SQL queries and Excel spreadsheets. |
+| Descriptive Analytics | 1 | Basic reports are generated on warehouse performance metrics, such as order fulfillment rates, but these reports are often outdated and lack actionable insights. |
+| Predictive Analytics | 1 | Predictive analytics capabilities are nonexistent. The organization does not forecast demand or optimize warehouse layouts based on data-driven insights. |
+| Data Collection | 3 | Decisions in warehouse operations are predominantly made based on past experiences and intuition rather than data-driven insights. There is a lack of data literacy among warehouse management and staff. |
 
 
 
