@@ -18,12 +18,8 @@ As part of a large transformation program, I was tasked with developing a framew
 
 To achieve this, I employed a four-point scale to evaluate various dimensions of the architecture, as well as its lifecycle stages, from the current state (as-is) to full implementation.
 
-Below is an example of a data domain and some of the metrics used to assess it.
+Below is an example of a data domain and some of the dimensions which we typically manage in any enterprise.
 
 <img width="964" alt="image" src="/images/publications/datadomain.png">
-
-
-
-
 
 
