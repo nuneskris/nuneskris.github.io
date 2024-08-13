@@ -22,7 +22,7 @@ Below are the most common target visions of data and anlytics organizations
 
 As part of a large transformation program, I was tasked with developing a framework to assess our current position and create a roadmap for where we need to go. I quickly realized that this was a politically sensitive endeavor. Rather than relying solely on financial metrics, which are typically used at a portfolio level, we needed a method to provide a more holistic perspective on data management.
 
-To achieve this, I employed a four-point scale to evaluate various dimensions of the architecture, as well as its lifecycle stages, from the current state (as-is) to full implementation.
+To achieve this, I employed a four-point scale to evaluate various dimensions of the architecture, as well as its lifecycle stages, from the current state (as-is) to full implementation. 
 
 Below is an example of a data domain and some of the dimensions which we typically manage in any enterprise.
 
@@ -33,6 +33,10 @@ Achieving escape velocity in collecting data for conducting a strategic gap anal
 Below is an example of a strategic gap analysis focused on the data domain related to warehouse operations within an organization. This analysis identifies the current and desired future states, gaps, and strategic initiatives to close those gaps, aiming to optimize warehouse operations, reduce costs, and improve inventory accuracy through data-driven insights.
 
 # Current State Assessment
+
+Before I explain this phase, I would like to call out that a current state assessment is not a one-time activity. Governance needs to establish a process for regularly reviewing and updating the assessment to reflect changes in the organization and its environment. We need to implement mechanisms for continuous feedback and improvement to ensure that the organization remains aligned with its goals and adapts to evolving needs.
+
+There is a sense of either overestimating or underestimating the current state of an organization or domain's data and analytics capabilities. There a those who atttent conferences and are easily convinced by the sales pitches and under-rate the current capabilities within the oranization. And there are those who are resistent to change and overrate their current capabilities. So it is important to benchmark against similar business and size industry standard. However best practices are there for a reason and there is much wisdom in it. Compare the organization’s current state against industry best practices and standards. Work with vendors to understand and assess an organization's capabilities. Get multiple opinions so that there is no bias.
 
 | Dimension | Score | Justification for current capability |
 |-------- |-------- |-------- |
