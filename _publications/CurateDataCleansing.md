@@ -53,6 +53,8 @@ SALESORDERID: int64,CREATEDBY: int64,CREATEDAT: date32[day],CHANGEDBY: int64,CHA
 
 
 # 3. Semantic Harmonization
+We need to ensure data is consistent in meaning and interpretation across different systems, datasets, or contexts. For example we need to ensure that  "NY," "N.Y.," and "New York" all refer to the same entity. This includes reference data and terms such as "client," "customer," and "consumer" are used consistently across datasets or are mapped to a single, standardized term. Essentially tt involves aligning data values and terminology to a common set of definitions, categories, or standards.
+
 
 ## Column Transformation
 Very often we are required to parsing column text (Strings) to splitting or extracting parts of data (e.g., extracting domain from email, splitting full name into first and last names).
