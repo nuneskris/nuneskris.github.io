@@ -21,10 +21,8 @@ They need to consider esch of these elements
 * ***assumptions*** - the conditions that are believed to be true for the architecture but have not been validated
 * ***constraints*** - limitations that must be adhered to, such as budget, time, technology, or legal restrictions
 * ***domain-specific principles*** - guiding principles specific that influence how architecture
-* ***policies*** - formalized rules that must be followed, often set at the organizational or regulatory level
-* ***standards*** - established norms or specifications that the architecture must comply with
-* ***organization guidelines*** -
-* ***specifications*** -
+* ***≈*** - formalized  that must be followed, often set at the organizational or regulatory level
+* ***policies & standards*** - established norms,  specifications & rules that the architecture must comply with
 
 # [Sandbox: Setting up tools](https://nuneskris.github.io/teaching/)
 Credibility is key to any architect or data leader. This credibility needs to be earned by gaining knowledge of technology not by reading a sales pitch but by experiencing the technology. 
