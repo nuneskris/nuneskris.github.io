@@ -15,12 +15,13 @@ It is importatn to only process data which we want to present for analytics. If 
 > ***CASE STUDY***: I had asked a team to perform a quick analysis of the data within a datawarehouse to measure data quality and the team said it was impossible task as there were around 1000 columns in the main tables of the database and it would take to long to make an analysis. However the data analyst made a quick remark saying that many of the columns were not used. We did an quick investigation and we realized more than 70% of the columns were not important to the business but processed into the datawarehouse which was plagued with quality issues. We brought down the focus to 150 columns which we were able to focus on and improve data quality 400% and most importatly increase the credibility of the reports.
 
 Removing irrelevant data during the cleansing process is vital for maintaining high data quality, improving analytical performance, and ensuring that the insights derived are accurate and meaningful. It enhances efficiency, simplifies data management, and contributes to better model performance, clearer reporting, and stronger data governance. By eliminating unnecessary noise, the focus remains on the most important and actionable information, leading to more effective and reliable analytics processes.
-## Processing Step
 
-### Data Profiling
+## Processing Steps
+
+* Step 1 -  Data Profiling
 As part of the data profiling step which performed in analyzing the source data we would need to flag the data which is incomplte or of low quality might be irrelevant or harmful to the analysis.
 
-### Define Relevance Criteria
+* Step 2 - Define Relevance Criteria
 Use the results of the data profiling to work with stakeholders to understand the business context and identify the specific data elements that are not necessary for decision-making. Develop criteria or rules that determine what constitutes relevant versus irrelevant data. These rules can be based on factors such as data attributes, business logic, timeframes, or specific use cases.
 
 ### Drops Columns
