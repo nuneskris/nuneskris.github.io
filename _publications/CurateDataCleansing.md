@@ -9,7 +9,27 @@ tags:
   - Curate
 ---
 
-Data Cleansing
+# Drop Irrelevant Data
+It is importatn to only process data which we want to present for analytics. If there are columns which are not useful either because they are very parse or they do not do not have semantic value because they maybe technical data which is not not useful to understand or interpret the data. Irrelevant data introduces noise, making it harder to extract meaningful insights. By removing unnecessary data, you ensure that your analysis focuses only on the information that is pertinent to the business problem or research question.
+
+> CASE STUDY: I had asked a team to perform a quick analysis of the data within a datawarehouse to measure data quality and the team said it was impossible task as there were around 1000 columns in the main tables of the database and it would take to long to make an analysis. However the data analyst made a quick remark saying that many of the columns were not used. We did an quick investigation and we realized more than 70% of the columns were not important to the business but processed into the datawarehouse which was plagued with quality issues. We brought down the focus to 150 columns which we were able to focus on and improve data quality 400% and most importatly increase the credibility of the reports.
+
+Removing irrelevant data during the cleansing process is vital for maintaining high data quality, improving analytical performance, and ensuring that the insights derived are accurate and meaningful. It enhances efficiency, simplifies data management, and contributes to better model performance, clearer reporting, and stronger data governance. By eliminating unnecessary noise, the focus remains on the most important and actionable information, leading to more effective and reliable analytics processes.
+
+***Step 1: Data Profiling:****: As part of the data profiling step which performed in analyzing the source data we would need to flag the data which is incomplete or of low quality might be irrelevant or harmful to the analysis.
+
+***Step 2: Define Relevance Criteria:****: Use the results of the data profiling to work with stakeholders to understand the business context and identify the specific data elements that are not necessary for decision-making. Develop criteria or rules that determine what constitutes relevant versus irrelevant data. These rules can be based on factors such as data attributes, business logic, timeframes, or specific use cases.
+
+***Step 3: Drops Columns****:
+
+
+
+Use data profiling tools to examine the structure, content, and relationships within your dataset. This helps identify patterns, inconsistencies, and outliers that might indicate irrelevant data.
+Identify Redundant or Outdated Data: Look for data that is duplicated, redundant, or outdated. For example, data entries that have not been updated in a long time or records that are not relevant to the current analysis.
+
+
+
+
 
 ## Column Standardization
 Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).  In this step we need to ensure that the data types are consistent and correct any discrepancies. 
@@ -114,8 +134,6 @@ Apply transformations based on conditions.
 	END AS ADDRESSTYPE_TRANSFORMED
 ```
 
-#### Column Filtering
-Remove unwanted columns from the dataset. Very often many columns are which are either empty or have only a few values. Work with the business to completely drop them.
 
 #### Handling Missing Values
  Use Nullable Types When Appropriate: If a field can have null values, ensure that the data type allows nulls (e.g., using Nullable<Integer> instead of just Integer). 
@@ -163,8 +181,6 @@ Geocoding: Converting addresses to geographic coordinates (latitude and longitud
 
 Aggregating: Summarizing or aggregating data (e.g., total sales per month).
 Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data).
-
-
 
 Data Correction:
 * Error Correction: Correcting known errors in data (e.g., fixing typos, correcting known incorrect values).
