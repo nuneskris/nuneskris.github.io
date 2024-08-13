@@ -14,14 +14,13 @@ redirect_from:
 I believe that the simpler I can explain things, the more intimate I am with the topic. The better I explain a topic to someone unfamiliar with it, the better I understand it myself. Simple explanations ensure the message is clear and easily understood by a wider audience. Ideas need acceptance from large audiences within the organization to become reality. By simplifying explanations, we make ideas accessible to people with varying expertise, encouraging engagement. This avoids confusion, saves time, and promotes quicker comprehension and decision-making. Simple explanations also help uncover flaws, improve concepts, and aid retention, fostering innovation. This foundation allows for deeper concepts to be built upon.
 
 # [Architecture: How do we manage our data](https://nuneskris.github.io/publications/)
+In the foundation section, I defined a high-level aspirational vision of the data analytics capabilities required to deliver business value. Now, we need frameworks and solution concepts that can consistently deliver these capabilities. It is important to consider various factors that influence how data analytics solutions are designed and implemented.
 
-In the foundation section I defined a high-level aspirational vision of data analytics capabilities required to deliver business value. Now we need frameworks and solution concepts which can consistently deliver these capabilities.It is important to consider various factors that influence how data analytics solutions are designed and implemented. 
-
-They need to consider esch of these elements 
-* ***assumptions*** - the conditions that are believed to be true for the architecture but have not been validated
-* ***constraints*** - limitations that must be adhered to, such as budget, time, technology, or legal restrictions
-* ***domain-specific principles*** - guiding principles specific that influence how architecture
-* ***policies & standards*** - established norms,  specifications & rules that the architecture must comply with
+The architecture needs to consider each of these elements
+* ***assumptions*** - These are conditions believed to be true for the architecture but have not yet been validated.
+* ***constraints*** - These are limitations that must be adhered to, such as budget, time, technology, or legal restrictions.
+* ***domain-specific principles*** - These are guiding principles specific to the domain that influence how the architecture is developed.
+* ***policies & standards*** - These are established norms, specifications, and rules that the architecture must comply with.
 
 # [Sandbox: Setting up tools](https://nuneskris.github.io/teaching/)
 Credibility is key to any architect or data leader. This credibility needs to be earned by gaining knowledge of technology not by reading a sales pitch but by experiencing the technology. 
