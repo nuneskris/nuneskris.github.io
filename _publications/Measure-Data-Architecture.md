@@ -38,7 +38,7 @@ Before I explain this phase, I would like to call out that a current state asses
 
 There is a sense of either overestimating or underestimating the current state of an organization or domain's data and analytics capabilities. There a those who atttent conferences and are easily convinced by the sales pitches and under-rate the current capabilities within the oranization. And there are those who are resistent to change and overrate their current capabilities. So it is important to benchmark against similar business and size industry standard. However best practices are there for a reason and there is much wisdom in it. Compare the organization’s current state against industry best practices and standards. Work with vendors to understand and assess an organization's capabilities. Get multiple opinions so that there is no bias.
 
-| Dimension | Score | Justification for current capability |
+| Dimension | Impact | Justification for current capability |
 |-------- |-------- |-------- |
 | Data Collection | 2 | The company collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems. |
 | Data Quality | 3 | There are inconsistencies in inventory data due to manual data entry errors and lack of real-time updates, leading to discrepancies in stock levels. |
