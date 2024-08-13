@@ -133,9 +133,6 @@ Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY
 
 # 4. Structural Standardization
 
-## Column Standardization
-
-
 ### Renaming Columns
 Change column names for consistency or clarity.
 ```sql
@@ -161,7 +158,7 @@ CASE
 END AS DESCRIPTION
 ```
 
-## Data Deduplication
+# 5. Data Deduplication
 Have continous validation to identify duplicate records using various techniques. Combining duplicate records into a single record or deleting redundant duplicate records.
 
 
