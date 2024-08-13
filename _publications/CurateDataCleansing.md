@@ -11,7 +11,11 @@ tags:
 
 <img width="920" alt="image" src="/images/publications/DataCleansing.png">
 
-# 1. Drop Irrelevant Data
+# Data Cleansing
+
+I have seperate [page](https://nuneskris.github.io/publication/CollectDataProfiling) on Data Profiling the source data in the context of processing the data for analytics.
+
+## 1. Drop Irrelevant Data
 It is importatn to only process data which we want to present for analytics. If there are columns which are not useful either because they are very parse or they do not do not have semantic value because they maybe technical data which is not not useful to understand or interpret the data. Irrelevant data introduces noise, making it harder to extract meaningful insights. By removing unnecessary data, you ensure that your analysis focuses only on the information that is pertinent to the business problem or research question.
 
 > ***CASE STUDY***: I had asked a team to perform a quick analysis of the data within a datawarehouse to measure data quality and the team said it was impossible task as there were around 1000 columns in the main tables of the database and it would take to long to make an analysis. However the data analyst made a quick remark saying that many of the columns were not used. We did an quick investigation and we realized more than 70% of the columns were not important to the business but processed into the datawarehouse which was plagued with quality issues. We brought down the focus to 150 columns which we were able to focus on and improve data quality 400% and most importatly increase the credibility of the reports.
@@ -22,7 +26,7 @@ Removing irrelevant data during the cleansing process is vital for maintaining h
 
 We are either remove columns completely or we would want to remove rows. However these decisions need to be documented, published and continously reviewed.
 
-# 2. Format Normalization
+## 2. Format Normalization
 It is important to convert ***individual data elements*** into a consistent and standardized format. Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).  In this step we need to ensure that the data types are consistent and correct any discrepancies. 
 
 This also includes ***data type conversions** to appropriate types (e.g., string to date, float to integer). Below are common examples. This involves ensuring that all data entries follow the same formatting rules, such as date formats, phone numbers, text case (e.g., upper case vs. lower case), and address formatting. The main goal is to eliminate inconsistencies in how data is represented, making it easier to process, search, and analyze. It also ensures that data can be easily integrated with other systems or datasets that may require specific formats.
@@ -76,20 +80,20 @@ TRIM({{ column }})
 regexp_replace(phone_number, '^(\d{3})(\d{3})(\d{4})$', '+1-\1-\2-\3') as normalized_phone_number,
 ```
 
-# 3. Semantic Harmonization
+## 3. Semantic Harmonization
 We need to ensure data is consistent in meaning and interpretation across different systems, datasets, or contexts. For example we need to ensure that  "NY," "N.Y.," and "New York" all refer to the same entity. This includes reference data and terms such as "client," "customer," and "consumer" are used consistently across datasets or are mapped to a single, standardized term. Essentially tt involves aligning data values and terminology to a common set of definitions, categories, or standards.
 
-## Column Transformation
+### Column Transformation
 Very often we are required to parsing column text (Strings) to splitting or extracting parts of data (e.g., extracting domain from email, splitting full name into first and last names).
 Also we often would need to combine or merge text from multiple columns to into a single. This will include simple String split based on a char or a regex expression.
 
-### Column Merging
+#### Column Merging
 Combine multiple columns into one. I once had to combine columns for a text processing usecase.
 ```sql
 CONCAT_WS(' ', NAME_FIRST, NAME_MIDDLE, NAME_LAST, NAME_INITIALS) as full_name
 ```
 
-### Regular Expression Transformations
+#### Regular Expression Transformations
 Use expressions on string values
 ```sql
 REGEXP_SUBSTR(
@@ -97,12 +101,12 @@ REGEXP_SUBSTR(
 		(  WEBADDRESS, 'https?://|www\.|/$', ''), '^[^/]+') AS EXTRACTED_DOMAIN
 ```
 
-### Column Splitting
+#### Column Splitting
 Split a column into multiple columns based on a delimiter.
 ``` sql
 SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN
 ```
-## New Column Imputation
+### New Column Imputation
 Derive and create a new columns based on existing data to either improve on the existing column.
 
 #### Derivation
@@ -147,7 +151,7 @@ Redaction: Removing or hiding sensitive data (e.g., removing social security num
 Aggregating: Summarizing or aggregating data (e.g., total sales per month).
 Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data)
 
-# 4. Structural Standardization
+## 4. Structural Standardization
 
 ### Renaming Columns
 Change column names for consistency or clarity.
@@ -174,7 +178,7 @@ CASE
 END AS DESCRIPTION
 ```
 
-# 5. Data Deduplication
+## 5. Data Deduplication
 Have continous validation to identify duplicate records using various techniques. Combining duplicate records into a single record or deleting redundant duplicate records.
 
 
