@@ -23,6 +23,9 @@ Removing irrelevant data during the cleansing process is vital for maintaining h
 We are either remove columns completely or we would want to remove rows. However these decisions need to be documented, published and continously reviewed.
 
 # 2. Format Normalization
+It is important to convert ***individual data elements*** into a consistent and standardized format. Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).  In this step we need to ensure that the data types are consistent and correct any discrepancies. 
+
+This also includes ***data type conversions** to appropriate types (e.g., string to date, float to integer). Below are common examples. This involves ensuring that all data entries follow the same formatting rules, such as date formats, phone numbers, text case (e.g., upper case vs. lower case), and address formatting. The main goal is to eliminate inconsistencies in how data is represented, making it easier to process, search, and analyze. It also ensures that data can be easily integrated with other systems or datasets that may require specific formats.
 
 ### Apply Proper Precision and Scale
 For numeric fields, ensure the correct precision and scale are applied (e.g., using DECIMAL(10,2) for currency values). I have seen numerals as strings many times which is not accepted. Also know what are integers vs floats etc. I am using the example from Parquet: Modifying float64 to float32 as it would suffice for the values we would need.
@@ -44,9 +47,37 @@ the new updated schema -> abover 3 columns would be updated to float from double
 SALESORDERID: int64,CREATEDBY: int64,CREATEDAT: date32[day],CHANGEDBY: int64,CHANGEDAT: date32[day],FISCVARIANT: string,FISCALYEARPERIOD: int64,PARTNERID: int64,SALESORG: string,CURRENCY: string,GROSSAMOUNT: int32,NETAMOUNT: float,TAXAMOUNT: float,LIFECYCLESTATUS: string,BILLINGSTATUS: string,DELIVERYSTATUS: string
 ```
 
+### Column Data Type Conversion
+Changing data type is one of the most common column transformations. Ensure that similar date fields across different tables or datasets use the same data type (e.g., use DATE or TIMESTAMP consistently for date fields).
+```sql
+{{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE
+```
+
+### Consistent Casing and Spacing
+Another common text processing on columns is converting text data to a consistent case (e.g., all lowercase or all uppercase).  Trimming leading, trailing, or excessive in-between spaces.
+
+#### String Transformations
+Perform operations like trimming, padding, and case conversion.
+
+```sql
+   UPPER(CITY) AS CITY
+```
+```sql
+initcap(full_name) as normalized_name
+```
+
+#### Trimming Column Text: Medium Descito
+```sql
+TRIM({{ column }})
+```
+
+#### Normalize phone numbers to the format '+1-XXX-XXX-XXXX'
+```sql
+regexp_replace(phone_number, '^(\d{3})(\d{3})(\d{4})$', '+1-\1-\2-\3') as normalized_phone_number,
+```
+
 # 3. Semantic Harmonization
 We need to ensure data is consistent in meaning and interpretation across different systems, datasets, or contexts. For example we need to ensure that  "NY," "N.Y.," and "New York" all refer to the same entity. This includes reference data and terms such as "client," "customer," and "consumer" are used consistently across datasets or are mapped to a single, standardized term. Essentially tt involves aligning data values and terminology to a common set of definitions, categories, or standards.
-
 
 ## Column Transformation
 Very often we are required to parsing column text (Strings) to splitting or extracting parts of data (e.g., extracting domain from email, splitting full name into first and last names).
@@ -71,47 +102,6 @@ Split a column into multiple columns based on a delimiter.
 ``` sql
 SPLIT_PART(EMAILADDRESS, '@', 2) AS EMAILDOMAIN
 ```
-
-### Address formating
-Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY etc based on the enterprise standard. I have also converted addresses to geographic coordinates (latitude and longitude) using external APIs.
-
-# 4. Structural Standardization
-
-
-## Column Standardization
-Format Normalization is key to accelerate development velocity and quality code. We would need to convert data into a common format (e.g., dates to a standard format, converting all text to lowercase).  In this step we need to ensure that the data types are consistent and correct any discrepancies. 
-This also includes ***data type conversions** to appropriate types (e.g., string to date, float to integer). Below are common examples
-
-### Renaming Columns
-Change column names for consistency or clarity.
-```sql
- LOGINNAME as USERNAME
-```
-
-### Column Data Type Conversion
-Changing data type is one of the most common column transformations. Ensure that similar date fields across different tables or datasets use the same data type (e.g., use DATE or TIMESTAMP consistently for date fields).
-```sql
-{{to_date_number_YYYYMMDD('VALIDITY_STARTDATE') }} as VALIDITY_STARTDATE
-```
-
-
-
-
-
-## Consistent Casing and Spacing
-Another common text processing on columns is converting text data to a consistent case (e.g., all lowercase or all uppercase).  Trimming leading, trailing, or excessive in-between spaces.
-#### String Transformations
-Perform operations like trimming, padding, and case conversion.
-
-```sql
-   UPPER(CITY) AS CITY
-```
-
-#### Trimming Column Text: Medium Descito
-```
-TRIM({{ column }})
-```
-
 ## New Column Imputation
 Derive and create a new columns based on existing data to either improve on the existing column.
 
@@ -138,6 +128,19 @@ Apply transformations based on conditions.
 	END AS ADDRESSTYPE_TRANSFORMED
 ```
 
+### Address formating
+Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY etc based on the enterprise standard. I have also converted addresses to geographic coordinates (latitude and longitude) using external APIs.
+
+# 4. Structural Standardization
+
+## Column Standardization
+
+
+### Renaming Columns
+Change column names for consistency or clarity.
+```sql
+ LOGINNAME as USERNAME
+```
 
 #### Handling Missing Values
  Use Nullable Types When Appropriate: If a field can have null values, ensure that the data type allows nulls (e.g., using Nullable<Integer> instead of just Integer). 
