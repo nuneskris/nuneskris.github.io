@@ -21,7 +21,6 @@ They need to consider esch of these elements
 * ***assumptions*** - the conditions that are believed to be true for the architecture but have not been validated
 * ***constraints*** - limitations that must be adhered to, such as budget, time, technology, or legal restrictions
 * ***domain-specific principles*** - guiding principles specific that influence how architecture
-* ***≈*** - formalized  that must be followed, often set at the organizational or regulatory level
 * ***policies & standards*** - established norms,  specifications & rules that the architecture must comply with
 
 # [Sandbox: Setting up tools](https://nuneskris.github.io/teaching/)
