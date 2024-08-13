@@ -56,15 +56,16 @@ Below is an example of a strategic gap analysis focused on the data domain relat
 |Cultural | Data-Driven Decision-Making | 2 | The organization does not consistently use data to drive decisions in warehouse operations, leading to inefficiencies and missed opportunities for optimization. |
 
 # Strategic Initiatives to Close Gaps
-| Domain | Initiative | Score | Justification of Gap |
+Urgency 1 - Low, 2 - Medium, 3 - High, 4 - Urgent
+| Domain | Initiative | Urgency | Justification of Gap |
 |-------- |-------- |-------- |-------- |
-|Technology  | Centralized Data Platform | 2 | Deploy a cloud-based data warehouse that integrates data from warehouse management systems (WMS), enterprise resource planning (ERP) systems, and other relevant sources. This platform should support real-time data processing and advanced analytics. |
+|Technology  | Centralized Data Platform | 3 | Deploy a cloud-based data warehouse that integrates data from warehouse management systems (WMS), enterprise resource planning (ERP) systems, and other relevant sources. This platform should support real-time data processing and advanced analytics. |
 |Technology  | Adopt Real-Time Data Collection Tools | 2 | Implement IoT sensors and automated data collection tools to track inventory levels, equipment usage, and shipment status in real time, reducing reliance on manual data entry. |
-|Process Improvement | Automate Data Quality Management | 2 | Introduce automated data quality checks and validation processes to minimize errors from manual data entry and ensure accurate, consistent data across systems. |
-|Process Improvement | Develop Real-Time Dashboards | 2 | Implement business intelligence (BI) tools like Power BI or Tableau to create real-time dashboards that provide warehouse managers with actionable insights into key performance metrics. |
-|Skill Development | Invest in Predictive Analytics Training | 2 | Provide training to warehouse data analysts and IT staff on predictive modeling techniques, demand forecasting, and optimization algorithms. Consider hiring data scientists with expertise in supply chain analytics. |
+|Process Improvement | Automate Data Quality Management | 4 | Introduce automated data quality checks and validation processes to minimize errors from manual data entry and ensure accurate, consistent data across systems. |
+|Process Improvement | Develop Real-Time Dashboards | 1 | Implement business intelligence (BI) tools like Power BI or Tableau to create real-time dashboards that provide warehouse managers with actionable insights into key performance metrics. |
+|Skill Development | Invest in Predictive Analytics Training | 3 | Provide training to warehouse data analysts and IT staff on predictive modeling techniques, demand forecasting, and optimization algorithms. Consider hiring data scientists with expertise in supply chain analytics. |
 |Skill Development | Enhance Data Literacy | 2 |  Launch data literacy programs targeted at warehouse management and staff to improve their ability to understand and act on data insights. This could include workshops, online courses, and ongoing support. |
-|Cultural Change Initiatives | Promote Data-Driven Decision-Making | 2 |  Encourage a shift towards data-driven decision-making by setting expectations at the leadership level and recognizing teams that successfully implement data-driven strategies. |
-|Cultural Change Initiatives | Foster Collaboration | 2 |  Create cross-functional teams that include data experts and warehouse operations personnel to work together on data-driven projects, such as optimizing warehouse layout or improving inventory accuracy. |
+|Cultural Change Initiatives | Promote Data-Driven Decision-Making | 4 |  Encourage a shift towards data-driven decision-making by setting expectations at the leadership level and recognizing teams that successfully implement data-driven strategies. |
+|Cultural Change Initiatives | Foster Collaboration | 1 |  Create cross-functional teams that include data experts and warehouse operations personnel to work together on data-driven projects, such as optimizing warehouse layout or improving inventory accuracy. |
 
 
