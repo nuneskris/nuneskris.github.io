@@ -12,11 +12,11 @@ tags:
 During my Master’s thesis, I focused on measuring architecture programs within enterprises, which ingrained in me the importance of measurement in all aspects of work. While most metrics may not perfectly capture reality or predict outcomes with complete accuracy, they are certainly better than having no metrics at all.
 
 Below are the most common target visions of data and anlytics organizations
-* Improved Data Integration: Seamless integration of data across warehouse operations, enabling a holistic view of performance and more comprehensive analysis.
-* Higher Data Quality: Automated data quality processes leading to more accurate and consistent data, reducing discrepancies in inventory levels and shipment status.
-* Real-Time Operational Insights: Real-time dashboards and reports that provide actionable insights into warehouse operations, enabling quicker and more informed decision-making.
-* Predictive Analytics Capabilities: The ability to forecast demand, optimize stock levels, and plan warehouse layouts using predictive models, resulting in reduced costs and improved efficiency.
-* Data-Driven Culture: A transformation in how decisions are made in warehouse operations, with data-driven insights guiding strategic and operational decisions.
+* ***Improved Data Integration***: Seamless integration of data across warehouse operations, enabling a holistic view of performance and more comprehensive analysis.
+* ***Higher Data Quality***: Automated data quality processes leading to more accurate and consistent data, reducing discrepancies in inventory levels and shipment status.
+* ***Real-Time Operational Insights***: Real-time dashboards and reports that provide actionable insights into warehouse operations, enabling quicker and more informed decision-making.
+* ***Predictive Analytics Capabilities***: The ability to forecast demand, optimize stock levels, and plan warehouse layouts using predictive models, resulting in reduced costs and improved efficiency.
+* ***Data-Driven Culture***: A transformation in how decisions are made in warehouse operations, with data-driven insights guiding strategic and operational decisions.
 
 [In a page on Data Domains](https://nuneskris.github.io/publication/Domain-Oriented-Business-Capability-Map), I recommended building data domains aligned with business capability maps to support federated data management and governance. However, it’s crucial to ensure consistency in what we measure and how we measure these data domains.
 
