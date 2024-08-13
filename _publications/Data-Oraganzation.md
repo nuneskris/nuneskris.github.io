@@ -24,6 +24,7 @@ Below is an example of a data domain and some of the dimensions which we typical
 
 # Current State Assessment
 
+| Dimension | Score | Justification |
 |-------- |-------- |-------- |
 | Data Collection | 2 | The company collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems. |
 | Data Quality | 3 | There are inconsistencies in inventory data due to manual data entry errors and lack of real-time updates, leading to discrepancies in stock levels. |
