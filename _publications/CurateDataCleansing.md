@@ -161,30 +161,6 @@ END AS DESCRIPTION
 ## Data Deduplication
 Have continous validation to identify duplicate records using various techniques. Combining duplicate records into a single record or deleting redundant duplicate records.
 
-## Perform Data Integrity Checks
-Perform Referential Integrity checks by running queries to confirm that the relationships between tables are maintained (e.g., foreign key constraints). If there are unique constraints which are required we would need perform a checks to ensure that specific columns contain unique values (e.g., email addresses, primary keys).
-
-# Data Validation
-Type Checking: Ensuring data types are correct (e.g., integers, dates).
-Range Checking: Ensuring values fall within a specified range (e.g., age between 0 and 120).
-Format Validation: Ensuring data follows a specific format (e.g., phone numbers, email addresses).
-
-
-
-
-
-# Data Masking:
-Anonymization: Masking or anonymizing sensitive data (e.g., replacing names with pseudonyms, masking credit card numbers).
-Redaction: Removing or hiding sensitive data (e.g., removing social security numbers).
-
-
-
-# Geocoding:
-Standardizing Addresses: Converting addresses to a standard format.
-Geocoding: Converting addresses to geographic coordinates (latitude and longitude).
-
-Aggregating: Summarizing or aggregating data (e.g., total sales per month).
-Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data).
 
 Data Correction:
 * Error Correction: Correcting known errors in data (e.g., fixing typos, correcting known incorrect values).
