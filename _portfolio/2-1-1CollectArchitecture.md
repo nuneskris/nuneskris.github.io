@@ -15,7 +15,7 @@ We will be explain Collect's sub components in this page. I have gone into detai
 
 * [Profile](https://nuneskris.github.io/publication/CollectDataProfiling): Understand the source data's structure and consistency so we can design and plan the data for analytics processing.
 * [Capture](https://nuneskris.github.io/publication/Collect-Data-Capture): Define, isolate and filter only the data which is required for analytics processing.
-* Extract: Move the data from source system into the target system enviorment. (Usually On-prem/Cloud to Cloud).
+* [Extract](https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest): Move the data from source system into the target system enviorment. (Usually On-prem/Cloud to Cloud).
 * [Load](https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/): Loading the data into the analytics processing system incrementally.
 
 # [Data Profiling](https://nuneskris.github.io/publication/CollectDataProfiling)
@@ -72,3 +72,4 @@ I get into the various patterns involved in loading data into the data processin
 * https://nuneskris.github.io/talks/Avro-Parquet-CSV-Gzip
 * https://nuneskris.github.io/publication/Collect-Data-Extraction-Batch
 * https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns
+* https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest
