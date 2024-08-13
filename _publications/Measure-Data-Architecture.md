@@ -50,11 +50,11 @@ Organization: A logistics and supply chain company aiming to optimize warehouse 
 |Process | Outdated Reporting | 2 | Reports are generated manually and are often outdated, providing limited value for decision-making. |
 |Skills and Knowledge|Predictive Analytics Expertise | 2 | There is no in-house expertise in predictive analytics to forecast demand, optimize stock levels, or improve warehouse layout. |
 |Skills and Knowledge | Data Literacy | 2 | Warehouse staff and management lack the skills to interpret data and utilize advanced analytics tools effectively. |
-|Cultural | Data-Driven Decision-Making | 2 | The organization does not consistently use data to drive decisions in warehouse operations, leading to inefficiencies and missed opportunities for optimization.. |
+|Cultural | Data-Driven Decision-Making | 2 | The organization does not consistently use data to drive decisions in warehouse operations, leading to inefficiencies and missed opportunities for optimization. |
 
 ## Strategic Initiatives to Close Gaps
 | Domain | Initiative | Score | Justification of Gap |
-|-------- |-------- |-------- |
+|-------- |-------- |-------- |-------- |
 |Technology  | Centralized Data Platform | 2 | Deploy a cloud-based data warehouse that integrates data from warehouse management systems (WMS), enterprise resource planning (ERP) systems, and other relevant sources. This platform should support real-time data processing and advanced analytics. |
 |Technology  | Adopt Real-Time Data Collection Tools | 2 | Implement IoT sensors and automated data collection tools to track inventory levels, equipment usage, and shipment status in real time, reducing reliance on manual data entry. |
 |Process Improvement | Centralized Data Platform | 2 | Deploy a cloud-based data warehouse that integrates data from warehouse management systems (WMS), enterprise resource planning (ERP) systems, and other relevant sources. This platform should support real-time data processing and advanced analytics. |
