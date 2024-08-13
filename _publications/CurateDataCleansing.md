@@ -2,7 +2,7 @@
 title: "Curate: Data Cleansing"
 collection: publications
 permalink: /publication/CurateDataCleansing
-excerpt: 'TBD'
+excerpt: 'Deliver quality data'
 date: 2024-05-01
 venue: 'Processing'
 tags:
@@ -131,6 +131,22 @@ Apply transformations based on conditions.
 ### Address formating
 Converting addresses to a standard format (STREET, CITY, STATE, ZIPCODE, COUNTRY etc based on the enterprise standard. I have also converted addresses to geographic coordinates (latitude and longitude) using external APIs.
 
+### Error Correction
+Correcting known errors in data (e.g., fixing typos, correcting known incorrect values).
+
+### Outlier Handling
+Identifying and handling outliers (e.g., reviewing and correcting, flagging, or removing).
+
+### Perform Data Integrity Checks
+Perform Referential Integrity checks by running queries to confirm that the relationships between tables are maintained (e.g., foreign key constraints). If there are unique constraints which are required we would need perform a checks to ensure that specific columns contain unique values (e.g., email addresses, primary keys).
+
+### Data Masking:
+Anonymization: Masking or anonymizing sensitive data (e.g., replacing names with pseudonyms, masking credit card numbers).
+Redaction: Removing or hiding sensitive data (e.g., removing social security numbers).
+
+Aggregating: Summarizing or aggregating data (e.g., total sales per month).
+Joining: Merging data from multiple sources or tables (e.g., joining customer data with order data).<img width="1687" alt="image" src="https://github.com/user-attachments/assets/7b47c26b-ea55-4765-9e68-786e2734f18f">
+
 # 4. Structural Standardization
 
 ### Renaming Columns
@@ -162,6 +178,3 @@ END AS DESCRIPTION
 Have continous validation to identify duplicate records using various techniques. Combining duplicate records into a single record or deleting redundant duplicate records.
 
 
-Data Correction:
-* Error Correction: Correcting known errors in data (e.g., fixing typos, correcting known incorrect values).
-* Outlier Handling: Identifying and handling outliers (e.g., reviewing and correcting, flagging, or removing).
