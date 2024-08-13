@@ -23,4 +23,3 @@ I have a page on how we can build an [enterprise wide domain level model](https:
 <img width="964" alt="image" src="/images/publications/datadomain.png">
 
 I have seen very often trying to use relationships across these large level concepts but they truly dont add value to the intended audience and can cause confusion to the model.
-
