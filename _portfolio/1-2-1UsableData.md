@@ -10,7 +10,7 @@ tags:
 
 For data to be usable for analytics purposes, we need it to have an acceptable quality, readily available and easily accessible. 
 
-<img width="612" alt="image" src="/images/portfolio/UsableData.png">
+<img width="912" alt="image" src="/images/portfolio/UsableData.png">
 
 # Discoverable
 But for data consumers who are not savvy with to interact with the data, we would need to go even further to make it usable. I appreaciate Data Mesh for articulating just that. They start with data needing to be Discoverable. Essentially, users would need to centralized regitry (catalog) where they can browse what data is available with enough information about the dataset for them to know if it would be applicable to their needs. 
