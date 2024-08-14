@@ -12,10 +12,10 @@ I've encountered many policy documents that list roles, responsibilities, and po
 
 # Effective Policy Format:
 
-1. Context: Background of the policy.
-2. Decision: The agreed guideline to handle the situation in the context.
-3. Consequence: The ramifications of not adhering to the policy.
-4. Architecture Guidelines: The impact on the architecture.
+1. ***Context***: Background of the policy.
+2. ***Decision***: The agreed guideline to handle the situation in the context.
+3. ***Consequence***: The ramifications of not adhering to the policy.
+4. ***Architecture Guidelines***: The impact on the architecture.
 
 I'll present this format with a simple example below.
 
