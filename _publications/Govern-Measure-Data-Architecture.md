@@ -222,8 +222,7 @@ Not all criteria are equally important. Assign weights to each criterion based o
 ####  Rank the Initiatives
 Rank the initiatives based on their composite scores. Higher scores indicate higher priority. Multiply the score for each criterion by its weight and sum these values to obtain a composite score for each initiative. This will give you an overall ranking of the initiatives.
 
-Score = ∑(Score for Criterion×Weight for Criterion)
-Composite Score=∑(Score for Criterion×Weight for Criterion)
+Composite Score = ∑(Score for Criterion×Weight for Criterion)
 
 Identify any interdependencies between initiatives. For example, some initiatives may need to be completed before others can start. Adjust the prioritization to reflect these dependencies.
 
