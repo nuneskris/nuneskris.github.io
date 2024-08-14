@@ -1,12 +1,14 @@
 ---
 title: "Example of a data architecture policy"
-excerpt: "A more effective format that is both simple and truly serves the intent of a policy"
+excerpt: "A more effective format that is both simple and truly serves the intent of a policy <br/><img src='/images/portfolio/policyexample.png'>"
 collection: portfolio
 venue: 'Vision'
 tags:
   - Governance
   - Management
 ---
+
+<img width="912" alt="image" src="/images/portfolio/policyexample.png">
 
 I've encountered many policy documents that list roles, responsibilities, and policy statements but often feel empty and ineffective. In a conversation with someone in corporate policy, I was guided towards a more effective format that is both simple and truly serves the intent of a policy: guiding decision-making.
 
