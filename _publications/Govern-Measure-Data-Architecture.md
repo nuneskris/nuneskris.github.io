@@ -122,7 +122,9 @@ s****
 * Relevant: A strong data culture ensures that the organization fully leverages its data assets to improve operations.
 * Time-bound: This objective could be made time-bound by setting a target such as "within 9 months."
 
-# 3. Architecture Gaps Analysis
+# 3. Data Architecture Gaps Analysis
+
+<img width="964" alt="image" src="/images/publications/GapsDataAssess.png">
 
 | Gap      | Description |
 | ----------- | ----------- |
@@ -142,7 +144,6 @@ s****
 |  Financial Gaps |  Budgetary Gaps: Insufficient budget to meet operational or strategic needs.<br>Cost Management Gaps: Inefficient cost control leading to overspending or financial waste. <br>Revenue Gaps: Shortfalls in expected revenue or failure to capitalize on revenue opportunities. <br>Investment Gaps: Lack of investment in key areas, such as technology or human resources, affecting growth. <br> Financial Risk Gaps: Exposure to financial risks that are not adequately mitigated. <br> Resource Allocation Gaps: Inefficient allocation of financial resources across projects or departments.<br>ROI Gaps: Poor return on investment for certain initiatives or projects.|
 |  Process Gaps | Process Inefficiencies: Redundant or overly complex processes leading to delays and wasted resources. <br>Lack of Standardization: Inconsistent processes across departments or teams. <br>Compliance Gaps: Processes not aligned with regulatory or industry standards. <br>Automation Gaps: Manual processes that could be automated for greater efficiency. <br>Documentation Gaps: Inadequate or outdated process documentation. <br>Process Alignment Gaps: Misalignment between processes and business objectives. <br>Change Management Gaps: Ineffective handling of process changes or updates. |
 
-
 For each gap, we define the urgency on how quickly the gap needs to be addressed to prevent further issues or capitalize on opportunities.
 Measurement Scale:
 * Low Urgency (1): Can be addressed over time without immediate risk.
@@ -161,7 +162,6 @@ Measurement Scale:
 |Cultural | Data-Driven Decision-Making | 2 | The organization does not consistently use data to drive decisions in warehouse operations, leading to inefficiencies and missed opportunities for optimization. |
 
 # 4. Strategic Initiatives to Close Gaps
-
 
 | Domain | Initiative | Urgency | Justification of Gap |
 |-------- |-------- |-------- |-------- |
