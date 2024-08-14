@@ -108,4 +108,12 @@ Data from source systems have multiple quality issues. One of the most important
 > Coming Soon
 
 # Related Pages
-* https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/
+* [https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture](https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture)
+* [https://nuneskris.github.io/publication/CollectDataProfiling](https://nuneskris.github.io/publication/CollectDataProfiling)
+* [https://nuneskris.github.io/publication/Collect-Data-Capture](https://nuneskris.github.io/publication/Collect-Data-Capture)
+* [https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest](https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest)
+* [https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns](https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns)
+* [https://nuneskris.github.io/publication/DataStore-RawLayer](https://nuneskris.github.io/publication/DataStore-RawLayer)
+* [https://nuneskris.github.io/publication/DataAnalytics-Storage-2024](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024)
+* [https://nuneskris.github.io/portfolio/2-1-2CurateArchitectrure/](https://nuneskris.github.io/portfolio/2-1-2CurateArchitectrure/)
+* [https://nuneskris.github.io/publication/CurateDataCleansing](https://nuneskris.github.io/publication/CurateDataCleansing)
