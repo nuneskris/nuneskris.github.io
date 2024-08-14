@@ -124,7 +124,7 @@ For the gaps defined above Here's how each objective aligns with the SMART crite
 
 | Syntax      | Description |
 | ----------- | ----------- |
-| Data Governance Gaps        | <ul><li>Data Ownership Gaps: Lack of clear ownership for data assets across the organization.</li><li>Data Stewardship Gaps: Insufficient or unclear data stewardship roles and responsibilities.</li></ul> Compliance Gaps: Failure to meet data-related regulatory requirements (e.g., GDPR, CCPA).</li></ul>Data Policy Gaps: Lack of comprehensive data policies covering data privacy, security, usage, and retention. </li></ul> Data Cataloging Gaps: Absence of a centralized data catalog to facilitate data discovery and lineage tracking.</li></ul>|
+| Data Governance Gaps        | <ul><li>Data Ownership Gaps: Lack of clear ownership for data assets across the organization.</li><li>Data Stewardship Gaps: Insufficient or unclear data stewardship roles and responsibilities.</li><li>Compliance Gaps: Failure to meet data-related regulatory requirements (e.g., GDPR, CCPA).</li><li>Data Policy Gaps: Lack of comprehensive data policies covering data privacy, security, usage, and retention.</li><li>Data Cataloging Gaps: Absence of a centralized data catalog to facilitate data discovery and lineage tracking.</li></ul>|
 
 
 
