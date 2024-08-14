@@ -29,10 +29,10 @@ Source systems are typically designed for transaction processing and cannot cura
 
 The sub components to the collect architecture are below.
 
-* Profile: Understand the source data's structure and consistency so we can design and plan the data for analytics processing.
-* Capture: Define, isolate and filter only the data which is required for analytics processing.
-* Extract: Move the data from source system into the target system enviorment. (Usually On-prem/Cloud to Cloud).
-* Load: Loading the data into the analytics processing system incrementally.
+* [Profile](https://nuneskris.github.io/publication/CollectDataProfiling): Understand the source data's structure and consistency so we can design and plan the data for analytics processing.
+* [Capture](https://nuneskris.github.io/publication/Collect-Data-Capture): Define, isolate and filter only the data which is required for analytics processing.
+* [Extract](https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest): Move the data from source system into the target system enviorment. (Usually On-prem/Cloud to Cloud).
+* [Load](https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns): Loading the data into the analytics processing system incrementally.
 
 I get into more details about collect architecture in in this [page](https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/).
 
@@ -60,7 +60,7 @@ Data from source systems have multiple quality issues. One of the most important
 Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies.
 * ***Validation***:
 * ***Error Handling***: Fixing known errors in data (e.g., typos, incorrect values).
-* **** MetaData***:
+* ***MetaData***:
 
 
 # Integrate
