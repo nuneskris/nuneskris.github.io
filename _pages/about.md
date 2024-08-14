@@ -25,7 +25,7 @@ The architecture needs to consider each of these elements
 
 # [Engineering](https://nuneskris.github.io/talks/)
 
-We need a repeatable processes and patterns for designing, building, and maintaining systems that enable the architecture to collect, store, and process large volumes of data. The data pipelines to deliver these processes need to ensure that data is accessible, reliable, and efficiently available for analysis and decision-making. I set out to demonstrate how tools and technologies can realize these processes and patterns through the lifecyle of data from source to destination while maintaining quality, scalability, and security.
+We need repeatable processes and patterns for designing, building, and maintaining systems that enable the architecture to collect, store, and process large volumes of data. These data pipelines must ensure that data is accessible, reliable, and efficiently available for analysis and decision-making. My goal is to demonstrate how tools and technologies can implement these processes and patterns throughout the data lifecycle, from source to destination, while maintaining quality, scalability, and security.
 
 # [Sandbox: Setting up tools](https://nuneskris.github.io/teaching/)
 
