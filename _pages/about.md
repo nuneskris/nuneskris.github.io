@@ -22,8 +22,15 @@ The architecture needs to consider each of these elements
 * ***domain-specific principles*** - These are guiding principles specific to the domain that influence how the architecture is developed.
 * ***policies & standards*** - These are established norms, specifications, and rules that the architecture must comply with.
 
+
+# [Engineering](https://nuneskris.github.io/talks/)
+
+We need a repeatable processes and patterns for designing, building, and maintaining systems that enable the architecture to collect, store, and process large volumes of data. The data pipelines to deliver these processes need to ensure that data is accessible, reliable, and efficiently available for analysis and decision-making. I set out to demonstrate how tools and technologies can realize these processes and patterns through the lifecyle of data from source to destination while maintaining quality, scalability, and security.
+
 # [Sandbox: Setting up tools](https://nuneskris.github.io/teaching/)
+
 Credibility is key to any architect or data leader. This credibility needs to be earned by gaining knowledge of technology not by reading a sales pitch but by experiencing the technology. 
+
 I often find myself lost in my day-to-day deliverables and have difficulty keeping up with evolving tools, especially as data technologies evolve rapidly. 
 Sure, I can look at a demo, but I can truly understand something only when I touch, feel, and experience it. 
 Being able to quickly prototype and test solutions goes a long way in building a concept which I can then build upon and conceptualize how I can fit it into a larger architecture.
@@ -40,8 +47,10 @@ They are more likely to trust and follow the guidance of someone who understands
 At the same time, it also helps to understand complexity and review the true progress of the development team.
 
 # [Patent](https://github.com/nuneskris/nuneskris.github.io/blob/b94aa8beb985c6af1799b7cae283f66870a9ffd4/files/Patent%20Public%20Search%20%7C%20USPTO.pdf)
+
 Background: For Boeing to realize its strategy of expanding to a global workforce, exporting technology data across their engineers and suppliers needs to be tightly controlled by complex license EAR and ITAR agreements with the US government. These license agreements are legal documents which detail what technology data can be exported to which country, organization/individual and under what conditions. These agreements need to be manually read by Boeing’s Global Trade Controls to determine export, which comes with long delays. Automation of extracting the rules and conditions from the documents would reduce these inefficiencies.
  
+
 Technology Challenge: The license agreement which are PDF text or images are a combination of semi structured and full text legal language with multiple document sections dependent on each other. Features or data attributes needed to be extracted from these documents with high accuracy, to build out rules under which technology data can be exported. There was no tool or technology which was available to handle this complexity.
 
 I was responsible to pilot Boeing’s machine learning platform, led a team to build and engineer the solution and finally establish confidence from compliance organization on the viability of the solution. Additionally I have a patent on the solution provided.
