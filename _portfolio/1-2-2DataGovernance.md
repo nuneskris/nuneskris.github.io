@@ -20,7 +20,7 @@ We can't govern everything. We need a platform to prioritize data capabilities b
 # [Performance Management](https://nuneskris.github.io/publication/Govern-Measure-Data-Architecture)
 We also need mechanisms to enforce decisions and measure outcomes within the governable units and measure outcomes from them. ***Managing performance*** based on objectives within governable units ensures the delivery of data management disciplines like data quality, integration, master data, metadata management, and data product management.
 
-# [Policy](https://nuneskris.github.io/portfolio/PolicyExample/)
+# [Policy](https://nuneskris.github.io/portfolio/9-0-0PolicyExample/)
 We have a decent operating model to define structures, arbitrate decisions and manage performance. Now we need binding system of guidelines to guide decisions and achieve outcomes. So we defines policies as statement of intent which includes procedures, standards, mertrics and guidelines. Each of the policies would include the context of the policy, a decision and a consequence of the decision.
 
 The combination of the operating model and policies forms what we call data governance. Various frameworks exist, but they all rely on these two aspects.
