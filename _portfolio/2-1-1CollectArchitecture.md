@@ -39,7 +39,7 @@ However the complexity is in the capturing changes. Below are the key steps to c
 
 I get into details in this page on [Data Capture](https://nuneskris.github.io/publication/Collect-Data-Capture) where I get into recommendations and considerations.
 
-# Data Extraction
+# Data [Extraction](https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest)
 Typically we would capture the data changes as files. Connect to the source systems and ingesting data into the data platform periodically (streaming mode or batch mode). We use terms such as ingest or extract for this. A question which I encounter is whether we apply [minor transformation in extraction queries (Pre-ingest) or extract as is from source (Post-ingest)](https://nuneskris.github.io/publication/Collect-Process-Pre-ingest-vs-post-ingest). Though most situtations we need to extrct data as-is, we need to also keep in mind what makes sense.
 
 ## [Batch Transfer Data](https://nuneskris.github.io/publication/Collect-Data-Extraction-Batch)
@@ -65,7 +65,7 @@ One of the more complicated task in data processing is extracting data which is 
 
 The Target system where the data is loaded can either be a schema-on-write where data needs to be loaded into a schema like relational-like databases or a schema-on-read database like cloud storage or HDFS.
 
-I get into the various patterns involved in loading data into the data processing systems in this [page](https://nuneskris.github.io/portfolio/2-3-1Collect-ExtractLoad-Patterns/).
+I get into the [various patterns involved in loading data into the data processing systems in this page](https://nuneskris.github.io/publication/Collect-ExtractLoad-Patterns).
 
 # Related Pages
 * https://nuneskris.github.io/publication/CollectDataProfiling
