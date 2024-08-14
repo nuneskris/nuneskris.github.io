@@ -123,9 +123,12 @@ For the gaps defined above Here's how each objective aligns with the SMART crite
 # 3. System Gaps Analysis
 
 ---
-hello: ddd
-sddsd: dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>
-
+permalink: /markdown/
+title: "Markdown"
+author_profile: true
+redirect_from: 
+  - /md/
+  - /markdown.html
 ---
 
 
