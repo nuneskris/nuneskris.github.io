@@ -135,23 +135,10 @@ For the gaps defined above Here's how each objective aligns with the SMART crite
 | Data Governance Gaps | <ul><li>Data Ownership Gaps: Lack of clear ownership for data assets across the organization.</li><li>Data Stewardship Gaps: Insufficient or unclear data stewardship roles and responsibilities.</li><li>Compliance Gaps: Failure to meet data-related regulatory requirements (e.g., GDPR, CCPA).</li><li>Data Policy Gaps: Lack of comprehensive data policies covering data privacy, security, usage, and retention.</li><li>Data Cataloging Gaps: Absence of a centralized data catalog to facilitate data discovery and lineage tracking.</li></ul>|
 | Master Data Management (MDM) Gaps | <ul><li>Master Data Governance Gaps: Lack of governance frameworks for managing master data. </li><li>Data Entity Gaps: Gaps in the identification and management of key data entities (e.g., customer, product). </li><li>Data Consistency Gaps: Inconsistent master data across systems leading to operational inefficiencies. </li><li>Hierarchy Management Gaps: Challenges in managing data hierarchies and relationships. </li><li>Data Synchronization Gaps: Inefficiencies in keeping master data synchronized across systems.</li></ul>|
 | Data Analytics Platform Gaps | <ul><li> Platform Usability Gaps: Analytics platforms that are not user-friendly or require extensive technical expertise.</li><li>Performance Gaps: Analytics platforms that do not meet performance expectations (e.g., slow query times). </li><li>Integration Gaps: Challenges in integrating analytics platforms with other enterprise systems. </li><li>Tool Gaps: Missing or outdated tools within the analytics platform. </li><li> Scalability Gaps: Platforms that cannot scale to handle increased data volumes or complexity.</li></ul>|
+|  Data Reporting and Visualization Gaps | <ul><li>Visualization Tool Gaps: Lack of advanced or user-friendly visualization tools. </li><li>Reporting Frequency Gaps: Inadequate reporting frequency that doesn’t meet business needs. </li><li>Customization Gaps: Lack of ability to customize reports and dashboards to meet specific user requirements. </li><li>Mobile Reporting Gaps: Insufficient support for accessing reports and dashboards on mobile devices. </li><li> Interactive Reporting Gaps: Limited interactivity in reports and dashboards for deeper analysis.</li></ul>|
+|  Data Strategy Gaps | <ul><li>Alignment Gaps: Misalignment between data strategy and overall business strategy. </li><li>Innovation Gaps: Lack of innovation in data practices, such as adopting new technologies or methodologies. </li><li>Investment Gaps: Insufficient investment in data and analytics capabilities. </li><li>Roadmap Gaps: Absence of a clear roadmap for developing and enhancing data capabilities. </li></ul>|
+|  Collaboration and Data Sharing Gaps | <ul><li>Data Sharing Gaps: Inefficiencies or barriers to sharing data across departments or with external partners.</li><li>Collaboration Tool Gaps: Lack of tools to facilitate collaboration around data and analytics. </li></ul>|
 
-
-11. Data Reporting and Visualization Gaps
-Visualization Tool Gaps: Lack of advanced or user-friendly visualization tools.
-Reporting Frequency Gaps: Inadequate reporting frequency that doesn’t meet business needs.
-Customization Gaps: Lack of ability to customize reports and dashboards to meet specific user requirements.
-Mobile Reporting Gaps: Insufficient support for accessing reports and dashboards on mobile devices.
-Interactive Reporting Gaps: Limited interactivity in reports and dashboards for deeper analysis.
-12. Data Strategy Gaps
-Alignment Gaps: Misalignment between data strategy and overall business strategy.
-Innovation Gaps: Lack of innovation in data practices, such as adopting new technologies or methodologies.
-Investment Gaps: Insufficient investment in data and analytics capabilities.
-Roadmap Gaps: Absence of a clear roadmap for developing and enhancing data capabilities.
-13. Collaboration and Data Sharing Gaps
-Data Sharing Gaps: Inefficiencies or barriers to sharing data across departments or with external partners.
-Collaboration Tool Gaps: Lack of tools to facilitate collaboration around data and analytics.
-Governance Gaps: Weak governance frameworks for managing collaborative data efforts.
 
 
 | Dimension |Gaps | Score | Justification of Gap |
