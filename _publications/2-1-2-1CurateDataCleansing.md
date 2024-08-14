@@ -3,7 +3,7 @@ title: "Curate: Data Cleansing"
 collection: publications
 permalink: /publication/CurateDataCleansing
 excerpt: 'Deliver quality data'
-date: 2024-05-01
+date: 2024-08-01
 venue: 'Processing'
 tags:
   - Curate
