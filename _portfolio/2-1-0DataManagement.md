@@ -56,18 +56,11 @@ Data from source systems have multiple quality issues. One of the most important
 
 <img src='/images/portfolio/CurateProcess.png'>
 
-## Data Cleansing
+* ***Data Cleansing***:
 Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies.
-
-### Validation
-
-## Error Handling
-Fixing known errors in data (e.g., typos, incorrect values).
-
-## Conform
-Ensuring data follows a common format (e.g., date formats, text casing). Data Annotation Adding metadata, tags, or annotations to enhance understanding and usability.
-
-
+* ***Validation***:
+* ***Error Handling***: Fixing known errors in data (e.g., typos, incorrect values).
+* **** MetaData***:
 
 
 # Integrate
