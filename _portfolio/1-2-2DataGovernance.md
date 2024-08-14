@@ -16,6 +16,7 @@ Like governing anything complex, we break things down into smaller governable un
 
 We can't govern everything. We need a platform to prioritize data capabilities based on business needs, ensuring appropriate sponsorship. These ***decisions*** align with the organization's data strategy, resolving priority conflicts and arbitrating consensus on data description, organization, integration, and sharing.
 
+# [Performance Management](https://nuneskris.github.io/publication/Govern-Measure-Data-Architecture)
 We also need mechanisms to enforce decisions and measure outcomes within the governable units and measure outcomes from them. ***Managing performance*** based on objectives within governable units ensures the delivery of data management disciplines like data quality, integration, master data, metadata management, and data product management.
 
 We have a decent operating model to define structures, arbitrate decisions and manage performance. Now we need binding system of guidelines to guide decisions and achieve outcomes. So we defines policies as statement of intent which includes procedures, standards, mertrics and guidelines. Each of the policies would include the context of the policy, a decision and a consequence of the decision.
