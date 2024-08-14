@@ -45,7 +45,9 @@ I get into more details about collect architecture in in this [page](https://nun
 
 The raw layer is the initial landing zone or area where data is ingested directly from various source systems (e.g., databases, APIs, files, IoT devices). This layer holds the unprocessed, unfiltered data exactly as it was received from the source. We need to organize raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer. 
 
-I have written best practices for this later in this [page](https://nuneskris.github.io/publication/DataStore-RawLayer). Essentially, Data is stored in its native format, without any transformations and it should be desifned to accomodate includes all multiple formats and type of data, often including redundant, irrelevant, or erroneous data. Data should be immutable since it is typically not altered or deleted once it is ingested, ensuring that the raw layer acts as a historical archive.
+> 📝 Note: Essentially, Data is stored in its native format, without any transformations and it should be desifned to accomodate includes all multiple formats and type of data, often including redundant, irrelevant, or erroneous data. Data should be immutable since it is typically not altered or deleted once it is ingested, ensuring that the raw layer acts as a historical archive.
+
+I have written best practices to design the Raw Layer in this [page](https://nuneskris.github.io/publication/DataStore-RawLayer).
 
 ### [Lakehouse Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024)
 There has been interesting movement in modern storae layer to enable reality of a lakehouse. I have a simple explaintion of what I call [Lakehouse (Modern) Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024). There is basically three components of the storage layer in a data analytics architecture. Where are we going to store it? Cloud Storage; How is the data stored? FileFormat; How do we interact with the stored data? Table Format. It is very important to know your storage layer.
@@ -62,11 +64,11 @@ Unlike the raw layer, data in the curated layer must be managed for quality. Mul
 
 ## Integrated Layer
 
-Once data is cleansed and validated in the curation layer, we would need to make it integrated so that it can truly leverage its potenial. The integration layer is where curated data from different sources is combined, aggregated, and transformed into a unified, coherent dataset. This layer needs to supports complex data transformations and is key to creating integrated datasets that provide a single view of entities like customers, products, or transactions.
+Once data is cleansed and validated in the curation layer, it needs to be integrated to fully realize its potential. The integration layer is where curated data from various sources is combined, aggregated, and transformed into a unified, coherent dataset. This layer supports complex data transformations and is crucial for creating integrated datasets that provide a comprehensive view of entities like customers, products, or transactions.
 
-This layer is required to be able to support tools which would need to bring data from multiple sources either logically or physically, run complex data maniplulation queries to integrate and merge the data. 
+The integration layer must support tools that can bring together data from multiple sources—whether logically or physically—and run complex data manipulation queries to merge and harmonize the data.
 
-> Since there can be multiple consumers on the data which is integrated, this layer needs to be highly governened for security, assess and quality.
+> 📝 Note:  Since the integrated data will have multiple consumers, this layer must be highly governed to ensure security, accessibility, and quality. However, typical consumers will extract the data as-is, without modifying it or running complex analytics queries, which are usually performed in the serving layer.
 
 ## Serving Layer
 
