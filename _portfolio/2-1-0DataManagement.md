@@ -53,14 +53,14 @@ I have written best practices for this later in this [page](https://nuneskris.gi
 There has been interesting movement in modern storae layer to enable reality of a lakehouse. I have a simple explaintion of what I call [Lakehouse (Modern) Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024). There is basically three components of the storage layer in a data analytics architecture. Where are we going to store it? Cloud Storage; How is the data stored? FileFormat; How do we interact with the stored data? Table Format. It is very important to know your storage layer.
 
 <a name="Curate"></a>
+
 ## [Curate](https://nuneskris.github.io/portfolio/2-1-2CurateArchitectrure/)
 
 Data from source systems have multiple quality issues. One of the most important objectives of this stage is to improve the quality of the data so it is usable. I explain a simple process to achieve this below and explained in this [page](https://nuneskris.github.io/portfolio/2-1-2CurateArchitectrure/).
 
 <img src='/images/portfolio/CurateProcess.png'>
 
-* ***Data Cleansing***:
-Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies.
+* ***[Data Cleansing](https://nuneskris.github.io/publication/CurateDataCleansing)***: Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies.
 * ***Validation***:
 * ***Error Handling***: Fixing known errors in data (e.g., typos, incorrect values).
 * ***MetaData***:
