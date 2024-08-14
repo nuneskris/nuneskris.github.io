@@ -122,14 +122,10 @@ For the gaps defined above Here's how each objective aligns with the SMART crite
 
 # 3. System Gaps Analysis
 
----
-permalink: /markdown/
-title: "Markdown"
-author_profile: true
-redirect_from: 
-  - /md/
-  - /markdown.html
----
+| Syntax      | Description |
+| ----------- | ----------- |
+| Data Governance Gaps        | <ul><li>Data Ownership Gaps: Lack of clear ownership for data assets across the organization.</li><li>Data Stewardship Gaps: Insufficient or unclear data stewardship roles and responsibilities.</li></ul> Compliance Gaps: Failure to meet data-related regulatory requirements (e.g., GDPR, CCPA).</li></ul>Data Policy Gaps: Lack of comprehensive data policies covering data privacy, security, usage, and retention. </li></ul> Data Cataloging Gaps: Absence of a centralized data catalog to facilitate data discovery and lineage tracking.</li></ul>|
+
 
 
 
@@ -146,6 +142,7 @@ redirect_from:
 
 # 4. Strategic Initiatives to Close Gaps
 Urgency 1 - Low, 2 - Medium, 3 - High, 4 - Urgent
+
 | Domain | Initiative | Urgency | Justification of Gap |
 |-------- |-------- |-------- |-------- |
 |Technology  | Centralized Data Platform | 3 | Deploy a cloud-based data warehouse that integrates data from warehouse management systems (WMS), enterprise resource planning (ERP) systems, and other relevant sources. This platform should support real-time data processing and advanced analytics. |
