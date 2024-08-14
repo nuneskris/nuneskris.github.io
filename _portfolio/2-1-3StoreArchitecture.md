@@ -1,6 +1,6 @@
 ---
 title: "Storage Architecture"
-excerpt: "Storage for Data Analytics: <br/><img src='/images/portfolio/StoreArchitecture.png'>"
+excerpt: "Storage for Data Analytics: Coming Soon <br/><img src='/images/portfolio/StoreArchitecture.png'>"
 collection: portfolio
 venue: 'Data Management'
 tags:
