@@ -120,7 +120,16 @@ For the gaps defined above Here's how each objective aligns with the SMART crite
 * Relevant: A strong data culture ensures that the organization fully leverages its data assets to improve operations.
 * Time-bound: This objective could be made time-bound by setting a target such as "within 9 months."
 
-# Identified Capability Gaps
+# 3. System Gaps Analysis
+
+----
+hello: ddd
+sddsd: dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>dsds<br>
+----
+
+
+
+
 | Dimension |Gaps | Score | Justification of Gap |
 |-------- |-------- |-------- |-------- |
 |Technology | Data Integration | 2 | Current systems lack the ability to integrate data from various warehouse operations and enterprise systems, resulting in siloed data that hinders comprehensive analysis. |
@@ -131,7 +140,7 @@ For the gaps defined above Here's how each objective aligns with the SMART crite
 |Skills and Knowledge | Data Literacy | 2 | Warehouse staff and management lack the skills to interpret data and utilize advanced analytics tools effectively. |
 |Cultural | Data-Driven Decision-Making | 2 | The organization does not consistently use data to drive decisions in warehouse operations, leading to inefficiencies and missed opportunities for optimization. |
 
-# Strategic Initiatives to Close Gaps
+# 4. Strategic Initiatives to Close Gaps
 Urgency 1 - Low, 2 - Medium, 3 - High, 4 - Urgent
 | Domain | Initiative | Urgency | Justification of Gap |
 |-------- |-------- |-------- |-------- |
