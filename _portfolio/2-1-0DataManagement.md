@@ -54,14 +54,14 @@ There has been interesting movement in modern storae layer to enable reality of 
 
 <a name="Curate"></a>
 
-## [Curate](https://nuneskris.github.io/portfolio/2-1-2CurateArchitectrure/)
+# [Curate](https://nuneskris.github.io/portfolio/2-1-2CurateArchitectrure/)
 
 Data from source systems have multiple quality issues. One of the most important objectives of this stage is to improve the quality of the data so it is usable. I explain a simple process to achieve this below and explained in this [page](https://nuneskris.github.io/portfolio/2-1-2CurateArchitectrure/).
 
 <img src='/images/portfolio/CurateProcess.png'>
 
 * ***[Data Cleansing](https://nuneskris.github.io/publication/CurateDataCleansing)***: Data cleansing, also known as data scrubbing, refers specifically to the process of detecting and correcting (or removing) corrupt or inaccurate records from a dataset. The primary goal of data cleansing is to improve data quality by fixing errors and inconsistencies.
-* ***Validation***:
+* ***Validation***: We also would need a process that ensures data is accurate and consistent to ensure it is usable so that it can be trusted by any consumers of the data.
 * ***Error Handling***: Fixing known errors in data (e.g., typos, incorrect values).
 * ***MetaData***:
 
