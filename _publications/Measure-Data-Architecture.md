@@ -2,7 +2,7 @@
 title: "Measure Data Architecture"
 collection: publications
 permalink: /publication/Measure-Data-Architecture
-excerpt: 'Consistency on what we measure and how we measure data domains.'
+excerpt: 'Consistency on what we measure and how we measure data domains. An method with an example scenario'
 tags:
   - Governance
 ---
@@ -70,20 +70,54 @@ The gap has a minimal effect on the organization. It may cause minor inefficienc
 | Data Culture | 1 | Decisions in warehouse operations are predominantly made based on past experiences and intuition rather than data-driven insights. There is a lack of data literacy among warehouse management and staff. |
 
 # Step 2. Defining a relevant and viable furture state.
-Very often organizations define a future state first before assessing the current state. This creates misunderstanding on what the future-state is and why we need it. I recommend that we perform an as-is current state assessment first so that we can define a relevant future state. This future state becomes the objectives and initiatives are creates to resolve them. So it is important that the defined future state be 
+Very often organizations define a future state first before assessing the current state. This creates misunderstanding on what the future-state is and why we need it. I recommend that we perform an as-is current state assessment first so that we can define a relevant future state. This future state becomes the objectives and initiatives are creates to resolve them. 
 
-Mordernize Data Collection: A comprehensive system that automatically collects and integrates data from all warehouse operations, including real-time tracking of inventory levels, shipment status, and equipment usage. 
+So it is important that the defined future state be treated like objectives and define them SMART objectives—Specific, Measurable, Achievable, Relevant, and Time-bound—because they are clearly defined and structured to drive impactful improvements in the organization's operations. 
 
-Data Quality: High data accuracy and consistency, with automated processes to minimize manual entry errors and ensure real-time updates of inventory and operations data.
+## Example Scenario
+For the gaps defined above Here's how each objective aligns with the SMART criteria. I recommend to explicitly call out the SMART criteria and communicate them so that we can get agreement that they are actionable, aligned with business goals, and capable of driving meaningful improvements in warehouse operations.
 
-Analytics Infrastructure: A modern, cloud-based infrastructure that centralizes all warehouse data, supports advanced analytics, and integrates seamlessly with other enterprise systems.
+### 1. Modernize Data Collection
+* Specific: The objective explicitly mentions the creation of a comprehensive system that automates data collection and integration from all warehouse operations.
+* Measurable: Success can be measured by the extent of automation, the number of processes integrated, and the availability of real-time data.
+* Achievable: With the right technology and resources, implementing an automated data collection system is feasible.
+* Relevant: This objective addresses the critical need for real-time and accurate data, which is essential for efficient warehouse operations.
+* Time-bound: Although a specific timeline isn't mentioned, this could be achieved within a set period, such as "within 12 months."
 
-Descriptive Analytics: Real-time dashboards and reports that provide actionable insights into key performance metrics, such as inventory turnover, order accuracy, and warehouse efficiency.
+### 2. Data Quality
+* Specific: The objective focuses on improving data accuracy and consistency while minimizing manual entry errors.
+* Measurable: Data accuracy and consistency can be measured by tracking error rates, the frequency of data updates, and the reduction in manual entries.
+* Achievable: With automated processes and data validation tools, high data quality is an attainable goal.
+* Relevant: Ensuring high data quality is critical for reliable reporting, decision-making, and maintaining operational efficiency.
+* Time-bound: This could be time-bound by specifying that data quality improvements should be realized "within the next 6 months."
 
-Predictive Analytics: Implementation of predictive models for demand forecasting, stock optimization, and warehouse layout planning to improve operational efficiency and reduce costs.
+### 3. Analytics Infrastructure
+* Specific: The objective is to build a modern, cloud-based analytics infrastructure that centralizes warehouse data and integrates with other systems.
+* Measurable: Success can be measured by the implementation of the infrastructure, the centralization of data, and the integration with existing systems.
+* Achievable: Given the availability of cloud solutions and analytics platforms, this objective is realistic with proper planning and resources.
+* Relevant: A robust analytics infrastructure is crucial for supporting advanced analytics, which is vital for modern warehouse operations.
+* Time-bound: A specific timeline, such as "within 18 months," would make this objective time-bound.
 
-Data Culture: A culture where data is the basis for decision-making in warehouse operations. Increased data literacy among staff, enabling them to use analytics tools effectively.
+### 4. Descriptive Analytics
+* Specific: The objective aims to create real-time dashboards and reports that offer insights into key warehouse metrics.
+* Measurable: This can be measured by the number of dashboards created, their usage by staff, and the frequency of real-time updates.
+* Achievable: With existing analytics tools, developing real-time dashboards is feasible.
+* Relevant: Descriptive analytics are essential for monitoring warehouse performance and making informed decisions.
+* Time-bound: This could be specified with a timeline such as "within 6 months."
 
+### 5. Predictive Analytics
+* Specific: The objective focuses on implementing predictive models for demand forecasting, stock optimization, and warehouse layout planning.
+* Measurable: The impact of predictive models can be measured by improvements in forecast accuracy, stock levels, and operational efficiency.
+* Achievable: With advanced analytics tools and data scientists, building predictive models is realistic.
+* Relevant: Predictive analytics can significantly enhance operational efficiency and reduce costs, aligning with strategic goals.
+* Time-bound: A timeline such as "within 12 months" could make this objective time-bound.
+
+### 6. Data Culture
+* Specific: The objective is to foster a data-driven culture where decisions are based on data, and to improve data literacy among staff.
+* Measurable: Success can be measured by the number of staff trained, the frequency of data-driven decisions, and the use of analytics tools.
+* Achievable: With training programs and leadership support, a data-driven culture can be cultivated.
+* Relevant: A strong data culture ensures that the organization fully leverages its data assets to improve operations.
+* Time-bound: This objective could be made time-bound by setting a target such as "within 9 months."
 
 # Identified Capability Gaps
 | Dimension |Gaps | Score | Justification of Gap |
