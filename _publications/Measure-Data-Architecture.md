@@ -32,7 +32,7 @@ Achieving escape velocity in collecting data for conducting a strategic gap anal
 
 Below is an example of a strategic gap analysis focused on the data domain related to warehouse operations within an organization. This analysis identifies the current and desired future states, gaps, and strategic initiatives to close those gaps, aiming to optimize warehouse operations, reduce costs, and improve inventory accuracy through data-driven insights.
 
-# Current State Assessment
+# Step 1. Current State Assessment
 
 Before I explain this phase, I would like to call out that a current state assessment is not a one-time activity. Governance needs to establish a process for regularly reviewing and updating the assessment to reflect changes in the organization and its environment. We need to implement mechanisms for continuous feedback and improvement to ensure that the organization remains aligned with its goals and adapts to evolving needs.
 
@@ -58,6 +58,8 @@ The gap affects some aspects of the business, but the overall impact is manageab
 ### 1 - Minor Impact
 The gap has a minimal effect on the organization. It may cause minor inefficiencies or slight misalignment but does not significantly impact overall performance. Ex: A gap that slightly delays reporting processes but does not affect decision-making timelines.
 
+## Example Scenario
+
 | Dimension | Impact | Justification for current capability |
 |-------- |-------- |-------- |
 | Technology Alignment | 2 | The domain collects basic data on inventory levels, inbound and outbound shipments, and warehouse capacity utilization. However, data from warehouse management systems (WMS) is not fully integrated with enterprise systems. |
@@ -66,6 +68,21 @@ The gap has a minimal effect on the organization. It may cause minor inefficienc
 | Data Quality | 2 | Basic reports are generated on warehouse performance metrics, such as order fulfillment rates, but these reports are often outdated and lack actionable insights. |
 | Business Performance | 1 | Predictive analytics capabilities are nonexistent. The organization does not forecast demand or optimize warehouse layouts based on data-driven insights. |
 | Data Culture | 1 | Decisions in warehouse operations are predominantly made based on past experiences and intuition rather than data-driven insights. There is a lack of data literacy among warehouse management and staff. |
+
+# Step 2. Defining a relevant and viable furture state.
+Very often organizations define a future state first before assessing the current state. This creates misunderstanding on what the future-state is and why we need it. I recommend that we perform an as-is current state assessment first so that we can define a relevant future state. This future state becomes the objectives and initiatives are creates to resolve them. So it is important that the defined future state be 
+
+Mordernize Data Collection: A comprehensive system that automatically collects and integrates data from all warehouse operations, including real-time tracking of inventory levels, shipment status, and equipment usage. 
+
+Data Quality: High data accuracy and consistency, with automated processes to minimize manual entry errors and ensure real-time updates of inventory and operations data.
+
+Analytics Infrastructure: A modern, cloud-based infrastructure that centralizes all warehouse data, supports advanced analytics, and integrates seamlessly with other enterprise systems.
+
+Descriptive Analytics: Real-time dashboards and reports that provide actionable insights into key performance metrics, such as inventory turnover, order accuracy, and warehouse efficiency.
+
+Predictive Analytics: Implementation of predictive models for demand forecasting, stock optimization, and warehouse layout planning to improve operational efficiency and reduce costs.
+
+Data Culture: A culture where data is the basis for decision-making in warehouse operations. Increased data literacy among staff, enabling them to use analytics tools effectively.
 
 
 # Identified Capability Gaps
