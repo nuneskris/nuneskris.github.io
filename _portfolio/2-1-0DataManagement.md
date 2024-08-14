@@ -41,16 +41,35 @@ I get into more details about collect architecture in in this [page](https://nun
 
 <img src='/images/portfolio/StoreArchitecture.png'>
 
-### [Raw Layer](https://nuneskris.github.io/publication/DataStore-RawLayer)
+## [Raw Layer](https://nuneskris.github.io/publication/DataStore-RawLayer)
 
-Stroe data from collection: Gathering and aggregating data from various sources.
+The raw layer is the initial landing zone or area where data is ingested directly from various source systems (e.g., databases, APIs, files, IoT devices). This layer holds the unprocessed, unfiltered data exactly as it was received from the source. We need to organize raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer. 
 
-We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
-
-I have written best practices for this later in this [page](https://nuneskris.github.io/publication/DataStore-RawLayer).
+I have written best practices for this later in this [page](https://nuneskris.github.io/publication/DataStore-RawLayer). Essentially, Data is stored in its native format, without any transformations and it should be desifned to accomodate includes all multiple formats and type of data, often including redundant, irrelevant, or erroneous data. Data should be immutable since it is typically not altered or deleted once it is ingested, ensuring that the raw layer acts as a historical archive.
 
 ### [Lakehouse Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024)
 There has been interesting movement in modern storae layer to enable reality of a lakehouse. I have a simple explaintion of what I call [Lakehouse (Modern) Storage Layer](https://nuneskris.github.io/publication/DataAnalytics-Storage-2024). There is basically three components of the storage layer in a data analytics architecture. Where are we going to store it? Cloud Storage; How is the data stored? FileFormat; How do we interact with the stored data? Table Format. It is very important to know your storage layer.
+
+## Curated Layer
+
+The data in the raw layer is stored in a file and format chosen for ease of extraction and loading into the analytics platform. We have established that the raw layer should be read-only to prevent data corruption and ensure that the data can be reprocessed in case of failures. By its nature, raw data is often not immediately usable for analytics, with quality being a primary concern. Therefore, we require an isolated environment where raw data can be copied and [curated](#Curate) to ensure it is trustworthy and ready for confident use by consumers.
+
+The curation layer within the data analytics platform is where data is cleaned, validated, and enriched. This layer is designed to prepare the raw data for further processing, making it more consistent and reliable.
+
+> 📝 Note: It’s important to note that the data in the curated layer remains isolated within the source data boundaries and is not yet integrated with data from other domains.
+
+Unlike the raw layer, data in the curated layer must be managed for quality. Multiple transformations are applied to clean the data, removing duplicates, errors, and inconsistencies. We also standardize data formats, units of measure, and naming conventions. Finally, this layer must support tools that can validate the quality of the data.
+
+## Integrated Layer
+
+Once data is cleansed and validated in the curation layer, we would need to make it integrated so that it can truly leverage its potenial. The integration layer is where curated data from different sources is combined, aggregated, and transformed into a unified, coherent dataset. This layer needs to supports complex data transformations and is key to creating integrated datasets that provide a single view of entities like customers, products, or transactions.
+
+This layer is required to be able to support tools which would need to bring data from multiple sources either logically or physically, run complex data maniplulation queries to integrate and merge the data. 
+
+> Since there can be multiple consumers on the data which is integrated, this layer needs to be highly governened for security, assess and quality.
+
+## Serving Layer
+
 
 <a name="Curate"></a>
 
