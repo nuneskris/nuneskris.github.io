@@ -1,7 +1,7 @@
 ---
 title: "Measure Data Architecture"
 collection: publications
-permalink: /publication/Measure-Data-Architecture
+permalink: /publication/Govern-Measure-Data-Architecture
 excerpt: 'Consistency on what we measure and how we measure data domains. An method with an example scenario'
 tags:
   - Governance
