@@ -52,4 +52,4 @@ By unifying this data, the company can achieve the following:
 * Consolidated Financial Data: Integrate financial transactions with sales data to analyze revenue and customer spending patterns.
 
 # Related Pages
-* https://nuneskris.github.io/portfolio/1-1-2IntegratedData/
+* [https://nuneskris.github.io/portfolio/1-1-2IntegratedData/](https://nuneskris.github.io/portfolio/1-1-2IntegratedData/)
