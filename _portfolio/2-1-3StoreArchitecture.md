@@ -39,8 +39,10 @@ Once data is cleansed and validated in the curation layer, it needs to be integr
 
 The integration layer must support tools that can bring together data from multiple sources—whether logically or physically—and run complex data manipulation queries to merge and harmonize the data.
 
-> 📝 Note:  Since the integrated data will have multiple consumers, this layer must be highly governed to ensure security, accessibility, and quality. However, typical consumers will extract the data as-is, without modifying it or running complex analytics queries, which are usually performed in the serving layer.
+> 📝 Note:  This is the layer where we would hold the single source of truth and the integrated data will have multiple consumers. This layer must be highly governed to ensure security, accessibility, and quality. However, typical consumers will extract the data as-is, without modifying it or running complex analytics queries, which are usually performed in the serving layer.
 
 ## Serving Layer
 
+The serving layer is the final layer where data is made available for consumption by end-users, applications, or analytics tools. This layer is optimized for fast, reliable access and is tailored to meet the specific needs of different users and use cases. This layer is usually modeled based on the performance guidelines of the query platform and data is often indexed, cached, or partitioned to ensure fast query performance. Data was presented in dimensional star schema when relational databases performed these queries, but mordern query processing systems like Snowflake and Bigquery have moved from star schema to a more flat tables. 
 
+> 📝 Note:  This layer is for consumers are intended to be managed and governed by individual consumers who build data assets in this layer.
