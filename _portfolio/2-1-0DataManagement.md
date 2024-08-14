@@ -67,39 +67,24 @@ Data cleansing, also known as data scrubbing, refers specifically to the process
 
 
 # Integrate
-Combining data from different sources into a unified dataset.
 
-## Data Transformation
-Changing the structure or format of data to make it more useful or compatible.
-
-## Data Preservation
-Ensuring long-term storage and accessibility of data.
-
-## Data Governance
-Establishing policies and procedures to manage data quality, security, and privacy.
-
-# Integrate
-Combining curated data from different sources into a unified view. 
-This involves aligning formats, schemas, and identifiers to ensure consistency and accessibility.
+> Coming Soon
 
 # Share
-Distributing the integrated data to stakeholders, systems, and applications. 
-This enables informed decision-making, collaboration, and operational efficiency.
+
+> Coming Soon
 
 # Organize
-Data Organizing involves structuring and categorizing data in a systematic way to make it more accessible and useful. 
-This includes creating logical and physical data models, defining data hierarchies, and implementing data taxonomies. 
-The goal is to ensure that data is stored efficiently and can be easily retrieved and analyzed.
+
+> Coming Soon
 
 # Describe
-Data Describing refers to the process of documenting data to provide context and meaning. 
-This often involves creating metadata, which includes details like data definitions, data types, relationships, and business rules. 
-Describing data helps users understand its structure, source, and how it should be used, enhancing data transparency and usability.
+
+> Coming Soon
 
 # Implement
-Data Implementing encompasses the deployment of data solutions and systems. 
-This involves setting up databases, data warehouses, data lakes, and other storage solutions, as well as implementing data processing workflows and pipelines. 
-The implementation phase ensures that data infrastructure supports the organization’s data strategy and operational needs. 
+
+> Coming Soon
 
 # Related Pages
 * https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/
