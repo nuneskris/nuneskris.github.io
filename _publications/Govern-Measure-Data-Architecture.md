@@ -10,6 +10,12 @@ tags:
 
 <img width="923" alt="image" src="https://github.com/user-attachments/assets/4ad5c6b2-69c1-4339-81bd-5f44db2a1f52">
 
+# Table of contents
+1. [Introduction](#introduction)
+2. [Some paragraph](#paragraph1)
+    1. [Sub paragraph](#subparagraph1)
+3. [Another paragraph](#paragraph2)
+
 During my Master’s thesis, I focused on measuring architecture programs within enterprises, which ingrained in me the importance of measurement in all aspects of work. While most metrics may not perfectly capture reality or predict outcomes with complete accuracy, they are certainly better than having no metrics at all.
 
 Below are the most common target visions of data and anlytics organizations
@@ -122,7 +128,7 @@ s****
 * Relevant: A strong data culture ensures that the organization fully leverages its data assets to improve operations.
 * Time-bound: This objective could be made time-bound by setting a target such as "within 9 months."
 
-# 3. Data Architecture Gaps Analysis
+# 3. Data Architecture Gaps Analysis  <a name="introduction"></a>
 Below is a Gap Assessment Framework based on the lessons learnt on the multiple programs I have supported.
 
 <img width="964" alt="image" src="/images/publications/GapsDataAssess.png">
