@@ -19,10 +19,9 @@ We want transform data into information which can lead to business insights by t
 Now we are getting into the realms where many architecture solutions come into play to realize this. Irrespective of the architecture solution, there are key management capabilities each of them try to solve.
 
 
-# Data Processing Capabilities.
-
 <a name="Collect"></a>
-## [Collect](https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/)
+
+# [Collect](https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/)
 Source systems are typically designed for transaction processing and cannot curate, transform, or integrate data within themselves. We need to collect data from various sources, such as databases, applications, streams, or external sources, into a data platform for processing. This data is usually collected into cloud storage, which is partitioned into a separate layer of the larger data analytics architecture. This layer is what we call the raw layer and data is stored in it the original source system state.
 
 <img src='/images/portfolio/CollectArchitecture.png'>
@@ -37,9 +36,13 @@ The sub components to the collect architecture are below.
 I get into more details about collect architecture in in this [page](https://nuneskris.github.io/portfolio/2-1-1CollectArchitecture/).
 
 <a name="Store"></a>
-## Store
+
+# Store
+
+<img src='/images/portfolio/StoreArchitecture.png'>
 
 ### [Raw Layer](https://nuneskris.github.io/publication/DataStore-RawLayer)
+
 Stroe data from collection: Gathering and aggregating data from various sources.
 
 We need to compile raw data so that it can be picked up for subsequent processing. We call the data in this stage as raw and the layer in the architecture as raw. We define policies around access, archival, compliance and metadata management in this layer.
