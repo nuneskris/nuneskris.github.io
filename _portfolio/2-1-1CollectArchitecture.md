@@ -47,6 +47,8 @@ The most common scenario we would encouter is to move data in batches. We need t
 
 ## Stream Transfer Data
 
+>Coming Soon
+
 ## [Compresss data](https://nuneskris.github.io/publication/Collect-Data-Extraction-Compress)
 Compressing data during ETL ingestion into the cloud offers several benefits, primarily related to performance, cost, and efficiency. Cloud storage costs are typically based on the amount of data stored. Compressing data reduces its size, leading to lower storage costs. Most importantly, compressed data is smaller, which means it can be transferred more quickly over the network. This is particularly important when moving large volumes of data to the cloud, as it speeds up the ingestion process and reduces the load on network resources.
 
