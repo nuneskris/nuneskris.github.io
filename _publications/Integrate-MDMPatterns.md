@@ -1,7 +1,7 @@
 ---
 title: "MDM Patterns. All are relevant and can coexist"
 collection: publications
-permalink: /publication/MDMPatterns
+permalink: /publication/Integrate-MDMPatterns
 excerpt: 'Leverage Business Capability Maps for Data Domains'
 date: 2024-05-01
 venue: 'Master Data'
