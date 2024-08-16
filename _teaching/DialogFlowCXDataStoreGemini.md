@@ -40,17 +40,15 @@ Select the Data Store App.
 
 Under the Agent Settings, proceed to the Generative AI section, and then to DataStore. 
 
-1. Selected gemini1.0pro001 as the prompt
-2. Allow low score grounding
+1.  Allow low score grounding
+2.  Selected gemini1.0pro001 as the prompt
+3.  Fall back was default to use generative AI
 
 ![image](https://github.com/user-attachments/assets/2adec5ca-8ebe-4481-955e-563dd570fa45)
+![image](https://github.com/user-attachments/assets/de639667-445f-49c9-a5d1-5f77b0e91a58)
 
 # Testing the agent
 ![image](https://github.com/user-attachments/assets/d987a963-4ef7-4cc5-bb38-dab4ef24a708)
-
-
-![image](https://github.com/user-attachments/assets/de639667-445f-49c9-a5d1-5f77b0e91a58)
-
 
 
 
