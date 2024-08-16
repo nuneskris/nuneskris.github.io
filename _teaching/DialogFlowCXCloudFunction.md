@@ -74,6 +74,12 @@ Any way I have added a response.
 
 ## Time to test this
 
+I types Hi, who are you, and it was able to respond the messsage which was configured.
+
+![image](https://github.com/user-attachments/assets/b70d1664-8132-4516-943f-e098b5a11f90)
+
+![image](https://github.com/user-attachments/assets/46e067b2-0ea2-4a53-98c3-2e888c44a173)
+
 
 
 
