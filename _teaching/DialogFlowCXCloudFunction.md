@@ -78,8 +78,34 @@ I types Hi, who are you, and it was able to respond the messsage which was confi
 
 ![image](https://github.com/user-attachments/assets/b70d1664-8132-4516-943f-e098b5a11f90)
 
-![image](https://github.com/user-attachments/assets/46e067b2-0ea2-4a53-98c3-2e888c44a173)
 
+# Now lets route to a new page
+
+I am creating a new intent which will handle questions on the locaiton of the website.
+
+![image](https://github.com/user-attachments/assets/c3b0dccb-67c8-4c96-92ea-a8110484b585)
+
+This will route will transition into a new page.
+
+![image](https://github.com/user-attachments/assets/040d7143-0a75-4301-b33e-b90549d42eb8)
+
+## Entry Fulfillment
+We need to configure what the user reponds when we land on this page when they ask the question about the location of the url.
+ 
+ > Entry fulfillment is the agent response for the end-user when the page initially becomes active
+
+![image](https://github.com/user-attachments/assets/e96772a4-7e98-4492-9f1f-f45e9eee67dd)
+
+## Another page to test routing to 2 pages.
+I am creating another page to learn.
+
+![image](https://github.com/user-attachments/assets/2358a7b8-f7b5-49fa-8171-3ed5d89ab2e1)
+
+## Time to test
+
+The DFCX agent is able to route to the right page.  Another cool observation is we can see the tool uses NLU to understand context and route to the right page even though we were in the site locaion page and it was able to direct the question to the know more page.
+
+![image](https://github.com/user-attachments/assets/24b764dc-7786-4467-bc12-debf6b6af577)
 
 
 
