@@ -51,8 +51,28 @@ For our flow, we have a start page which is default and there is a route by defa
 When we are on a page, we would like to the user's goal or desired action. This is an intent and they are user goals or actions that drive the conversation. Intents help Dialogflow CX understand the user's intent and trigger the appropriate flow of conversation.
 
 When we say Hi on a chatbot, we want our start page to respond with a welcome messsage. 
-So there is component to know what the input message to ***route*** to the intent and what the output response should be accoringly.
+So there is component to know 
+1. what the input message to ***route*** to the intent
+2.  what the output response should be accoringly.
 
+Lets open the intent to figure the above 2 out.
+
+## 1. Training phrases
+This is what we use to trigger route to this intent.
+
+![image](https://github.com/user-attachments/assets/5118de52-0374-4af1-8b72-4d0ac2eb5fac)
+
+I have added 2 more phrases. 
+![image](https://github.com/user-attachments/assets/a5ffbceb-baac-4ce9-abcb-9404eb8436d2)
+
+## 2. Agent Response
+The agent response is what the agent responds. Note this can be configured both at the route and at the intent within the route. This seems to be redundant. But, when I am thinking about it, I am assuming the one on the route has more features like condioning etc. Not sure.
+
+Any way I have added a response.
+
+![image](https://github.com/user-attachments/assets/73f6cad7-4174-4a33-a158-421748c8e6d0)
+
+## Time to test this
 
 
 
