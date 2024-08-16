@@ -121,3 +121,11 @@ I have created entiies on the various topics. We can also create synonyms.
 Configuring a parameter on a page to hold the entity value provided by the user.
 ![image](https://github.com/user-attachments/assets/116303e0-c88e-4c35-b239-9f629060dd29)
 
+Now that we have created a paramter which can hold the entities, we would like to be able to capture them in the users requests. DFCX  automatically annotates the entities in the training phrases. We can see both the entity and the sysnonyms get annontated. Let us test and see if the agent is able to capture this entity in the user request.
+
+The agent response captures the entity by referencing to it via $session.params.sitetopic
+
+I will stop here. I will continue with integration to an external webhook to handle a more complex agent response.
+![image](https://github.com/user-attachments/assets/8d31a4a6-e622-498c-8b41-51381f7274ad)
+
+
