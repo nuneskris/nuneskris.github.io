@@ -108,6 +108,16 @@ The DFCX agent is able to route to the right page.  Another cool observation is 
 ![image](https://github.com/user-attachments/assets/24b764dc-7786-4467-bc12-debf6b6af577)
 
 
+## Parameters and Entities
 
+We would like to use variables which can hold values based on user inputs and use these variables for conditions and flexibility. DFCX terms these variables as parameters and the values as entities.
 
+We will have 2 types of parameters. Topics and components. Topics will be Foundation, architetcure, engineering and sandbox. Components will be Collect, curate, governance, integrate etc. So we can ask what the users want to know about and appropriatlly use these values to route.
+
+I have created entiies on the various topics. We can also create synonyms.
+
+![image](https://github.com/user-attachments/assets/a3a72683-832b-40dc-a130-e615c38f0a20)
+
+Configuring a parameter on a page to hold the entity value provided by the user.
+![image](https://github.com/user-attachments/assets/116303e0-c88e-4c35-b239-9f629060dd29)
 
