@@ -6,9 +6,11 @@ permalink: /talks//ConversationAIDialogflowCXWebhooks
 date: 2024-08-17
 ---
 
-I exaplined [setup of DialogflowCX ](https://nuneskris.github.io/teaching/DialogFlowCXCloudFunction) and exlpained how to create a conversational flow design and demonstrated how NLU can interpret user requests and understand context. I finally used Entities and Intents to navigate and use variables as parameters from the user.
+<img width="690" alt="image" src="https://github.com/user-attachments/assets/9fc73e3e-3afe-4797-b905-0726c671aeaf">
 
-This will not focus on machine learning but will provide integrations to Dialogflow which is an Conversational AI Platform.
+I explained the [setup of DialogflowCX ](https://nuneskris.github.io/teaching/DialogFlowCXCloudFunction) and I explained how to create a conversational flow design and demonstrated how NLU can interpret user requests and understand context. I also used Entities and Intents to navigate and use variables as parameters provided by the user.
+
+This approach does not focus on machine learning but provides integrations with Dialogflow, a Conversational AI Platform.
 
 
 # Cloud Spanner
@@ -149,12 +151,12 @@ We update the Agent reposnse to read the paramter which we send from the cloud f
 
 # Testing this
 
-1. DFCX with NLU understood that the request paramter as for basics for foundation.
-2. DFCX calls the webhooks which calls Cloud Function
-3. Cloud function parses the paremter 'topic'. The value was foundation and call the spanner table.
-4. Spanner table return the url :1,foundation,https://nuneskris.github.io/portfolio/
-5. Cloud Function returns the url to DFCX https://nuneskris.github.io/portfolio/
-6. DFCX responds to the user.
+1. DFCX with NLU interpreted the request parameter as a query for foundational basics.
+2. DFCX then calls a webhook, which triggers a Cloud Function.
+3. The Cloud Function parses the parameter 'topic.' Since the value is 'foundation,' it queries the Spanner table.
+4. The Spanner table returns the following URL: 1, foundation, https://nuneskris.github.io/portfolio/.
+5. The Cloud Function sends the URL back to DFCX: https://nuneskris.github.io/portfolio/.
+6. DFCX responds to the user with the provided URL.
 
 ![image](https://github.com/user-attachments/assets/7f6aa754-4e25-4021-9e16-2db70d6cc43f)
 
