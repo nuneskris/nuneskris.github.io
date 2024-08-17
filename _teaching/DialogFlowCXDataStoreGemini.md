@@ -97,10 +97,8 @@ No difference between High and Low
 
 ![image](https://github.com/user-attachments/assets/ec51c067-6c7a-4900-a168-7b6143772b00)
 
-### Test 2: Question which I have a page but not a paragraph: Passed
+### Test 2: Question which I have a page but not a paragraph: Not sure 
 
-![image](https://github.com/user-attachments/assets/422503cf-3c88-4716-9a4c-41b178c6ce18)
+the answer was less descriptive.
 
-
-
-
+![image](https://github.com/user-attachments/assets/d1e117af-f8b5-49e4-89bc-31c1bfcaab04)
