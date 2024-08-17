@@ -79,9 +79,11 @@ Test 1: Direct questions which I know I have a paragraph on.
 ![image](https://github.com/user-attachments/assets/aab1880a-4576-475a-ab3d-3c05f3efae31)
 
 I did a compare and it made my answer better.
+
 ![image](https://github.com/user-attachments/assets/ee09735d-739e-4119-a659-2b41e17e88a6)
 
 Test 2: Question which I have a page but not a paragraph
+
 ![image](https://github.com/user-attachments/assets/94123333-5d47-408a-8f3e-5fb2d272afbe)
 
 
