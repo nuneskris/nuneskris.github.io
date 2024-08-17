@@ -9,7 +9,11 @@ date: 2024-08-16
 ---
 <img width="740" alt="image" src="https://github.com/user-attachments/assets/5e167eaf-b5f4-486a-a513-0a38214bc7e5">
 
-I will be continuing the sandbox page where I set up DialogFlow CX with a few routes.
+This is a continuation of the DialogFLowCX Sandbox setup which I had detailed in the page: [GCP DialogFlowCX: Setup, Flow, Intent, Entities and Parameters](https://nuneskris.github.io/teaching/DialogFlowCX)
+
+I have built a integration of Cloud Function and Spanner as a Webhook to DiaglowFlowCX in this page: [ConversationAI: Integrating DialogflowCX with backends data sources using webhooks](https://nuneskris.github.io/talks/ConversationAIDialogflowCXWebhooks)
+
+I will be continuing the sandbox in this page to bring in AI Capabilitieis into DialogFlowCX. I will create a Data Store Vertex AI Agent, which can be based on various sources like Cloud Storage, websites, or other data sources. I will be using Cloud Storage. When a user interacts with your agent, the agent would need to access information from the data store or knowledge base to provide a relevant response. Vertex AI provides conversational AI capabilities to the agent's responses to specific information stored in a data store.
 
 # Creat a knowledge base in Cloud Storage
 I copied multiple files from my githubpages over to Cloud Storage.
@@ -50,10 +54,3 @@ Under the Agent Settings, proceed to the Generative AI section, and then to Data
 
 # Testing the agent
 ![image](https://github.com/user-attachments/assets/d987a963-4ef7-4cc5-bb38-dab4ef24a708)
-
-
-
-
-
-
-
