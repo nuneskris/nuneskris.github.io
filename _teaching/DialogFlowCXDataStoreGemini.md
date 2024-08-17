@@ -62,17 +62,12 @@ Grounding means that the agent's responses are not just generic or made up, but 
 
 The "grounding score" is a measure of how confident the system is that the chatbot's response is based on real, factual information from a knowledge base.
   
-## High Grounding Score
-* Dialogflow CX has a high level of confidence that the chatbot's response is grounded in the knowledge base. This means the system has found relevant information in the knowledge base that supports the response.
-* Responses with high grounding scores are more likely to be accurate and factual.
-* Users are more likely to trust a chatbot that provides responses with high grounding scores.
-
 ## Low Grounding Score
 * Dialogflow CX has low confidence that the response is grounded in the knowledge base. This could mean that the system didn't find any relevant information or that the information it found was not very strong.
 * Responses with low grounding scores might be less accurate or might contain information that is not fully supported by the knowledge base.
 * Users might be less likely to trust a chatbot that provides responses with low grounding scores.
 
-Test 1: Direct questions which I know I have a paragraph on.
+### Test 1: Direct questions which I know I have a paragraph on.: Passed
 
 > Side Note: NLU (another component of DialogFlowCX) was not able to handle a spelling mistake which I thought it should have. But maybe not.
 
@@ -82,11 +77,29 @@ I did a compare and it made my answer better.
 
 ![image](https://github.com/user-attachments/assets/ee09735d-739e-4119-a659-2b41e17e88a6)
 
-Test 2: Question which I have a page but not a paragraph
+### Test 2: Question which I have a page but not a paragraph: Passed
 
 ![image](https://github.com/user-attachments/assets/94123333-5d47-408a-8f3e-5fb2d272afbe)
 
 
+A more complex question like best practices would be difficult and it was not able to provide one.
+
+For what is parquet, I dont remember giving such a detailed description on what is parquet. I am wondering if the fall back is kicking in. I will comfirm later.
+
+## High Grounding Score
+* Dialogflow CX has a high level of confidence that the chatbot's response is grounded in the knowledge base. This means the system has found relevant information in the knowledge base that supports the response.
+* Responses with high grounding scores are more likely to be accurate and factual.
+* Users are more likely to trust a chatbot that provides responses with high grounding scores.
+ 
+### Test 1: Direct questions which I know I have a paragraph on.: Not sure
+
+No difference between High and Low
+
+![image](https://github.com/user-attachments/assets/ec51c067-6c7a-4900-a168-7b6143772b00)
+
+### Test 2: Question which I have a page but not a paragraph: Passed
+
+![image](https://github.com/user-attachments/assets/422503cf-3c88-4716-9a4c-41b178c6ce18)
 
 
 
