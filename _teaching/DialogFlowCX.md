@@ -1,12 +1,14 @@
 ---
-title: "GCP DialogFlowCX with CloudFunction Backend"
+title: "GCP DialogFlowCX: Setup, Flow, Intent, Entities and Parameters"
 collection: teaching
 type: "AI/ML"
-permalink: /teaching/DialogFlowCXCloudFunction
+permalink: /teaching/DialogFlowCX
 venue: "DialogflowCX"
 location: "GCP"
 date: 2024-08-16
 ---
+
+<img width="278" alt="image" src="https://github.com/user-attachments/assets/e2ca4dd7-ed02-485b-857d-ed00c8c07899">
 
 # Setup
 * Enable relevant APIs. The console will guide
