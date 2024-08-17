@@ -44,13 +44,48 @@ Select the Data Store App.
 # Selecting the Generative AI which we be applied on the DataStore Agent
 
 Under the Agent Settings, proceed to the Generative AI section, and then to DataStore. 
-
-1.  Allow low score grounding
-2.  Selected gemini1.0pro001 as the prompt
-3.  Fall back was default to use generative AI
+ 
+1. Low Grounding score. Know more below.
+2. Selected gemini1.0pro001 as the prompt
+3. Fall back was default to use generative AI
 
 ![image](https://github.com/user-attachments/assets/de639667-445f-49c9-a5d1-5f77b0e91a58)
 ![image](https://github.com/user-attachments/assets/2adec5ca-8ebe-4481-955e-563dd570fa45)
 
 # Testing the agent
 ![image](https://github.com/user-attachments/assets/d987a963-4ef7-4cc5-bb38-dab4ef24a708)
+
+
+# Playing with Grounding Score
+
+Grounding means that the agent's responses are not just generic or made up, but are grounded in real, factual information retrieved from the data store. In other words, the agent uses the data store to "ground" its responses. This means it retrieves specific information from the data store and uses it to formulate its answers
+
+The "grounding score" is a measure of how confident the system is that the chatbot's response is based on real, factual information from a knowledge base.
+  
+## High Grounding Score
+* Dialogflow CX has a high level of confidence that the chatbot's response is grounded in the knowledge base. This means the system has found relevant information in the knowledge base that supports the response.
+* Responses with high grounding scores are more likely to be accurate and factual.
+* Users are more likely to trust a chatbot that provides responses with high grounding scores.
+
+## Low Grounding Score
+* Dialogflow CX has low confidence that the response is grounded in the knowledge base. This could mean that the system didn't find any relevant information or that the information it found was not very strong.
+* Responses with low grounding scores might be less accurate or might contain information that is not fully supported by the knowledge base.
+* Users might be less likely to trust a chatbot that provides responses with low grounding scores.
+
+Test 1: Direct questions which I know I have a paragraph on.
+
+> Side Note: NLU (another component of DialogFlowCX) was not able to handle a spelling mistake which I thought it should have. But maybe not.
+
+![image](https://github.com/user-attachments/assets/aab1880a-4576-475a-ab3d-3c05f3efae31)
+
+I did a compare and it made my answer better.
+![image](https://github.com/user-attachments/assets/ee09735d-739e-4119-a659-2b41e17e88a6)
+
+Test 2: Question which I have a page but not a paragraph
+![image](https://github.com/user-attachments/assets/94123333-5d47-408a-8f3e-5fb2d272afbe)
+
+
+
+
+
+
