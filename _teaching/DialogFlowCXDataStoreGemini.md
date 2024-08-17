@@ -7,6 +7,7 @@ venue: "DialogflowCX"
 location: "GCP"
 date: 2024-08-16
 ---
+<img width="740" alt="image" src="https://github.com/user-attachments/assets/5e167eaf-b5f4-486a-a513-0a38214bc7e5">
 
 I will be continuing the sandbox page where I set up DialogFlow CX with a few routes.
 
@@ -49,6 +50,8 @@ Under the Agent Settings, proceed to the Generative AI section, and then to Data
 
 # Testing the agent
 ![image](https://github.com/user-attachments/assets/d987a963-4ef7-4cc5-bb38-dab4ef24a708)
+
+
 
 
 
