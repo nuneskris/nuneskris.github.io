@@ -5,6 +5,7 @@ type: "Using Discovery Engine Agent Builder Client to Import Documents into a Ve
 permalink: /talks/DiscoveryEngineAgentBuilderClientImportDocuments
 date: 2024-08-17
 ---
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/ee043f53-cf7c-4fcf-80fd-ccfb4529e2da">
 
 Objectives
 
