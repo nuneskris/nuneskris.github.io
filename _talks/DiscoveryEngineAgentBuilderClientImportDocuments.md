@@ -110,9 +110,13 @@ checking the document
 # 4. Validating if the Dialog Flow has this updated and genterates a result.
 
 now we have a answer
+
 <img width="353" alt="image" src="https://github.com/user-attachments/assets/d18853d1-8602-4eb7-8a41-ee77227f3802">
 
 I would like to compare the original just for kicks.
+
+![image](https://github.com/user-attachments/assets/99cf5861-0a73-4c05-bf7e-e50d57ee41df)
+
 
 
 
