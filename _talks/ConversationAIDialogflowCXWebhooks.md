@@ -2,7 +2,7 @@
 title: 'ConversationAI: Integrating DialogflowCX with backends data sources using webhooks'
 collection: talks
 type: "Integrated backend SQL Spanner data store to DialogflowCX via Cloud Function"
-permalink: /talks//ConversationAIDialogflowCXWebhooks
+permalink: /talks/ConversationAIDialogflowCXWebhooks
 date: 2024-08-17
 ---
 
