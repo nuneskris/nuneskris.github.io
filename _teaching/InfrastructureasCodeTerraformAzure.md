@@ -172,3 +172,33 @@ resource "azurerm_synapse_workspace" "kfn_synapse_workspace" {
 ```
 
 ![image](https://github.com/user-attachments/assets/11ea4fa3-d612-4364-9ad9-7601b69c1550)
+
+## Azure Data Factory
+
+```tf
+resource "azurerm_data_factory" "adf" {
+  name                = "kfnTFDataFactory"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = {
+    environment = "terraform"
+  }
+}
+resource "azurerm_data_factory_linked_service_azure_blob_storage" "blob_storage_linked_service" {
+  name                = "kfnTFblobLinkedService"
+  data_factory_id     = azurerm_data_factory.adf.id
+  connection_string   = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.storage.name};AccountKey=${azurerm_storage_account.storage.primary_access_key};EndpointSuffix=core.windows.net"
+}
+```
+
+Data Factory and Data Set created.
+![image](https://github.com/user-attachments/assets/1832ff2b-cab1-44a0-b5ab-563cba3cf790)
+
+![image](https://github.com/user-attachments/assets/96258f1e-57fd-45d6-8efb-d88f5b1a1010)
+
+
