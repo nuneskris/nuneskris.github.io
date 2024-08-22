@@ -45,18 +45,114 @@ Terragrunt is a tool that acts as a wrapper around Terraform, providing addition
 
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/64287fc0-9b24-4eef-a2a7-e21ee4f7481a">
 
-
-
-
 ### Environment Structure
 * best-practices/infrastructure/live
 * best-practices/infrastructure/live/dev/
 * best-practices/infrastructure/live/prod/
+  
+### parent Terragrunt
 
+```hcl
+# best-practices/infrastructure/live/dev/terragrunt.hcl
+inputs = {
+  location            = "westus2"
+  tenant_id           = "c459871e-5392-4422-8fa5-bc1834d14b9a"
+  environment         = "dev"
+  prefix              = "kfn-study"
+}
+
+# The generate block dynamically creates a provider.tf file within the same directory. 
+# This file configures the Azure provider (azurerm) for Terraform. 
+# The if_exists = "overwrite" option ensures that the provider configuration is always up-to-date.
+generate "provider" {
+  path      = "provider.tf"                   # The name of the file to be generated.
+  if_exists = "overwrite"                     # Ensures the file is overwritten if it already exists.
+  contents  = <<EOF
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"           # Specifies the Azure provider from HashiCorp's registry.
+      version = "~> 3.0.2"                    # Locks the provider version to avoid breaking changes.
+    }
+  }
+  required_version = ">= 1.1.0"               # Ensures Terraform is at least version 1.1.0.
+}
+
+provider "azurerm" {
+  features {}                                 # Enables all necessary provider features.
+}
+EOF
+}
+```
+### module Terragrunt
+```hcl
+# best-practices/infrastructure/live/dev/resource_group/terragrunt.hcl
+include {
+  path = find_in_parent_folders()
+}
+terraform {
+  source = "${get_terragrunt_dir()}/../../../../modules/resource_group"
+}
+inputs = {
+  resource_type     = "rg"
+}
+```
 ### Functional Structure
 * best-practices/infrastructure/modules
 * best-practices/infrastructure/modules/resource-group
 * best-practices/infrastructure/modules/secure
+
+```tf
+# best-practices/modules/resource_group/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "${var.prefix}-${var.resource_type}-${var.environment}"
+  location = var.location
+}
+
+```
+
+```tf
+// Example output (modules/resource_group/outputs.tf)
+output "resource_group_id" {
+  value = azurerm_resource_group.rg.id
+}
+output "resource_group_name" {
+  value = azurerm_resource_group.rg.name
+}
+```
+
+```tf
+// Example for a resource group module (modules/resource_group/variables.tf)  
+variable "prefix" {
+  description = "Prefix indicating the project or organization"
+  type        = string
+  default     = "kfn-study"
+}
+
+variable "resource_type" {
+  description = "Resource type abbreviation (e.g., rg for Resource Group)"
+  type        = string
+  default     = "rg"
+}
+
+variable "environment" {
+  description = "Specifies the environment (e.g., dev, test, prod)"
+  type        = string
+}
+
+variable "location" {
+  description = "Azure region where the resource group should be created"
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
+  default     = "" # You can either keep this empty or remove it if not required anymore
+}
+
+```
+
 
 # Use consistent naming
 Consistent naming convention for resources in Terraform, can construct the name field using a combination of input variables and string interpolation. This allows us to dynamically create resource names that follow our specified naming convention. Here's how we can implement this for your azurerm_resource_group resource
