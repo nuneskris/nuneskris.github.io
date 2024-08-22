@@ -77,7 +77,11 @@ resource "azurerm_storage_account" "storage" {
   }
 }
 ```
-## creating a storage account
+
+![image](https://github.com/user-attachments/assets/baf2d2db-b87d-4884-8173-ae677e02c972)
+
+
+## Creating a Key Vault
 
 ```tf
 # resource "azurerm_key_vault": This block creates an Azure Key Vault. A Key Vault is a secure place where you can store secrets, such as API keys, passwords, or connection strings.
@@ -94,7 +98,6 @@ resource "azurerm_key_vault" "azure_key_vault" {
   tenant_id           = "c459871e-5392-4422-8fa5-bc1834d14b9a"
   sku_name            = "standard"
 }
-
 
 # data "azurerm_key_vault_secret" "synapse_username": This block retrieves a secret from the Key Vault.
 # name = "synapse-username": Specifies the name of the secret you want to retrieve. In this case, it's synapse-username, which would store the username used to access the Synapse Analytics workspace.
@@ -113,7 +116,10 @@ data "azurerm_key_vault_secret" "sqlsynapseanalytics_password" {
   key_vault_id = azurerm_key_vault.azure_key_vault.id
 }
 ```
- 
+ ![image](https://github.com/user-attachments/assets/d815455d-598b-44b8-958e-c57459bf3e16)
+
+ I updated the keys seperately.
+
 ## Creating of Synapse workspace
 
 ```tf
@@ -165,3 +171,4 @@ resource "azurerm_synapse_workspace" "kfn_synapse_workspace" {
 }
 ```
 
+![image](https://github.com/user-attachments/assets/11ea4fa3-d612-4364-9ad9-7601b69c1550)
