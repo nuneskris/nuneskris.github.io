@@ -41,7 +41,12 @@ Modularity in Terraform is a practice that involves organizing your infrastructu
 ![image](https://github.com/user-attachments/assets/ae030fd8-d379-48a5-bdcb-c42debb77a95)
 
 # 5. Use Terragrunt
-Terragrunt is a tool that acts as a wrapper around Terraform, providing additional features to simplify the management of complex infrastructure setups, especially when dealing with multiple environments or shared configurations. Here's how Terragrunt can enhance modularity and configuration management. lets organize how we can use Terragrunt. I will use an example and slowly build on top of it. We need to unify organization of Environment structure along with Functional Strucure. We will use Terragrunt to unify this and orchestrate multiple modular terraforms.
+Terragrunt is a tool that acts as a wrapper around Terraform, providing additional features to simplify the management of complex infrastructure setups, especially when dealing with multiple environments or shared configurations. Here's how Terragrunt can enhance modularity and configuration management. lets organize how we can use Terragrunt. I will use an example and slowly build on top of it. We need to unify organization of Environment structure along with Functional Strucure. We will use Terragrunt to unify this and orchestrate multiple modular terraforms. Below shows how we can orchestrate a terraform file with selective values for variables based on the environment
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/64287fc0-9b24-4eef-a2a7-e21ee4f7481a">
+
+
+
 
 ### Environment Structure
 * best-practices/infrastructure/live
@@ -67,15 +72,18 @@ resource "azurerm_resource_group" "rg" {
 # Backend Configuration
 The backend configuration is critical for managing Terraform state files across different environments. The configuration ensures that state is stored securely and reliably.
 ```hcl
+# The backend configuration is critical for managing Terraform state files across different environments. 
+# The configuration ensures that state is stored securely and reliably.
 generate "backend" {
   path      = "backend.tf"
   if_exists = "overwrite"
   contents  = <<EOF
 terraform {
   backend "azurerm" {
-    storage_account_name = "kfn_terraform_storageaccount" # Azure Storage Account for storing Terraform state.
+    resource_group_name  = "kfn-study-rg-dev"
+    storage_account_name = "kfnterrastorage" # Azure Storage Account for storing Terraform state.
     container_name       = "tfstate"          # The container within the storage account that will hold the state files.
-    key                  = "dev.terraform.tfstate"  #  The name of the state file for the current environment, ensuring that each environment has its own state file.
+    key                  = "terraform.tfstate"  #  The name of the state file for the current environment, ensuring that each environment has its own state file.
   }
 }
 EOF
