@@ -13,10 +13,16 @@ date: 2024-07-01
 Provide outputs for key resource attributes so that they can be easily referenced after deployment. This can achieved by adding outputs whenever majob actions like creates are performed.
 
 ```tf
+// Example output (modules/resource_group/outputs.tf)
 output "resource_group_id" {
   value = azurerm_resource_group.rg.id
 }
+output "resource_group_name" {
+  value = azurerm_resource_group.rg.name
+}
 ```
+![image](https://github.com/user-attachments/assets/ee54b602-d45b-4f18-a343-c0ef84b5a022)
+
 
 # 2. Use Variable
 
@@ -36,7 +42,7 @@ variable "location" {
 ![image](https://github.com/user-attachments/assets/9cec18ac-b5b1-4b8a-8579-eee0c1c42ee2)
 
 # 4. Modularity
-Modularity in Terraform is a practice that involves organizing your infrastructure into smaller, reusable modules. This approach enhances maintainability, promotes reusability, and simplifies the management of large and complex infrastructure.
+Modularity in Terraform is a practice that involves organizing your infrastructure into smaller, reusable modules. This approach enhances maintainability, promotes reusability, and simplifies the management of large and complex infrastructure. Keep environment-specific configurations (like this terragrunt.hcl) separate from the core Terraform modules to enhance reusability and maintainability.
 
 ![image](https://github.com/user-attachments/assets/ae030fd8-d379-48a5-bdcb-c42debb77a95)
 
@@ -59,29 +65,6 @@ inputs = {
   tenant_id           = "c459871e-5392-4422-8fa5-bc1834d14b9a"
   environment         = "dev"
   prefix              = "kfn-study"
-}
-
-# The generate block dynamically creates a provider.tf file within the same directory. 
-# This file configures the Azure provider (azurerm) for Terraform. 
-# The if_exists = "overwrite" option ensures that the provider configuration is always up-to-date.
-generate "provider" {
-  path      = "provider.tf"                   # The name of the file to be generated.
-  if_exists = "overwrite"                     # Ensures the file is overwritten if it already exists.
-  contents  = <<EOF
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"           # Specifies the Azure provider from HashiCorp's registry.
-      version = "~> 3.0.2"                    # Locks the provider version to avoid breaking changes.
-    }
-  }
-  required_version = ">= 1.1.0"               # Ensures Terraform is at least version 1.1.0.
-}
-
-provider "azurerm" {
-  features {}                                 # Enables all necessary provider features.
-}
-EOF
 }
 ```
 ### module Terragrunt
@@ -107,6 +90,11 @@ inputs = {
 resource "azurerm_resource_group" "rg" {
   name     = "${var.prefix}-${var.resource_type}-${var.environment}"
   location = var.location
+  tags = {
+    environment = "dev"                        # Specifies the environment (e.g., dev, test, prod).
+    project     = "kfn-study"                  # Identifies the project or organization.
+    owner       = "krisnunes"                  # The owner or team responsible for the resource.
+  }
 }
 
 ```
@@ -165,9 +153,34 @@ resource "azurerm_resource_group" "rg" {
 
 ```
 
+
 # Backend Configuration
+By generating the provider.tf and backend.tf files dynamically, you ensure that all environments use a consistent configuration, reducing the likelihood of configuration drift.
 The backend configuration is critical for managing Terraform state files across different environments. The configuration ensures that state is stored securely and reliably.
 ```hcl
+
+# The generate block dynamically creates a provider.tf file within the same directory. 
+# This file configures the Azure provider (azurerm) for Terraform. 
+# The if_exists = "overwrite" option ensures that the provider configuration is always up-to-date.
+generate "provider" {
+  path      = "provider.tf"                   # The name of the file to be generated.
+  if_exists = "overwrite"                     # Ensures the file is overwritten if it already exists.
+  contents  = <<EOF
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"           # Specifies the Azure provider from HashiCorp's registry.
+      version = "~> 3.0.2"                    # Locks the provider version to avoid breaking changes.
+    }
+  }
+  required_version = ">= 1.1.0"               # Ensures Terraform is at least version 1.1.0.
+}
+
+provider "azurerm" {
+  features {}                                 # Enables all necessary provider features.
+}
+EOF
+}
 # The backend configuration is critical for managing Terraform state files across different environments. 
 # The configuration ensures that state is stored securely and reliably.
 generate "backend" {
@@ -185,3 +198,7 @@ terraform {
 EOF
 }
 ```
+# Tags and Metadata
+Tags and metadata should be consistently applied to all resources for easier management, billing, and compliance tracking.
+
+```hcl
