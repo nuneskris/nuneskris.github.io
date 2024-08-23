@@ -1,5 +1,5 @@
 ---
-title: "Terraform best practices - Simple enough which all projects need to include"
+title: "10 Terraform best practices - Simple enough and all projects need to include"
 collection: talks
 type: "Infrastructure as code"
 permalink: /talks/TerraformBestPractices
