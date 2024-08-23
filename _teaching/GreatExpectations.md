@@ -19,7 +19,7 @@ Objectives:
 5. Profiling to create generate baseinformation on the tables
 6. Generating Documentation
 7. Profiling for multiple tables
-8. Updating Genterated Expectations
+8. Updating Generated Expectations
 9. Adding Documentation Details
 10. Validate a suite
 
@@ -59,7 +59,7 @@ The key file is the great_expectations.yml which will hold the details of the pr
 # Connecting to a Snowflake database using a connection string based on the below
 # my_connection_string = "snowflake://<USER_NAME>:<PASSWORD>@<ACCOUNT_NAME_OR_LOCATOR>/<DATABASE_NAME>/<SCHEMA_NAME>?warehouse=<WAREHOUSE_NAME>&role=<ROLE_NAME>"
 # A DataConnector defines how to access data from your datasource. For SQL datasources like Snowflake, you might use a ConfiguredAssetSqlDataConnector or a RuntimeDataConnector.
-connection_string = "snowflake://nuneskris:Gracesnow1982@wzb29778/DB_PRESTAGE/ERP?warehouse=compute_wh&role=ACCOUNTADMIN&application=great_expectations_oss"
+connection_string = "snowflake://nuneskris:passrowd@wzb29778/DB_PRESTAGE/ERP?warehouse=compute_wh&role=ACCOUNTADMIN&application=great_expectations_oss"
 datasource_config = {
     "name": "kfn_datasource",
     "execution_engine": {
