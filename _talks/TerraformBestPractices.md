@@ -8,6 +8,10 @@ location: "Teraform"
 date: 2024-07-01
 ---
 
+Every project need to have its infrastrcuture as code. I understand many do not have the budget for a comprehensive DevOPS. But using the below simple best practices which are simple to implement and brings much needed discipline into infrastructure management.
+
+I will use Terraform on Azure. I hvae sandbox on using Terraform on Azure to build multiple components in this [page](https://nuneskris.github.io/teaching/InfrastructureasCodeTerraformAzure).
+
 1. Display and Log Output Informaiton
 2. Use Variables
 3. Tags and Metadata
@@ -17,7 +21,7 @@ date: 2024-07-01
 7. Same Structure for all environments
 8. Use consistent naming using input variables and string interpolation
 9. Generate Backend and Provider Configuration
-10. 
+   
 
 # 1. Output Information
 Provide outputs for key resource attributes so that they can be easily referenced after deployment. This can achieved by adding outputs whenever majob actions like creates are performed.
