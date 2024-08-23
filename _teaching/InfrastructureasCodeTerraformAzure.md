@@ -8,6 +8,7 @@ location: "Terraform"
 date: 2024-06-01
 ---
 
+<img width="462" alt="image" src="https://github.com/user-attachments/assets/be9ee277-6560-4971-a75d-0a6322a88ea3">
 
 # Setup and Introduction
 
