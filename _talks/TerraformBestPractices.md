@@ -22,6 +22,7 @@ I will use Terraform on Azure. I hvae sandbox on using Terraform on Azure to bui
 7. Same Structure for all environments
 8. Use consistent naming using input variables and string interpolation
 9. Generate Backend and Provider Configuration
+10. Document Code
    
 
 # 1. Output Information
