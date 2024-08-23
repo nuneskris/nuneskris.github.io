@@ -7,6 +7,7 @@ venue: "Teraform, Azure"
 location: "Teraform"
 date: 2024-07-01
 ---
+![image](https://github.com/user-attachments/assets/c9017e3a-a2b2-42b9-8770-1c0cb59e72d0)
 
 Every project need to have its infrastrcuture as code. I understand many do not have the budget for a comprehensive DevOPS. But using the below simple best practices which are simple to implement and brings much needed discipline into infrastructure management.
 
