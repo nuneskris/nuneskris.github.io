@@ -7,7 +7,7 @@ venue: "Snowflake"
 location: "DBT Cloud"
 date: 2024-06-01
 ---
-<img width="613" alt="image" src="https://github.com/user-attachments/assets/c5e038a1-ec86-4c82-a71f-3afc7ea512da">
+<img width="613" alt="image" src="/images/teachings/GXSnowflake.png">
 
 Great Expectations can have a learning curve simply because we do not know what to expect. I will use this page to demo how to install and get things started with Great Expectation.
 
