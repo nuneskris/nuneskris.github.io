@@ -24,9 +24,9 @@ The content provided on this GitHub Pages site is solely a personal knowledge ba
 
 > :memo: ***No Client or Customer Data***: None of the content, including code or demonstrations, utilizes or references any data from my clients or customers. All examples are fabricated and do not pertain to any real-world client or customer data.
 
-> 6. :memo: ***Not for Production Use***: The implementations and examples provided here are not recommended for use in production environments. They are intended to illustrate concepts and are not necessarily optimized for practical applications. Always conduct thorough testing and review before deploying any code or solutions in a production setting.
+> :memo: ***Not for Production Use***: The implementations and examples provided here are not recommended for use in production environments. They are intended to illustrate concepts and are not necessarily optimized for practical applications. Always conduct thorough testing and review before deploying any code or solutions in a production setting.
 
-> 7. :memo: ***Complexity and Adaptation***: The purpose of the content is to provide a foundational understanding of various concepts. Real-world scenarios often involve greater complexity and require adaptations beyond what is demonstrated here. It is important to apply these concepts with consideration to the specific requirements and context of your own projects.
+> :memo: ***Complexity and Adaptation***: The purpose of the content is to provide a foundational understanding of various concepts. Real-world scenarios often involve greater complexity and require adaptations beyond what is demonstrated here. It is important to apply these concepts with consideration to the specific requirements and context of your own projects.
 
 #  Disclaimer: 
 
