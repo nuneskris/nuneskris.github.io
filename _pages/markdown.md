@@ -9,7 +9,7 @@ redirect_from:
 
 The content provided on this GitHub Pages site is solely a personal knowledge base and reflects my individual thoughts and learning experiences. It includes demonstrations, code snippets, and other technical examples that are intended purely for educational purposes.
 
-Important Points to Note:
+# Important Points to Note:
 
 1. Original Content: All content on this site is original and based on my own understanding and research. I do not use or incorporate any proprietary or copyrighted material from clients, customers, or other external sources. The code snippets, examples, and explanations are developed independently and are not taken from any copyrighted works.
 2. Educational Use Only: The examples and demonstrations provided are intended for educational and illustrative purposes only. They are not designed or recommended for deployment in production environments. Always validate and test any code or solutions thoroughly before considering them for real-world use.
