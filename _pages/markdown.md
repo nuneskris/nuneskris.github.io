@@ -2,6 +2,7 @@
 permalink: /markdown/
 title: "Please Read Carefully"
 author_profile: true
+date: 2024-05-01
 redirect_from: 
   - /md/
   - /markdown.html
