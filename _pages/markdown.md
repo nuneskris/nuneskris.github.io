@@ -20,11 +20,11 @@ The content provided on this GitHub Pages site is solely a personal knowledge ba
 
 > ⚠️ ***No Endorsement or Affiliation***: The views and examples presented here are my own and do not represent the views or practices of any organization I may be associated with, nor do they reflect the opinions or recommendations of any employers or clients.
 
-> 📝 ***Copyright and Attribution***: I respect intellectual property rights and ensure that no copyrighted materials are used or referenced without proper attribution. If you believe that any content on this site infringes on your rights, please contact me so that I can address your concerns.
+> 🏛️ ***Copyright and Attribution***: I respect intellectual property rights and ensure that no copyrighted materials are used or referenced without proper attribution. If you believe that any content on this site infringes on your rights, please contact me so that I can address your concerns.
 
-> 📝 ***No Client or Customer Data***: None of the content, including code or demonstrations, utilizes or references any data from my clients or customers. All examples are fabricated and do not pertain to any real-world client or customer data.
+> 🔒 ***No Client or Customer Data***: None of the content, including code or demonstrations, utilizes or references any data from my clients or customers. All examples are fabricated and do not pertain to any real-world client or customer data.
 
-> 🔒 ***Not for Production Use***: The implementations and examples provided here are not recommended for use in production environments. They are intended to illustrate concepts and are not necessarily optimized for practical applications. Always conduct thorough testing and review before deploying any code or solutions in a production setting.
+> 📝 ***Not for Production Use***: The implementations and examples provided here are not recommended for use in production environments. They are intended to illustrate concepts and are not necessarily optimized for practical applications. Always conduct thorough testing and review before deploying any code or solutions in a production setting.
 
 > 🛑 ***Complexity and Adaptation***: The purpose of the content is to provide a foundational understanding of various concepts. Real-world scenarios often involve greater complexity and require adaptations beyond what is demonstrated here. It is important to apply these concepts with consideration to the specific requirements and context of your own projects.
 
