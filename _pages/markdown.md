@@ -30,6 +30,6 @@ The content provided on this GitHub Pages site is solely a personal knowledge ba
 
 #  Disclaimer: 
 
-:warning: This site and its contents are provided on an "as-is" basis. I make no representations or warranties about the accuracy, completeness, or suitability of the information. Use of the material is at your own risk, and I am not liable for any consequences arising from its use.
+⚖️ This site and its contents are provided on an "as-is" basis. I make no representations or warranties about the accuracy, completeness, or suitability of the information. Use of the material is at your own risk, and I am not liable for any consequences arising from its use.
 
 Thank you for visiting and understanding.
