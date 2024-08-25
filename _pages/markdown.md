@@ -3,6 +3,9 @@ permalink: /markdown/
 title: "Please Read Carefully"
 author_profile: true
 date: 2024-05-01
+venue: "Disclaimer"
+location: "Important"
+date: 2024-08-16
 redirect_from: 
   - /md/
   - /markdown.html
