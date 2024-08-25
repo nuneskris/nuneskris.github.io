@@ -10,13 +10,18 @@ redirect_from:
   - /markdown.html
 ---
 
+:::note
+Remember, the best time to plant a tree was 20 years ago.
+The second best time is now. So, plant that code!
+:::
+
 The content provided on this GitHub Pages site is solely a personal knowledge base and reflects my individual thoughts and learning experiences. All examples are fabricated and do not pertain to any real-world ***client or customer data and deliverables***. It includes demonstrations, code snippets, and other technical examples that are intended purely for educational purposes. 
 
 # Important Points to Note:
 
-> 1. :note: ***Original Content***: All content on this site is original and based on my own understanding and research. I do not use or incorporate any proprietary or copyrighted material from clients, customers, or other external sources. The code snippets, examples, and explanations are developed independently and are not taken from any copyrighted works.
+> 1. :memo: ***Original Content***: All content on this site is original and based on my own understanding and research. I do not use or incorporate any proprietary or copyrighted material from clients, customers, or other external sources. The code snippets, examples, and explanations are developed independently and are not taken from any copyrighted works.
 
-> 2. :note: ***Educational Use Only***: The examples and demonstrations provided are intended for educational and illustrative purposes only. They are not designed or recommended for deployment in production environments. Always validate and test any code or solutions thoroughly before considering them for real-world use.
+> 2. :memo: ***Educational Use Only***: The examples and demonstrations provided are intended for educational and illustrative purposes only. They are not designed or recommended for deployment in production environments. Always validate and test any code or solutions thoroughly before considering them for real-world use.
 
 > 3. :memo: ***No Endorsement or Affiliation***: The views and examples presented here are my own and do not represent the views or practices of any organization I may be associated with, nor do they reflect the opinions or recommendations of any employers or clients.
 
