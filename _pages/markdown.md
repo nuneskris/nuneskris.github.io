@@ -9,10 +9,6 @@ redirect_from:
   - /md/
   - /markdown.html
 ---
-> **Note**
-> This is a note
-› **Warning**
-› This is a warning
 
 The content provided on this GitHub Pages site is solely a personal knowledge base and reflects my individual thoughts and learning experiences. All examples are fabricated and do not pertain to any real-world ***client or customer data and deliverables***. It includes demonstrations, code snippets, and other technical examples that are intended purely for educational purposes. 
 
