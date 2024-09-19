@@ -1,5 +1,5 @@
 ---
-title: 'Machine Learning for daily tasks'
+title: 'HelloWorld-PyTorch'
 date: 2015-08-14
 permalink: /posts/2011/08/blog-post-5/
 tags:
