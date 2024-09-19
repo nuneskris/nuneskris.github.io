@@ -1,3 +1,12 @@
+---
+title: 'Machine Learning for daily tasks'
+date: 2015-08-14
+permalink: /posts/2011/08/blog-post-5/
+tags:
+  - cool posts
+  - category1
+  - category2
+---
 # Hello Pytorch
 
 
@@ -8,12 +17,7 @@ import matplotlib.pyplot as plt
 torch.__version__
 ```
 
-
-
-
     '2.4.1+cu121'
-
-
 
 ## Simple linear regression problem
 I will use the freecodecamp example which I find very usefull to get into the fundementals. This will try to build a model which trains 2 variables; Bias and weight of a line. We will generate sample data with predefined values of .3 and .7 and train the model based on the sample data which we have generated.
