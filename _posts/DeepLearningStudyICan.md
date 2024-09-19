@@ -1,7 +1,7 @@
 ---
 title: 'HelloWorld-PyTorch'
 date: 2015-08-14
-permalink: /posts/2011/08/blog-post-5/
+permalink: /posts/2011/08/HelloWorld-PyTorch/
 tags:
   - cool posts
   - category1
