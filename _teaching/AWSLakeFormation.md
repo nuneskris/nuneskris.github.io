@@ -146,15 +146,18 @@ We can use Data Location as an additional layer of securing roles having access 
 We will use tags as an additional layer of securing roles having access to the data.
 ![image](https://github.com/user-attachments/assets/8cf57a36-7998-43f6-85ec-30d465b131f8)
 
-## Step 4: Setting up permissios of Tags to Users
-The Analyst will have Data Sensivity set to sensitive and Engineer will be set to internal.
-![image](https://github.com/user-attachments/assets/2c8b7685-373a-4ad6-a453-5e1964a937f7)
-
-## Step 5: Setting up permission of Tags to Tables
+## Step 4: Setting up permission of Tags to Tables
 
 ![image](https://github.com/user-attachments/assets/b0e755ff-d94e-465e-9cba-268e527b2f0c)
 
 ![image](https://github.com/user-attachments/assets/bba31d35-4e93-4a09-aa1b-fd611fcfbb74)
+
+## Step 5: Setting up permissions of Data Permissions of User based on Tags
+Now that we have setup tables and associated the tags for access to the tables, we now would need to associate the tags to users so that users can access to the ables based on matched tags.
+![image](https://github.com/user-attachments/assets/dcd0b23e-c95d-4193-81e4-5964d98cd6f1)
+![image](https://github.com/user-attachments/assets/89561f3d-e931-4797-a6db-388638a09c15)
+
+
 
 # Testing
 
