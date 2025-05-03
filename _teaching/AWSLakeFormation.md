@@ -154,12 +154,35 @@ We will use tags as an additional layer of securing roles having access to the d
 
 ## Step 5: Setting up permissions of Data Permissions of User based on Tags
 Now that we have setup tables and associated the tags for access to the tables, we now would need to associate the tags to users so that users can access to the ables based on matched tags.
-![image](https://github.com/user-attachments/assets/dcd0b23e-c95d-4193-81e4-5964d98cd6f1)
 ![image](https://github.com/user-attachments/assets/89561f3d-e931-4797-a6db-388638a09c15)
 
+# Testing LF Analyst
+Only LF Tag Data Sensitivity: sensitive need to be visible.
 
+Only the table "balls" is available to the LF Analyst user. The match table is not available.
 
-# Testing
+![image](https://github.com/user-attachments/assets/810142d6-a976-4707-ad2e-724379784d41)
+
+# Testing LF Enginer
+Providing access to tables and databased with Tag DataSensitivity: internal
+![image](https://github.com/user-attachments/assets/1b99d9f2-45d5-4b17-b5b0-6d22cafbb00a)
+
+The engineer does not have access to the balls table.
+![image](https://github.com/user-attachments/assets/93bce54d-0666-4eb1-b744-652312296c83)
+
+But the engineer does have access to the Match table
+![image](https://github.com/user-attachments/assets/c42d7b79-1aa3-4655-b663-b83a9406fd58)
+
+# Some more interesting play
+
+The database is set with tag value: sensitive. But I did override the Match with tag value internal. That is why the value is mentioned as overridden in the match table.
+
+![image](https://github.com/user-attachments/assets/41f6fec5-7e35-4fb0-aef4-8cd64e65dfec)
+
+The implication for this is that, the database describe is not assessable for the engineer but the Match table is query-able. 
+
+![image](https://github.com/user-attachments/assets/7995382d-3eee-44da-9327-cc461dee373c)
+
 
 
 
