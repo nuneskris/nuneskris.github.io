@@ -131,10 +131,11 @@ We are creating 2 tables.
 
 # Now Lake Formation
 
+## Step 1: Setup the LF datalake administrators. 
+
+We will be using the lake admin role we have been using for this.
+
+![image](https://github.com/user-attachments/assets/a5852779-6726-4afa-9ca7-850cdefd99d9)
 
 
 
-=======
-# Data Lake Adminstrator
-
-![image](https://github.com/user-attachments/assets/1bb4eebd-f431-4806-83bf-493ef40f4cfa)
