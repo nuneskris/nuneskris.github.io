@@ -137,5 +137,15 @@ We will be using the lake admin role we have been using for this.
 
 ![image](https://github.com/user-attachments/assets/a5852779-6726-4afa-9ca7-850cdefd99d9)
 
+## Step 2: Data Lake Location
+
+We can use Data Location as an additional layer of securing roles having access to the data.
+![image](https://github.com/user-attachments/assets/d934154f-7e2f-4266-b5a8-dbc03fcd46f3)
+
+## Step 3: Setting up Tags
+We will use tags as an additional layer of securing roles having access to the data.
+![image](https://github.com/user-attachments/assets/8cf57a36-7998-43f6-85ec-30d465b131f8)
+
+
 
 
