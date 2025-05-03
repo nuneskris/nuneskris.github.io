@@ -11,7 +11,7 @@ AWS Lake Formation = Scaled Data Lake + Scaled Security Provisioning
 
 <img width="454" alt="image" src="https://github.com/user-attachments/assets/27a296a3-5a12-4de0-bd5c-a47c0287bedb" />
 
-We will provision access to the roles based on the mapped tags to the database
+We will provision access to the users based on the mapped tags to the database
 # IAM Setup
 
 ![image](https://github.com/user-attachments/assets/ff11bc15-0ff1-4498-b436-2b673fb17095)
