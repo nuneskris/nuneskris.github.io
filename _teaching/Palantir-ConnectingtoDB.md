@@ -160,12 +160,24 @@ INSERT INTO approval_steps (approval_id, request_id, approver, step_order, appro
 (9012, 5009, 'Engineering Lead', 1, 'Draft', NULL, 'Need BOM impact assessment.');
 ```
 
-## The source db
-
-
 # Data Connection
+
+this will be a one time connection configuration and we will use this later in a transform.
 
 ![alt text](image.png)
 
 ## Connection Details
 ![alt text](image-1.png)
+
+Note: Ensure the egress network policies are appropriately added. [Typically managed by the platform admins]
+
+## Test Run
+
+Configure a sync and a target and we are good to go.
+
+![alt text](image-2.png)
+
+
+The output folder which was configured had the data ingested.
+
+![alt text](image-3.png)
