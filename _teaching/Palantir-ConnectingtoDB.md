@@ -3,7 +3,7 @@ title: "Collect: Palantir: Ingest simple DB via UI"
 collection: teaching
 type: "Palantir"
 permalink: /teaching/Palantir-SimpleIngest-viaUI
-venue: "Airflow"
+venue: "Palantir"
 date: 2026-06-06
 ---
 
