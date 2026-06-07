@@ -21,7 +21,7 @@ Code Repository in Foundry
 - A Code Repository is a Git-backed project that contains the logic for data transformations, functions, models, or applications. It's the fundamental unit where all "code" lives in Foundry.
 
 - What It Contains
-
+```
 code-repository/
 ├── transforms-python/
 │   ├── conda_recipe/
@@ -35,10 +35,13 @@ code-repository/
 │       └── test/                   ← Unit tests
 ├── build.gradle                    ← Build configuration
 └── ci.yml                          ← CI pipeline definition
+```
 
-
-<img width="612" alt="image" src="nuneskris/nuneskris.github.io/_teaching/images/palantir/image-4.png">
+![alt text](images/palantir/image-4.png)
 
 
 ![alt text](image-4.png)
+
+Give at a name and a folder where it needs to reside.
+![alt text](image-5.png)
 
