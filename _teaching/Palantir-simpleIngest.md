@@ -16,7 +16,28 @@ We developed how to create a data connection
 
 ## Code Repository
 
-![alt text](nuneskris/nuneskris.github.io/_teaching/images/palantir/image-4.png)
+Code Repository in Foundry
+
+- A Code Repository is a Git-backed project that contains the logic for data transformations, functions, models, or applications. It's the fundamental unit where all "code" lives in Foundry.
+
+- What It Contains
+
+code-repository/
+├── transforms-python/
+│   ├── conda_recipe/
+│   │   └── meta.yaml              ← Dependencies (packages)
+│   └── src/
+│       ├── myproject/
+│       │   ├── pipeline.py         ← Registers transforms for discovery
+│       │   └── datasets/
+│       │       └── my_transform.py ← Your transform logic
+│       ├── setup.py                ← Entry point declaration
+│       └── test/                   ← Unit tests
+├── build.gradle                    ← Build configuration
+└── ci.yml                          ← CI pipeline definition
+
+
+<img width="612" alt="image" src="nuneskris/nuneskris.github.io/_teaching/images/palantir/image-4.png">
 
 
 ![alt text](image-4.png)
