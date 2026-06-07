@@ -15,5 +15,5 @@ We developed how to create a data connection
 
 
 ## Code Repository
-![alt text](/images/palantir/image-4.png)
+![alt text](_teaching/images/palantir/image-4.png)
 
